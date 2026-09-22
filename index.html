@@ -9,13 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #f3f1ea;
-    --ink: #1c1b18;
-    --ink-soft: #4a473f;
+    --paper: #f3dec4;
+    --ink: #2e1503;
+    --ink-soft: #80471c;
     --line: #d8d3c4;
-    --accent: #7a2e2e;
-    --accent-soft: #a9564f;
-    --sage: #55624f;
+    --accent: #432616;
+    --accent-soft: #7BB5A3;
+    --sage: #371d10;
   }
 
   * { box-sizing: border-box; }
@@ -51,7 +51,7 @@
   nav {
     position: sticky;
     top: 0;
-    background: rgba(243,241,234,0.92);
+    background: #d3b392;
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--line);
     z-index: 10;
@@ -85,8 +85,8 @@
 
   /* ---------- Hero ---------- */
   header.hero {
-    padding: 84px 0 56px;
-    border-bottom: 1px solid var(--line);
+    padding: 80px 0 10px;
+    border-bottom: 3px solid var(--line);
   }
   header.hero h1 {
     font-size: clamp(1.7rem, 3.6vw, 2.5rem);
@@ -99,7 +99,7 @@
 
   /* ---------- Sections ---------- */
   section {
-    padding: 56px 0;
+    padding: 30px 0;
     border-bottom: 1px solid var(--line);
   }
   section:last-of-type { border-bottom: none; }
@@ -224,9 +224,9 @@
 
 <section id="home-content">
   <div class="wrap">
-    <p>Hi! I'm [insert my name], and I'm studying (applied) mathematics at [University].</p>
+    <p>Hi! I'm Sarthak Dassarma, and I'm studying (applied) mathematics at Columbia University.</p>
 
-    <p>My interests change pretty frequently, but some things I like to do as of now:</p>
+    <p>Some things I like to do as of now:</p>
 
     <ul>
       <li>Math
@@ -247,7 +247,7 @@
           <li>I taught contest math through my last three years of high school and my freshman year at college</li>
         </ul>
       </li>
-      <li>Writing (<a href="https://yourblog.example.com" target="_blank" rel="noopener">this blog!</a>)</li>
+      <li>Writing (<a href="https://oofset.substack.com/" target="_blank" rel="noopener">check out my blog!</a>)</li>
     </ul>
   </div>
 </section>
@@ -255,36 +255,37 @@
 <section id="projects">
   <div class="wrap">
     <h2>Projects</h2>
-    <p class="lede">Things I've built or am building. Replace each entry below with your own — these are placeholders showing the layout.</p>
+    <p class="lede">Things I've built or am building.</p>
 
-    <div class="entry">
+        <div class="entry">
       <div class="entry-head">
-        <span class="entry-title">Project name</span>
-        <span class="entry-meta">2026</span>
+        <span class="entry-title">s-arbitrage & Portfolio Allocation Research Framework (Python)</span>
+        <span class="entry-meta">September 2026</span>
       </div>
-      <p>One or two sentences on what it is and why you made it.</p>
-      <div class="tags"><span>Tag one</span><span>Tag two</span></div>
+      <p>Built a walk-forward pairs-trading and portfolio-allocation backtester with cointegration testing, Kalman-filtered hedge ratios, and Ornstein-Uhlenbeck half-life estimation. Implemented five portfolio construction methods including convex risk-parity optimization and multi-start SLSQP for non-convex Sharpe optimization. Packaged as an installable Python library with CLI, CI pipeline (GitHub Actions, Python 3.10+) and documented methodology.</p>
+      <div class="tags"><span>NumPy</span><span>pandas</span><span>SciPy</span><span>statsmodels</span></div>
       <div class="entry-links">
         <a href="#">Live link</a>
         <a href="#">Source</a>
       </div>
     </div>
-
+  
     <div class="entry">
       <div class="entry-head">
-        <span class="entry-title">Another project</span>
-        <span class="entry-meta">2025</span>
+        <span class="entry-title">Gerrymandle Puzzle Generator — motivated by <a href="https://gerrymandle.com/" target="_blank" rel="noopener">gerrymandle</a></span>
+        <span class="entry-meta">August 2026</span>
       </div>
-      <p>A short description goes here. You can drop the tags or links row if a project doesn't need them.</p>
-      <div class="tags"><span>Tag one</span></div>
+      <p>Designed a bitmask-based exhaustive search algorithm to partition a hex grid into connected districts, using recursive backtracking with branch-and-bound pruning. Built a randomized generate-and-test search that samples board layouts and colorings, then re-verifies each candidate for solution uniqueness. Wrote a template-free HTML/SVG renderer in pure Python to turn structured puzzle data into an interactive site.</p>
+      <div class="tags"><span>Python</span><span>HTML</span></div>
     </div>
 
     <div class="entry">
       <div class="entry-head">
-        <span class="entry-title">A smaller, older project</span>
-        <span class="entry-meta">2024</span>
+        <span class="entry-title">Discretized Method for Continuous-Time Black-Scholes</span>
+        <span class="entry-meta">May 2025</span>
       </div>
-      <p>Not everything needs a big write-up — a one-liner is fine for smaller things.</p>
+      <p>Implemented Black-Scholes pricing model with terminal boundary conditions and a 2-dimensional solution lattice. Applied backward recursion via a tridiagonal matrix to compute option prices across a stock price grid until time zero.</p>
+      <div class="tags"><span>Jupyter Notebook</span><span>pandas</span></div>
     </div>
   </div>
 </section>
@@ -292,26 +293,31 @@
 <section id="math">
   <div class="wrap">
     <h2>Math</h2>
-    <p class="lede">Notes and write-ups, mostly typeset in LaTeX. Compiled PDFs live in the <a href="papers/">papers</a> folder of the repository, alongside the .tex source.</p>
+    <p class="lede">Notes, handouts, and write-ups, mostly typeset in LaTeX.</p>
+    <!--
+    Put compiled PDFs in <a href="papers/">papers</a> folder of the repository alongside .tex source.
+    -->
 
     <div class="entry">
       <div class="entry-head">
         <span class="entry-title">Distribution theory notes</span>
         <span class="entry-meta">In progress</span>
       </div>
-      <p>Working notes — replace with a short description once these are further along.</p>
+      <p>Working notes - to be posted soon.</p>
+      <!--
       <div class="entry-links">
         <a href="papers/distribution-theory-notes.pdf">PDF</a>
         <a href="papers/distribution-theory-notes.tex">.tex source</a>
       </div>
+      -->
     </div>
 
     <div class="entry">
       <div class="entry-head">
-        <span class="entry-title">Add another note or write-up</span>
-        <span class="entry-meta">Year</span>
+        <span class="entry-title">Sobolev Spaces and the Direct Method in the Calculus of Variations</span>
+        <span class="entry-meta">June 2026</span>
       </div>
-      <p>Drop a compiled PDF (and optionally the .tex source) into papers/, then copy this block and fill it in.</p>
+      <p>Final Real Analysis presentation proving the straight line is the curve of minimal length between two points.</p>
     </div>
   </div>
 </section>
@@ -322,18 +328,19 @@
 
     <div class="entry">
       <div class="entry-head">
-        <span class="entry-title">Award or honor name</span>
-        <span class="entry-meta">Year</span>
+        <span class="entry-title">Putnam Top 500 Scorer</span>
+        <span class="entry-meta">2025</span>
       </div>
-      <p>One line on what it recognized or who granted it.</p>
+      <p>Score: 30</p>
+      <p><a href="https://www.scu.edu/news-and-events/feature-stories/2026/stories/math-major-and-putnam-standout-wants-to-change-the-way-you-think-about-math.html">featured article</a></p>
     </div>
 
     <div class="entry">
       <div class="entry-head">
-        <span class="entry-title">Another award</span>
-        <span class="entry-meta">Year</span>
+        <span class="entry-title">Distinguished Student Award — SCU</span>
+        <span class="entry-meta">2026</span>
       </div>
-      <p>Replace these placeholders with your actual honors, scholarships, or competition results.</p>
+      <p>Awarded to the two students with an outstanding academic record judged to have distinguished themselves in mathematics or computer science beyond the standard course work.</p>
     </div>
   </div>
 </section>
