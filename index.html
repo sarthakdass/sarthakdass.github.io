@@ -99,8 +99,9 @@
 
   /* ---------- Sections ---------- */
   section {
-    padding: 30px 0;
+    padding: 10px 0;
     border-bottom: 1px solid var(--line);
+    scroll-margin-top: 60px;
   }
   section:last-of-type { border-bottom: none; }
 
@@ -260,7 +261,7 @@
         <div class="entry">
       <div class="entry-head">
         <span class="entry-title">s-arbitrage & Portfolio Allocation Research Framework (Python)</span>
-        <span class="entry-meta">September 2026</span>
+        <span class="entry-meta">Sep 2026</span>
       </div>
       <p>Built a walk-forward pairs-trading and portfolio-allocation backtester with cointegration testing, Kalman-filtered hedge ratios, and Ornstein-Uhlenbeck half-life estimation. Implemented five portfolio construction methods including convex risk-parity optimization and multi-start SLSQP for non-convex Sharpe optimization. Packaged as an installable Python library with CLI, CI pipeline (GitHub Actions, Python 3.10+) and documented methodology.</p>
       <div class="tags"><span>NumPy</span><span>pandas</span><span>SciPy</span><span>statsmodels</span></div>
@@ -275,10 +276,13 @@
     <div class="entry">
       <div class="entry-head">
         <span class="entry-title">Gerrymandle Puzzle Generator — motivated by <a href="https://gerrymandle.com/" target="_blank" rel="noopener">gerrymandle</a></span>
-        <span class="entry-meta">August 2026</span>
+        <span class="entry-meta">Aug 2026</span>
       </div>
       <p>Designed a bitmask-based exhaustive search algorithm to partition a hex grid into connected districts, using recursive backtracking with branch-and-bound pruning. Built a randomized generate-and-test search that samples board layouts and colorings, then re-verifies each candidate for solution uniqueness. Wrote a template-free HTML/SVG renderer in pure Python to turn structured puzzle data into an interactive site.</p>
       <div class="tags"><span>Python</span><span>HTML</span></div>
+      <div class="entry-links">
+        <a href="https://github.com/sarthakdass/gerrymandle-puzzles" target="_blank" rel="noopener">Source</a>
+      </div>
     </div>
 
     <div class="entry">
@@ -317,9 +321,12 @@
     <div class="entry">
       <div class="entry-head">
         <span class="entry-title">Sobolev Spaces and the Direct Method in the Calculus of Variations</span>
-        <span class="entry-meta">June 2026</span>
+        <span class="entry-meta">Jun 2026</span>
       </div>
       <p>Final Real Analysis presentation proving the straight line is the curve of minimal length between two points.</p>
+      <div class="entry-links">
+        <a href="https://github.com/sarthakdass/sarthakdass.github.io/blob/main/papers/SobolevSpaces_COV.pdf" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
     </div>
   </div>
 </section>
