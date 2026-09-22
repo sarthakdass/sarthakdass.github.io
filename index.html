@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarthak Dassarma's website</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f3f1ea;
+    --ink: #1c1b18;
+    --ink-soft: #4a473f;
+    --line: #d8d3c4;
+    --accent: #7a2e2e;
+    --accent-soft: #a9564f;
+    --sage: #55624f;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: var(--ink);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .wrap {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 56px;
+  }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(243,241,234,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    z-index: 10;
+  }
+  nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  nav .name {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    white-space: nowrap;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 26px;
+    margin: 0;
+    padding: 0;
+    font-size: 0.92rem;
+    flex-wrap: wrap;
+  }
+  nav ul a { color: var(--ink-soft); }
+  nav ul a:hover { color: var(--accent); text-decoration: none; }
+
+  /* ---------- Hero ---------- */
+  header.hero {
+    padding: 84px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+  header.hero h1 {
+    font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  @media (max-width: 620px) {
+    header.hero h1 { white-space: normal; font-size: clamp(1.5rem, 7vw, 2rem); }
+  }
+
+  /* ---------- Sections ---------- */
+  section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+
+  section > .wrap > p.lede {
+    color: var(--ink-soft);
+    max-width: 64ch;
+    margin: -8px 0 26px;
+  }
+
+  section p { max-width: 68ch; }
+
+  section ul {
+    padding-left: 22px;
+    max-width: 68ch;
+  }
+  section ul ul { margin-top: 6px; }
+  section li { margin: 6px 0; }
+
+  section ul.plain > li { margin: 16px 0; }
+
+  /* ---------- Entry list (projects / math / awards) ---------- */
+  .entry {
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+  .entry:first-child { border-top: none; }
+
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .entry-title {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .entry-meta {
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+    white-space: nowrap;
+  }
+  .entry p {
+    margin: 10px 0 0;
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+  }
+  .entry .tags {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .entry .tags span {
+    font-size: 0.78rem;
+    color: var(--sage);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 2px 8px;
+  }
+  .entry .entry-links {
+    margin-top: 12px;
+    display: flex;
+    gap: 16px;
+    font-size: 0.88rem;
+  }
+
+  /* ---------- Now section ---------- */
+  .now-field {
+    margin: 0 0 18px;
+    max-width: 68ch;
+  }
+  .now-field .label {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 40px 0 60px;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 700px) {
+    .wrap { padding: 0 24px; }
+    header.hero { padding: 56px 0 40px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="name">Sarthak Dassarma</span>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#math">Math</a></li>
+      <li><a href="#awards">Awards</a></li>
+      <li><a href="#hobbies">Hobbies</a></li>
+      <li><a href="#now">Now</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="wrap">
+    <h1>Sarthak Dassarma's website</h1>
+  </div>
+</header>
+
+<section id="home-content">
+  <div class="wrap">
+    <p>Hi! I'm [insert my name], and I'm studying (applied) mathematics at [University].</p>
+
+    <p>My interests change pretty frequently, but some things I like to do as of now:</p>
+
+    <ul>
+      <li>Math
+        <ul>
+          <li>Algebraic geometry</li>
+          <li>Combinatorics</li>
+          <li>Distribution theory</li>
+          <li>Functional analysis</li>
+          <li>Measure theory</li>
+          <li>Optimization</li>
+          <li>Contest math (Olympiads, Putnam)</li>
+          <li>Quantitative finance / financial market games</li>
+        </ul>
+      </li>
+      <li>Teaching
+        <ul>
+          <li>I was a TA for Discrete Math, Probability, Statistics, Linear Algebra, and Abstract Algebra</li>
+          <li>I taught contest math through my last three years of high school and my freshman year at college</li>
+        </ul>
+      </li>
+      <li>Writing (<a href="https://yourblog.example.com" target="_blank" rel="noopener">this blog!</a>)</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <p class="lede">Things I've built or am building. Replace each entry below with your own — these are placeholders showing the layout.</p>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Project name</span>
+        <span class="entry-meta">2026</span>
+      </div>
+      <p>One or two sentences on what it is and why you made it.</p>
+      <div class="tags"><span>Tag one</span><span>Tag two</span></div>
+      <div class="entry-links">
+        <a href="#">Live link</a>
+        <a href="#">Source</a>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Another project</span>
+        <span class="entry-meta">2025</span>
+      </div>
+      <p>A short description goes here. You can drop the tags or links row if a project doesn't need them.</p>
+      <div class="tags"><span>Tag one</span></div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">A smaller, older project</span>
+        <span class="entry-meta">2024</span>
+      </div>
+      <p>Not everything needs a big write-up — a one-liner is fine for smaller things.</p>
+    </div>
+  </div>
+</section>
+
+<section id="math">
+  <div class="wrap">
+    <h2>Math</h2>
+    <p class="lede">Notes and write-ups, mostly typeset in LaTeX. Compiled PDFs live in the <a href="papers/">papers</a> folder of the repository, alongside the .tex source.</p>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Distribution theory notes</span>
+        <span class="entry-meta">In progress</span>
+      </div>
+      <p>Working notes — replace with a short description once these are further along.</p>
+      <div class="entry-links">
+        <a href="papers/distribution-theory-notes.pdf">PDF</a>
+        <a href="papers/distribution-theory-notes.tex">.tex source</a>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Add another note or write-up</span>
+        <span class="entry-meta">Year</span>
+      </div>
+      <p>Drop a compiled PDF (and optionally the .tex source) into papers/, then copy this block and fill it in.</p>
+    </div>
+  </div>
+</section>
+
+<section id="awards">
+  <div class="wrap">
+    <h2>Awards</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Award or honor name</span>
+        <span class="entry-meta">Year</span>
+      </div>
+      <p>One line on what it recognized or who granted it.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Another award</span>
+        <span class="entry-meta">Year</span>
+      </div>
+      <p>Replace these placeholders with your actual honors, scholarships, or competition results.</p>
+    </div>
+  </div>
+</section>
+
+<section id="hobbies">
+  <div class="wrap">
+    <h2>Hobbies</h2>
+
+    <ul class="plain">
+      <li><strong>Logic puzzles.</strong> <a href="https://eev.ee/fyi/variant-sudoku/" target="_blank" rel="noopener">Variant sudoku</a> puzzles follow typical sudoku rules, but typically with a twist. Sometimes you may have to "color" cells that you know are the same but don't know the value of yet, and sometimes you will even have to construct the regions of the puzzle yourself.</li>
+
+      <li><strong>Crosswords.</strong> I enjoy constructing and solving crosswords, especially <a href="https://en.wikipedia.org/wiki/Cryptic_crossword" target="_blank" rel="noopener">cryptic crosswords</a>.</li>
+
+      <li><strong>Basketball.</strong> My personal preference is playing pickup basketball with my established friend groups, but I also practice alone and enjoy playing at new parks and making new friends. I also love learning and engaging in discussions about the history of basketball.</li>
+
+      <li><strong>Watching sports.</strong> I enjoy watching most sports, notably: basketball, American football, cricket, football ("soccer").</li>
+
+      <li><a href="https://setwithforks.com/" target="_blank" rel="noopener"><strong>Set</strong></a> is a card game played with a special deck of 3<sup>4</sup> = 81 cards where each card has four features that distinguish it from the others: color, shape, shading, and number. For each feature, there are three variants. Your aim is to select a set which is a combination of three cards such that for each of the four features, the variants of that feature expressed by the three cards are either all the same or all different.</li>
+
+      <li><a href="https://hanabi.github.io/about" target="_blank" rel="noopener"><strong>Hanabi</strong></a> is a cooperative card game where you see everyone's cards except their own. You give clues by color or rank to your teammates so they learn the identity of their cards, and they give you clues so you learn your cards. The goal is to play cards in an ordered stack like in solitaire — the default is 5 stacks of 5 different colors of cards ranked 1 through 5, but this can change in other variants.</li>
+
+      <li><strong>Hiking.</strong></li>
+
+      <li><strong>Reading.</strong></li>
+
+      <li><strong>Poker.</strong></li>
+    </ul>
+  </div>
+</section>
+
+<section id="now">
+  <div class="wrap">
+    <h2>Now</h2>
+
+    <p class="now-field">
+      <span class="label">Where I am</span>
+      New York, NY during the academic year. The San Francisco Bay Area during breaks.
+    </p>
+
+    <p class="now-field">
+      <span class="label">What I'm studying now</span>
+      Algebraic geometry | Distribution theory | Optimization | Quantitative finance
+    </p>
+
+    <p class="now-field">
+      <span class="label">Where I am/will be working</span>
+      I am finishing up my summer research and pursuing my master's in applied mathematics. My interests are much more heavily skewed towards mathematics, particularly in subjects like algebraic geometry, combinatorics, analysis, etc.
+    </p>
+
+    <ul>
+      <li>I am spending quite a bit of time writing up my distribution theory notes, and hope to publish that soon.</li>
+      <li>I plan to spend a little bit of time studying up on financial concepts, conducting some mock trading, etc.</li>
+      <li>In the medium to long term, I want teaching mathematics to be a part of my life. Currently it is not, and I have not been seriously looking into ways to change this in the short term.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    &copy; 2026 Sarthak Dassarma. Built with plain HTML and hosted on GitHub Pages.
+  </div>
+</footer>
+
+</body>
+</html>
