@@ -1,0 +1,235 @@
+/* ==========================================================================
+   Demo pages in projects/  (Fourier Visualization, Gerrymandle boards)
+   Loaded after css/style.css, so all theme tokens are available.
+   ========================================================================== */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 22px;
+  font: 500 0.85rem/1 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--on-dark-soft);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.back-link:hover { color: var(--accent); }
+
+.page-title--long {
+  font-size: clamp(2.1rem, 5.2vw, 3.8rem);
+  line-height: 1.04;
+}
+
+.stage__lede--wide { max-width: 64ch; }
+.stage__lede + .stage__lede { margin-top: 14px; }
+
+/* ---------- Fourier Visualization ---------- */
+
+.canvas-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid var(--ink-3);
+  background-color: var(--ink);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1.3px);
+  background-size: 24px 24px;
+  box-shadow: 0 24px 42px -30px rgba(13, 16, 22, 0.6);
+}
+
+.canvas-card canvas {
+  display: block;
+  width: 100%;
+  height: min(62vh, 540px);
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.canvas-card .status,
+.canvas-card .readout {
+  position: absolute;
+  top: 16px;
+  font: 400 0.8rem/1.4 var(--font-mono);
+  color: var(--on-dark-soft);
+  pointer-events: none;
+}
+.canvas-card .status { left: 18px; max-width: 60%; }
+.canvas-card .readout { right: 18px; font-variant-numeric: tabular-nums; }
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 26px;
+  margin-top: 22px;
+  font-size: 0.92rem;
+  color: var(--text-mid);
+}
+.controls label { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.controls input[type="range"] { width: 130px; accent-color: var(--accent); }
+.controls input[type="checkbox"] { accent-color: var(--accent); }
+.controls .val {
+  min-width: 3.4em;
+  color: var(--text);
+  font: 500 0.85rem/1 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.notes {
+  max-width: 72ch;
+  margin-top: clamp(40px, 6vw, 72px);
+  padding-top: clamp(28px, 4vw, 44px);
+  border-top: 1px solid var(--rule);
+}
+.notes h2 {
+  margin-bottom: 16px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+}
+.notes p { color: var(--text-mid); }
+
+.formula {
+  margin: 22px 0;
+  padding: 8px 22px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  box-shadow: 0 18px 34px -28px rgba(13, 16, 22, 0.4);
+}
+/* Before MathJax typesets, show the raw TeX quietly rather than flashing it. */
+.formula mjx-container { margin: 0 !important; }
+.formula:not(.ready) { font-size: 0.95rem; color: var(--text-soft); }
+
+@media (max-width: 720px) {
+  .canvas-card canvas { height: min(52vh, 420px); }
+  .controls { gap: 12px 18px; }
+  .controls input[type="range"] { width: 108px; }
+}
+
+/* ---------- Gerrymandle boards ---------- */
+
+.rules {
+  max-width: 76ch;
+  margin: 0 0 clamp(40px, 6vw, 64px);
+  padding: clamp(20px, 3vw, 30px);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 22px;
+  box-shadow: 0 24px 42px -30px rgba(13, 16, 22, 0.5);
+}
+.rules p { margin: 0 0 12px; color: var(--text-mid); }
+.rules p:last-child { margin: 0; }
+.rules b { color: var(--text); font-family: var(--font-display); font-weight: 600; }
+
+.secthead { margin: clamp(48px, 7vw, 84px) 0 28px; }
+.secthead h2 {
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+}
+.secthead p { max-width: 66ch; margin: 10px 0 0; color: var(--text-soft); }
+
+.puzzle {
+  margin: 0 0 28px;
+  padding: clamp(20px, 3vw, 34px);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 22px;
+  box-shadow: 0 24px 42px -30px rgba(13, 16, 22, 0.5);
+}
+.phead h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.35rem, 2.6vw, 1.8rem);
+  font-weight: 700;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.chip {
+  padding: 0.38em 0.8em;
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--text-mid);
+  font: 500 0.72rem/1.2 var(--font-mono);
+}
+.obj { max-width: 60ch; margin: 0 0 26px; color: var(--text-mid); }
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(24px, 3.5vw, 44px);
+  align-items: start;
+}
+
+/* the map panel stays dark: the party colours were chosen for it */
+.board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 18px;
+  background: #0e1524;
+  border: 1px solid var(--ink-3);
+  border-radius: 18px;
+}
+.layer { display: none; width: 100%; }
+.layer.show { display: block; }
+.map { display: block; width: 100%; height: auto; }
+
+.toggle {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 0.85em 1.2em;
+  border: 1.5px solid var(--text);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: 600 0.9rem/1 var(--font-display);
+  cursor: pointer;
+  transition: background-color 0.18s, color 0.18s;
+}
+.toggle:hover { background: var(--text); color: var(--paper); }
+
+.bar { display: flex; height: 28px; margin-bottom: 12px; overflow: hidden; border-radius: 8px; }
+.seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #08101c;
+  font: 600 0.8rem/1 var(--font-mono);
+}
+.vline { margin: 0 0 20px; color: var(--text-soft); font-size: 0.92rem; }
+
+.dossier dl { margin: 0 0 20px; border-top: 1px solid var(--rule); }
+.dossier dt { padding-top: 12px; color: var(--text-soft); font-size: 0.9rem; }
+.dossier dd {
+  margin: 0;
+  padding: 2px 0 12px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--text);
+  font: 650 1.1rem/1.35 var(--font-display);
+  letter-spacing: -0.01em;
+}
+.dossier dd.hit { color: #7e22ce; }
+
+.note { margin: 0 0 16px; color: var(--text-mid); font-size: 0.98rem; }
+details { color: var(--text-soft); font-size: 0.9rem; }
+summary { padding: 6px 0; cursor: pointer; font: 400 0.8rem/1.4 var(--font-mono); }
+.legend { margin: 8px 0 0; color: var(--text-soft); font-size: 0.82rem; }
+.legend b { color: var(--text); }
+pre {
+  overflow: auto;
+  padding: 14px;
+  background: var(--ink);
+  border: 1px solid var(--ink-3);
+  border-radius: 12px;
+  color: var(--on-dark-soft);
+  font: 400 0.8rem/1.5 var(--font-mono);
+}
+
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; gap: 26px; }
+}
+
+/* the word "purple" in the Gerrymandle title takes the party colour */
+.page-title .p { color: #a855f7; }
