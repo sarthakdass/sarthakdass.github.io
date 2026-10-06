@@ -370,11 +370,96 @@ def random_walks():
     return _svg(f"0 0 {W} {H}", body, "Random-walk paths with fading trails")
 
 
+# ---------------------------------------------------------------- 15 Arzela-Ascoli epsilon-tube (real analysis)
+def arzela_ascoli(label=True):
+    """A function f, its epsilon-tube, and a family of functions staying inside the tube:
+    the picture behind uniform convergence and the Arzela-Ascoli theorem."""
+    W, H, eps = 300, 190, 22
+    right = 58 if label else 10          # room for the epsilon bracket in the labeled version
+    X = lambda t: 10 + t * (W - 10 - right)
+    f = lambda t: 95 + 46 * math.sin(2 * math.pi * 1.15 * t + 0.6)
+    N = 160
+    ts = [i / N for i in range(N + 1)]
+    upper = [(X(t), f(t) - eps) for t in ts]
+    lower = [(X(t), f(t) + eps) for t in ts]
+    d = "M" + "L".join(f"{x:.1f},{y:.1f}" for x, y in upper + lower[::-1]) + "Z"
+    body = f'<path class="fl" style="opacity:.2" d="{d}"/>'
+    body += _poly(upper, "l") + _poly(lower, "l")
+    for amp, k, ph in [(15, 3.5, 0.3), (11, 5.5, 1.4), (8, 8.5, 2.2)]:   # f_n, all inside the tube
+        body += _poly([(X(t), f(t) + amp * math.sin(2 * math.pi * k * t + ph)) for t in ts], "s").replace(
+            '<path class', '<path style="opacity:.75" class')
+    body += _poly([(X(t), f(t)) for t in ts], "a t")
+    if label:
+        x, ya, yb = X(1.0) + 14, f(1.0) - eps, f(1.0) + eps          # bracket just past the right end
+        body += f'<path class="s" d="M{x-4:.1f},{ya:.1f}H{x+4:.1f}M{x:.1f},{ya:.1f}V{yb:.1f}M{x-4:.1f},{yb:.1f}H{x+4:.1f}"/>'
+        body += f'<text x="{x+9:.1f}" y="{f(1.0)+4:.1f}">\u03b5</text>'
+    return _svg(f"0 0 {W} {H}", body, "An epsilon-tube around a function with a family of functions inside it (Arzela-Ascoli)")
+
+
+# ---------------------------------------------------------------- 16 CLT: a lumpy density turning into a bell
+def clt():
+    """Standardized densities of 1, 2, 4 and 16 independent draws from a lumpy curve.
+    Same maths as the Central Limit Theorem Visualization (exact convolution by doubling), just on a small lattice."""
+    M = 110
+    xs = [i / (M - 1) for i in range(M)]
+    f = [0.95 * math.exp(-((x - 0.17) / 0.06) ** 2) + 0.55 * math.exp(-((x - 0.62) / 0.08) ** 2)
+         + (0.3 if 0.78 < x < 0.95 else 0.0) + 0.04 for x in xs]
+    tot = sum(f)
+    pmf = [v / tot for v in f]
+
+    def conv(a, b):
+        out = [0.0] * (len(a) + len(b) - 1)
+        for i, ai in enumerate(a):
+            if ai:
+                for j, bj in enumerate(b):
+                    out[i + j] += ai * bj
+        return out
+
+    mean = sum(k * p for k, p in enumerate(pmf))
+    std = math.sqrt(sum((k - mean) ** 2 * p for k, p in enumerate(pmf)))
+
+    def density(p, n):
+        scale = std * math.sqrt(n)
+        out = []
+        for j in range(241):
+            z = -3.6 + 7.2 * j / 240
+            pos = z * scale + n * mean
+            if pos < 0 or pos > len(p) - 1:
+                out.append((z, 0.0))
+            else:
+                i0 = int(pos)
+                fr = pos - i0
+                v = p[i0] if i0 >= len(p) - 1 else p[i0] * (1 - fr) + p[i0 + 1] * fr
+                out.append((z, v * scale))
+        return out
+
+    series = {1: density(pmf, 1)}
+    cur, n = pmf, 1
+    while n < 16:
+        cur = conv(cur, cur)
+        n *= 2
+        if n in (2, 4, 16):
+            series[n] = density(cur, n)
+
+    W, H = 300, 190
+    X = lambda z: 10 + (z + 3.6) / 7.2 * (W - 20)
+    base = H - 14
+    Y = lambda d: max(6, base - d / 0.62 * (base - 12))     # tall spikes in the original run to the top edge
+    bell = [(z, math.exp(-0.5 * z * z) / math.sqrt(2 * math.pi)) for z, _ in series[16]]
+    body = f'<path class="s" style="opacity:.5" d="M8,{base}H{W-8}"/>'
+    body += _poly([(X(z), Y(d)) for z, d in series[1]], "l").replace('<path class', '<path style="stroke-dasharray:3 4;opacity:.9" class')
+    body += _poly([(X(z), Y(d)) for z, d in series[2]], "l")
+    body += _poly([(X(z), Y(d)) for z, d in series[4]], "s")
+    body += _poly([(X(z), Y(d)) for z, d in bell], "s").replace('<path class', '<path style="stroke-dasharray:2 4;opacity:.6" class')
+    body += _poly([(X(z), Y(d)) for z, d in series[16]], "a t")
+    return _svg(f"0 0 {W} {H}", body, "A lumpy density becoming a bell curve as more draws are added")
+
+
 FIGS = {
     "gasket": gasket, "sierpinski": sierpinski, "elliptic": elliptic, "elliptic_icon": elliptic_icon, "cantor": cantor,
     "hilbert": hilbert, "mollifier": mollifier, "variations": variations, "spread": spread,
     "black_scholes": black_scholes, "hexes": hexes, "epicycle": epicycle, "fano": fano,
-    "contours": contours, "random_walks": random_walks,
+    "contours": contours, "random_walks": random_walks, "arzela_ascoli": arzela_ascoli, "clt": clt,
 }
 
 if __name__ == "__main__":

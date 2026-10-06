@@ -1,4 +1,4 @@
-/* Sarthak Dassarma — site behaviour. Plain JS, no dependencies.
+/* Sarthak Dassarma — site behavior. Plain JS, no dependencies.
    Every effect degrades gracefully: with JavaScript off, or with
    "reduce motion" on, the page is simply static and fully readable. */
 (function () {
@@ -48,7 +48,7 @@
   }
 
   // While a card is still fading in (opacity < 1) the browser flattens its 3D layers, so the
-  // tilt's coloured sheets would paint on top of the card. Tilt only starts once it has settled.
+  // tilt's colored sheets would paint on top of the card. Tilt only starts once it has settled.
   function settle(el) {
     var done = false;
     function finish() {
@@ -368,7 +368,7 @@
   }
 
   function reveal(onMid) {
-    // arriving: the sheets sweep up and away, ink first, so the colours trail behind
+    // arriving: the sheets sweep up and away, ink first, so the colors trail behind
     layers.forEach(function (l, i) {
       l.animate(
         [{ transform: 'translateY(0)' }, { transform: 'translateY(-100%)' }],

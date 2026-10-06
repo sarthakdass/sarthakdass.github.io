@@ -31,7 +31,7 @@ FONTS = (
     "&display=swap"
 )
 
-# --- logo: traced from the SD monogram (assets/logo-sd.svg), inlined so it takes the text colour
+# --- logo: traced from the SD monogram (assets/logo-sd.svg), inlined so it takes the text color
 _LOGO_SVG = open("assets/logo-sd.svg", encoding="utf-8").read()
 _LOGO_D = re.search(r' d="([^"]+)"', _LOGO_SVG).group(1)
 _LOGO_VB = re.search(r'viewBox="([^"]+)"', _LOGO_SVG).group(1)
@@ -60,6 +60,9 @@ FIG = {
     "epicycle": figs.epicycle(),
     "contours": figs.contours(),
     "random_walks": figs.random_walks(),
+    "arzela_ascoli": figs.arzela_ascoli(),
+    "clt": figs.clt(),
+    "arzela_ascoli_icon": figs.arzela_ascoli(label=False),
 }
 
 FOOTER_INNER = (
@@ -274,6 +277,13 @@ def cardify(content, mapping):
     return _ENTRY.sub(build, content)
 
 
+def renumber(content):
+    """Number the cards 01, 02, ... in the order they appear."""
+    count = iter(range(1, 1000))
+    return re.sub(r'(<div class="entry__index" aria-hidden="true">)\d+(</div>)',
+                  lambda m: f"{m.group(1)}{next(count):02d}{m.group(2)}", content)
+
+
 def tag_icon(key, text):
     return f'<span class="tag-ic"><span class="v" aria-hidden="true">{FIG[key]}</span>{text}</span>'
 
@@ -359,6 +369,22 @@ projects_content = '''      <article class="entry">
           </header>
           <p>Implemented Black-Scholes pricing model with terminal boundary conditions and a 2-dimensional solution lattice. Applied backward recursion via a tridiagonal matrix to compute option prices across a stock price grid until time zero.</p>
           <ul class="tags"><li>Jupyter Notebook</li><li>pandas</li></ul>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry__index" aria-hidden="true">00</div>
+        <div class="entry__body">
+          <header class="entry__head">
+            <h2 class="entry__title">Central Limit Theorem Visualization</h2>
+            <span class="entry__meta">Jan 2025</span>
+          </header>
+          <p>Behold the power of the Central Limit Theorem! Convergence to a normal distribution is inevitable, how long can your curve avoid it? Draw any density, lock it in, and watch the sum of n = 2 up to 1024 independent draws turn into a bell curve, computed exactly by convolving the density with itself.</p>
+          <ul class="tags"><li>Python</li><li>Pygame</li><li>NumPy</li><li>JavaScript</li><li>Canvas</li></ul>
+          <div class="entry__links">
+            <a class="btn btn--solid" href="projects/clt-visualization.html">Live link <span aria-hidden="true">&nearr;</span></a>
+            <a class="btn" href="https://github.com/sarthakdass/clt-draw" target="_blank" rel="noopener">Source <span aria-hidden="true">&nearr;</span></a>
+          </div>
         </div>
       </article>'''
 
@@ -476,13 +502,14 @@ now_content = '''      <dl class="now">
 
 
 now_content = (now_content
-    .replace("{TAG_AG}", tag_icon("elliptic_icon", "Algebraic geometry"))
+    .replace("{TAG_AG}", tag_icon("arzela_ascoli_icon", "Analysis"))
     .replace("{TAG_DT}", tag_icon("mollifier", "Distribution theory"))
     .replace("{TAG_OPT}", tag_icon("contours", "Optimization"))
     .replace("{TAG_QF}", tag_icon("spread", "Quantitative finance")))
 
 # thumbnails on cards
-projects_content = cardify(decorate(projects_content), {
+projects_content = cardify(renumber(decorate(projects_content)), {
+    "Central Limit Theorem": ("clt", False),
     "s-arbitrage": ("spread", False),
     "Fourier Visualization": ("epicycle", True),
     "Puzzle Generator": ("hexes", False),
@@ -507,10 +534,12 @@ TILES = [
     ("mollifier", "Mollifiers \u2192 \u03b4", "light", "Thumbnail for the Distribution theory notes, and the Distribution theory tag icon.", "distribution theory", False),
     ("variations", "Curves between two points", "light", "Thumbnail for Sobolev Spaces and the Calculus of Variations.", "calculus of variations", False),
     ("contours", "Level sets + gradient descent", "light", "Optimization icon.", "optimization", False),
+    ("arzela_ascoli", "Arzel\u00e0\u2013Ascoli \u03b5-tube", "light", "Analysis icon.", "real analysis", False),
     ("spread", "Mean-reverting spread", "light", "Thumbnail for s-arbitrage: entries when the spread leaves the \u00b12\u03c3 band. Also the Quantitative finance icon.", "quantitative finance", False),
     ("black_scholes", "Call price \u2192 payoff", "light", "Thumbnail for the Black\u2013Scholes project as expiry approaches.", "quantitative finance", False),
     ("hexes", "Hex districts", "light", "Thumbnail for the Gerrymandle puzzle generator.", "combinatorics", False),
     ("epicycle", "Epicycles", "light", "Thumbnail for Fourier Visualization.", "Fourier series", False),
+    ("clt", "Sums turning into a bell", "light", "Thumbnail for the Central Limit Theorem Visualization.", "probability", False),
 ]
 
 

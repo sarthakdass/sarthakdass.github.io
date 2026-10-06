@@ -160,7 +160,7 @@
   align-items: start;
 }
 
-/* the map panel stays dark: the party colours were chosen for it */
+/* the map panel stays dark: the party colors were chosen for it */
 .board {
   display: flex;
   align-items: center;
@@ -231,5 +231,106 @@ pre {
   .grid { grid-template-columns: 1fr; gap: 26px; }
 }
 
-/* the word "purple" in the Gerrymandle title takes the party colour */
+/* the word "purple" in the Gerrymandle title takes the party color */
 .page-title .p { color: #a855f7; }
+
+/* ---------- Central Limit Theorem Visualization ---------- */
+
+.clt-intro {
+  max-width: 68ch;
+  margin: 0 0 26px;
+  color: var(--text-mid);
+  font-size: 1.08rem;
+}
+
+.canvas-card--clt canvas { height: min(56vh, 460px); }
+.canvas-card canvas.chart { height: 230px; cursor: default; touch-action: auto; }
+.canvas-card .readout { max-width: 62%; text-align: right; }
+
+.btn[disabled] { opacity: 0.4; cursor: not-allowed; }
+.btn[disabled]:hover { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+
+.clt-label {
+  margin: 30px 0 4px;
+  font: 500 0.78rem/1.5 var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+/* the discretized slider: a native range input (keyboard, touch, screen readers) with labelled ticks */
+.clt-slider { max-width: 780px; padding: 0 2px; }
+.clt-slider input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 32px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.clt-slider input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: var(--rule); }
+.clt-slider input[type="range"]::-moz-range-track { height: 4px; border-radius: 2px; background: var(--rule); }
+.clt-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px; height: 22px; margin-top: -9px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 4px solid var(--card);
+  box-shadow: 0 0 0 1.5px var(--accent);
+}
+.clt-slider input[type="range"]::-moz-range-thumb {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 4px solid var(--card);
+  box-shadow: 0 0 0 1.5px var(--accent);
+}
+.clt-slider input[type="range"]:disabled { cursor: not-allowed; opacity: 0.45; }
+.clt-slider input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 6px; }
+
+.clt-ticks { display: flex; justify-content: space-between; margin-top: -2px; padding: 0 11px; }
+.clt-ticks button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 44px;                 /* a real tap target, centered on the tick... */
+  margin: 0 -22px;             /* ...but taking no layout width, so ticks stay evenly spaced */
+  padding: 4px 0 6px;
+  overflow: visible;
+  border: 0;
+  background: none;
+  color: var(--text-soft);
+  font: 500 0.82rem/1 var(--font-mono);
+  cursor: pointer;
+}
+.clt-ticks button::before { content: ''; display: block; width: 2px; height: 9px; margin-bottom: 8px; border-radius: 1px; background: var(--rule); }
+.clt-ticks button:hover { color: var(--text); }
+.clt-ticks button.is-on { color: var(--text); font-weight: 700; }
+.clt-ticks button.is-on::before { background: var(--accent); }
+.clt-ticks.is-disabled button { pointer-events: none; opacity: 0.45; }
+.clt-ticks button:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 4px; }
+
+.clt-chart-head { margin: 36px 0 12px; }
+.clt-chart-head h2 { font-size: clamp(1.3rem, 2.6vw, 1.7rem); font-weight: 750; letter-spacing: -0.03em; }
+.clt-chart-head p { margin: 6px 0 0; color: var(--text-soft); font-size: 0.95rem; }
+
+.credit {
+  max-width: 72ch;
+  margin-top: clamp(36px, 5vw, 56px);
+  padding: 20px 24px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--accent);
+  border-radius: 16px;
+  color: var(--text-mid);
+}
+.credit h2 { margin-bottom: 8px; font-size: 0.78rem; font: 500 0.78rem/1.5 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); }
+.credit p { margin: 0; }
+
+@media (max-width: 720px) {
+  .canvas-card--clt .status { max-width: 100%; }
+  .canvas-card--clt .readout { top: 40px; right: auto; left: 18px; max-width: calc(100% - 36px); text-align: left; }
+  .clt-ticks button { font-size: 0.7rem; }
+}

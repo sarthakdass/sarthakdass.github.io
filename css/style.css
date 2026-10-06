@@ -118,7 +118,7 @@ p { margin: 0 0 1em; }
 
 .topbar {
   display: flex;
-  align-items: center;            /* every item is centred on the same line... */
+  align-items: center;            /* every item is centered on the same line... */
   justify-content: space-between;
   gap: 24px;
   padding: 16px var(--edge);
@@ -140,7 +140,7 @@ p { margin: 0 0 1em; }
   width: auto;
   aspect-ratio: 50 / 75.83;
   color: var(--fg);
-  transform: translateY(-3px);    /* centres the mark on the text's x-height, not its padded box */
+  transform: translateY(-3px);    /* centers the mark on the text's x-height, not its padded box */
 }
 
 /* ...and the name and the links are built from identical boxes: same font
@@ -849,7 +849,7 @@ html.pt-cover .pt__layer { transform: none; }
 
 /* ==========================================================================
    Math visuals (decorations, thumbnails, icons, dividers, gallery)
-   Figures are inline SVG whose strokes take their colours from CSS.
+   Figures are inline SVG whose strokes take their colors from CSS.
    ========================================================================== */
 
 .v svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -956,6 +956,6 @@ html.pt-cover .pt__layer { transform: none; }
 }
 
 /* A card that is still fading in is flattened by the browser (opacity < 1 disables 3D), which
-   would paint the tilt's coloured sheets over the card. Keep them hidden until it has settled. */
+   would paint the tilt's colored sheets over the card. Keep them hidden until it has settled. */
 .js [data-reveal]:not(.settled)::before,
 .js [data-reveal]:not(.settled)::after { opacity: 0 !important; }
