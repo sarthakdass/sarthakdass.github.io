@@ -482,7 +482,7 @@ p { margin: 0 0 1em; }
 }
 
 /* ---------- Entry cards (projects / math) ----------
-   Title + date across the top with a rule under them, then description | thumbnail. */
+   Title + date across the top, then description | thumbnail. */
 
 .entry {
   margin: 0 0 22px;
@@ -497,8 +497,7 @@ p { margin: 0 0 1em; }
   flex-wrap: wrap;
   align-items: baseline;
   gap: 6px clamp(14px, 2.4vw, 26px);
-  padding: clamp(18px, 2.4vw, 26px) clamp(20px, 3vw, 34px);
-  border-bottom: 1px solid var(--rule);
+  padding: clamp(18px, 2.4vw, 26px) clamp(20px, 3vw, 34px) 0;
 }
 
 .entry__index {
@@ -526,7 +525,7 @@ p { margin: 0 0 1em; }
   grid-template-columns: minmax(0, 1fr) clamp(150px, 24%, 240px);
   align-items: center;
   gap: clamp(18px, 3vw, 36px);
-  padding: clamp(20px, 3vw, 30px) clamp(20px, 3vw, 34px) clamp(22px, 3vw, 32px);
+  padding: clamp(12px, 1.6vw, 18px) clamp(20px, 3vw, 34px) clamp(22px, 3vw, 32px);
 }
 .entry__main--solo { grid-template-columns: 1fr; }
 .entry__body { min-width: 0; }
