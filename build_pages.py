@@ -7,7 +7,12 @@ so the header, footer and page-transition markup stay identical on every
 page. You can also edit the generated .html files directly and ignore this
 script (pick one workflow: re-running overwrites the five pages).
 """
+import os
 import re
+import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "tools"))
+import figs  # noqa: E402  (math figures, drawn as inline SVG)
 
 PAGES = [
     ("index.html", "Home"),
@@ -15,6 +20,7 @@ PAGES = [
     ("math.html", "Math"),
     ("hobbies.html", "Hobbies"),
     ("now.html", "Now"),
+    ("visuals.html", "Visuals"),
 ]
 
 FONTS = (
@@ -34,6 +40,32 @@ LOGO = (
     f'<svg class="brand__mark" viewBox="{_LOGO_VB}" aria-hidden="true" focusable="false">'
     f'<path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="{_LOGO_D}"/></svg>'
 )
+
+# --- math figures, each generated once and inlined where used
+FIG = {
+    "gasket": figs.gasket(min_r=2.4),
+    "hilbert": figs.hilbert(5),
+    "elliptic": figs.elliptic(),
+    "elliptic_decor": figs.elliptic(labels=False, grid=False),
+    "elliptic_icon": figs.elliptic_icon(),
+    "sierpinski": figs.sierpinski(5),
+    "sierpinski_mark": figs.sierpinski(4),
+    "fano": figs.fano(),
+    "cantor": figs.cantor(),
+    "mollifier": figs.mollifier(),
+    "variations": figs.variations(),
+    "spread": figs.spread(),
+    "black_scholes": figs.black_scholes(),
+    "hexes": figs.hexes(),
+    "epicycle": figs.epicycle(),
+    "contours": figs.contours(),
+}
+
+FOOTER_INNER = (
+    f'<span class="footer__mark v" aria-hidden="true">{FIG["sierpinski_mark"]}</span>'
+    "&copy; 2026 Sarthak Dassarma. Built with plain HTML and hosted on GitHub Pages."
+)
+DIVIDER = f'\n      <div class="divider v" aria-hidden="true">{FIG["cantor"]}</div>'
 
 # Runs before first paint: marks the page as JS-enabled and, if we arrived through the
 # stacked-sheet transition, keeps the sheets covering the page until they sweep away.
@@ -80,7 +112,7 @@ def nav(current, prefix=""):
 </header>"""
 
 
-def page(filename, title, body_class, stage_html, content, description=""):
+def page(filename, title, body_class, stage_html, content, description="", divider=False):
     desc = f'\n<meta name="description" content="{description}">' if description else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -110,10 +142,10 @@ def page(filename, title, body_class, stage_html, content, description=""):
 <div class="stack">
   <div class="sheet">
     <main class="sheet__content wrap" id="content">
-{content}
+{content}{DIVIDER if divider else ""}
     </main>
     <footer class="footer">
-      <div class="wrap">&copy; 2026 Sarthak Dassarma. Built with plain HTML and hosted on GitHub Pages.</div>
+      <div class="wrap">{FOOTER_INNER}</div>
     </footer>
   </div>
 </div>
@@ -161,7 +193,7 @@ def project_shell(title, back_stage_html, content_html, head_extra="", body_end=
 {content_html}
     </main>
     <footer class="footer">
-      <div class="wrap">&copy; 2026 Sarthak Dassarma. Built with plain HTML and hosted on GitHub Pages.</div>
+      <div class="wrap">{FOOTER_INNER}</div>
     </footer>
   </div>
 </div>
@@ -184,13 +216,37 @@ def marquee():
   <div class="wrap marquee-controls"><button class="chip-btn" type="button" data-marquee-toggle aria-pressed="false">Pause marquee</button></div>"""
 
 
-def stage(title, lede="", extra=""):
+def stage(title, lede="", extra="", art=""):
     lede_html = f'\n      <p class="stage__lede">{lede}</p>' if lede else ""
-    return f"""<header class="stage">
+    art_html = ""
+    if art:
+        name, key = art
+        art_html = f'\n  <div class="stage__art stage__art--{name} v" aria-hidden="true">{FIG[key]}</div>'
+    return f"""<header class="stage">{art_html}
   <div class="wrap">
     <h1 class="page-title reveal">{title_markup(title)}</h1>{lede_html}
   </div>{extra}
 </header>"""
+
+
+def add_figs(content, mapping):
+    """Give chosen entry cards a thumbnail column: mapping = {title substring: (figure key, square?)}."""
+    parts = re.split(r'(?=<article class="entry")', content)
+    out = []
+    for p in parts:
+        if p.startswith('<article class="entry"'):
+            for sub, (key, sq) in mapping.items():
+                if sub in p:
+                    p = p.replace('<article class="entry"', '<article class="entry entry--fig"', 1)
+                    cls = "entry__fig entry__fig--sq" if sq else "entry__fig"
+                    p = p.replace("</article>", f'<div class="{cls} v" aria-hidden="true">{FIG[key]}</div>\n      </article>', 1)
+                    break
+        out.append(p)
+    return "".join(out)
+
+
+def tag_icon(key, text):
+    return f'<span class="tag-ic"><span class="v" aria-hidden="true">{FIG[key]}</span>{text}</span>'
 
 
 def decorate(content):
@@ -214,7 +270,8 @@ home_stage = '''<header class="stage" data-paths>
   </div>
 </header>'''
 
-home_content = '''      <p class="statement">I&rsquo;m a graduate student studying applied mathematics at Columbia University with a passion for creative problem solving. Interested in collaborating and connecting abstract structure with real problems to inspire impactful innovation.</p>'''
+home_content = '''      <p class="statement">I&rsquo;m a graduate student studying applied mathematics at Columbia University with a passion for creative problem solving. Interested in collaborating and connecting abstract structure with real problems to inspire impactful innovation.</p>
+      <p class="aside">I completed my undergraduate studies at Santa Clara University, where I studied pure mathematics with an emphasis in applied mathematics.</p>'''
 
 # ------------------------------------------------------------- PROJECTS
 projects_content = '''      <article class="entry">
@@ -242,7 +299,7 @@ projects_content = '''      <article class="entry">
           <p>The program takes a user's drawing with a mouse as a complex Fourier series function of 201 rotating vectors each rotated by a unique complex constant and calculates these complex constants to obtain the parameterized Fourier function. After the user draws their picture, the program displays an animation of the user's drawn shape with this Fourier Series.</p>
           <ul class="tags"><li>Python</li><li>Pygame</li><li>JavaScript</li><li>Canvas</li></ul>
           <div class="entry__links">
-            <a class="btn btn--solid" href="projects/fourier-visualization.html">Live link <span aria-hidden="true">&rarr;</span></a>
+            <a class="btn btn--solid" href="projects/fourier-visualization.html">Live link <span aria-hidden="true">&nearr;</span></a>
             <a class="btn" href="https://github.com/sarthakdass/fourier-draw" target="_blank" rel="noopener">Source <span aria-hidden="true">&nearr;</span></a>
           </div>
         </div>
@@ -372,7 +429,7 @@ now_content = '''      <dl class="now">
         <div class="now__row">
           <dt>What I'm studying now</dt>
           <dd>
-            <ul class="tags"><li>Algebraic geometry</li><li>Distribution theory</li><li>Optimization</li><li>Quantitative finance</li></ul>
+            <ul class="tags"><li>{TAG_AG}</li><li>{TAG_DT}</li><li>{TAG_OPT}</li><li>{TAG_QF}</li></ul>
           </dd>
         </div>
         <div class="now__row">
@@ -388,6 +445,65 @@ now_content = '''      <dl class="now">
       </ul>'''
 
 
+now_content = (now_content
+    .replace("{TAG_AG}", tag_icon("elliptic_icon", "Algebraic geometry"))
+    .replace("{TAG_DT}", tag_icon("mollifier", "Distribution theory"))
+    .replace("{TAG_OPT}", tag_icon("contours", "Optimization"))
+    .replace("{TAG_QF}", tag_icon("spread", "Quantitative finance")))
+
+# thumbnails on cards
+projects_content = add_figs(decorate(projects_content), {
+    "s-arbitrage": ("spread", False),
+    "Fourier Visualization": ("epicycle", True),
+    "Gerrymandle": ("hexes", False),
+    "Black-Scholes": ("black_scholes", False),
+})
+math_content = add_figs(decorate(math_content), {
+    "Distribution theory notes": ("mollifier", False),
+    "Sobolev Spaces and the Calculus of Variations": ("variations", False),
+})
+hobbies_content = decorate(hobbies_content)
+now_content = decorate(now_content)
+
+# ---------- Visuals gallery page
+TILES = [
+    ("gasket", "Apollonian gasket", "dark", "Math page: cropped into the corner of the dark layer, behind the title.", "Descartes circle theorem", False),
+    ("hilbert", "Hilbert curve", "dark", "Projects page: a faint texture down the right edge of the dark layer.", "space-filling curve", False),
+    ("elliptic", "Elliptic curve + group law", "dark", "Now page: behind the title, with a tiny version on the Algebraic geometry tag. y\u00b2 = x\u00b3 \u2212 x + 1, with P + Q.", "chord-and-tangent addition", False),
+    ("sierpinski", "Sierpinski triangle", "dark", "End-of-page mark in every footer. It is also Pascal\u2019s triangle mod 2.", "fractal", False),
+    ("fano", "Fano plane", "dark", "Hobbies page: tucked into the corner of the dark layer, behind the title.", "7 points, 7 lines", False),
+    ("cantor", "Cantor set", "light", "Six-level divider at the bottom of Projects, Math, Hobbies and Now.", "measure theory", True),
+    ("mollifier", "Mollifiers \u2192 \u03b4", "light", "Thumbnail for the Distribution theory notes, and the Distribution theory tag icon.", "distribution theory", False),
+    ("variations", "Curves between two points", "light", "Thumbnail for Sobolev Spaces and the Calculus of Variations; the straight line wins.", "calculus of variations", False),
+    ("contours", "Level sets + gradient descent", "light", "The Optimization icon.", "optimization", False),
+    ("spread", "Mean-reverting spread", "light", "Thumbnail for s-arbitrage: entries when the spread leaves the \u00b12\u03c3 band. Also the Quantitative finance icon.", "quantitative finance", False),
+    ("black_scholes", "Call price \u2192 payoff", "light", "Thumbnail for the Black\u2013Scholes project as expiry approaches.", "quantitative finance", False),
+    ("hexes", "Hex districts", "light", "Thumbnail for the Gerrymandle puzzle generator.", "combinatorics", False),
+    ("epicycle", "Epicycles", "light", "Thumbnail for Fourier Visualization.", "Fourier series", False),
+]
+
+
+def tile(key, name, tone, where, tag, wide):
+    w = " vtile__fig--wide" if wide else ""
+    return f"""        <article class="vtile" data-reveal data-tilt>
+          <div class="vtile__fig {tone}{w} v" role="img" aria-label="{name}">{FIG[key]}</div>
+          <div class="vtile__body">
+            <h3 class="vtile__name">{name}</h3>
+            <p class="vtile__where">{where}</p>
+            <span class="vtile__tag">{tag}</span>
+          </div>
+        </article>"""
+
+
+visuals_content = f"""      <section class="block" aria-labelledby="gallery">
+        <h2 class="block__title" id="gallery">The gallery</h2>
+        <p class="block__lede">Dark tiles are meant for the dark top layer; light tiles are small thumbnails and icons for cards.</p>
+        <div class="gal">
+{chr(10).join(tile(*t) for t in TILES)}
+        </div>
+      </section>"""
+
+
 OUT = {
     "index.html": page(
         "index.html", "Sarthak Dassarma", "home", home_stage, home_content,
@@ -395,19 +511,28 @@ OUT = {
     ),
     "projects.html": page(
         "projects.html", "Projects — Sarthak Dassarma", "",
-        stage("Projects", "Things I've built or am building."), decorate(projects_content),
+        stage("Projects", "Things I've built or am building.", art=("hilbert", "hilbert")),
+        projects_content, divider=True,
     ),
     "math.html": page(
         "math.html", "Math — Sarthak Dassarma", "",
-        stage("Math", "Notes, handouts, and write-ups, mostly typeset in LaTeX."), decorate(math_content),
+        stage("Math", "Notes, handouts, and write-ups, mostly typeset in LaTeX.", art=("gasket", "gasket")),
+        math_content, divider=True,
     ),
     "hobbies.html": page(
         "hobbies.html", "Hobbies — Sarthak Dassarma", "",
-        stage("Hobbies", extra=marquee()), decorate(hobbies_content),
+        stage("Hobbies", extra=marquee(), art=("fano", "fano")),
+        hobbies_content, divider=True,
     ),
     "now.html": page(
         "now.html", "Now — Sarthak Dassarma", "",
-        stage("Now"), decorate(now_content),
+        stage("Now", art=("elliptic", "elliptic_decor")),
+        now_content, divider=True,
+    ),
+    "visuals.html": page(
+        "visuals.html", "Visuals — Sarthak Dassarma", "",
+        stage("Visuals", "Math visuals used on this website!"),
+        visuals_content,
     ),
 }
 

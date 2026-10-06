@@ -269,7 +269,7 @@
     setTimeout(function () { window.location.href = url; }, DUR + STAG * (layers.length - 1) + 30);
   }
 
-  var PAGE = /(^|\/)(index|projects|math|hobbies|now)\.html$|\/projects\/[^/]+\.html$|\/$/;
+  var PAGE = /(^|\/)(index|projects|math|hobbies|now|visuals)\.html$|\/projects\/[^/]+\.html$|\/$/;
   document.addEventListener('click', function (e) {
     if (reduce || !canAnimate) return;
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
