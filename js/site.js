@@ -196,10 +196,10 @@
     btn.type = 'button';
     btn.className = 'chip-btn';
     btn.setAttribute('aria-pressed', String(!running));
-    btn.textContent = running ? 'Pause animation' : 'Play animation';
+    btn.textContent = running ? 'Pause random-walk animation' : 'Play random-walk animation';
     btn.addEventListener('click', function () {
       running = !running;
-      btn.textContent = running ? 'Pause animation' : 'Play animation';
+      btn.textContent = running ? 'Pause random-walk animation' : 'Play random-walk animation';
       btn.setAttribute('aria-pressed', String(!running));
       if (running) play(); else cancelAnimationFrame(raf);
     });
