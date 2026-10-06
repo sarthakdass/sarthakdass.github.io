@@ -59,6 +59,7 @@ FIG = {
     "hexes": figs.hexes(),
     "epicycle": figs.epicycle(),
     "contours": figs.contours(),
+    "random_walks": figs.random_walks(),
 }
 
 FOOTER_INNER = (
@@ -212,8 +213,15 @@ def marquee():
         c = f' class="{cls}"' if cls else ""
         return "".join(f"<span{c}>{w}</span><span{c}><i>&#10022;</i></span>" for w in INTERESTS)
     return f"""
-  <div class="marquee" aria-hidden="true"><div class="marquee__track">{copy()}{copy("dup")}</div></div>
-  <div class="wrap marquee-controls"><button class="chip-btn" type="button" data-marquee-toggle aria-pressed="false">Pause marquee</button></div>"""
+  <div class="marquee" aria-hidden="true"><div class="marquee__track">{copy()}{copy("dup")}{copy("dup")}</div></div>
+  <div class="wrap marquee-controls">
+    <button class="chip-btn" type="button" data-marquee-toggle aria-pressed="false">Pause marquee</button>
+    <button class="chip-btn" type="button" data-marquee-arrows aria-pressed="false">Arrow navigation</button>
+    <span class="marquee-arrows" hidden>
+      <button class="chip-btn chip-btn--icon" type="button" data-marquee-prev aria-label="Previous interest">&larr;</button>
+      <button class="chip-btn chip-btn--icon" type="button" data-marquee-next aria-label="Next interest">&rarr;</button>
+    </span>
+  </div>"""
 
 
 def stage(title, lede="", extra="", art=""):
@@ -229,20 +237,41 @@ def stage(title, lede="", extra="", art=""):
 </header>"""
 
 
-def add_figs(content, mapping):
-    """Give chosen entry cards a thumbnail column: mapping = {title substring: (figure key, square?)}."""
-    parts = re.split(r'(?=<article class="entry")', content)
-    out = []
-    for p in parts:
-        if p.startswith('<article class="entry"'):
-            for sub, (key, sq) in mapping.items():
-                if sub in p:
-                    p = p.replace('<article class="entry"', '<article class="entry entry--fig"', 1)
-                    cls = "entry__fig entry__fig--sq" if sq else "entry__fig"
-                    p = p.replace("</article>", f'<div class="{cls} v" aria-hidden="true">{FIG[key]}</div>\n      </article>', 1)
-                    break
-        out.append(p)
-    return "".join(out)
+_ENTRY = re.compile(
+    r'<article class="entry"(?P<attrs>[^>]*)>\s*'
+    r'<div class="entry__index" aria-hidden="true">(?P<idx>[^<]*)</div>\s*'
+    r'<div class="entry__body">\s*'
+    r'<header class="entry__head">\s*<h2 class="entry__title">(?P<title>.*?)</h2>\s*'
+    r'<span class="entry__meta">(?P<meta>.*?)</span>\s*</header>(?P<rest>.*?)</div>\s*</article>',
+    re.S,
+)
+
+
+def cardify(content, mapping):
+    """Card layout: title + date across the top with a rule under it, then description | thumbnail.
+
+    mapping = {title substring: (figure key, square?)}; entries not listed get no thumbnail."""
+    def build(m):
+        fig_html, solo = "", " entry__main--solo"
+        for sub, (key, sq) in mapping.items():
+            if sub in m.group("title"):
+                cls = "entry__fig entry__fig--sq v" if sq else "entry__fig v"
+                fig_html = f'\n        <div class="{cls}" aria-hidden="true">{FIG[key]}</div>'
+                solo = ""
+                break
+        return (
+            f'<article class="entry entry--card"{m.group("attrs")}>\n'
+            f'        <header class="entry__top">\n'
+            f'          <span class="entry__index" aria-hidden="true">{m.group("idx")}</span>\n'
+            f'          <h2 class="entry__title">{m.group("title")}</h2>\n'
+            f'          <span class="entry__meta">{m.group("meta")}</span>\n'
+            f'        </header>\n'
+            f'        <div class="entry__main{solo}">\n'
+            f'        <div class="entry__body">{m.group("rest")}</div>{fig_html}\n'
+            f'        </div>\n'
+            f'      </article>'
+        )
+    return _ENTRY.sub(build, content)
 
 
 def tag_icon(key, text):
@@ -252,8 +281,8 @@ def tag_icon(key, text):
 def decorate(content):
     """Opt cards into the scroll-reveal and layered-tilt animations."""
     content = content.replace('<article class="entry">', '<article class="entry" data-reveal data-tilt>')
-    content = content.replace('<div class="group"', '<div data-reveal data-tilt class="group"')
-    content = content.replace('<div class="group group--wide"', '<div data-reveal data-tilt class="group group--wide"')
+    content = content.replace('<div class="group"', '<div data-reveal class="group"')
+    content = content.replace('<div class="group group--wide"', '<div data-reveal class="group group--wide"')
     content = content.replace('<div class="now__row">', '<div class="now__row" data-reveal>')
     return content
 
@@ -278,7 +307,7 @@ projects_content = '''      <article class="entry">
         <div class="entry__index" aria-hidden="true">01</div>
         <div class="entry__body">
           <header class="entry__head">
-            <h2 class="entry__title">s-arbitrage &amp; Portfolio Allocation Research Framework (Python)</h2>
+            <h2 class="entry__title">s-arbitrage &amp; Portfolio Allocation</h2>
             <span class="entry__meta">Oct 2026</span>
           </header>
           <p>Built a walk-forward pairs-trading and portfolio-allocation backtester with cointegration testing, Kalman-filtered hedge ratios, and Ornstein-Uhlenbeck half-life estimation. Implemented five portfolio construction methods including convex risk-parity optimization and multi-start SLSQP for non-convex Sharpe optimization. Packaged as an installable Python library with CLI, CI pipeline (GitHub Actions, Python 3.10+) and documented methodology.</p>
@@ -309,7 +338,7 @@ projects_content = '''      <article class="entry">
         <div class="entry__index" aria-hidden="true">03</div>
         <div class="entry__body">
           <header class="entry__head">
-            <h2 class="entry__title">Gerrymandle Puzzle Generator &mdash; motivated by <a href="https://gerrymandle.com/" target="_blank" rel="noopener">gerrymandle</a></h2>
+            <h2 class="entry__title">Puzzle Generator &mdash; motivated by <a href="https://gerrymandle.com/" target="_blank" rel="noopener">gerrymandle</a></h2>
             <span class="entry__meta">Aug 2026</span>
           </header>
           <p>Designed a bitmask-based exhaustive search algorithm to partition a hex grid into connected districts, using recursive backtracking with branch-and-bound pruning. Built a randomized generate-and-test search that samples board layouts and colorings, then re-verifies each candidate for solution uniqueness. Wrote a template-free HTML/SVG renderer in pure Python to turn structured puzzle data into an interactive site.</p>
@@ -325,7 +354,7 @@ projects_content = '''      <article class="entry">
         <div class="entry__index" aria-hidden="true">04</div>
         <div class="entry__body">
           <header class="entry__head">
-            <h2 class="entry__title">Discretized Method for Continuous-Time Black-Scholes</h2>
+            <h2 class="entry__title">Discretized Method for Black-Scholes</h2>
             <span class="entry__meta">May 2025</span>
           </header>
           <p>Implemented Black-Scholes pricing model with terminal boundary conditions and a 2-dimensional solution lattice. Applied backward recursion via a tridiagonal matrix to compute option prices across a stock price grid until time zero.</p>
@@ -398,6 +427,7 @@ hobbies_content = '''      <section class="block" aria-labelledby="academic">
             <h3>Writing</h3>
             <ul>
               <li><a href="https://oofset.substack.com/" target="_blank" rel="noopener">Check out my blog!</a></li>
+              <li>I write about mathematics, basketball, "not-so-investigative journalism", and various miscellaneous thoughts!</li>
             </ul>
           </div>
         </div>
@@ -452,13 +482,13 @@ now_content = (now_content
     .replace("{TAG_QF}", tag_icon("spread", "Quantitative finance")))
 
 # thumbnails on cards
-projects_content = add_figs(decorate(projects_content), {
+projects_content = cardify(decorate(projects_content), {
     "s-arbitrage": ("spread", False),
     "Fourier Visualization": ("epicycle", True),
-    "Gerrymandle": ("hexes", False),
+    "Puzzle Generator": ("hexes", False),
     "Black-Scholes": ("black_scholes", False),
 })
-math_content = add_figs(decorate(math_content), {
+math_content = cardify(decorate(math_content), {
     "Distribution theory notes": ("mollifier", False),
     "Sobolev Spaces and the Calculus of Variations": ("variations", False),
 })
@@ -467,15 +497,16 @@ now_content = decorate(now_content)
 
 # ---------- Visuals gallery page
 TILES = [
-    ("gasket", "Apollonian gasket", "dark", "Math page: cropped into the corner of the dark layer, behind the title.", "Descartes circle theorem", False),
-    ("hilbert", "Hilbert curve", "dark", "Projects page: a faint texture down the right edge of the dark layer.", "space-filling curve", False),
-    ("elliptic", "Elliptic curve + group law", "dark", "Now page: behind the title, with a tiny version on the Algebraic geometry tag. y\u00b2 = x\u00b3 \u2212 x + 1, with P + Q.", "chord-and-tangent addition", False),
-    ("sierpinski", "Sierpinski triangle", "dark", "End-of-page mark in every footer. It is also Pascal\u2019s triangle mod 2.", "fractal", False),
-    ("fano", "Fano plane", "dark", "Hobbies page: tucked into the corner of the dark layer, behind the title.", "7 points, 7 lines", False),
+    ("gasket", "Apollonian gasket", "dark", "Math page.", "Descartes circle theorem", False),
+    ("hilbert", "Hilbert curve", "dark", "Projects page.", "space-filling curve", False),
+    ("elliptic", "Elliptic curve + group law", "dark", "Now page. y\u00b2 = x\u00b3 \u2212 x + 1, with P + Q.", "algebraic geometry", False),
+    ("sierpinski", "Sierpinski triangle", "dark", "End-of-page mark in every footer. Fun fact: it's also Pascal\u2019s triangle mod 2.", "fractal", False),
+    ("fano", "Fano plane", "dark", "Hobbies page.", "7 points, 7 lines", False),
+    ("random_walks", "Random walks", "dark", "Home page.", "stochastic processes", False),
     ("cantor", "Cantor set", "light", "Six-level divider at the bottom of Projects, Math, Hobbies and Now.", "measure theory", True),
     ("mollifier", "Mollifiers \u2192 \u03b4", "light", "Thumbnail for the Distribution theory notes, and the Distribution theory tag icon.", "distribution theory", False),
-    ("variations", "Curves between two points", "light", "Thumbnail for Sobolev Spaces and the Calculus of Variations; the straight line wins.", "calculus of variations", False),
-    ("contours", "Level sets + gradient descent", "light", "The Optimization icon.", "optimization", False),
+    ("variations", "Curves between two points", "light", "Thumbnail for Sobolev Spaces and the Calculus of Variations.", "calculus of variations", False),
+    ("contours", "Level sets + gradient descent", "light", "Optimization icon.", "optimization", False),
     ("spread", "Mean-reverting spread", "light", "Thumbnail for s-arbitrage: entries when the spread leaves the \u00b12\u03c3 band. Also the Quantitative finance icon.", "quantitative finance", False),
     ("black_scholes", "Call price \u2192 payoff", "light", "Thumbnail for the Black\u2013Scholes project as expiry approaches.", "quantitative finance", False),
     ("hexes", "Hex districts", "light", "Thumbnail for the Gerrymandle puzzle generator.", "combinatorics", False),

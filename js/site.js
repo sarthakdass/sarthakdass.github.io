@@ -36,15 +36,30 @@
 
     var items = document.querySelectorAll('[data-reveal]');
     if (reduce || !('IntersectionObserver' in window)) {
-      Array.prototype.forEach.call(items, function (i) { i.classList.add('in'); });
+      Array.prototype.forEach.call(items, function (i) { i.classList.add('in', 'settled'); });
       return;
     }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        if (e.isIntersecting) { e.target.classList.add('in'); settle(e.target); io.unobserve(e.target); }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
     Array.prototype.forEach.call(items, function (i) { io.observe(i); });
+  }
+
+  // While a card is still fading in (opacity < 1) the browser flattens its 3D layers, so the
+  // tilt's coloured sheets would paint on top of the card. Tilt only starts once it has settled.
+  function settle(el) {
+    var done = false;
+    function finish() {
+      if (done) return;
+      done = true;
+      el.classList.add('settled');
+    }
+    el.addEventListener('transitionend', function onEnd(ev) {
+      if (ev.target === el && ev.propertyName === 'opacity') { el.removeEventListener('transitionend', onEnd); finish(); }
+    });
+    setTimeout(finish, 1100);
   }
 
   /* ------------------------------------------------------------------
@@ -69,8 +84,10 @@
      ------------------------------------------------------------------ */
   if (!reduce && !coarse) {
     Array.prototype.forEach.call(document.querySelectorAll('[data-tilt]'), function (el) {
-      el.addEventListener('pointerenter', function () { el.classList.add('is-tilting'); });
+      function ready() { return !el.hasAttribute('data-reveal') || el.classList.contains('settled'); }
       el.addEventListener('pointermove', function (e) {
+        if (!ready()) return;                       // still fading in: leave it flat
+        if (!el.classList.contains('is-tilting')) el.classList.add('is-tilting');
         var r = el.getBoundingClientRect();
         var px = (e.clientX - r.left) / r.width - 0.5;
         var py = (e.clientY - r.top) / r.height - 0.5;
@@ -84,16 +101,126 @@
   }
 
   /* ------------------------------------------------------------------
-     5 · Marquee pause / play
+     5 · Marquee: continuous by default; optional arrow navigation
      ------------------------------------------------------------------ */
   var marquee = document.querySelector('.marquee');
-  var marqueeBtn = document.querySelector('[data-marquee-toggle]');
-  if (marquee && marqueeBtn) {
-    marqueeBtn.addEventListener('click', function () {
-      var paused = marquee.classList.toggle('is-paused');
-      marqueeBtn.textContent = paused ? 'Play marquee' : 'Pause marquee';
-      marqueeBtn.setAttribute('aria-pressed', String(paused));
+  if (marquee) initMarquee(marquee);
+
+  function initMarquee(box) {
+    var track = box.querySelector('.marquee__track');
+    var toggleBtn = document.querySelector('[data-marquee-toggle]');
+    var arrowBtn = document.querySelector('[data-marquee-arrows]');
+    var arrowsBox = document.querySelector('.marquee-arrows');
+    var prevBtn = document.querySelector('[data-marquee-prev]');
+    var nextBtn = document.querySelector('[data-marquee-next]');
+    if (!track || !toggleBtn || !arrowBtn) return;
+
+    var DURATION = 36;                 // seconds for one loop, matches the CSS animation
+    var STEP_MS = 440;
+    var mode = 'auto', paused = false, idx = 0, busy = false;
+    var n = 0, starts = [], loopW = 0, pad = 0;
+
+    // The track holds three identical copies of the word list, so any word can be
+    // brought to the left with filled space on both sides, and wrapping is seamless.
+    function measure() {
+      var kids = track.children, perCopy = kids.length / 3;
+      n = perCopy / 2;
+      starts = [];
+      for (var i = 0; i < n; i++) starts.push(kids[2 * i].offsetLeft);
+      loopW = kids[perCopy].offsetLeft;
+      pad = box.clientWidth * 0.1;
+    }
+    function posMid(i) { return loopW + starts[i] - pad; }     // word i in the middle copy
+    function currentOffset() {
+      var m = new DOMMatrixReadOnly(getComputedStyle(track).transform);
+      return -m.m41;
+    }
+    function setX(x, animate) {
+      track.style.transition = animate ? 'transform ' + STEP_MS + 'ms cubic-bezier(0.7,0,0.2,1)' : 'none';
+      track.style.transform = 'translateX(' + (-x) + 'px)';
+      if (!animate) void track.offsetWidth;       // flush so the next change can animate
+    }
+    function labels() {
+      var off = mode === 'arrows' || paused;
+      toggleBtn.textContent = off ? 'Play marquee' : 'Pause marquee';
+      toggleBtn.setAttribute('aria-pressed', String(off));
+      arrowBtn.setAttribute('aria-pressed', String(mode === 'arrows'));
+      if (arrowsBox) arrowsBox.hidden = mode !== 'arrows';
+    }
+
+    function enterArrows() {
+      measure();
+      var cur = currentOffset() + loopW;           // same picture, shifted into the middle copy
+      track.style.animation = 'none';
+      box.classList.remove('is-paused');
+      paused = false;
+      setX(cur, false);
+      var best = 0, bestD = Infinity;
+      for (var i = 0; i < n; i++) {
+        var d = Math.abs(posMid(i) - cur);
+        if (d < bestD) { bestD = d; best = i; }
+      }
+      idx = best;
+      mode = 'arrows';
+      setX(posMid(idx), true);                     // glide to the nearest word
+    }
+
+    function exitArrows() {
+      var o = ((posMid(idx) - loopW) % loopW + loopW) % loopW;
+      track.style.transition = 'none';
+      track.style.transform = '';
+      track.style.animation = 'none';
+      void track.offsetWidth;
+      track.style.animation = '';
+      track.style.animationDelay = '-' + (o / loopW * DURATION).toFixed(3) + 's';
+      mode = 'auto';
+      paused = false;
+    }
+
+    function go(delta) {
+      if (mode !== 'arrows' || busy) return;
+      busy = true;
+      var next = idx + delta, wrapTo = null;
+      if (next >= n) { next = 0; setX(posMid(n - 1), false); setX(posMid(0) + loopW, true); wrapTo = posMid(0); }
+      else if (next < 0) { next = n - 1; setX(posMid(0), false); setX(posMid(n - 1) - loopW, true); wrapTo = posMid(n - 1); }
+      else { setX(posMid(next), true); }
+      idx = next;
+      setTimeout(function () {
+        if (wrapTo !== null) setX(wrapTo, false);   // jump back into the middle copy; looks identical
+        busy = false;
+      }, STEP_MS + 30);
+    }
+
+    toggleBtn.addEventListener('click', function () {
+      if (mode === 'arrows') exitArrows();
+      else { paused = !paused; box.classList.toggle('is-paused', paused); }
+      labels();
     });
+    arrowBtn.addEventListener('click', function () {
+      if (mode === 'arrows') exitArrows(); else enterArrows();
+      labels();
+    });
+    if (prevBtn) prevBtn.addEventListener('click', function () { go(-1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { go(1); });
+
+    document.addEventListener('keydown', function (e) {
+      if (mode !== 'arrows') return;
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      var t = e.target;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+      e.preventDefault();
+      go(e.key === 'ArrowRight' ? 1 : -1);
+    });
+
+    var rt = 0;
+    window.addEventListener('resize', function () {
+      if (mode !== 'arrows') return;
+      clearTimeout(rt);
+      rt = setTimeout(function () { measure(); setX(posMid(idx), false); }, 120);
+    });
+
+    labels();
   }
 
   /* ------------------------------------------------------------------

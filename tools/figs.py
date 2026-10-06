@@ -344,11 +344,37 @@ def contours():
     return _svg(f"0 0 {W} {H}", body, "Level sets of a quadratic with a gradient-descent path")
 
 
+# ---------------------------------------------------------------- 14 random walks (the Home page animation, frozen)
+def random_walks():
+    W, H = 300, 190
+    rnd = random.Random(21)
+    body = ""
+    for i, cls in enumerate(["a", "l", "s", "a", "l", "s", "l", "a", "s", "l"]):
+        x, y = rnd.uniform(0, 80), rnd.uniform(40, 150)
+        dx, vol = rnd.uniform(2.4, 3.2), rnd.uniform(5, 9)
+        pts = [(x, y)]
+        for _ in range(rnd.randint(56, 86)):
+            x += dx
+            y += rnd.gauss(0, vol)
+            y = 20 - y if y < 10 else (2 * (H - 10) - y if y > H - 10 else y)
+            if x > W - 6:
+                break
+            pts.append((x, y))
+        k = len(pts)
+        for lo, hi, op in [(0.0, 0.45, 0.22), (0.4, 0.75, 0.5), (0.7, 1.0, 1.0)]:   # older = fainter
+            seg = pts[int(lo * (k - 1)): int(hi * (k - 1)) + 1]
+            if len(seg) > 1:
+                body += _poly(seg, cls).replace('<path class', f'<path style="opacity:{op}" class')
+        head = {"a": "fa", "l": "fl", "s": "fc"}[cls]
+        body += f'<circle class="{head}" cx="{pts[-1][0]:.1f}" cy="{pts[-1][1]:.1f}" r="2.6"/>'
+    return _svg(f"0 0 {W} {H}", body, "Random-walk paths with fading trails")
+
+
 FIGS = {
     "gasket": gasket, "sierpinski": sierpinski, "elliptic": elliptic, "elliptic_icon": elliptic_icon, "cantor": cantor,
     "hilbert": hilbert, "mollifier": mollifier, "variations": variations, "spread": spread,
     "black_scholes": black_scholes, "hexes": hexes, "epicycle": epicycle, "fano": fano,
-    "contours": contours,
+    "contours": contours, "random_walks": random_walks,
 }
 
 if __name__ == "__main__":
