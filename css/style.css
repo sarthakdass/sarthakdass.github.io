@@ -959,3 +959,6 @@ html.pt-cover .pt__layer { transform: none; }
    would paint the tilt's colored sheets over the card. Keep them hidden until it has settled. */
 .js [data-reveal]:not(.settled)::before,
 .js [data-reveal]:not(.settled)::after { opacity: 0 !important; }
+
+/* section headings on the Projects page */
+.block__title--solo { margin-bottom: 26px; }

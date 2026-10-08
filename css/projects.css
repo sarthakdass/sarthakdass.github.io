@@ -334,3 +334,29 @@ pre {
   .canvas-card--clt .readout { top: 40px; right: auto; left: 18px; max-width: calc(100% - 36px); text-align: left; }
   .clt-ticks button { font-size: 0.7rem; }
 }
+
+/* playable boards (js/gerrymandle.js) */
+.playhint { margin: 0 0 12px; color: var(--text-soft); font-size: 0.88rem; max-width: 56ch; }
+.map--play { cursor: pointer; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+.playbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 10px 16px; margin-top: 14px;
+}
+.playbar__msg { margin: 0; color: var(--text-mid); font: 500 0.82rem/1.4 var(--font-mono); }
+.playbar__msg.is-win { color: #7e22ce; font-weight: 600; }
+.playbar__clear {
+  padding: 0.5em 1em; border: 1.5px solid var(--rule); border-radius: 999px;
+  background: transparent; color: var(--text-mid); font: 600 0.78rem/1 var(--font-display);
+  cursor: pointer; transition: background-color 0.18s, color 0.18s, border-color 0.18s;
+}
+.playbar__clear:hover { background: var(--text); border-color: var(--text); color: var(--paper); }
+
+/* answers hidden until clicked */
+.spoiler {
+  display: inline-block; padding: 0 0.5em; border-radius: 6px;
+  background: var(--ink); color: transparent; cursor: pointer; user-select: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+.spoiler:hover { background: var(--ink-3); }
+.spoiler:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.spoiler.is-open { background: transparent; color: inherit; cursor: text; user-select: auto; padding: 0; }

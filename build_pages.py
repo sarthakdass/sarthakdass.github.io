@@ -292,10 +292,14 @@ def cardify(content, mapping):
 
 
 def renumber(content):
-    """Number the cards 01, 02, ... in the order they appear."""
-    count = iter(range(1, 1000))
-    return re.sub(r'(<div class="entry__index" aria-hidden="true">)\d+(</div>)',
-                  lambda m: f"{m.group(1)}{next(count):02d}{m.group(2)}", content)
+    """Number the cards 01, 02, ... in the order they appear; numbering restarts in each <section>."""
+    def run(chunk):
+        count = iter(range(1, 1000))
+        return re.sub(r'(<div class="entry__index" aria-hidden="true">)\d+(</div>)',
+                      lambda m: f"{m.group(1)}{next(count):02d}{m.group(2)}", chunk)
+    if "<section" not in content:
+        return run(content)
+    return re.sub(r'<section.*?</section>', lambda m: run(m.group(0)), content, flags=re.S)
 
 
 def tag_icon(key, text):
@@ -323,16 +327,18 @@ home_stage = '''<header class="stage" data-paths>
   </div>
 </header>'''
 
-home_content = '''      <p class="statement">I&rsquo;m a graduate student studying applied mathematics at Columbia University with a passion for creative problem solving. Interested in collaborating and connecting abstract structure with real problems to inspire impactful innovation.</p>
+home_content = '''      <p class="statement">I&rsquo;m a first-year (applied) mathematics graduate student at Columbia University. I enjoy bridging abstract mathematical structures with real-world problems.</p>
       <p class="aside">I completed my undergraduate studies at Santa Clara University, where I studied pure mathematics with an emphasis in applied mathematics.</p>'''
 
 # ------------------------------------------------------------- PROJECTS
-projects_content = '''      <article class="entry">
+projects_content = '''      <section class="block" aria-labelledby="coding">
+        <h2 class="block__title block__title--solo" id="coding">Coding portfolio</h2>
+      <article class="entry">
         <div class="entry__index" aria-hidden="true">01</div>
         <div class="entry__body">
           <header class="entry__head">
             <h2 class="entry__title">s-arbitrage &amp; Portfolio Allocation</h2>
-            <span class="entry__meta">Oct 2026</span>
+            <span class="entry__meta">Sep 2026</span>
           </header>
           <p>Built a walk-forward pairs-trading and portfolio-allocation backtester with cointegration testing, Kalman-filtered hedge ratios, and Ornstein-Uhlenbeck half-life estimation. Implemented five portfolio construction methods including convex risk-parity optimization and multi-start SLSQP for non-convex Sharpe optimization. Packaged as an installable Python library with CLI, CI pipeline (GitHub Actions, Python 3.10+) and documented methodology.</p>
           <ul class="tags"><li>NumPy</li><li>pandas</li><li>SciPy</li><li>statsmodels</li></ul>
@@ -341,29 +347,26 @@ projects_content = '''      <article class="entry">
           </div>
         </div>
       </article>
-
       <article class="entry">
-        <div class="entry__index" aria-hidden="true">02</div>
+        <div class="entry__index" aria-hidden="true">04</div>
         <div class="entry__body">
           <header class="entry__head">
-            <h2 class="entry__title">Fourier Visualization</h2>
-            <span class="entry__meta">Sep 2026</span>
+            <h2 class="entry__title">Discretized Method for Black-Scholes</h2>
+            <span class="entry__meta">May 2025</span>
           </header>
-          <p>The program takes a user's drawing with a mouse as a complex Fourier series function of 201 rotating vectors each rotated by a unique complex constant and calculates these complex constants to obtain the parameterized Fourier function. After the user draws their picture, the program displays an animation of the user's drawn shape with this Fourier Series.</p>
-          <ul class="tags"><li>Python</li><li>Pygame</li><li>JavaScript</li><li>Canvas</li></ul>
-          <div class="entry__links">
-            <a class="btn btn--solid" href="projects/fourier-visualization.html">Live link <span aria-hidden="true">&nearr;</span></a>
-            <a class="btn" href="https://github.com/sarthakdass/fourier-draw" target="_blank" rel="noopener">Source <span aria-hidden="true">&nearr;</span></a>
-          </div>
+          <p>Black-Scholes pricing model with terminal boundary conditions and a 2-dimensional solution lattice. Applied backward recursion via a tridiagonal matrix to compute option prices across a stock price grid until time zero.</p>
+          <ul class="tags"><li>Jupyter Notebook</li><li>pandas</li></ul>
         </div>
       </article>
-
+      </section>
+      <section class="block" aria-labelledby="mathy">
+        <h2 class="block__title block__title--solo" id="mathy">Mathy and Interactive</h2>
       <article class="entry">
         <div class="entry__index" aria-hidden="true">03</div>
         <div class="entry__body">
           <header class="entry__head">
             <h2 class="entry__title">Puzzle Generator &mdash; motivated by <a href="https://gerrymandle.com/" target="_blank" rel="noopener">gerrymandle</a></h2>
-            <span class="entry__meta">Aug 2026</span>
+            <span class="entry__meta">Jun 2026</span>
           </header>
           <p>Designed a bitmask-based exhaustive search algorithm to partition a hex grid into connected districts, using recursive backtracking with branch-and-bound pruning. Built a randomized generate-and-test search that samples board layouts and colorings, then re-verifies each candidate for solution uniqueness. Wrote a template-free HTML/SVG renderer in pure Python to turn structured puzzle data into an interactive site.</p>
           <ul class="tags"><li>Python</li><li>HTML</li></ul>
@@ -373,19 +376,21 @@ projects_content = '''      <article class="entry">
           </div>
         </div>
       </article>
-
       <article class="entry">
-        <div class="entry__index" aria-hidden="true">04</div>
+        <div class="entry__index" aria-hidden="true">02</div>
         <div class="entry__body">
           <header class="entry__head">
-            <h2 class="entry__title">Discretized Method for Black-Scholes</h2>
-            <span class="entry__meta">May 2025</span>
+            <h2 class="entry__title">Fourier Visualization</h2>
+            <span class="entry__meta">Dec 2025</span>
           </header>
-          <p>Implemented Black-Scholes pricing model with terminal boundary conditions and a 2-dimensional solution lattice. Applied backward recursion via a tridiagonal matrix to compute option prices across a stock price grid until time zero.</p>
-          <ul class="tags"><li>Jupyter Notebook</li><li>pandas</li></ul>
+          <p>The program takes a user's drawing with a mouse as a complex Fourier series function of 201 rotating vectors each rotated by a unique complex constant and calculates these complex constants to obtain the parameterized Fourier function. After the user draws their picture, the program displays an animation of the user's drawn shape with this Fourier Series.</p>
+          <ul class="tags"><li>Python</li><li>Pygame</li><li>JavaScript</li><li>Canvas</li></ul>
+          <div class="entry__links">
+            <a class="btn btn--solid" href="projects/fourier-visualization.html">Live link <span aria-hidden="true">&nearr;</span></a>
+            <a class="btn" href="https://github.com/sarthakdass/fourier-draw" target="_blank" rel="noopener">Source <span aria-hidden="true">&nearr;</span></a>
+          </div>
         </div>
       </article>
-
       <article class="entry">
         <div class="entry__index" aria-hidden="true">00</div>
         <div class="entry__body">
@@ -400,7 +405,9 @@ projects_content = '''      <article class="entry">
             <a class="btn" href="https://github.com/sarthakdass/clt-draw" target="_blank" rel="noopener">Source <span aria-hidden="true">&nearr;</span></a>
           </div>
         </div>
-      </article>'''
+      </article>
+      </section>
+'''
 
 # ------------------------------------------------------------------ MATH
 math_content = '''      <article class="entry">

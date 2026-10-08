@@ -19,6 +19,15 @@ if len(sys.argv) != 3:
     sys.exit(__doc__)
 src = open(sys.argv[1], encoding="utf-8").read()
 
+# --- dossier tidy-up: drop the redundant row, hide two answers behind spoilers, drop the prose note ---
+def tidy(h):
+    h = re.sub(r"\s*<dt>Of those, purple wins</dt><dd class=\"hit\">exactly 1</dd>", "", h)
+    def spoil(m):
+        return '%s<dd><span class="spoiler" role="button" tabindex="0" aria-label="Reveal answer">%s</span></dd>' % (m.group(1), m.group(2).strip())
+    h = re.sub(r"(<dt>(?:Most districts purple wins under any cut|The winning split)</dt>)<dd>(.*?)</dd>", spoil, h)
+    h = re.sub(r'\s*<p class="note">.*?</p>', "", h, flags=re.S)
+    return h
+
 title = re.search(r"<title>(.*?)</title>", src, re.S).group(1)
 h1 = re.search(r"<h1>(.*?)</h1>", src, re.S).group(1)
 lede = re.search(r'<div class="lede">\s*(.*?)\s*</div>', src, re.S).group(1)
@@ -27,6 +36,7 @@ rest = re.search(r'(<div class="secthead">.*?)</div>\s*<script>', src, re.S).gro
 script = re.search(r"<script>.*?</script>", src, re.S).group(0)
 
 # the map panel was called .stage; the site already uses that name for its dark header layer
+rest = tidy(rest)
 rest = rest.replace('<div class="stage">', '<div class="board">')
 script = script.replace("querySelector('.stage')", "querySelector('.board')")
 assert "'.board'" in script and 'class="board"' in rest
@@ -41,6 +51,6 @@ stage_inner = f'''    <a class="back-link" href="./">&larr; Back to projects</a>
 {lede_html}'''
 
 content = rules + "\n" + rest
-html = project_shell(f"{title} — Sarthak Dassarma", stage_inner, content, body_end=script)
+html = project_shell(f"{title} — Sarthak Dassarma", stage_inner, content, head_extra='<script src="../js/gerrymandle.js" defer></script>\n', body_end=script)
 open(sys.argv[2], "w", encoding="utf-8").write(html)
 print("wrote", sys.argv[2], len(html), "bytes;", rest.count('class="puzzle"'), "puzzles")
