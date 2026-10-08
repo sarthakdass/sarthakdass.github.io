@@ -309,7 +309,7 @@ p { margin: 0 0 1em; }
 }
 
 .display {
-  font-size: clamp(3rem, 10.5vw, 8rem);
+  font-size: clamp(2.5rem, 8vw, 6rem);
   line-height: 0.93;
   letter-spacing: -0.05em;
   font-weight: 800;
@@ -376,12 +376,12 @@ p { margin: 0 0 1em; }
   background: var(--paper);
   color: var(--text);
   border-radius: 34px 34px 0 0;
-  padding-top: clamp(44px, 7vw, 84px);
+  padding-top: clamp(20px, 3vw, 36px);
 }
 
 .sheet__content {
   flex: 1;
-  padding-bottom: clamp(56px, 8vw, 96px);
+  padding-bottom: clamp(20px, 2.5vw, 30px);
 }
 
 .home .sheet { padding-top: clamp(40px, 6vw, 72px); }
@@ -567,7 +567,7 @@ p { margin: 0 0 1em; }
 
 /* ---------- Hobbies ---------- */
 
-.block + .block { margin-top: clamp(48px, 7vw, 84px); }
+.block + .block { margin-top: clamp(32px, 4.5vw, 52px); }
 
 .block__title {
   font-size: clamp(1.6rem, 3.2vw, 2.2rem);
@@ -879,6 +879,12 @@ html.pt-cover .pt__layer { transform: none; }
   -webkit-mask-image: linear-gradient(to left, #000 30%, transparent 100%);
   mask-image: linear-gradient(to left, #000 30%, transparent 100%);
 }
+.stage__art--sierpinski {
+  right: clamp(24px, 6vw, 96px); top: 50%; transform: translateY(-50%);
+  width: min(30%, 280px);
+  color: var(--lilac); opacity: 0.4;
+}
+.stage__art--sierpinski svg { width: 100%; height: auto; display: block; }
 .stage__art--hilbert {
   right: 0; top: 0; bottom: 0; width: min(46%, 520px);
   color: var(--on-dark-soft); opacity: 0.2;
@@ -962,3 +968,6 @@ html.pt-cover .pt__layer { transform: none; }
 
 /* section headings on the Projects page */
 .block__title--solo { margin-bottom: 26px; }
+
+/* the card thumbnail of Manhattan is tall: keep it inside the card */
+.entry__fig svg[aria-label^="Map of Manhattan"] { width: auto; max-width: 100%; max-height: 210px; margin: 0 auto; }

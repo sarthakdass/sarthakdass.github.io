@@ -455,11 +455,18 @@ def clt():
     return _svg(f"0 0 {W} {H}", body, "A lumpy density becoming a bell curve as more draws are added")
 
 
+def taxi():
+    """Manhattan taxi zones shaded by tip generosity (built by tools/prep_taxi_data.py)."""
+    import os
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "taxi_thumb.svg")
+    return open(path, encoding="utf-8").read()
+
+
 FIGS = {
     "gasket": gasket, "sierpinski": sierpinski, "elliptic": elliptic, "elliptic_icon": elliptic_icon, "cantor": cantor,
     "hilbert": hilbert, "mollifier": mollifier, "variations": variations, "spread": spread,
     "black_scholes": black_scholes, "hexes": hexes, "epicycle": epicycle, "fano": fano,
-    "contours": contours, "random_walks": random_walks, "arzela_ascoli": arzela_ascoli, "clt": clt,
+    "contours": contours, "random_walks": random_walks, "arzela_ascoli": arzela_ascoli, "clt": clt, "taxi": taxi,
 }
 
 if __name__ == "__main__":

@@ -62,11 +62,11 @@ FIG = {
     "random_walks": figs.random_walks(),
     "arzela_ascoli": figs.arzela_ascoli(),
     "clt": figs.clt(),
+    "taxi": figs.taxi(),
     "arzela_ascoli_icon": figs.arzela_ascoli(label=False),
 }
 
 FOOTER_INNER = (
-    f'<span class="footer__mark v" aria-hidden="true">{FIG["sierpinski_mark"]}</span>'
     "&copy; 2026 Sarthak Dassarma. Built with plain HTML and hosted on GitHub Pages."
 )
 DIVIDER = f'\n      <div class="divider v" aria-hidden="true">{FIG["cantor"]}</div>'
@@ -337,6 +337,21 @@ projects_content = '''      <section class="block" aria-labelledby="coding">
         <div class="entry__index" aria-hidden="true">01</div>
         <div class="entry__body">
           <header class="entry__head">
+            <h2 class="entry__title">NYC Yellow Taxi Tip Prediction</h2>
+            <span class="entry__meta">Oct 2026</span>
+          </header>
+          <p>Cleaned 3.5 million raw taxi trip records a month with DuckDB, then trained a C++ mlpack decision tree to predict generous tips. It reaches 75.5% accuracy against a 62.4% baseline, and holds up on months it never saw (+12.7 and +16.6 points). Benchmarked it against a linear regression, and built interactive maps showing that where you are picked up matters far more than when: JFK pickups are generous about 11% of the time, Midtown about 65%.</p>
+          <ul class="tags"><li>C++</li><li>mlpack</li><li>CMake</li><li>Python</li><li>geopandas</li><li>folium</li></ul>
+          <div class="entry__links">
+            <a class="btn btn--solid" href="../projects/taxi-tip-prediction.html">Live link <span aria-hidden="true">&nearr;</span></a>
+            <a class="btn" href="https://github.com/sarthakdass/taxi-ml" target="_blank" rel="noopener">Source <span aria-hidden="true">&nearr;</span></a>
+          </div>
+        </div>
+      </article>
+      <article class="entry">
+        <div class="entry__index" aria-hidden="true">01</div>
+        <div class="entry__body">
+          <header class="entry__head">
             <h2 class="entry__title">s-arbitrage &amp; Portfolio Allocation</h2>
             <span class="entry__meta">Sep 2026</span>
           </header>
@@ -531,6 +546,7 @@ now_content = (now_content
 # thumbnails on cards
 projects_content = cardify(renumber(decorate(projects_content)), {
     "Central Limit Theorem": ("clt", False),
+    "NYC Yellow Taxi": ("taxi", False),
     "s-arbitrage": ("spread", False),
     "Fourier Visualization": ("epicycle", True),
     "Puzzle Generator": ("hexes", False),
@@ -548,10 +564,10 @@ TILES = [
     ("gasket", "Apollonian gasket", "dark", "Math page.", "Descartes circle theorem", False),
     ("hilbert", "Hilbert curve", "dark", "Projects page.", "space-filling curve", False),
     ("elliptic", "Elliptic curve + group law", "dark", "Now page. y\u00b2 = x\u00b3 \u2212 x + 1, with P + Q.", "algebraic geometry", False),
-    ("sierpinski", "Sierpinski triangle", "dark", "End-of-page mark in every footer. Fun fact: it's also Pascal\u2019s triangle mod 2.", "fractal", False),
+    ("sierpinski", "Sierpinski triangle", "dark", "Top-right of the Visuals page. Fun fact: it's also Pascal\u2019s triangle mod 2.", "fractal", False),
     ("fano", "Fano plane", "dark", "Hobbies page.", "7 points, 7 lines", False),
     ("random_walks", "Random walks", "dark", "Home page.", "stochastic processes", False),
-    ("cantor", "Cantor set", "light", "Six-level divider at the bottom of Projects, Math, Hobbies and Now.", "measure theory", True),
+    ("cantor", "Cantor set", "light", "Six-level divider at the bottom of Home, Projects, Math, Hobbies, Now and Visuals.", "measure theory", True),
     ("mollifier", "Mollifiers \u2192 \u03b4", "light", "Thumbnail for the Distribution theory notes, and the Distribution theory tag icon.", "distribution theory", False),
     ("variations", "Curves between two points", "light", "Thumbnail for Sobolev Spaces and the Calculus of Variations.", "calculus of variations", False),
     ("contours", "Level sets + gradient descent", "light", "Optimization icon.", "optimization", False),
@@ -588,7 +604,7 @@ visuals_content = f"""      <section class="block" aria-labelledby="gallery">
 OUT = {
     "index.html": page(
         "index.html", "Sarthak Dassarma", "home", home_stage, home_content,
-        "Sarthak Dassarma — graduate student in applied mathematics at Columbia University.",
+        "Sarthak Dassarma — graduate student in applied mathematics at Columbia University.", divider=True,
     ),
     "projects.html": page(
         "projects.html", "Projects — Sarthak Dassarma", "",
@@ -612,8 +628,8 @@ OUT = {
     ),
     "visuals.html": page(
         "visuals.html", "Visuals — Sarthak Dassarma", "",
-        stage("Visuals", "Math visuals used on this website!"),
-        visuals_content,
+        stage("Visuals", "Math visuals used on this website!", art=("sierpinski", "sierpinski")),
+        visuals_content, divider=True,
     ),
 }
 
