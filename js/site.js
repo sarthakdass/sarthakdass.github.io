@@ -431,3 +431,74 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
+
+
+/* Brand mark: hovering (or tapping) the SD monogram spins the S twice around the stem of the D.
+ * The S is drawn as a thin slab (a stack of slices) and every point is projected with perspective, so the near edge
+ * grows, the far edge shrinks, the sides show as it turns edge-on, and it casts a soft shadow on the D. */
+(function () {
+  var brand = document.querySelector('.brand'), sg = brand && brand.querySelector('.brand__s');
+  var sh = brand && brand.querySelector('.brand__shade path');
+  if (!sg || !sh) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  var flat = sg.querySelector('path'), D = flat.getAttribute('d');
+  var toks = D.match(/[MCLZ]|-?\d*\.?\d+/g);
+  var AX = 110.9, CY = 118.5;          // the D's stem, and the S's vertical middle
+  var DIST = 62, HALF = 1.9, LAYERS = 7, TURNS = 1, MS = 1300;
+  var slab = document.createElementNS(NS, 'g');
+  slab.setAttribute('class', 'brand__slab');
+  sg.appendChild(slab);
+  var paths = [];
+  for (var k = 0; k < LAYERS; k++) { var p = document.createElementNS(NS, 'path'); p.setAttribute('fill-rule', 'evenodd'); slab.appendChild(p); paths.push(p); }
+  slab.style.display = 'none';
+  var raf = 0;
+
+  function project(w, sin, cos, dx, dy) {
+    var out = [], nums = [], i = 0, n = toks.length;
+    while (i < n) {
+      var t = toks[i];
+      if (/[MCLZ]/.test(t)) { out.push(t); i++; continue; }
+      var x = +toks[i] - AX, y = +toks[i + 1] - CY; i += 2;
+      var X = x * cos + w * sin, Z = -x * sin + w * cos, s = DIST / (DIST - Z);
+      out.push((AX + X * s + dx).toFixed(2) + ' ' + (CY + y * s + dy).toFixed(2));
+    }
+    return out.join(' ').replace(/([MCLZ]) /g, '$1');
+  }
+  function rgb() {
+    var m = getComputedStyle(brand).color.match(/[\d.]+/g) || [233, 236, 243];
+    return [+m[0], +m[1], +m[2]];
+  }
+  function mix(c, f) { return 'rgb(' + c.map(function (v) { return Math.round(v * f + 8 * (1 - f)); }).join(',') + ')'; }
+
+  function frame(th) {
+    var sin = Math.sin(th), cos = Math.cos(th), as = Math.abs(sin), c = rgb();
+    var order = [];
+    for (var k = 0; k < LAYERS; k++) order.push({ k: k, w: HALF * (1 - 2 * k / (LAYERS - 1)) });
+    order.sort(function (a, b) { return a.w * cos - b.w * cos; });          // farthest slice first
+    // lighting from the front: the face turned toward the viewer is lit by how squarely it faces us
+    var face = 0.52 + 0.48 * Math.abs(cos);
+    for (var q = 0; q < LAYERS; q++) {
+      var o = order[q], isTop = q === LAYERS - 1;
+      paths[q].setAttribute('d', project(o.w, sin, cos, 0, 0));
+      paths[q].setAttribute('fill', mix(c, isTop ? face : 0.34 + 0.26 * q / LAYERS));
+    }
+    // shadow thrown on the D: strongest when the S is turned edge-on and nearest the stem
+    sh.setAttribute('d', project(0, sin, cos, 1.2 + 3.0 * as, 0.9 + 1.4 * as));
+    sh.parentNode.style.opacity = (0.8 * Math.pow(as, 0.7)).toFixed(3);
+  }
+  function ease(t) { return 0.5 - 0.5 * Math.cos(Math.PI * t); }
+  function spin() {
+    if (raf || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+    flat.style.display = 'none'; slab.style.display = '';
+    var t0 = null;
+    (function step(now) {
+      if (t0 == null) t0 = now;
+      var t = Math.min(1, (now - t0) / MS);
+      frame(TURNS * 2 * Math.PI * ease(t));
+      if (t < 1) raf = requestAnimationFrame(step);
+      else { raf = 0; slab.style.display = 'none'; flat.style.display = ''; sh.parentNode.style.opacity = 0; }
+    })(performance.now());
+  }
+  brand.addEventListener('pointerenter', spin);
+  brand.addEventListener('focus', spin);
+})();

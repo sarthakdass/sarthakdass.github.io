@@ -971,3 +971,6 @@ html.pt-cover .pt__layer { transform: none; }
 
 /* the card thumbnail of Manhattan is tall: keep it inside the card */
 .entry__fig svg[aria-label^="Map of Manhattan"] { width: auto; max-width: 100%; max-height: 210px; margin: 0 auto; }
+
+/* ---------- Brand mark: the hover spin is drawn by js/site.js (a perspective-projected slab) ---------- */
+.brand__shade { opacity: 0; }

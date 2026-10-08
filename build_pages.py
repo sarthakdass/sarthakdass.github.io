@@ -36,9 +36,17 @@ _LOGO_SVG = open("assets/logo-sd.svg", encoding="utf-8").read()
 _LOGO_D = re.search(r' d="([^"]+)"', _LOGO_SVG).group(1)
 _LOGO_VB = re.search(r'viewBox="([^"]+)"', _LOGO_SVG).group(1)
 _LOGO_D = re.sub(r"(\d+\.\d)\d", r"\1", _LOGO_D)  # 1 decimal is plenty at header size
+# The monogram is three outlines: the D, then the two halves of the S. Hover spins the S about the D's stem.
+_parts = [x for x in re.split(r"(?=M)", _LOGO_D) if x]
+_LOGO_PATH = 'fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd"'
 LOGO = (
     f'<svg class="brand__mark" viewBox="{_LOGO_VB}" aria-hidden="true" focusable="false">'
-    f'<path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="{_LOGO_D}"/></svg>'
+    f'<defs><clipPath id="brand-dclip"><path d="{_parts[0]}"/></clipPath>'
+    f'<filter id="brand-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="0.7"/></filter></defs>'
+    f'<path {_LOGO_PATH} d="{_parts[0]}"/>'
+    # soft shadow the spinning S casts on the stem of the D (visible only while it spins)
+    f'<g clip-path="url(#brand-dclip)"><g class="brand__shade"><path fill="#000" fill-rule="evenodd" filter="url(#brand-soft)" d="{"".join(_parts[1:])}"/></g></g>'
+    f'<g class="brand__s"><path {_LOGO_PATH} d="{"".join(_parts[1:])}"/></g></svg>'
 )
 
 # --- math figures, each generated once and inlined where used
