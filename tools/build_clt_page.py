@@ -37,7 +37,7 @@ CREDIT = ("The idea for this project is not original. An anonymous student from 
           "class designed a similar website, and I took inspiration in designing my own visually interactive "
           "Central Limit Theorem project.")
 
-STAGE = f"""    <a class="back-link" href="../projects.html">&larr; Back to projects</a>
+STAGE = f"""    <a class="back-link" href="./">&larr; Back to projects</a>
     <h1 class="page-title page-title--long reveal">{title_markup("Central Limit Theorem Visualization")}</h1>
     <p class="stage__lede stage__lede--wide">{DESCRIPTION}</p>"""
 

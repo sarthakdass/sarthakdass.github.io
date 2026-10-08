@@ -36,7 +36,7 @@ rest = rest.replace('<section class="puzzle"', '<section class="puzzle" data-rev
 paras = re.findall(r"<p>(.*?)</p>", lede, re.S)
 lede_html = "\n".join(f'    <p class="stage__lede stage__lede--wide">{re.sub(chr(10), " ", p).strip()}</p>' for p in paras)
 
-stage_inner = f'''    <a class="back-link" href="../projects.html">&larr; Back to projects</a>
+stage_inner = f'''    <a class="back-link" href="./">&larr; Back to projects</a>
     <h1 class="page-title page-title--long reveal"><span class="line"><span>{h1}</span></span></h1>
 {lede_html}'''
 

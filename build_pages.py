@@ -90,12 +90,17 @@ INTERESTS = [
 ]
 
 
+def clean(href):
+    """index.html -> '' (the site root); math.html -> 'math/'. Folder URLs keep .html out of the address bar."""
+    return "" if href == "index.html" else href[:-5] + "/"
+
+
 def nav(current, prefix=""):
     items = []
     for href, label in PAGES:
         cur = ' aria-current="page"' if href == current else ""
         items.append(
-            f"""        <li><a class="nav-link" href="{prefix}{href}"{cur}>
+            f"""        <li><a class="nav-link" href="{prefix}{clean(href)}"{cur}>
           <span class="nav-link__roll"><span class="nav-link__label">{label}</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">{label}</span></span>
           <span class="nav-link__line" aria-hidden="true"></span>
         </a></li>"""
@@ -103,7 +108,7 @@ def nav(current, prefix=""):
     links = "\n".join(items)
     return f"""<header class="site-header">
   <div class="topbar">
-    <a class="brand" href="{prefix}index.html" aria-label="Sarthak Dassarma, home">
+    <a class="brand" href="{prefix}" aria-label="Sarthak Dassarma, home">
       {LOGO}
       <span class="brand__name">Sarthak Dassarma</span>
     </a>
@@ -117,8 +122,10 @@ def nav(current, prefix=""):
 
 
 def page(filename, title, body_class, stage_html, content, description="", divider=False):
+    # Root page: paths as written. Section pages live in <name>/index.html, one folder down.
+    up = "" if filename == "index.html" else "../"
     desc = f'\n<meta name="description" content="{description}">' if description else ""
-    return f"""<!DOCTYPE html>
+    html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -126,12 +133,12 @@ def page(filename, title, body_class, stage_html, content, description="", divid
 <meta name="theme-color" content="#0d1016">{desc}
 <title>{title}</title>
 {HEAD_SCRIPT}
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{up}assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="{FONTS}" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<script src="js/site.js" defer></script>
+<link rel="stylesheet" href="{up}css/style.css">
+<script src="{up}js/site.js" defer></script>
 </head>
 <body class="{body_class}">
 
@@ -139,7 +146,7 @@ def page(filename, title, body_class, stage_html, content, description="", divid
 
 <a class="skip" href="#content">Skip to content</a>
 
-{nav(filename)}
+{nav(filename, up)}
 
 {stage_html}
 
@@ -157,6 +164,13 @@ def page(filename, title, body_class, stage_html, content, description="", divid
 </body>
 </html>
 """
+    if up:
+        html = re.sub(r'href="((?:projects|papers)/)', r'href="../\1', html)
+        html = re.sub(r'(?<=src=")(?=assets/)', '../', html)
+    # links between section pages written as plain file names
+    html = re.sub(r'href="(?:\.\./)?(index|projects|math|hobbies|now|visuals)\.html"',
+                  lambda m: 'href="%s%s"' % (up, clean(m.group(1) + ".html")), html)
+    return html
 
 
 def project_shell(title, back_stage_html, content_html, head_extra="", body_end="", css="projects.css"):
@@ -597,7 +611,11 @@ OUT = {
 }
 
 if __name__ == "__main__":
+    import os
     for name, html in OUT.items():
+        if name != "index.html":
+            os.makedirs(name[:-5], exist_ok=True)
+            name = name[:-5] + "/index.html"
         with open(name, "w", encoding="utf-8") as f:
             f.write(html)
         print("wrote", name, len(html), "bytes")
