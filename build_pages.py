@@ -337,7 +337,7 @@ projects_content = '''      <section class="block" aria-labelledby="coding">
         <div class="entry__index" aria-hidden="true">01</div>
         <div class="entry__body">
           <header class="entry__head">
-            <h2 class="entry__title">NYC Yellow Taxi Tip Prediction</h2>
+            <h2 class="entry__title">NYC Yellow Taxi Tip Prediction Model</h2>
             <span class="entry__meta">Oct 2026</span>
           </header>
           <p>Cleaned 3.5 million raw taxi trip records a month with DuckDB, then trained a C++ mlpack decision tree to predict generous tips. It reaches 75.5% accuracy against a 62.4% baseline, and holds up on months it never saw (+12.7 and +16.6 points). Benchmarked it against a linear regression, and built interactive maps showing that where you are picked up matters far more than when: JFK pickups are generous about 11% of the time, Midtown about 65%.</p>

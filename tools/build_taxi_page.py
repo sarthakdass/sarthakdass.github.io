@@ -35,7 +35,7 @@ DESCRIPTION = ("How much of a rider&rsquo;s tip can you predict from the trip al
                "riders tip.")
 
 STAGE = f"""    <a class="back-link" href="./">&larr; Back to projects</a>
-    <h1 class="page-title page-title--long reveal">{title_markup("NYC Yellow Taxi Tip Prediction")}</h1>
+    <h1 class="page-title page-title--long reveal">{title_markup("NYC Yellow Taxi Tip Prediction Model")}</h1>
     <p class="stage__lede stage__lede--wide">{DESCRIPTION}</p>
     <div class="contact">
       <a class="btn btn--solid" href="https://github.com/sarthakdass/taxi-ml" target="_blank" rel="noopener">Source <span aria-hidden="true">&nearr;</span></a>
@@ -162,7 +162,7 @@ CONTENT = r"""      <p class="tx-lead">Once the data errors are stripped away, h
       </aside>"""
 
 html = project_shell(
-    "NYC Yellow Taxi Tip Prediction — Sarthak Dassarma",
+    "NYC Yellow Taxi Tip Prediction Model — Sarthak Dassarma",
     STAGE,
     CONTENT,
     head_extra=MATHJAX,
