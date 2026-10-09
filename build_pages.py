@@ -521,7 +521,7 @@ now_content = '''      <dl class="now">
         <div class="now__row">
           <dt>What I'm studying now</dt>
           <dd>
-            <ul class="tags"><li>{TAG_AG}</li><li>{TAG_DT}</li><li>{TAG_OPT}</li><li>{TAG_QF}</li></ul>
+            <ul class="tags"><li>{TAG_AG}</li><li>{TAG_AN}</li><li>{TAG_DT}</li><li>{TAG_OPT}</li><li>{TAG_QF}</li></ul>
           </dd>
         </div>
         <div class="now__row">
@@ -538,7 +538,8 @@ now_content = '''      <dl class="now">
 
 
 now_content = (now_content
-    .replace("{TAG_AG}", tag_icon("arzela_ascoli_icon", "Analysis"))
+    .replace("{TAG_AG}", tag_icon("elliptic_icon", "Algebraic geometry"))
+    .replace("{TAG_AN}", tag_icon("arzela_ascoli_icon", "Analysis"))
     .replace("{TAG_DT}", tag_icon("mollifier", "Distribution theory"))
     .replace("{TAG_OPT}", tag_icon("contours", "Optimization"))
     .replace("{TAG_QF}", tag_icon("spread", "Quantitative finance")))
@@ -564,6 +565,7 @@ TILES = [
     ("gasket", "Apollonian gasket", "dark", "Math page.", "Descartes circle theorem", False),
     ("hilbert", "Hilbert curve", "dark", "Projects page.", "space-filling curve", False),
     ("elliptic", "Elliptic curve + group law", "dark", "Now page. y\u00b2 = x\u00b3 \u2212 x + 1, with P + Q.", "algebraic geometry", False),
+    ("elliptic_icon", "Elliptic curve", "light", "Algebraic geometry icon on the Now page.", "algebraic geometry", False),
     ("sierpinski", "Sierpinski triangle", "dark", "Top-right of the Visuals page. Fun fact: it's also Pascal\u2019s triangle mod 2.", "fractal", False),
     ("fano", "Fano plane", "dark", "Hobbies page.", "7 points, 7 lines", False),
     ("random_walks", "Random walks", "dark", "Home page.", "stochastic processes", False),
