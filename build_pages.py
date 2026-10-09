@@ -83,14 +83,8 @@ DIVIDER = f'\n      <div class="divider v" aria-hidden="true">{FIG["cantor"]}</d
 # stacked-sheet transition, keeps the sheets covering the page until they sweep away.
 HEAD_SCRIPT = (
     "<script>(function(){var d=document.documentElement;d.classList.add('js');"
-    "try{if(sessionStorage.getItem('sd-pt')){sessionStorage.removeItem('sd-pt');"
-    "if(!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('pt-cover');}}catch(e){}"
-    "setTimeout(function(){if(!window.__sd){d.classList.remove('js','pt-cover');}},4000);})();</script>"
+    "setTimeout(function(){if(!window.__sd){d.classList.remove('js');}},4000);})();</script>"
 )
-
-PT = """<div class="pt" aria-hidden="true">
-  <div class="pt__layer"></div><div class="pt__layer"></div><div class="pt__layer"></div>
-</div>"""
 
 INTERESTS = [
     "Algebraic geometry", "Combinatorics", "Distribution theory", "Functional analysis",
@@ -150,7 +144,6 @@ def page(filename, title, body_class, stage_html, content, description="", divid
 </head>
 <body class="{body_class}">
 
-{PT}
 
 <a class="skip" href="#content">Skip to content</a>
 
@@ -201,7 +194,6 @@ def project_shell(title, back_stage_html, content_html, head_extra="", body_end=
 </head>
 <body>
 
-{PT}
 
 <a class="skip" href="#content">Skip to content</a>
 

@@ -817,30 +817,6 @@ p { margin: 0 0 1em; }
   .marquee-controls { display: none; }
 }
 
-/* ---------- 7 · Stacked-sheet page transition ---------- */
-.pt {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  pointer-events: none;
-  visibility: hidden;
-}
-.pt__layer {
-  position: absolute;
-  inset: 0;
-  transform: translateY(100%);
-  will-change: transform;
-}
-.pt__layer:nth-child(1) { background: var(--lilac); }
-.pt__layer:nth-child(2) { background: var(--accent); }
-.pt__layer:nth-child(3) { background: var(--ink); }
-html.pt-cover .pt { visibility: visible; }
-html.pt-cover .pt__layer { transform: none; }
-
-@media (prefers-reduced-motion: reduce) {
-  .pt { display: none; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .js .reveal .line > span { transform: none; transition: none; }
   .js [data-reveal] { opacity: 1; translate: none; transition: none; }

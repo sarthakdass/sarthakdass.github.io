@@ -353,80 +353,9 @@
     else window.addEventListener('resize', onResize);
   }
 
-  /* ------------------------------------------------------------------
-     7 · Stacked-sheet page transition (lilac, vermilion, ink)
-     ------------------------------------------------------------------ */
-  var pt = document.querySelector('.pt');
-  var layers = pt ? Array.prototype.slice.call(pt.querySelectorAll('.pt__layer')) : [];
-  var DUR = 520, STAG = 80, EASE = 'cubic-bezier(0.7,0,0.2,1)';
-  var canAnimate = layers.length > 0 && typeof layers[0].animate === 'function';
-
-  function cancelLayerAnimations() {
-    layers.forEach(function (l) {
-      if (l.getAnimations) l.getAnimations().forEach(function (a) { a.cancel(); });
-    });
-  }
-
-  function reveal(onMid) {
-    // arriving: the sheets sweep up and away, ink first, so the colors trail behind
-    layers.forEach(function (l, i) {
-      l.animate(
-        [{ transform: 'translateY(0)' }, { transform: 'translateY(-100%)' }],
-        { duration: DUR, delay: (layers.length - 1 - i) * STAG, easing: EASE, fill: 'forwards' }
-      );
-    });
-    setTimeout(onMid, 380);
-    setTimeout(function () {
-      root.classList.remove('pt-cover');
-      cancelLayerAnimations();
-      if (pt) pt.style.visibility = '';
-    }, DUR + STAG * (layers.length - 1) + 60);
-  }
-
-  function leave(url) {
-    // leaving: the sheets sweep up from the bottom (lilac, vermilion, then ink on top)
-    try { sessionStorage.setItem('sd-pt', '1'); } catch (e) { /* storage blocked: just navigate */ }
-    pt.style.visibility = 'visible';
-    layers.forEach(function (l, i) {
-      l.animate(
-        [{ transform: 'translateY(100%)' }, { transform: 'translateY(0)' }],
-        { duration: DUR, delay: i * STAG, easing: EASE, fill: 'forwards' }
-      );
-    });
-    setTimeout(function () { window.location.href = url; }, DUR + STAG * (layers.length - 1) + 30);
-  }
-
-  var PAGE = /(^|\/)(index|projects|math|hobbies|now|visuals)\.html$|\/projects\/[^/]+\.html$|\/$/;
-  document.addEventListener('click', function (e) {
-    if (reduce || !canAnimate) return;
-    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    var a = e.target.closest ? e.target.closest('a[href]') : null;
-    if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download')) return;
-    var u;
-    try { u = new URL(a.href, window.location.href); } catch (err) { return; }
-    if (u.protocol !== window.location.protocol || u.host !== window.location.host) return;
-    if (u.pathname === window.location.pathname && u.search === window.location.search) return;
-    if (!PAGE.test(u.pathname)) return;           // only the themed pages get the transition
-    e.preventDefault();
-    leave(u.href);
-  });
-
-  // Back/forward cache can restore a page mid-transition: clean up so it isn't left covered.
-  window.addEventListener('pageshow', function (e) {
-    if (!e.persisted) return;
-    root.classList.remove('pt-cover');
-    cancelLayerAnimations();
-    if (pt) pt.style.visibility = '';
-  });
-
   /* ------------------------------------------------------------------ */
   function init() {
-    if (root.classList.contains('pt-cover') && canAnimate) {
-      requestAnimationFrame(function () { reveal(start); });
-    } else {
-      root.classList.remove('pt-cover');
-      start();
-    }
+    start();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
