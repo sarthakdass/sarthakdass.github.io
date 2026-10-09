@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d1016">
+<meta name="description" content="I took Optimization and Real Analysis at the same time and one of the running jokes in Real Analysis was about the (lack of) rigor in proving the techniques we used in Optimization while…">
+<title>Calculus of Variations, Part I — Sarthak Dassarma</title>
+<script>(function(){var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!window.__sd){d.classList.remove('js');}},4000);})();</script>
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="../../../css/writing.css">
+<link rel="alternate" type="application/rss+xml" title="Sarthak Dassarma: Writing" href="../../../writing/feed.xml">
+<script src="../../../js/writing-math.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+<script src="../../../js/site.js" defer></script>
+</head>
+<body class="post-page">
+
+
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="site-header">
+  <div class="topbar">
+    <a class="brand" href="../../../" aria-label="Sarthak Dassarma, home">
+      <svg class="brand__mark" viewBox="92.83 80.00 50.00 75.83" aria-hidden="true" focusable="false"><defs><clipPath id="brand-dclip"><path d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/></clipPath><filter id="brand-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="0.7"/></filter></defs><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/><g clip-path="url(#brand-dclip)"><g class="brand__shade"><path fill="#000" fill-rule="evenodd" filter="url(#brand-soft)" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></g><g class="brand__s"><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></svg>
+      <span class="brand__name">Sarthak Dassarma</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="../../../">
+          <span class="nav-link__roll"><span class="nav-link__label">Home</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Home</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../../projects/">
+          <span class="nav-link__roll"><span class="nav-link__label">Projects</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Projects</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../../math/">
+          <span class="nav-link__roll"><span class="nav-link__label">Math</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Math</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../../hobbies/">
+          <span class="nav-link__roll"><span class="nav-link__label">Hobbies</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Hobbies</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../../writing/" aria-current="page">
+          <span class="nav-link__roll"><span class="nav-link__label">Writing</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Writing</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../../now/">
+          <span class="nav-link__roll"><span class="nav-link__label">Now</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Now</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../../visuals/">
+          <span class="nav-link__roll"><span class="nav-link__label">Visuals</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Visuals</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<header class="stage">
+  <div class="wrap wrap--post">
+    <a class="back-link" href="../../">&larr; Writing</a>
+    <h1 class="page-title page-title--post reveal"><span class="line"><span>Calculus of Variations, Part I</span></span></h1>
+    <p class="post-meta"><time datetime="2026-03-29">March 29, 2026</time><span>15 min read</span><a class="wchip wchip--dark" href="../../math/">Math</a></p>
+  </div>
+</header>
+
+<div class="stack">
+  <div class="sheet">
+    <main class="sheet__content wrap" id="content">
+      <article class="post prose">
+<p>I took Optimization and Real Analysis at the same time and one of the running jokes in Real Analysis was about the (lack of) rigor in proving the techniques we used in Optimization while also admitting how useful they are! One such concept is known as the &ldquo;Calculus of Variations&rdquo;.</p>
+<p>I laughed in those moments, but in retrospect, who am I to laugh unless I genuinely understand it? And after finally understanding the math for myself, this has truly become one of my favorite applications of analysis!</p>
+<p><em>Reading Prerequisites: Understand vector spaces, norm, limits, integration</em><br />
+<em>Extremely useful, almost prerequisites: Integration by parts, directional derivatives, gradients, multidimensional chain rule, differential equations, second-order ODEs</em></p>
+<p><strong><em>Notation &ldquo;issue&rdquo;:</em></strong> <em>I will sometimes write this:</em></p>
+<div class="math-block">\[\int f\,dx\]</div>
+<p><em>as a blatant abuse of notation instead of this:</em></p>
+<div class="math-block">\[\int f(x)\,dx\]</div>
+<h2 id="part-0-directional-derivatives">Part 0: Directional Derivatives<a class="anchor" href="#part-0-directional-derivatives" title="Link to this section">#</a></h2>
+<p>Let \(X\) be a normed space (like \(\R^N\)). Suppose \(f : E \to \R\) where \(E \subseteq X\) and \(x_0 \in E\) is an interior point (i.e. \(f\) is not just defined at \(x_0\), but also &ldquo;around&rdquo; \(x_0\)). Then we can try to find the &ldquo;derivative&rdquo; of \(f\) at \(x_0\).</p>
+<p>Specifically, we can take a &ldquo;directional derivative&rdquo;, but that means that a &ldquo;direction&rdquo; this derivative must be specified. Especially, it is the &ldquo;rate of change moving along some line through \(x_0\)&rdquo;. To wit, let \(v \in X\) with \(\|v\| = 1\) be a &ldquo;direction&rdquo;. Imagine this as an arrow that points in the direction of the derivative.</p>
+<p><strong>Definition (Directional Derivative):</strong> The directional derivative of \(f\) at \(x_0\) along the direction \(v\) is:</p>
+<div class="math-block">\[\frac{\partial f}{\partial v}(x_0) := \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0)}{t}\]</div>
+<p>For example, let \(X = \R^3\), and let \(f(x, y, z) = x^2 + y^2 + z^2\), defined on all of \(\R^3\). We can take the directional derivative along \(i := (1, 0, 0)\) at \((1, 1, 1)\):</p>
+<div class="math-block">\[\begin{aligned}
+\frac{\partial f}{\partial i}(1, 1, 1) &amp;:= \lim_{t \to 0} \frac{f((1, 1, 1) + t(1, 0, 0)) - f(1, 1, 1)}{t} \\
+&amp;= \lim_{t \to 0} \frac{f(1 + t, 1, 1) - f(1, 1, 1)}{t} \\
+&amp;= \lim_{t \to 0} \frac{(1 + t)^2 + 1^2 + 1^2 - 1^2 - 1^2 - 1^2}{t} = 2
+\end{aligned}\]</div>
+<p>For fun, you can try and see what happens when you take other examples of \(v\).</p>
+<h2 id="part-1-differentiating-in-infinite-dimensions">Part 1: Differentiating in Infinite Dimensions<a class="anchor" href="#part-1-differentiating-in-infinite-dimensions" title="Link to this section">#</a></h2>
+<p>This might sound scary, but keep in mind that absolutely nothing changes from the previous example. It&rsquo;s the same exact definition. We&rsquo;re just going to have fun with it. Let&rsquo;s mess around.</p>
+<p>We can start with a spicier vector space. Let \(X = C_b(\R)\), the normed vector space of <em>bounded continuous functions</em> over \(\R\). Of course, if I say it&rsquo;s a normed space, then I have to give you a norm. We&rsquo;re going to take the <strong>supremum norm</strong>, i.e. for a continuous function \(f\):</p>
+<div class="math-block">\[\|f\|_\infty := \sup_{\R} |f|\]</div>
+<p>If you don&rsquo;t know what <strong>sup</strong> means, you can instead replace it with <strong>max</strong> (not <em>technically</em> correct, but good enough for intuition). Convince yourself that it is a norm. That is, we should have these properties:</p>
+<ul>
+<li>\(\|f\|_\infty = 0\) if and only if \(f = 0\)</li>
+<li>For a real number \(t\), we have that \(\|tf\|_\infty = |t| \cdot \|f\|_\infty\)</li>
+<li>\(\|f\|_\infty + \|g\|_\infty \ge \|f + g\|_\infty\) (this might be the trickiest one to prove)</li>
+</ul>
+<p>Cool! We have a vector space. <strong>Note that this vector space is of infinite dimension</strong>, so what do <em>functions</em> on this vector space look like? These &ldquo;functions&rdquo; take in other functions, and output real numbers. Wow! So, these are like, &ldquo;higher-order functions&rdquo;, eh?</p>
+<p><strong>Example 1 (Evaluation Map):</strong> Let&rsquo;s try the function</p>
+<div class="math-block">\[F(f) := f(0)\]</div>
+<p>For example, \(\sin \in C_b(\R)\), and so we can compute \(F(\sin) = 0\) since \(\sin(0) = 0\).</p>
+<p>Try a few exercises to test your understanding!</p>
+<ul>
+<li>Compute \(F(\cos)\). Answer: 1</li>
+<li>
+<p>Compute:</p>
+<div class="math-block">\[F(t \mapsto e^{-t^2}) \qquad \text{Answer: } 1\]</div>
+<ul>
+<li>
+<p>Why did I write</p>
+<div class="math-block">\[F(t \mapsto e^{-t^2}) \text{ instead of } F(e^{-t^2})\]</div>
+<p>Writing the latter might be fine, but pedantically one might interpret \(\exp(-t^2)\) as a <em>number</em> rather than a <em>function</em>. \(F\) doesn&rsquo;t take in numbers; it takes in functions! Writing \(t \mapsto \exp(-t^2)\) makes it very explicit that we&rsquo;re talking about a function.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Compute:</p>
+<div class="math-block">\[F(t \mapsto t^2)\]</div>
+<p>Answer: Technically not defined, because \(t \mapsto t^2 \notin C_b(\R)\). It&rsquo;s continuous for sure but it&rsquo;s certainly not bounded!</p>
+</li>
+</ul>
+<p>We have a function to differentiate, so now we want a direction \(v\) to differentiate towards and a point \(x_0\) to take the derivative at&hellip;For sake of generality, let&rsquo;s just let them be \(v\) and \(f_0\). (Motivation for the notation of \(f_0\) is to remind ourselves it&rsquo;s a function.)</p>
+<p>Let&rsquo;s see how wild this gets:</p>
+<div class="math-block">\[\begin{aligned}
+\frac{\partial F}{\partial v}(f_0) &amp;= \lim_{t \to 0} \frac{F(f_0 + tv) - F(f_0)}{t} \\
+&amp;= \lim_{t \to 0} \frac{f_0(0) + tv(0) - f_0(0)}{t} = \boxed{v(0)}
+\end{aligned}\]</div>
+<p>This is pretty interesting!</p>
+<p><em>Bonus Problem: Is \(F\) differentiable? That is, does there exist a linear</em></p>
+<div class="math-block">\[L : C_b(\R) \to \R\]</div>
+<p><em>such that</em></p>
+<div class="math-block">\[\lim_{f \to f_0} \frac{F(f) - F(f_0) - L(f - f_0)}{\|f - f_0\|_\infty} = 0\]</div>
+<ul>
+<li>Hint: How can we use the directional derivatives to deduce what \(L\) would <em>have</em> to be?</li>
+<li>Answer: For \(h \in C_b(\R)\), the only possible candidate for the derivative is \(L(h) = h(0)\).</li>
+</ul>
+<p><strong>Example 2 (Integral Functionals):</strong> This will be a nice warmup for what&rsquo;s coming up.</p>
+<div class="math-block">\[F(f) := \int_{-1}^{1} f(x)\,dx\]</div>
+<p>For example, \(F(\sin) = 0\) and \(F(\cos) = 2\sin(1)\) or something like that. Let&rsquo;s try computing the directional derivative of \(F\) at \(f_0\) in the direction \(v\):</p>
+<div class="math-block">\[\begin{aligned}
+\frac{\partial F}{\partial v}(f_0) &amp;= \lim_{t \to 0} \frac{F(f_0 + tv) - F(f_0)}{t} \\
+&amp;= \lim_{t \to 0} \frac{1}{t} \left[ \int_{-1}^{1} f_0(x) + tv(x)\,dx - \int_{-1}^{1} f_0(x)\,dx \right] \\
+&amp;= \lim_{t \to 0} \frac{1}{t} \left[ \int_{-1}^{1} f_0(x) + tv(x) - f_0(x)\,dx \right] \\
+&amp;= \lim_{t \to 0} \frac{1}{t} \int_{-1}^{1} tv(x)\,dx = \boxed{\int_{-1}^{1} v(x)\,dx}
+\end{aligned}\]</div>
+<p><strong>Example 3 (Spicy!):</strong> The previous example was perhaps a bit lame since everything just happened to cancel <em>a little too well</em>. Here&rsquo;s</p>
+<div class="math-block">\[F(f) := \int_{-1}^{1} f(x)^2\,dx\]</div>
+<p>What now?</p>
+<div class="math-block">\[\begin{aligned}
+\frac{\partial F}{\partial v}(f_0) &amp;= \lim_{t \to 0} \frac{F(f_0 + tv) - F(f_0)}{t} \\
+&amp;= \lim_{t \to 0} \frac{1}{t} \left[ \int_{-1}^{1} (f_0(x) + tv(x))^2\,dx - \int_{-1}^{1} f_0(x)^2\,dx \right] \\
+&amp;= \lim_{t \to 0} \frac{1}{t} \int_{-1}^{1} 2tf_0(x)v(x) + t^2 v(x)^2\,dx \\
+&amp;= \lim_{t \to 0} \int_{-1}^{1} 2f_0(x)v(x) + tv(x)^2\,dx = \int_{-1}^{1} 2f_0(x)v(x)\,dx + \lim_{t \to 0} \int_{-1}^{1} tv(x)^2\,dx
+\end{aligned}\]</div>
+<p>So close! How do we deal with the pesky latter term of</p>
+<div class="math-block">\[\lim_{t \to 0} \int_{-1}^{1} tv(x)^2\,dx\]</div>
+<p>Intuitively, since \(tv(x)^2\) should go to 0 as \(t \to 0\), we would predict that this limit is 0. This is actually true! This is proven using <strong>Lebesgue Dominated Convergence</strong>. No worries if you&rsquo;re unfamiliar with this but just note that you can&rsquo;t always &ldquo;shove the limit inside the integral&rdquo;. It&rsquo;s fine here, though! Therefore:</p>
+<div class="math-block">\[\frac{\partial F}{\partial v}(f_0) = \boxed{\int_{-1}^{1} 2f_0(x)v(x)\,dx}\]</div>
+<p>Spicy!</p>
+<p><em>Bonus Exercise: Generalize the above argument to compute the directional derivative of functionals of the form</em></p>
+<div class="math-block">\[F(f) = \int_a^b g(f(x))^2\]</div>
+<p><em>where \(g : \R \to \R\) is a differentiable function with continuous derivative. If you don&rsquo;t know Lebesgue Dominated Convergence, go ahead and swap limits and integrals without proof.</em></p>
+<p>Fooling around in infinite dimensions was fun! Here&rsquo;s how we can practically apply this&hellip;it&rsquo;s about to get even more fun!</p>
+<h2 id="part-2-calculus-of-variations">Part 2: Calculus of Variations<a class="anchor" href="#part-2-calculus-of-variations" title="Link to this section">#</a></h2>
+<p>Consider the following four problems:</p>
+<ol>
+<li>
+<p>What function \(f : [0, 1] \to [0, 1]\) satisfying \(f(0) = 0\), \(f(1) = 1\) will minimize the quantity</p>
+<div class="math-block">\[\int_0^1 (f(x) + f'(x))^2\,dx\]</div>
+</li>
+<li>
+<p>What is the shortest path between two points in \(\R^2\)?</p>
+</li>
+<li>Suppose a cliff is \(h\) meters high. What is the shape of the track that minimizes the time it would take for a roller coaster starting at the top of the cliff to reach the ground?</li>
+<li>Consider two rings \(\{x = a,\ y^2 + z^2 = r_0^2\}\) and \(\{x = b,\ y^2 + z^2 = r_1^2\}\) positioned &ldquo;coaxially&rdquo; in \(\R^3\), for constants \(a, b, r_0, r_1\). What is the shape of minimal surface (covered in a previous blog post!) that connects the boundaries of the two rings?</li>
+</ol>
+<p>These four problems are all <em>minimization problems</em>. If you&rsquo;re reading this, you&rsquo;ve probably found minimums before. It was easy! To find the minimum of something like \(f(x) = x^2 - x\), you&rsquo;d just take the derivative and set it to zero. For those problems, you were finding the point that minimizes a function \(f\). But for the above four problems, what we&rsquo;re trying to find a certain <em>function</em> that minimizes some quantity in terms of that function&hellip;like, a function of a function.</p>
+<p>Perhaps it would be easier to see where we&rsquo;re headed if we considered the first problem first.</p>
+<p><strong>Example 1:</strong> Over all differentiable functions \(f : [0, 1] \to [0, 1]\) satisfying \(f(0) = 0\), \(f(1) = 1\), what is the minimum possible value of</p>
+<div class="math-block">\[F(f) := \int_0^1 (f(x) + f'(x))^2\,dx\]</div>
+<p>For what \(f\) is this achieved?</p>
+<blockquote>
+<p>Well, taking inspiration from calculus, what if we just, like&hellip;took the derivative of \(F\) and set it to zero&hellip;? Well, we&rsquo;re trying to minimize over a space of functions, which is like, an infinite-dimensional vector space, so the derivative would have to be like some kind of infinite-dimensional derivative, or something&hellip;</p>
+</blockquote>
+<p>Oh wait&hellip;are we sufficiently equipped for this problem?</p>
+<h3 id="some-tools-we-will-need">Some Tools We Will Need<a class="anchor" href="#some-tools-we-will-need" title="Link to this section">#</a></h3>
+<p>We need an analog for &ldquo;if \(f\) is minimized at \(x_0\), then \(f'(x_0) = 0\)&rdquo;.</p>
+<div class="env env--theorem">
+<p class="env__head"><span class="env__name">Theorem</span></p>
+<p>Let \(f : E \to \R\) where \(E \subseteq X\) for \(X\) a normed vector space. Suppose \(f\) has local minimum/maximum at \(x_0 \in E\), where \(x_0\) is an interior point and all the directional derivatives at \(x_0\) exist. Then we MUST have:</p>
+<div class="math-block">\[\frac{\partial f}{\partial v}(x_0) = 0\]</div>
+</div>
+<div class="env env--proof">
+<p class="env__head"><span class="env__name">Proof</span></p>
+<p>If it&rsquo;s a local minimum, then surely \(x_0\) is a local minimum of each function</p>
+<div class="math-block">\[g_v(t) := f(x_0 + tv)\]</div>
+<p>Then</p>
+<div class="math-block">\[0 = g_v'(x_0) = \frac{\partial f}{\partial v}(x_0)\]</div>
+</div>
+<p>Next up, a short blurb on integration by parts.</p>
+<div class="env env--lemma">
+<p class="env__head"><span class="env__name">Lemma</span></p>
+<p>Let</p>
+<div class="math-block">\[\varphi \in C_0^1([a, b]; \R)\]</div>
+<p>That is, \(\varphi\) is continuously differentiable and <em>compactly supported</em>, (you can interpret this as \(\varphi(a) = \varphi(b) = 0\)). Then for any differentiable, integrable \(f\), we have:</p>
+<div class="math-block">\[\int_a^b f\varphi'\,dx = -\int_a^b f'\varphi\,dx\]</div>
+</div>
+<div class="env env--proof">
+<p class="env__head"><span class="env__name">Proof</span></p>
+<p>Applying integration by parts:</p>
+<div class="math-block">\[\int_a^b f\varphi'\,dx = f(b)\varphi(b) - f(a)\varphi(a) - \int_a^b f'\varphi\,dx\]</div>
+<p>Since \(\varphi\) is compactly supported, the \(f(b)\varphi(b) - f(a)\varphi(a)\) is just 0, thus proven.</p>
+</div>
+<p>The next tool we will need is the chain rule in multiple dimensions.</p>
+<div class="env env--theorem">
+<p class="env__head"><span class="env__name">Theorem</span> <span class="env__title">(Chain Rule)</span></p>
+<p>Let \(f : \R \to \R^N\) and \(g : \R^N \to \R^N\). Then:</p>
+<div class="math-block">\[\frac{d}{dt} g(f(t)) = \nabla g(f(t)) \cdot f'(t)\]</div>
+</div>
+<blockquote>
+<p>I&rsquo;ll choose to omit the proof for this one, but here&rsquo;s an example:</p>
+<p>If we take \(N = 3\), let \(f(t) = (t, t^2, \sin t)\) and let \(g(x, y, z) = x^2 y + z\). Then:</p>
+<div class="math-block">\[\frac{d}{dt} g(f(t)) = \nabla g(f(t)) \cdot f'(t)\]</div>
+<div class="math-block">\[= \begin{bmatrix} \frac{\partial g}{\partial x}(f(t)) \\ \frac{\partial g}{\partial y}(f(t)) \\ \frac{\partial g}{\partial z}(f(t)) \end{bmatrix} \cdot \begin{bmatrix} 1 \\ 2t \\ \cos t \end{bmatrix}\]</div>
+<div class="math-block">\[= \begin{bmatrix} 2xy \big|_{x=t,\,y=t^2} \\ x^2 \big|_{x=t} \\ 1 \end{bmatrix} \cdot \begin{bmatrix} 1 \\ 2t \\ \cos t \end{bmatrix}\]</div>
+<div class="math-block">\[= \begin{bmatrix} 2t^3 \\ t^2 \\ 1 \end{bmatrix} \cdot \begin{bmatrix} 1 \\ 2t \\ \cos t \end{bmatrix}\]</div>
+<div class="math-block">\[= 2t^3 + 2t^3 + \cos t = \boxed{4t^3 + \cos t}\]</div>
+</blockquote>
+<p>Finally, we will get to employ this very cool trick!</p>
+<div class="env env--lemma">
+<p class="env__head"><span class="env__name">Lemma</span> <span class="env__title">(Fundamental Lemma of the Calculus of Variations)</span></p>
+<p>Let \(h : [a, b] \to \R\) be a continuous function, such that</p>
+<div class="math-block">\[\int_a^b h\varphi\,dx = 0\]</div>
+<p>for all compactly supported and continuously differentiable \(\varphi\) satisfying \(\|\varphi\|_\infty = 1\). Then \(h = 0\).</p>
+</div>
+<div class="env env--proof">
+<p class="env__head"><span class="env__name">Proof</span></p>
+<p>Suppose otherwise. Then there exists \(x_0 \in [a, b]\) for which \(h(x_0) \ne 0\). WLOG \(h(x_0) &gt; 0\), and for our own ease, we assume that \(x_0 \ne a, b\) (the proof is more or less the same).</p>
+<p>If we let \(c := h(x_0)\), then by continuity, there exists sufficiently small \(\delta &gt; 0\) such that \(h(x) &gt; c/2 &gt; 0\) for all \(x\) within \(\delta\) of \(x_0\).</p>
+<p>Now, it is not too hard to construct a smooth \(\varphi\) that is nonzero only in \((x_0 - \delta, x_0 + \delta)\), such that</p>
+<div class="math-block">\[\int_a^b \varphi\,dx &gt; 0\]</div>
+<p>We then obtain:</p>
+<div class="math-block">\[\begin{aligned}
+\int_a^b f\varphi\,dx &amp;= \int_{(x_0 - \delta, x_0 + \delta)} f\varphi\,dx + \int_{[a,b] \setminus (x_0 - \delta, x_0 + \delta)} f\varphi\,dx \\
+&amp;= \int_{(x_0 - \delta, x_0 + \delta)} f\varphi\,dx + 0 \\
+&amp;\ge \int_{(x_0 - \delta, x_0 + \delta)} (c/2)\varphi\,dx \\
+&amp;= \frac{c}{2} \int_{(x_0 - \delta, x_0 + \delta)} \varphi &gt; 0
+\end{aligned}\]</div>
+<p>Contradiction. We can easily scale up/down \(\varphi\) to get \(\|\varphi\|_\infty = 1\), so we still win.</p>
+</div>
+<h3 id="back-to-the-first-example">Back to the First Example<a class="anchor" href="#back-to-the-first-example" title="Link to this section">#</a></h3>
+<p>First, we need to specify the vector space of functions we&rsquo;re using. We will pick</p>
+<div class="math-block">\[X = C^1([0, 1]; \R)\]</div>
+<p>which is the normed space of functions \(f : [0, 1] \to \R\) with continuous derivative. As before, the norm we take is the supremum/maximum norm.</p>
+<p>Let&rsquo;s suppose that</p>
+<div class="math-block">\[F : C^1([a, b]; \R) \to \R\]</div>
+<p>is minimized at some \(f_0\). Then, by <strong>Theorem 1</strong>, we have for every direction \(v \in X\) that</p>
+<div class="math-block">\[0 = \frac{\partial F}{\partial v}(f_0) = \lim_{t \to 0} \frac{F(f_0 + tv) - F(f_0)}{t}\]</div>
+<div class="math-block">\[\begin{aligned}
+&amp;= \lim_{t \to 0} \frac{1}{t} \int_0^1 (f_0(x) + tv(x) + f_0'(x) + tv'(x))^2 - (f_0(x) + f_0'(x))^2\,dx \\
+&amp;= \lim_{t \to 0} \frac{1}{t} \int_0^1 2(f_0(x) + f_0'(x))(tv(x) + tv'(x)) + (tv(x) + tv'(x))^2\,dx \\
+&amp;= \lim_{t \to 0} \int_0^1 2(f_0(x) + f_0'(x))(v(x) + v'(x)) + t(v(x) + v'(x))^2\,dx
+\end{aligned}\]</div>
+<p>Switch the limit and integral with a domination argument:</p>
+<div class="math-block">\[\begin{aligned}
+&amp;= \int_0^1 \lim_{t \to 0} 2(f_0(x) + f_0'(x))(v(x) + v'(x)) + t(v(x) + v'(x))^2\,dx \\
+&amp;= \int_0^1 2(f_0(x) + f_0'(x))(v(x) + v'(x))\,dx
+\end{aligned}\]</div>
+<p>Now we need to split this integral into two parts. The key idea is to remove the \(v'(x)\) and turn it into a \(v(x)\).</p>
+<div class="math-block">\[= \int_0^1 2(f_0(x) + f_0'(x))v(x)\,dx + \int_0^1 2(f_0(x) + f_0'(x))v'(x)\,dx\]</div>
+<p>This equality holds for all directions \(v\). We&rsquo;re allowed to apply more conditions to \(v\) if we want (as long as it&rsquo;s still a direction, it works!), particularly we may assume that \(v\) is compactly supported in \((0, 1)\). Then, magic happens when we apply integration by parts / <strong>Theorem 2</strong> on the second integral! This gives us:</p>
+<div class="math-block">\[= \int_0^1 2(f_0(x) + f_0'(x))v(x)\,dx - \int_0^1 2(f_0'(x) + f_0''(x))v(x)\,dx\]</div>
+<p>We thus conclude that</p>
+<div class="math-block">\[\int_0^1 (f_0''(x) + 2f_0'(x) + f_0(x))v(x)\,dx = 0\]</div>
+<p>for all</p>
+<div class="math-block">\[v \in C_0^1([0, 1]; \R)\]</div>
+<p>By the <strong>Fundamental Lemma of Calculus of Variations</strong>, we find that actually,</p>
+<div class="math-block">\[f_0''(x) + 2f_0'(x) + f_0(x) = 0\]</div>
+<p>Ta-da! This is now just a differential equation! We can solve this&hellip;</p>
+<blockquote>
+<p>Define \(D\) to be the differentiation linear operator on the vector space of smooth solutions, so that \((D + I)(D + I)(f_0) = 0\). Let \(u = (D + 1)f_0\) so \(u \in \ker(T + I)\). Then \(u' = -u\) so \(u = c_1 e^{-x}\).</p>
+<p>Now \(f_0' + f_0 = c_1 e^{-x}\). For fun, move the \(e^x\) over, then magically we have</p>
+<div class="math-block">\[\frac{d}{dx}(f_0(x)e^x) = c_1\]</div>
+<p>So,</p>
+<div class="math-block">\[f_0(x)e^x = c_1 x + c_2,\quad f_0 = (c_1 x + c_2)e^{-x}\]</div>
+</blockquote>
+<p>&hellip;to get \(f_0 = (c_1 x + c_2)e^{-x}\). Plugging in the constraints \(f_0(0) = 0\) and \(f_1(1) = 1\), we find that \(c_1 = e\) and \(c_2 = 0\). Therefore, the minimizing function is:</p>
+<div class="math-block">\[\boxed{f_0(x) = xe^{1-x}}\]</div>
+<p>By taking an &ldquo;infinite-dimensional&rdquo; derivative, we discovered the minimal value of a &ldquo;infinite-dimensional&rdquo; function! Wasn&rsquo;t that fun?</p>
+<p>Welcome to the Calculus of Variations.</p>
+<h2 id="part-3-the-euler-lagrange-equation">Part 3: The Euler-Lagrange Equation<a class="anchor" href="#part-3-the-euler-lagrange-equation" title="Link to this section">#</a></h2>
+<p>You can totally solve the other three problems that I have posed by using this method, but it can get a bit annoying. Instead, let&rsquo;s generalize in order to make a shortcut!</p>
+<p><strong>General Problem:</strong> Let \(g(x, y, z)\) be a twice-differentiable function \(\R^3 \to \R\). The \(x\) component represents the&hellip;\(x\), the \(y\)-component represents \(f(x)\), and the \(z\) component represents \(f'(x)\). Here&rsquo;s an example to explain what that means: if I&rsquo;m trying to represent the expression \(xf(x) + f'(x)^2\) in the form \(g(x, f(x), f'(x))\), then \(g(x, y, z) = xy + z^2\).</p>
+<p>Let</p>
+<div class="math-block">\[F(f) = \int_a^b g(x, f(x), f'(x))\,dx\]</div>
+<p>What differential equation must be satisfied by an \(f\) that minimizes \(F(f)\)?</p>
+<p>Note that the first problem is equivalent to solving this general problem for \(g(x, y, z) = (y + z)^2\).</p>
+<h3 id="step-1-take-the-directional-derivative">Step 1: Take the directional derivative<a class="anchor" href="#step-1-take-the-directional-derivative" title="Link to this section">#</a></h3>
+<p>If \(f_0\) is a local minimum, then the directional derivatives at \(f_0\) must all be zero. For any direction \(v\) compactly supported in \((a, b)\), we have that:</p>
+<div class="math-block">\[\begin{aligned}
+0 = \frac{\partial F}{\partial v}(f_0) &amp;= \lim_{t \to 0} \frac{1}{t} \int_a^b g(x, f_0(x) + tv(x), f_0'(x) + tv'(x)) - g(x, f_0(x), f_0'(x))\,dx \\
+&amp;= \lim_{t \to 0} \int_a^b \frac{g(x, f_0(x) + tv(x), f_0'(x) + tv'(x)) - g(x, f_0(x), f_0'(x))}{t}\,dx
+\end{aligned}\]</div>
+<h3 id="step-15-shove-the-limit-in">Step 1.5: Shove the limit in<a class="anchor" href="#step-15-shove-the-limit-in" title="Link to this section">#</a></h3>
+<p><em>This isn&rsquo;t that fun of a step so feel free to not care much about this.</em></p>
+<p>By the Mean Value Theorem, we have that for each \(t\) there exists \(t_0\) between 0 and \(t\) such that</p>
+<div class="math-block">\[\frac{g(x, f_0(x) + tv(x), f_0'(x) + tv'(x)) - g(x, f_0(x), f_0'(x))}{t} = \frac{d}{dt} g(x, f_0(x) + tv(x), f_0'(x) + tv'(x)) \Big|_{t = t_0}\]</div>
+<p>Since \(g\) is twice-differentiable,</p>
+<div class="math-block">\[\frac{d}{dt} g(x, f_0(x) + tv(x), f_0'(x) + tv'(x))\]</div>
+<p>is continuous, so it obtains a maximum \(M\) on \([a, b]\). We deduce that the integrand is bounded by \(M\). By Arzela-Ascoli and/or Lebesgue domination, we may conclude that the limit may be passed through the integral.</p>
+<h3 id="step-2-prepare-the-chain-rule">Step 2: Prepare the Chain Rule<a class="anchor" href="#step-2-prepare-the-chain-rule" title="Link to this section">#</a></h3>
+<div class="math-block">\[= \int_a^b \lim_{t \to 0} \frac{g(x, f_0(x) + tv(x), f_0'(x) + tv'(x)) - g(x, f_0(x), f_0'(x))}{t}\,dx\]</div>
+<p>The integrand looks like a derivative, and that&rsquo;s because it totally is. It&rsquo;s just:</p>
+<div class="math-block">\[\lim_{t \to 0} \frac{g(x, f_0(x) + tv(x), f_0'(x) + tv'(x)) - g(x, f_0(x), f_0'(x))}{t} = \frac{d}{dt} g(x, f_0(x) + tv(x), f_0'(x) + tv'(x)) \Big|_{t = 0}\]</div>
+<p>Now with that being said, I personally do find it quite difficult to understand where exactly the chain rule is applied here. To help myself out, I like to define a &ldquo;component accumulator&rdquo; function. To wit, let</p>
+<div class="math-block">\[h(t) = (x, f_0(x) + tv(x), f_0'(x) + tv'(x))\]</div>
+<p>Then, this is:</p>
+<div class="math-block">\[= \frac{d}{dt} g(h(t))\]</div>
+<h3 id="step-3-apply-the-chain-rule">Step 3: Apply the Chain Rule<a class="anchor" href="#step-3-apply-the-chain-rule" title="Link to this section">#</a></h3>
+<div class="math-block">\[\begin{aligned}
+&amp;= \nabla g(h(t)) \cdot h'(t) \\
+&amp;= \begin{bmatrix} \frac{\partial g}{\partial x}(h(t)) \\ \frac{\partial g}{\partial y}(h(t)) \\ \frac{\partial g}{\partial z}(h(t)) \end{bmatrix} \cdot \begin{bmatrix} 0 \\ v(x) \\ v'(x) \end{bmatrix} \\
+&amp;= \frac{\partial g}{\partial y}(x, f_0(x), f_0'(x))v(x) + \frac{\partial g}{\partial z}(x, f_0(x), f_0'(x))v'(x)
+\end{aligned}\]</div>
+<p>Putting back the integral, we have that for every \(C^1\) and compactly supported \(v\) that:</p>
+<div class="math-block">\[0 = \int_a^b \frac{\partial g}{\partial y}(x, f_0(x), f_0'(x))v(x) + \frac{\partial g}{\partial z}(x, f_0(x), f_0'(x))v'(x)\,dx\]</div>
+<h3 id="step-4-integrate-by-parts">Step 4: Integrate by Parts<a class="anchor" href="#step-4-integrate-by-parts" title="Link to this section">#</a></h3>
+<p>We don&rsquo;t like \(v'(x)\) and wish to replace with \(v(x)\). So we split the integral:</p>
+<div class="math-block">\[= \int_a^b \frac{\partial g}{\partial y}(x, f_0(x), f_0'(x))v(x)\,dx + \int_a^b \frac{\partial g}{\partial z}(x, f_0(x), f_0'(x))v'(x)\,dx\]</div>
+<p>And apply integration by parts, and the fact that \(v\) is compactly supported, on the second term:</p>
+<div class="math-block">\[\begin{aligned}
+&amp;= \int_a^b \frac{\partial g}{\partial y}(x, f_0(x), f_0'(x))v(x)\,dx - \int_a^b \frac{d}{dx}\frac{\partial g}{\partial z}(x, f_0(x), f_0'(x))v(x)\,dx \\
+&amp;= \int_a^b \left( \frac{\partial g}{\partial y}(x, f_0(x), f_0'(x)) - \frac{d}{dx}\frac{\partial g}{\partial z}(x, f_0(x), f_0'(x)) \right) v(x)\,dx
+\end{aligned}\]</div>
+<h3 id="step-5-the-fundamental-lemma">Step 5: The Fundamental Lemma<a class="anchor" href="#step-5-the-fundamental-lemma" title="Link to this section">#</a></h3>
+<p>Since this holds for all compactly supported \(C^1\) directions \(v\), we may use the Fundamental Lemma of Calculus of Variations, and we finally obtain that:</p>
+<div class="math-block">\[\frac{\partial g}{\partial y}(x, f_0(x), f_0'(x)) - \frac{d}{dx}\frac{\partial g}{\partial z}(x, f_0(x), f_0'(x)) = 0\]</div>
+<p>Ergo:</p>
+<div class="math-block">\[\boxed{\frac{\partial g}{\partial y}(x, f_0(x), f_0'(x)) = \frac{d}{dx}\frac{\partial g}{\partial z}(x, f_0(x), f_0'(x))}\]</div>
+<p>This is the <strong>Euler-Lagrange Equation</strong>.</p>
+<h2 id="part-4-euler-lagrange-abuse">Part 4: Euler-Lagrange Abuse<a class="anchor" href="#part-4-euler-lagrange-abuse" title="Link to this section">#</a></h2>
+<p>We&rsquo;ve got a lot of variables flying around all over the place, so let&rsquo;s see how we&rsquo;re really supposed to use Euler-Lagrange:</p>
+<ol>
+<li>First, look at your integrand and figure out what \(g\) really is. This is done by replacing \(f(x)\) with \(y\) and \(f'(x)\) with \(z\).</li>
+<li>To get the left side, differentiate \(g\) with respect to the \(y\) variable, then plug back in \(y = f(x)\) and \(z = f'(x)\). (You can think of this as treating \(f(x)\) as a &ldquo;variable&rdquo; and differentiating with respect to it.)</li>
+<li>To get the right side, differentiate \(g\) with respect to the \(z\) variable, then plug back in \(y = f(x)\) and \(z = f'(x)\). (&ldquo;Differentiate with respect to the \(f'(x)\) variable&rdquo;). Now, take the derivative with respect to \(x\).</li>
+</ol>
+<p>Our first example will be the shortest distance between two points.</p>
+<p><strong>Example 1 (Shortest Distance):</strong> Let \((a, b)\) and \((c, d)\) be two points in \(\R^2\), and let&rsquo;s assume that \(a &lt; c\). What is the shortest path between these two points?</p>
+<p>(We expect this to be a line, but let&rsquo;s see if this is true.)</p>
+<p>We can (sort of) model the shortest path as a continuous function \(f : [a, c] \to \R\) that satisfies \(f(a) = b\) and \(f(c) = d\). So, we&rsquo;re trying to figure out what function \(f\) satisfies these conditions such that its length (i.e. &ldquo;arc length&rdquo;) is minimized.</p>
+<p>The arc-length formula states that the &ldquo;length&rdquo; of this path is given by</p>
+<div class="math-block">\[\int_a^c \sqrt{1 + f'(x)^2}\,dx\]</div>
+<blockquote>
+<p><em>Slight warning: we are assuming that \(f\) is differentiable&hellip;</em></p>
+<p>But we&rsquo;re actually fine! We don&rsquo;t need differentiable here, we just need &ldquo;absolutely continuous&rdquo;, and then \(f'(x)\) exists &ldquo;almost everywhere&rdquo; making this quantity well-defined. This actually makes sense because I&rsquo;m moderately certain that we don&rsquo;t even define length for curves that aren&rsquo;t absolutely continuous.</p>
+</blockquote>
+<p>Thus, here&rsquo;s the problem: Find the differentiable function \(f\) satisfying \(f(a) = b\) and \(f(c) = d\) that minimizes the quantity</p>
+<div class="math-block">\[F(f) := \int_a^c \sqrt{1 + f'(x)^2}\,dx\]</div>
+<p>Now let&rsquo;s follow the Euler-Lagrange formula&hellip;</p>
+<ol>
+<li>
+<p>Looks like our</p>
+<div class="math-block">\[g(x, y, z) = \sqrt{1 + z^2}\]</div>
+</li>
+<li>
+<p>Let&rsquo;s differentiate with respect to \(y\) and uh&hellip;we get 0. This is the LHS.</p>
+</li>
+<li>
+<p>Now let&rsquo;s differentiate with respect to \(z\) to get</p>
+<div class="math-block">\[\frac{z}{\sqrt{1 + z^2}}\]</div>
+<p>Plugging this stuff back in, this turns into</p>
+<div class="math-block">\[\frac{f'(x)}{\sqrt{1 + f'(x)^2}}\]</div>
+<p>We&rsquo;re not done yet: We need to differentiate <em>this</em> with respect to \(x\) to get</p>
+<div class="math-block">\[\frac{d}{dx} \frac{f'(x)}{\sqrt{1 + f'(x)^2}}\]</div>
+<p>This is the RHS.</p>
+</li>
+</ol>
+<p>Hence the Euler-Lagrange equation for this minimization problem is given by</p>
+<div class="math-block">\[\boxed{\frac{d}{dx} \frac{f'(x)}{\sqrt{1 + f'(x)^2}} = 0}\]</div>
+<p>Notice that I didn&rsquo;t bother evaluating this derivative. That&rsquo;s because if the derivative of something is zero <del>and that something is \(C^1\)</del> then the something MUST be a constant function! Thus:</p>
+<div class="math-block">\[\frac{f'(x)}{\sqrt{1 + f'(x)^2}} = k\]</div>
+<p>for a constant \(k\). Solving, we get:</p>
+<div class="math-block">\[f'(x) = \pm\frac{1}{\sqrt{1 - k^2}}\]</div>
+<p>Therefore,</p>
+<div class="math-block">\[\boxed{f(x) = m \pm \frac{x}{1 - k^2}}\]</div>
+<p>for constants \(k\) and \(m\), as well as a choice of sign. This is linear, and by applying the original conditions, this must interpolate to the line connecting the two points.</p>
+<p><strong>Example 2 (Rollercoaster Brachistochrone):</strong> You&rsquo;ve been hired as an engineer to build a new rollercoaster at the Grand Canyon, which probably violates more than 6 laws. It&rsquo;s going to start really high up at \((0, h)\) and its ending point is going to be on the ground at \((k, 0)\). To maximize profits, your company wants the ride to take the least amount of time possible. Given that the only force acting on the system is gravity (i.e. gravity is the only source of speed), what shape should the track be?</p>
+<p>First, we claim that the track can be modelled as a continuous function</p>
+<div class="math-block">\[f : [0, h] \to [0, k]\]</div>
+<p><del>unless you really, really want loops</del>. How do we compute the time the rollercoaster would take to get to the end given that \(f\) is the function modelling the track? The unfortunate answer is physics.</p>
+<blockquote>
+<p><strong>Bad Physics</strong></p>
+<p>We need physics to compute the rollercoaster&rsquo;s speed when it reaches a certain point \((x, f(x))\) on the track. Fortunately, this is simple: The total energy at the top of the track is all gravitationally sourced and is given by \(mgh\). Once it has descended to \((x, f(x))\), there has been a vertical displacement of \(h - f(x)\), meaning \(mg(h - f(x))\) of gravitational potential energy has been &ldquo;lost&rdquo;. This must all be converted to kinetic energy, hence if \(v(x)\) is the speed of \((x, f(x))\) then:</p>
+<div class="math-block">\[mg(h - f(x)) = \tfrac{1}{2} m v(x)^2\]</div>
+<div class="math-block">\[\boxed{v(x) = \sqrt{2g(h - f(x))}}\]</div>
+</blockquote>
+<p>Which leads into some messy analysis&hellip;</p>
+<blockquote>
+<p><strong>Messy Analysis</strong></p>
+<p>To be honest, these manipulations don&rsquo;t come naturally to me, so don&rsquo;t fret if you can&rsquo;t follow (alternatively, Google some alternative approaches). Impose the condition that \(f\) be absolutely continuous (so that the curve traced is rectifiable), hence \(f\) is differentiable almost everywhere and we may define:</p>
+<div class="math-block">\[z(t) := \int_0^{x(t)} \sqrt{1 + f'(x)^2}\,dx\]</div>
+<p>where \(x(t)\) is the \(x\)-coordinate after \(t\) seconds. That is, \(z(t)\) is the length along the curve travelled after a time \(t\). \(z\) has an inverse and by the chain rule</p>
+<div class="math-block">\[1 = \frac{d}{ds} z(z^{-1}(s)) = \frac{dz^{-1}}{ds}(s) \cdot z'(z^{-1}(s))\]</div>
+<p>thus if \(L\) is the total length of the journey and \(T\) is the total time taken (which we need to find), then:</p>
+<div class="math-block">\[T = z^{-1}(L) - z^{-1}(0) = \int_0^L \frac{dz^{-1}}{ds}(s)\,ds = \int_0^L \frac{1}{z'(z^{-1}(s))}\,ds\]</div>
+<p>Now note that in fact,</p>
+<div class="math-block">\[z'(t) = \sqrt{1 + f'(x(t))^2}\,x'(t) = \sqrt{x'(t)^2 + \left(\tfrac{d}{dt} f(x(t))\right)^2} = v(x(t))\]</div>
+<p>hence:</p>
+<div class="math-block">\[T = \int_0^L \frac{1}{v(x(z^{-1}(s)))}\,ds = \int_0^L \frac{1}{\sqrt{2g(h - f(x(z^{-1}(s))))}}\,ds\]</div>
+<p>Now apply the substitution \(u = x(z^{-1}(s))\). Then, write \(s = z(x^{-1}(u))\) so that</p>
+<div class="math-block">\[s'(u) = z'(x^{-1}(u))(x^{-1})'(u) = \sqrt{1 + f'(u)^2}\,x'(x^{-1}(u))(x^{-1})'(u) = \sqrt{1 + f'(u)^2}\]</div>
+<p>Therefore:</p>
+<div class="math-block">\[T = \int_0^L \frac{\sqrt{1 + f'(u)^2}}{\sqrt{2g(h - f(u))}}\,du\]</div>
+</blockquote>
+<p>And eventually we find that the time taken \(f(F)\) given a track \(f\) is given by:</p>
+<div class="math-block">\[F(f) = \int_0^L \frac{\sqrt{1 + f'(x)^2}}{\sqrt{2g(h - f(x))}}\,du\]</div>
+<p>Er, looks like the letter \(g\) has been stolen by physics. Oh well. But when has that ever stopped math? The left side of the Euler-Lagrange equation is:</p>
+<div class="math-block">\[\frac{g\sqrt{1 + f'(x)^2}}{2\sqrt{2}\,(g(h - f(x)))^{3/2}}\]</div>
+<p>The right side is:</p>
+<div class="math-block">\[\frac{d}{dx} \frac{f'(x)}{\sqrt{2g(h - f(x))} \cdot \sqrt{1 + f'(x)^2}}\]</div>
+<p>Now set them equal and solve, simple!!!</p>
+<p>Right&hellip;</p>
+<p>&hellip;if I go through the computations here then both my readers and I will go insane. Fortunately, Mathematica comes to the rescue! This reduces to:</p>
+<div class="math-block">\[1 + f'(x)^2 = 2(h - f(x))f''(x)\]</div>
+<p>I&rsquo;m not a big fan of this \(h - f(x)\) term, so if we let \(u = h - f(x)\), then this is</p>
+<div class="math-block">\[1 + u'(x)^2 = -2u(x)u''(x)\]</div>
+<p>Now we get to use a really slick trick! We <em>multiply each side</em> by \(u'(x)\) to get</p>
+<div class="math-block">\[u'(x) + u'(x)^3 + 2u(x)u'(x)u''(x) = 0\]</div>
+<p>But why would I ever do such a thing here? Well, with some clever manipulation&hellip;</p>
+<div class="math-block">\[u'(x) + u'(x)u'(x)^2 + u(x)(2u'(x)u''(x)) = 0\]</div>
+<p>&hellip;<em>we can apply the product rule for differentiation in reverse</em>!</p>
+<div class="math-block">\[u'(x) + \frac{d}{dx}\left(u(x)u'(x)^2\right) = 0\]</div>
+<p>Or equivalently,</p>
+<div class="math-block">\[\frac{d}{dx}\left(u(x) + u(x)u'(x)^2\right) = 0\]</div>
+<p>Thus, \(u(x) + u(x)u'(x)^2 = c\) for a constant \(c\). We&rsquo;ve got one layer down, one to go! Solving for \(u'(x)\):</p>
+<div class="math-block">\[u'(x) = \pm\sqrt{\frac{c - u(x)}{u(x)}}\]</div>
+<p>Now let&rsquo;s think for a second: is \(u\) going up or going down? It should be going up because \(f\) is going down! So we must take the positive solution!</p>
+<p>Let&rsquo;s toss some rigor aside and &ldquo;separate and integrate&rdquo;:</p>
+<div class="math-block">\[\begin{aligned}
+\frac{du}{dx} &amp;= \sqrt{\frac{c - u}{u}} \\
+\sqrt{\frac{u}{c - u}}\,du &amp;= dx \\
+x &amp;= c_1 + \int \sqrt{\frac{u}{c - u}}\,du
+\end{aligned}\]</div>
+<p>(If you&rsquo;re concerned, it&rsquo;s not <em>too</em> hard to restore rigor.)</p>
+<p>If integrating this lovely expression is your cup of tea, go ahead. A trig sub or two should do the trick. Unfortunately for you, I will politely decline such an experience, by stuffing this into Mathematica we get:</p>
+<div class="math-block">\[x = c_1 + c\sin^{-1}\left(\sqrt{u/c}\right) - \sqrt{u(c - u)}\]</div>
+<p>Admittedly, this is not the prettiest solution, but it will certainly do.</p>
+<p>If we restore \(f(x) = h - u(x)\) then the curve looks something like this:</p>
+<p><img alt="A graph of a decreasing curve starting at height 4 at x = 0 and flattening out to 0 near x = 6" src="fig1.png" /></p>
+<p>This curve is called the <strong>Brachistochrone!</strong></p>
+<p>The last problem, I leave to you as an exercise.</p>
+<p><strong>Example 3 (The Containment Catenoid)</strong></p>
+<p>Steely Dan has gotten his hands on the elusive Cocktail Monkey and wants to build a special enclosure for it. He insists that the room for the monkey consists of a circular floor of radius \(r_2\) and a circular ceiling \(r_1\), such that the centers of the circles lie directly above each other at a distance \(h\).</p>
+<p>Steely Dan is running out of material though, and has hired you (yes, you!) to finish the enclosure by building the walls out of super expensive flexible material. The mission is to figure out what shape the walls need to be in order to minimize the amount of flexible used (i.e. minimize the surface area of the walls).</p>
+<p>His first thought was to just build the walls up &ldquo;linearly&rdquo; to make a truncated cone. But I suspect that he doesn&rsquo;t have the mathematical background to back up his claim. Fortunately, you do now! Is the truncated cone truly the most optimal shape? Or does it turn out to be a more surprising shape&hellip;? Perhaps, some mysterious surface called &ldquo;catenoid&rdquo;? Only one way to find out!</p>
+<p>If you need it, here&rsquo;s a starting point:</p>
+<blockquote>
+<p>Tilt the room on its side. We&rsquo;ll make the walls by drawing a continuous function \(f\) connecting \((0, r_1)\) and \((h, r_2)\), then rotating the function around the \(x\)-axis. Of course, this assumes that the best surface is rotationally symmetric. Don&rsquo;t ask me for a proof, though!</p>
+<p>For such a function \(f\), I&rsquo;ll tell you that the surface area of the revolved surface is given by:</p>
+<div class="math-block">\[F(f) = 2\pi \int_0^h f(x)\sqrt{1 + f'(x)^2}\,dx\]</div>
+</blockquote>
+<p>Have at it!</p>
+<h2 id="takeaways">Takeaways<a class="anchor" href="#takeaways" title="Link to this section">#</a></h2>
+<ul>
+<li>Function spaces are valid vector spaces, and you can even do &ldquo;Calculus&rdquo; on them.</li>
+<li>Having a deep understanding of analysis, in its most general forms, leads to some remarkable results and methodologies.</li>
+<li>The &ldquo;set the derivative to 0&rdquo;-philosophy has an infinite-dimensional analogue, which leads to the Euler-Lagrange equation.</li>
+</ul>
+<p>For that last point though&hellip;we all know that solving \(f'(x) = 0\) does not <em>necessarily</em> give you a maximum/minimum&hellip;sometimes you can get tricked. Must the Euler-Lagrange equation give a minimum? Unfortunately, no! We need to ensure, somehow, that a minimum even exists in the first place. But how?&hellip;and other questions that we shall resolve in Part II!</p>
+      </article>
+      <nav class="post-nav" aria-label="More posts"><a class="post-nav__prev" href="../you-are-not-in-a-chinese-time-of-your-life-a-conversation-and-analysis/"><small>Older</small><span>You are NOT in a Chinese Time of your Life - A Conversation and Analysis</span></a><a class="post-nav__next" href="../boredom-is-magic/"><small>Newer</small><span>Boredom is Magic</span></a></nav>
+      <div class="divider v" aria-hidden="true"><svg viewBox="0 -1 600 72" role="img" aria-label="Cantor set, six levels" xmlns="http://www.w3.org/2000/svg"><rect class="fc" x="0.00" y="0" width="600.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="4.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="19.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="49.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="64.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="138.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="153.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="182.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="197.53" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="404.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="419.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="449.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="464.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="538.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="553.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="582.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="597.53" y="60" width="2.47" height="3.5" rx="1.2"/></svg></div>
+    </main>
+    <footer class="footer">
+      <div class="wrap">&copy; 2026 Sarthak Dassarma. Built with plain HTML and hosted on GitHub Pages.</div>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>

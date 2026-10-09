@@ -19,6 +19,7 @@ PAGES = [
     ("projects.html", "Projects"),
     ("math.html", "Math"),
     ("hobbies.html", "Hobbies"),
+    ("writing.html", "Writing"),
     ("now.html", "Now"),
     ("visuals.html", "Visuals"),
 ]
@@ -123,9 +124,13 @@ def nav(current, prefix=""):
 </header>"""
 
 
-def page(filename, title, body_class, stage_html, content, description="", divider=False):
+def page(filename, title, body_class, stage_html, content, description="", divider=False,
+         up=None, nav_current=None, head_extra="", body_end=""):
     # Root page: paths as written. Section pages live in <name>/index.html, one folder down.
-    up = "" if filename == "index.html" else "../"
+    # Pages deeper than that (the Writing categories and posts) pass their own `up` and write their own relative links.
+    explicit_up = up is not None
+    if up is None:
+        up = "" if filename == "index.html" else "../"
     desc = f'\n<meta name="description" content="{description}">' if description else ""
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -140,14 +145,14 @@ def page(filename, title, body_class, stage_html, content, description="", divid
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="{FONTS}" rel="stylesheet">
 <link rel="stylesheet" href="{up}css/style.css">
-<script src="{up}js/site.js" defer></script>
+{head_extra}<script src="{up}js/site.js" defer></script>
 </head>
 <body class="{body_class}">
 
 
 <a class="skip" href="#content">Skip to content</a>
 
-{nav(filename, up)}
+{nav(nav_current or filename, up)}
 
 {stage_html}
 
@@ -161,15 +166,15 @@ def page(filename, title, body_class, stage_html, content, description="", divid
     </footer>
   </div>
 </div>
-
+{body_end}
 </body>
 </html>
 """
-    if up:
+    if up and not explicit_up:
         html = re.sub(r'href="((?:projects|papers)/)', r'href="../\1', html)
         html = re.sub(r'(?<=src=")(?=assets/)', '../', html)
     # links between section pages written as plain file names
-    html = re.sub(r'href="(?:\.\./)?(index|projects|math|hobbies|now|visuals)\.html"',
+    html = re.sub(r'href="(?:\.\./)?(index|projects|math|hobbies|writing|now|visuals)\.html"',
                   lambda m: 'href="%s%s"' % (up, clean(m.group(1) + ".html")), html)
     return html
 
@@ -644,3 +649,7 @@ if __name__ == "__main__":
         with open(name, "w", encoding="utf-8") as f:
             f.write(html)
         print("wrote", name, len(html), "bytes")
+    # the Writing section (hub, archives, posts) is built from writing-src/
+    sys.path.insert(0, "tools")
+    import build_writing
+    build_writing.build(page, title_markup, DIVIDER)

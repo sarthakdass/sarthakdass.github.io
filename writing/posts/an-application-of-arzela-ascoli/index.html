@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d1016">
+<meta name="description" content="This is more of a pedagogical note than a post that is trying to teach, so I will be assuming that you are fairly comfortable with the standard real analysis curriculums.">
+<title>An Application of Arzela-Ascoli — Sarthak Dassarma</title>
+<script>(function(){var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!window.__sd){d.classList.remove('js');}},4000);})();</script>
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="../../../css/writing.css">
+<link rel="alternate" type="application/rss+xml" title="Sarthak Dassarma: Writing" href="../../../writing/feed.xml">
+<script src="../../../js/writing-math.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+<script src="../../../js/site.js" defer></script>
+</head>
+<body class="post-page">
+
+
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="site-header">
+  <div class="topbar">
+    <a class="brand" href="../../../" aria-label="Sarthak Dassarma, home">
+      <svg class="brand__mark" viewBox="92.83 80.00 50.00 75.83" aria-hidden="true" focusable="false"><defs><clipPath id="brand-dclip"><path d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/></clipPath><filter id="brand-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="0.7"/></filter></defs><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/><g clip-path="url(#brand-dclip)"><g class="brand__shade"><path fill="#000" fill-rule="evenodd" filter="url(#brand-soft)" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></g><g class="brand__s"><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></svg>
+      <span class="brand__name">Sarthak Dassarma</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="../../../">
+          <span class="nav-link__roll"><span class="nav-link__label">Home</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Home</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../../projects/">
+          <span class="nav-link__roll"><span class="nav-link__label">Projects</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Projects</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../../math/">
+          <span class="nav-link__roll"><span class="nav-link__label">Math</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Math</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../../hobbies/">
+          <span class="nav-link__roll"><span class="nav-link__label">Hobbies</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Hobbies</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../../writing/" aria-current="page">
+          <span class="nav-link__roll"><span class="nav-link__label">Writing</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Writing</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../../now/">
+          <span class="nav-link__roll"><span class="nav-link__label">Now</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Now</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../../visuals/">
+          <span class="nav-link__roll"><span class="nav-link__label">Visuals</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Visuals</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<header class="stage">
+  <div class="wrap wrap--post">
+    <a class="back-link" href="../../">&larr; Writing</a>
+    <h1 class="page-title page-title--post reveal"><span class="line"><span>An Application of Arzela-Ascoli</span></span></h1>
+    <p class="post-meta"><time datetime="2026-07-04">July 4, 2026</time><span>5 min read</span><a class="wchip wchip--dark" href="../../math/">Math</a></p>
+  </div>
+</header>
+
+<div class="stack">
+  <div class="sheet">
+    <main class="sheet__content wrap" id="content">
+      <article class="post prose">
+<p>This is more of a pedagogical note than a post that is trying to teach, so I will be assuming that you are fairly comfortable with the standard real analysis curriculums.</p>
+<p>One of the &ldquo;endgame&rdquo; goals that are reached by the end of a real analysis course is the celebrated theorem of Arzela-Ascoli.</p>
+<div class="env env--theorem">
+<p class="env__head"><span class="env__name">Theorem</span> <span class="env__title">(A-A, basic form)</span></p>
+<p>Let \(f_n : [a, b] \to \R\) be a sequence of functions that is uniformly bounded and uniformly equicontinuous. Then it admits a uniformly converging subsequence.</p>
+</div>
+<div class="env env--theorem">
+<p class="env__head"><span class="env__name">Theorem</span> <span class="env__title">(A-A, more general)</span></p>
+<p>Let</p>
+<div class="math-block">\[\mathcal{F} \subseteq C_b(X; \R)\]</div>
+<p>where \(X\) is a separable metric space. If \(\mathcal{F}\) is pointwise bounded and pointwise equicontinuous then there exists a sequence \(f_n \in \mathcal{F}\) which converges locally uniformly.</p>
+</div>
+<p>I think a problem that could arise when teaching A-A is that it is not clear why anyone would care (fortunately, my analysis professor made it abundantly clear why we should care!). What are the applications of this crown-jewel theorem? One could say that it gives insight into compactness in infinite dimensions, but one should explain why such compactness is more than a mere curiosity.</p>
+<p>The first main point is that &ldquo;compactness&rdquo; and &ldquo;taking convergent subsequences&rdquo; are inseparable concepts to the extent that we may often think of them as being the same (they are very different in mere topological spaces but that&rsquo;s not going to happen until functional analysis so whatever.) A proof which demonstrates this quite well is that for the EVT.</p>
+<div class="env env--theorem">
+<p class="env__head"><span class="env__name">Theorem</span> <span class="env__title">(EVT)</span></p>
+<p>Every continuous \(f : K \to \R\) obtains its sup/inf.</p>
+</div>
+<div class="env env--proof">
+<p class="env__head"><span class="env__name">Proof</span></p>
+<p>Let</p>
+<div class="math-block">\[M = \sup_K f.\]</div>
+<p>Then there exists \(x_n \in K\) such that \(f(x_n) \to M\). Taking a subsequence</p>
+<div class="math-block">\[x_{n_k} \to x_0 \in K\]</div>
+<p>we have by continuity that \(f(x_k) \to f(x_0)\) and so \(f(x_0) = M\). (implicitly this also rules out \(M = \infty\))</p>
+</div>
+<p>In disguise this is basically the <em>direct method</em> in Calculus of Variations, done in the simplest possible setting. So for teaching, it&rsquo;s natural to try and think of an application of A-A that uses the direct method. However, this is somewhat hard because most problems in calculus of variations can&rsquo;t be done with A-A alone (or at all!). An issue with using A-A is that, while it preserves continuity, it does not preserve higher regularity such as differentiation.</p>
+<p>So, for example, if we wish to minimize the Dirichlet energy</p>
+<div class="math-block">\[E[f] := \frac{1}{2} \int_a^b |f'|^2 \quad \text{over all } f \in C^1([a, b]) \text{ subject to } f(a) = 0,\ f(b) = 67\]</div>
+<p>then it&rsquo;s tempting to let</p>
+<div class="math-block">\[m = \inf_f E[f]\]</div>
+<p>and take \(f_n\) in the admissible set for which \(E[f_n] \to m\). Then it&rsquo;s not hard to see that \(f_n\) is uniformly equicontinuous (for example by Hölder,</p>
+<div class="math-block">\[f(y) - f(x) = \int_x^y f' \le |x - y|^{1/2} \norm{f'}_{L^2}\]</div>
+<p>which shows that it is equi-1/2-Hölder) and uniformly bounded, so there is a subsequence \(f_{n_k}\) converging uniformly. But this means that the limit \(f_0\) is only at most of class \(C([a, b])\), which breaks everything.</p>
+<p>Recovering the regularity is a tough problem, so this is doomed. Studying the direct method, we see that in order to a problem to be solvable using only A-A, we need the following conditions:</p>
+<ul>
+<li>A bound on \(E[f_n]\) implies equicontinuity (and uniform boundedness)</li>
+<li>If \(f_n \to f\) uniformly then \(E[f_n] \to E[f]\)</li>
+</ul>
+<p>After pondering this in bed one night, I&rsquo;ve come up with the perfect solution: Take \(E\) to be the best Lipschitz constant of \(f\)!</p>
+<div class="env env--theorem">
+<p class="env__head"><span class="env__name">Theorem</span> <span class="env__title">(Flappy Bird)</span></p>
+<p>Let \(g, h : [0, 100] \to \R\) be functions with \(g \le h\), where we think of \(g\) being the &ldquo;lower pipes&rdquo; and \(h\) being the &ldquo;upper pipes&rdquo;.</p>
+<p>A bird starts at \((0, 0)\) and wants to end at \((100, 0)\) while dodging the pipes. That is, we are considering continuous functions \(f : [0, 100] \to \R\) such that:</p>
+<ul>
+<li>The bird starts at \((0, 0)\), i.e. \(f(0) = 0\)</li>
+<li>The bird ends at \((100, 0)\), i.e. \(f(100) = 0\)</li>
+<li>The bird never hits the pipes, i.e. \(g(x) \le f(x) \le h(x)\) for all \(x \in [0, 100]\)</li>
+</ul>
+<p>Prove that if this is possible to do, then there is an \(f\) satisfying these conditions for which \(\mathrm{Lip}(f)\) is <strong>minimal</strong>.</p>
+</div>
+<p><em>(motivation: we don&rsquo;t want the bird to have to fly too steeply up or down, that&rsquo;ll exhaust it for sure!)</em></p>
+<p>Below I provide a complete solution.</p>
+<p><img alt="A Flappy Bird level: a bird flying between green pipes" src="fig1.png" /></p>
+<details class="spoiler">
+<summary>Show solution</summary>
+<div class="env env--proof">
+<p class="env__head"><span class="env__name">Proof</span></p>
+<p>Let \(A\) be the set of &ldquo;legal paths&rdquo; through the pipes, i.e. \(A\) = the set of all continuous functions \([0, 100] \to \R\) satisfying those three conditions points. The &ldquo;theoretical minimum steepness&rdquo;, then, is</p>
+<div class="math-block">\[m := \inf_{f \in A} \mathrm{Lip}(f).\]</div>
+<p>The goal is to show that this infimum is actually a minimum. That is: Find an \(f \in A\) such that \(\mathrm{Lip}(f) = m\).</p>
+<p>Alright, let&rsquo;s start by trying to get close to \(m\).</p>
+<ul>
+<li>Since we&rsquo;re given that the Flappy bird level is possible, it follows that \(A\) is non-empty.</li>
+<li>Moreover, \(\mathrm{Lip}(f) : f \in A\) is bounded from below by 0.</li>
+<li>Non-empty sets bounded from below have an infimum, so \(m\) exists and is finite.</li>
+<li>We can always get close to such an infimum: There exists \(f_n \in A\) such that</li>
+</ul>
+<div class="math-block">\[\mathrm{Lip}(f_n) \to m.\]</div>
+<p>Great! We now have a sequence of Flappy bird paths \(\{f_n\}_n\) whose &ldquo;steepnesses&rdquo; approach \(m\). How can we procure a function whose &ldquo;steepness&rdquo; is exactly \(m\)…?</p>
+<p>Wait hold on, here&rsquo;s an idea:</p>
+<ul>
+<li>Since \(\mathrm{Lip}(f_n) \to m\), we know that \(\mathrm{Lip}(f_n)\) is a bounded sequence! Let&rsquo;s say it&rsquo;s bounded by \(L\).</li>
+<li>From before, we know that a sequence of functions with the same Lipschitz constant is uniformly equicontinuous!</li>
+<li>Moreover, since \(f_n\) is \(L\)-Lipschitz,</li>
+</ul>
+<div class="math-block">\[|f_n(x)| = |f_n(x) - f_n(0)| \le L|x - 0| \le 100L,\]</div>
+<p>so \(\{f_n\}_n\) is uniformly bounded!</p>
+<p>Therefore, we can apply Arzela-Ascoli to find a subsequence \(f_{n_k}\) which converges uniformly to some \(f : [0, 100] \to \R\).</p>
+<p>Is this limit, \(f\), a valid Flappy bird path?</p>
+<ul>
+<li>Since \(f_{n_k} \to f\) uniformly, this convergence is also true pointwise. So, \(f_{n_k}(0) \to f(0)\) and \(f_{n_k}(100) \to f(100)\). This tells us that \(f(0) = 0\) and \(f(100) = 0\).</li>
+<li>Does \(f\) dodge the pipes? We know that \(g(x) \le f_{n_k}(x) \le h(x)\) for all \(x\) and \(k\). By pointwise convergence, we can send \(k \to \infty\) to find that \(g(x) \le f(x) \le h(x)\) for all \(x\), which means that \(f\) dodges the pipes as well.</li>
+<li>Uniform convergence preserves continuity, so \(f\) is continuous.</li>
+</ul>
+<p>So \(f\) is indeed a valid Flappy birth path (i.e. \(f \in A\)).</p>
+<p>Finally, does \(f\) actually achieve the theoretical minimum steepness? Well, we know that</p>
+<div class="math-block">\[|f_{n_k}(x) - f_{n_k}(y)| \le \mathrm{Lip}(f_{n_k})|x - y|\]</div>
+<p>because that&rsquo;s what Lip means. What happens when we send \(k \to \infty\)?</p>
+<p>So \(m\) is at least the steepness of \(f\), \(\mathrm{Lip}(f)\). But \(m\) is the infimum of all possible steepnesses, i.e. \(m \le \mathrm{Lip}(f)\). So \(m = \mathrm{Lip}(f)\), meaning that we&rsquo;ve achieved the minimum possible steepness.</p>
+</div>
+</details>
+<p>I think this is a great example for showing how A-A is useful. It&rsquo;s simple and also, in my opinion, is a very interesting result. It&rsquo;s not obviously true, and it may seem quite daunting to prove (&ldquo;there are so many continuous functions to check!&rdquo;), so it&rsquo;s very nice that we can actually slay this beast using nothing but A-A! It really demonstrates the power of analysis.</p>
+<p>More generally, I&rsquo;m a proponent of showing students neat applications of the theory of real analysis whenever possible, particular any applications that use some really &ldquo;big guns&rdquo; proven in lecture. As another example, using the Banach Fixed Point theorem to show Picard-Lindelöf (or Cauchy-Lipschitz, depending on who you talk to) is very beautiful, as one of my classmates hinted to in his real analysis presentation.</p>
+<p>Some folklore applications of A-A include: the existence of length-minimizing paths, convergence boosting for certain harmonic (or holomorphic) sequences of functions, and showing the existence to solutions for ODEs (i.e. Peano&rsquo;s theorem). The first two are rather inaccessible since they require a lot more background to cover them. As for Peano&rsquo;s theorem, I think this is the next best application for A-A, though my main issue with it (aside from requiring integration) is that the proof may be rather technical (even if the &ldquo;picture&rdquo; it involves is ultimately quite simple).</p>
+<p>If you have other ideas for &ldquo;elementary&rdquo; applications of A-A, I&rsquo;d be quite interested.</p>
+      </article>
+      <nav class="post-nav" aria-label="More posts"><a class="post-nav__prev" href="../the-desexualization-of-asian-american-men/"><small>Older</small><span>The Desexualization of Asian American Men</span></a><a class="post-nav__next" href="../advice-as-a-vector/"><small>Newer</small><span>Advice as a Vector</span></a></nav>
+      <div class="divider v" aria-hidden="true"><svg viewBox="0 -1 600 72" role="img" aria-label="Cantor set, six levels" xmlns="http://www.w3.org/2000/svg"><rect class="fc" x="0.00" y="0" width="600.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="4.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="19.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="49.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="64.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="138.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="153.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="182.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="197.53" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="404.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="419.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="449.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="464.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="538.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="553.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="582.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="597.53" y="60" width="2.47" height="3.5" rx="1.2"/></svg></div>
+    </main>
+    <footer class="footer">
+      <div class="wrap">&copy; 2026 Sarthak Dassarma. Built with plain HTML and hosted on GitHub Pages.</div>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>
