@@ -493,7 +493,7 @@ hobbies_content = '''      <section class="block" aria-labelledby="academic">
           <div class="group">
             <h3>Writing</h3>
             <ul>
-              <li><a href="https://oofset.substack.com/" target="_blank" rel="noopener">Check out my blog!</a></li>
+              <li><a href="writing.html">Check out my writing!</a> I write some fun things.</li>
               <li>I write about mathematics, basketball, "not-so-investigative journalism", and various miscellaneous thoughts!</li>
             </ul>
           </div>
