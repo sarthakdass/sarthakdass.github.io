@@ -1,7 +1,8 @@
 ---
 title: Calculus of Variations, Part I
 date: 2026-03-29
-tags: Math
+section: math
+summary: An introduction to the calculus of variations, developed carefully from directional derivatives, with the brachistochrone as the guiding example.
 ---
 
 I took Optimization and Real Analysis at the same time and one of the running jokes in Real Analysis was about the (lack of) rigor in proving the techniques we used in Optimization while also admitting how useful they are! One such concept is known as the "Calculus of Variations".

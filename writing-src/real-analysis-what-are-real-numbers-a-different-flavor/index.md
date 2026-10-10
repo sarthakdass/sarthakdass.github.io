@@ -1,7 +1,8 @@
 ---
 title: "Real Analysis: What Are Real Numbers - a Different Flavor"
 date: 2026-01-25
-tags: Math
+section: math
+summary: A different take on what the real numbers are, built up from the rationals through order and suprema.
 ---
 
 ![Meme: a man crouching by railway tracks gently touching a flower, labeled "Real Analysis" (the oncoming train), "Freshman math majors" (the man) and "Calculus is cool" (the flower). My Real Analysis Professor really likes this meme, so here you go](fig1.png)

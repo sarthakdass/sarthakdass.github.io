@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d1016">
+<meta name="description" content="TLDR: I learned about elliptic curves over two weeks just to solve the stupid viral emoji problem">
+<title>The Viral Emoji Math Problem, but actually — Sarthak Dassarma</title>
+<script>(function(){var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!window.__sd){d.classList.remove('js');}},4000);})();</script>
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/writing.css">
+<script src="../../js/writing-math.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+<script src="../../js/site.js" defer></script>
+</head>
+<body class="post-page">
+
+
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="site-header">
+  <div class="topbar">
+    <a class="brand" href="../../" aria-label="Sarthak Dassarma, home">
+      <svg class="brand__mark" viewBox="92.83 80.00 50.00 75.83" aria-hidden="true" focusable="false"><defs><clipPath id="brand-dclip"><path d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/></clipPath><filter id="brand-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="0.7"/></filter></defs><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/><g clip-path="url(#brand-dclip)"><g class="brand__shade"><path fill="#000" fill-rule="evenodd" filter="url(#brand-soft)" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></g><g class="brand__s"><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></svg>
+      <span class="brand__name">Sarthak Dassarma</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="../../">
+          <span class="nav-link__roll"><span class="nav-link__label">Home</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Home</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../projects/">
+          <span class="nav-link__roll"><span class="nav-link__label">Projects</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Projects</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../math/" aria-current="page">
+          <span class="nav-link__roll"><span class="nav-link__label">Math</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Math</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../hobbies/">
+          <span class="nav-link__roll"><span class="nav-link__label">Hobbies</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Hobbies</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../writing/">
+          <span class="nav-link__roll"><span class="nav-link__label">Writing</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Writing</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../now/">
+          <span class="nav-link__roll"><span class="nav-link__label">Now</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Now</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../visuals/">
+          <span class="nav-link__roll"><span class="nav-link__label">Visuals</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Visuals</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<header class="stage">
+  <div class="wrap wrap--post">
+    <a class="back-link" href="../">&larr; Math</a>
+    <h1 class="page-title page-title--post reveal"><span class="line"><span>The Viral Emoji Math Problem, but actually</span></span></h1>
+    <p class="stage__lede stage__lede--wide">TLDR: I learned about elliptic curves over two weeks just to solve the stupid viral emoji problem</p>
+    <p class="post-meta"><time datetime="2025-12-01">December 2025</time><span>11 min read</span></p>
+  </div>
+</header>
+
+<div class="stack">
+  <div class="sheet">
+    <main class="sheet__content wrap" id="content">
+      <article class="post prose">
+<p>Here is my first attempt at a longform post that seeks to be highly instructive as well as fun.</p>
+<h2 id="introduction">Introduction<a class="anchor" href="#introduction" title="Link to this section">#</a></h2>
+<p>In the event that the culture of today is lost to time, I shall provide context for why this problem is worth looking at. The Internet has unfortunately been plagued with inane clickbait “emoji math problems” that look something like this piece of hot garbage:</p>
+<p><img alt="A clickbait emoji math problem: &quot;Solve If You Are A Genius&quot; with apples, bananas and coconuts" src="fig1.png" /></p>
+<p>They’re more or less constructed so that it’s easy to mess up (look carefully at the bananas), so that people get different answers sparking arguments and discussion and viralness, etc&hellip;</p>
+<p>Naturally, actual passionate math people are sick of this. In early 2017, a <a href="https://www.reddit.com/r/math/comments/5mm6sm/requestfun_im_really_sick_of_all_the_facebook/dc5dwrc/">Reddit thread</a> titled “<strong>I’m really sick of all the Facebook fruit math bull that’s going on lately. Does anyone want to create a truly difficult math problem with pictures of fruit to counter this?</strong>” appeared on r/math. One user there created this:</p>
+<p><img alt="An emoji problem: apple/(banana + pineapple) + banana/(apple + pineapple) + pineapple/(apple + banana) = 4, &quot;Can you find values for apple, banana, and pineapple?&quot;" src="fig2.png" /></p>
+<p>This isn’t <em>too</em> hard. Some patience or a brute force search can reasonably solve this over the integers (potential solutions exist such as (11, 9, -5) and (11, 4, -1)). But here’s where the fun begins.</p>
+<p>A mathematician by the name of Sridhar Ramesh saw the above image and decided to make a small tweak before popularizing it.</p>
+<p><img alt="The same emoji problem, now asking &quot;Can you find positive whole values for apple, banana, and pineapple?&quot;" src="fig3.png" /></p>
+<p>And just like that, the problem became notoriously difficult. The smallest solution is more than 80 digits long. This problem is widely believed to require a “massive level of knowledge about elliptic curves”.</p>
+<p>But we are not silly Facebook posters arguing over viral math problems. We have the tools to solve this problem together. Here’s how I finally solved it.</p>
+<p><em>Prerequisites: Basic polynomial theory, e.g. Vieta’s Formulas (knowledge about the sum and products of roots), should be enough</em></p>
+<h2 id="warmup-tackling-an-easier-problem">Warmup - Tackling an Easier Problem<a class="anchor" href="#warmup-tackling-an-easier-problem" title="Link to this section">#</a></h2>
+<p><strong>Problem:</strong> Find all Pythagorean Triples</p>
+<p><em>Solution:</em> We are solving the Diophantine Equation \(x^2 + y^2 = z^2\) in nonnegative integers, which isn’t really that great. Instead, we could be working with one less variable by solving \((x/z)^2 + (y/z)^2 = 1\). Letting \(x_1 = x/z\), and \(y_1 = y/z\), we can essentially say we are solving the same problem of \(x_1^2 + y_1^2 = 1\) in the nonnegative rationals.</p>
+<blockquote>
+<p><em>Caveat:</em> It’s not exactly the same because although every \((x, y, z)\) will correspond to a \((x_1, y_1)\) in this way, we can’t go the opposite direction. For instance, \((3, 4, 5)\) and \((6, 8, 10)\) both correspond to \((3/5, 4/5)\). The fix is easy: whatever solutions we get for \((x_1, y_1)\), when we recover the \((x, y, z)\) from \((x_1, y_1)\), we can just remember that we can get any multiples as well. This issue will more or less fix itself, see if you can spot why.</p>
+</blockquote>
+<p>You might be asking why are we really so much happier to work with rationals? The problem is now “find all <em>rational points</em> on the unit circle”, where a rational point is just a point with rational coordinates. Is this really any easier?</p>
+<p>Here’s a trick that kills this problem.</p>
+<ol>
+<li>Start by finding <em>some</em> point \(P = (x_1, y_1)\) that works. Let’s take \((0, 1)\) for example.</li>
+<li>
+<p>Draw any line with <em>rational slope</em> going through \(P\). This can be something like</p>
+<div class="math-block">\[y = \frac{m}{n}x + 1\]</div>
+<p>where \(m/n\) is rational.</p>
+</li>
+</ol>
+<p><img alt="The unit circle with a red line of rational slope through the point (0, 1), meeting the circle at a second point" src="fig4.png" /></p>
+<ol start="3">
+<li>This will (almost surely) always intersect the circle at a second point \(Q\).</li>
+<li>\(Q\) <strong>must always</strong> be another rational point!</li>
+</ol>
+<p>Why is 4 true? To find the coordinates of this second point, we are solving the system of equations</p>
+<div class="math-block">\[\begin{cases} x_1^2 + y_1^2 = 1 \\ y_1 = \frac{m}{n}x + 1 \end{cases}\]</div>
+<p>We already know one solution, which is \((x_1, y_1) = (0, 1)\). So, when we eliminate \(y_1\) to the quadratic</p>
+<div class="math-block">\[x_1^2 + \left(\frac{m}{n}x_1 + 1\right)^2 = 1 \qquad (*)\]</div>
+<p>we can make the following logical arguments:</p>
+<ul>
+<li>The coefficients of the quadratic are rational.</li>
+<li>Therefore, by Vieta, the sum of the roots is rational.</li>
+<li>We know that one root is rational, since we drew the line through a rational point. Therefore, the other root must be rational.</li>
+<li>If \(x_1\) is rational, then \(\frac{m}{n}x_1 + 1\) is rational, hence \(y_1\) is rational.</li>
+<li>Therefore, the second point of intersection of this line with the circle is a rational point.</li>
+</ul>
+<p>We conclude that <strong>drawing any line of rational slope through \(P\) will give us another rational point on the circle</strong>. But it’s actually even better than that! Note that if \((x_1', y_1')\) is another rational point, then the line connecting \(P\) and \((x_1', y_1')\) must have rational slope. So, <strong>if we draw every line of rational point through \(P\), we hit EVERY possible rational point on the circle</strong>.</p>
+<p>So now, let’s find the second point for all possible slopes \(m/n\). By expanding out the equation \((*)\),</p>
+<div class="math-block">\[\frac{m^2+n^2}{n^2}x_1^2 + \frac{2m}{n}x_1 = 0\]</div>
+<p>We already knew \(x_1\) was a root, so we can factor it out to get our other root.</p>
+<div class="math-block">\[\begin{align}
+x_1\left(\frac{m^2+n^2}{n^2}x_1 + \frac{2m}{n}\right) &amp;= 0 \\
+x_1 &amp;= 0, \frac{-2mn}{m^2+n^2}
+\end{align}\]</div>
+<p>So, the \(x\)-coordinate we are looking for is our other root, \(-2mn/(m^2 + n^2)\). Some algebra can give us the value for \(y_1\).</p>
+<div class="math-block">\[y_1 = \frac{n^2-m^2}{m^2+n^2}\]</div>
+<p>By clearing up some of our denominators and cleaning some of our signs, we have the following parameterization that all Pythagorean triples may be characterized as</p>
+<div class="math-block">\[(x, y, z) = (2mn, n^2 - m^2, n^2 + m^2)\]</div>
+<p>for positive integers \(m\) and \(n\), up to some integer multiple. This is a very nice fact in Olympiad number theory that you may have heard before.</p>
+<p>What was the point of this problem? What did we learn? The important takeaway is that <em>drawing lines can get you more points</em>. Here, we just drew one line through a point to get another point. Although this won’t quite work for the original problem, the idea is very similar.</p>
+<h2 id="starting-off">Starting Off<a class="anchor" href="#starting-off" title="Link to this section">#</a></h2>
+<p>Getting rid of the ludicrous fruit mumbo jumbo, we start with the following equation:</p>
+<div class="math-block">\[\frac{x}{y+z} + \frac{y}{x+z} + \frac{z}{x+y} = 4\]</div>
+<p>An experienced number theorist might immediately notice that this equation is homogenous, but we can work this out.</p>
+<p>By clearing out all denominators and some algebra, we can eventually get</p>
+<div class="math-block">\[x^3 + y^3 + z^3 = 3\left(x^2(y+z) + y^2(x+z) + z^2(x+y)\right) + 8xyz\]</div>
+<p>Rather than trying to solve this in positive integers, we’re going to write this in terms of \(x_1\) and \(y_1\) to try and find rational points, positive or negative. Hopefully, this will make things easier.</p>
+<p>Dividing the equation by \(z^3\), we have</p>
+<div class="math-block">\[\left(\frac{x}{z}\right)^3 + \left(\frac{y}{z}\right)^3 + 1 = 3\left[\left(\frac{x}{z}\right)^2\left(\frac{y}{z}+1\right) + \left(\frac{y}{z}\right)^2\left(\frac{x}{z}+1\right) + \frac{x}{z} + \frac{y}{z}\right] + 8\left(\frac{x}{z}\right)\left(\frac{y}{z}\right)\]</div>
+<div class="math-block">\[x_1^3 + y_1^3 + 1 = 3\left[x_1^2(y_1+1) + y_1^2(x_1+1) + x_1 + y_1\right] + 8x_1y_1\]</div>
+<p>If we graph this equation, it looks like this:</p>
+<p><img alt="Graph of the cubic curve in the (x_1, y_1) plane, tilted by 45 degrees" src="fig5.png" /></p>
+<p>One observation you might have is that this graph is sort of “tilted” by \(45^\circ\). This is quite intuitive as switching \(x_1\) and \(y_1\) should not affect anything in the above equation, hence the reflection over the \(y = x\) line.</p>
+<p>One thing that we can do (but is totally unnecessary) is to rotate the graph such that it has symmetry across the \(x\)-axis. We can perform the substitution \(x_2 - y_2 = x_1\) and \(x_2 + y_2 = y_1\) to get a new equation involving variables \(x_2\) and \(y_2\).</p>
+<div class="math-block">\[1 - 6x_2 - 11x_2^2 - 4x_2^3 - y_2^2 + 12x_2y_2^2 = 0\]</div>
+<p>Cool, here’s how the graph looks.</p>
+<p><img alt="Graph of the rotated curve, symmetric across the x-axis" src="fig6.png" /></p>
+<p>This is nice and symmetrical. We will call this curve an <em>elliptic curve</em>.</p>
+<p>Just by looking at the graph, there are some pretty easy rational points that we can spot: \((0, 1)\), \((-1, 0)\), and \((0, -1)\), which I will call <strong>P</strong>, <strong>3P</strong>, and <strong>5P</strong>. (There is a reason for these weird labels, we will see why later).</p>
+<p><img alt="The elliptic curve with the rational points P = (0, 1), 3P = (-1, 0) and 5P = (0, -1) marked" src="fig7.png" /></p>
+<p>Unfortunately, finding these points does not at all mean we are done. These points correspond to invalid solutions to the original problem. However, can we use these “easy points” to find even more points?</p>
+<h2 id="bringing-back-the-line-trick">Bringing Back the Line Trick<a class="anchor" href="#bringing-back-the-line-trick" title="Link to this section">#</a></h2>
+<p>This process will let us obtain more points.</p>
+<ol>
+<li>Start with two rational points \(P\) and \(Q\) that lie on the elliptic curve.</li>
+<li>Draw the line \(PQ\). Note that this has rational slope because \(P\) and \(Q\) are rational points.</li>
+<li>\(PQ\) will always intersect the elliptic curve a third time (including multiplicity), at point \(R\).</li>
+<li>Moreover, \(R\) will always be another rational point!</li>
+</ol>
+<p>There are some things to explain here: Why must the line intersect a third time, and why must the third intersection be a rational point? We may reason analogously to the warm-up:</p>
+<ul>
+<li>The third point \(R = (x_2, y_2)\) satisfies the system of equations
+  \[\begin{cases} 1 - 6x_2 - 11x_2^2 - 4x_2^3 - y_2^2 + 12x_2y_2^2 = 0 \\ ax_2 + by_2 = 1 \end{cases}\]
+  where \(ax_2 + by_2 = 1\) is the equation of the line passing through the points \(P\) and \(Q\).</li>
+<li>If we solve for \(y_2\) in the second equation and substitute it into the first equation to eliminate the variable, then we are left with a cubic equation in \(x_2\).</li>
+<li>This cubic has rational coefficients. This is because the coefficients \(a\) and \(b\) have to be rational, since the line has rational slope and passes through rational points.</li>
+<li>Therefore, by Vieta, the sum of the roots of the cubic is a rational number.</li>
+<li>But two of the roots are given by the \(x_2\)-coordinates of \(P\) and \(Q\), both of which are rational.</li>
+<li>Therefore, the third root is rational. This means that the \(x_2\)-coordinate of \(R\) is rational.</li>
+<li>Using \(ax_2 + by_2 = 0\), we conclude that the \(y_2\)-coordinate is rational as well. Thus \(R\) is a rational point.</li>
+</ul>
+<p>Cool! But we should not forgo an important remark: Intersections are counted <em>including multiplicity</em>. It’s possible, for example, to take \(P\) and \(Q\) to be the same point. Then the “line” is actually the tangent to the curve at \(P\), and this still works. (can you see why?)</p>
+<p>Anyways, we now know that <strong>if we connect two rational points on the elliptic curve, then we can get another rational point on the curve</strong>. Let’s try it out.</p>
+<p>By connecting \((0, 1)\) and \((-1, 0)\), with a line, we find that there is a third intersection at \((-1/2, 1/2)\).</p>
+<p><img alt="The line through P and 3P meets the curve a third time at the point P2 = (-1/2, 1/2)" src="fig8.png" /></p>
+<p>And indeed, if we plug it in, it works! What else can we get?</p>
+<p>By “connecting \((0, 1)\) and \((0, 1)\) with a line”, or taking the tangent line to \((0, 1)\), we can find yet another third intersection with the curve.</p>
+<p><img alt="The tangent line at P meets the curve again at the point P4 = (-1/2, -1/2)" src="fig9.png" /></p>
+<p>This time it’s at \((-1/2, -1/2)\). That’s pretty lame: We could have figured that out by taking the previous point we got and flipping it over the \(x\)-axis. Is there anything else we can get easily?</p>
+<p>The answer is no. This is because these 5 points (and another hidden “point” that I won’t describe) are <em>points of torsion</em>. No matter how many more times we use the line trick, we won’t get any more new points.</p>
+<p>Darn. How can we get points that can “escape” these 5 points?</p>
+<h2 id="finding-more-points-of-infinite-order">Finding More Points of Infinite Order<a class="anchor" href="#finding-more-points-of-infinite-order" title="Link to this section">#</a></h2>
+<p>Because I am a little lazy and stupid, I wrote some Mathematica code to try and find some less trivial points on the curve.</p>
+<p><img alt="Mathematica code looping over x, y, z from -50 to 50, printing (x+y)/(2z) and (y-x)/(2z) whenever x/(y+z) + y/(z+x) + z/(x+y) = 4, followed by the list of rational points found" src="fig10.png" /></p>
+<p>This found some nice points! I experimented a lot with all the points, but the one that gave me the key insight was this first point, \((-2, 1/5)\). I’ll call this point <strong>A</strong>.</p>
+<p><img alt="The elliptic curve with the new point A = (-2, 1/5) marked" src="fig11.png" /></p>
+<p>Before we proceed to find more rational points, we need to address a couple of things.</p>
+<p>First, <strong>what rational point am I even trying to find?</strong> If we test A out, we find that it doesn’t work because some of the resulting variables \(x\), \(y\), \(z\) may end up being negative. So, we’re trying to find rational points \((x_2, y_2)\) such that they correspond to a completely positive triple \((x, y, z)\).</p>
+<p>When does that happen? Let’s reason it out by backtracking a bit.</p>
+<ul>
+<li>We can assume that some variable (WLOG \(z\)) is positive, because if all the variables \(x\), \(y\), and \(z\) are negative, then we get an all-positive situation by flipping all of their signs</li>
+<li>\(x, y &gt; 0\) when \(x/z, y/z &gt; 0\), i.e. \(x_1, y_1 &gt; 0\)</li>
+<li>This means that we want \(x_2 + y_2 &gt; 0\) and \(x_2 - y_2 &gt; 0\). In other words, \(x_2 &gt; |y_2|\)</li>
+</ul>
+<p>We can visualize these conditions by the green region below</p>
+<p><img alt="The elliptic curve with the region x_2 &gt; |y_2| shaded green" src="fig12.png" /></p>
+<p>To reiterate, <strong>our goal is to find a rational point on the curve that lies in this region</strong>. Hence, this turns into a fun little game of “math football”: We need to use the line trick to generate more and more points until we reach the “goal” that is the green region.</p>
+<p>This is a pain to do by hand that even Gauss could not have cleverly gotten out of. Fortunately, I have something he did not which is called Mathematica! This brings me to the second thing I want to address: <strong>How can we streamline the line trick?</strong></p>
+<p>Using Mathematica to do expansions for me, I found that the cubic equation resulting from finding the third intersection of the line passing through points \((a, b)\) and \((c, d)\) has sum of roots given by:</p>
+<div class="math-block">\[\frac{-\left(11a^2-22ac+11c^2+b^2(1+24c)+d^2+24ad(-b+d)-2b(d+12cd)\right)}{\left(4(a^2-3b^2-2ac+c^2+6bd-3d^2)\right)}\]</div>
+<p>Thus, by Vieta we may write a formula for the \(x_2\)-coordinate of the third intersection:</p>
+<div class="math-block">\[L(a,b,c,d) := \frac{-\left(11a^2-22ac+11c^2+b^2(1+24c)+d^2+24ad(-b+d)-2b(d+12cd)\right)}{\left(4(a^2-3b^2-2ac+c^2+6bd-3d^2)\right)} - a - c\]</div>
+<p>Similarly, I obtained a formula for the third intersection, given a tangent line at a point \((a, b)\):</p>
+<div class="math-block">\[T(a,b) := \frac{-\left(-9-282a-1741a^2-3900a^3-3204a^4-864a^5-47b^2+1860ab^2+4680a^2b^2+3456a^3b^2+108b^4-2592ab^4\right)}{108+792a+1884a^2+1584a^3+432a^4-436b^2-1488ab^2-1440a^2b^2+432b^4} - 2a\]</div>
+<p>Would it shock you if I were to say that our numbers will get <em>really big</em>?</p>
+<p>Keep in mind that these formulas only give us the \(x\)-coordinates. We now need to find the (positive) \(y\)-coordinate via one last formula which is not hard to derive (just solve for \(y_2\)):</p>
+<div class="math-block">\[Y(x) := \sqrt{\frac{1-6x-11x^2-4x^3}{1-12x}}\]</div>
+<p>Now we can proceed to our finish.</p>
+<h2 id="the-finish">The Finish<a class="anchor" href="#the-finish" title="Link to this section">#</a></h2>
+<p>From <strong>A</strong>, I will draw a tangent line and find a third intersection at a new point <strong>-2A</strong> (worry not about the labels!)</p>
+<p><img alt="The tangent line at A meets the curve again at the point -2A" src="fig13.png" /></p>
+<p>Our formulas give the coordinates for <strong>-2A</strong>:</p>
+<p><img alt="Mathematica output: T1[-2, 1/5] = 143/2066, and Y of that equals 18283/10330" src="fig14.png" /></p>
+<p>From <strong>-2A</strong>, I will draw yet another tangent line and find a third intersection at a new point <strong>4A</strong>.</p>
+<p><img alt="The tangent line at -2A meets the curve again at the point 4A, very close to P" src="fig15.png" /></p>
+<p>We can zoom in on the graph to see this better since <strong>P1</strong> and <strong>4A</strong> are quite close.</p>
+<p><img alt="Zoomed-in view showing P1 and 4A close together" src="fig16.png" /></p>
+<p>Thanks to Mathematica again for telling us the coordinates of <strong>4A</strong> via the formulas.</p>
+<p><img alt="Mathematica output of the coordinates of 4A: x = 1799732063/138590615906, y = 13227649274463287/12669261153046990" src="fig17.png" /></p>
+<p>We’re not able to get within the green region yet, so we need to keep going. Comically (or hideously, depending on your perspective on the matter), I will draw yet another tangent line at <strong>4A</strong> to obtain the point <strong>-8A</strong>:</p>
+<p><img alt="The tangent line at 4A meets the curve again at the point -8A" src="fig18.png" /></p>
+<p>As usual, here are our coordinates:</p>
+<p><img alt="Mathematica output of the coordinates of -8A, rational numbers with dozens of digits" src="fig19.png" /></p>
+<p>We’re done with tangents now! For convenience’s sake, I also plotted down the point <strong>8A</strong>, which is just <strong>-8A</strong> with negated \(y_2\)-coordinate, and I connected <strong>4P</strong> and <strong>8A</strong> with a line to get the point <strong>-8A - 4P</strong>:</p>
+<p><img alt="The line through 4P and 8A meets the curve at the point -8A-4P, high above the origin" src="fig20.png" /></p>
+<p>And here are our lovely coordinates:</p>
+<p><img alt="Mathematica output of the coordinates of -8A-4P" src="fig21.png" /></p>
+<p>This was my plan! You might be confused as to why I am so happy about getting this point. The idea is that I needed a point quite high up there somehow in order to finally get into the green region with one more line. What is that line you ask? I’m glad you asked! All this time, I had been saving this one last “nice” rational point I was saving until the very end: <strong>B</strong> = \((-15/2, 7/2)\) which you might remember was the second less trivial rational point that we obtained from Mathematica. By drawing the line between <strong>B</strong> and <strong>-8A - 4P</strong>, we finally end up with a point in the green region:</p>
+<p><img alt="The line through B and -8A-4P meets the curve at a point far out inside the green region" src="fig22.png" /></p>
+<p>And of course, our coordinates:</p>
+<p><img alt="Mathematica output of the coordinates of the final point, rational numbers with dozens of digits" src="fig23.png" /></p>
+<p>I understand it’s hard to believe, but we are almost there! Letting this final point be \((x_2, y_2)\), we compute \(x_2 + y_2\) and \(x_2 - y_2\) to get \(x_1\) and \(y_1\).</p>
+<div class="math-block">\[x_1 = \frac{36875131794129999827197811565225474825492979968971970996283137471637224634055579}{4373612677928697257861252602371390152816537558161613618621437993378423467772036}\]</div>
+<div class="math-block">\[y_1 = \frac{154476802108746166441951315019919837485664325669565431700026634898253202035277999}{4373612677928697257861252602371390152816537558161613618621437993378423467772036}\]</div>
+<p>Recalling that these are equal to \(x/z\) and \(x/z\) respectively, we let \(z\) be the LCM of the denominators and \(x\), \(y\) be the resulting numerators when we find a common denominator. This gives us the following humungous solution&hellip; <em>in positive integers!</em></p>
+<div class="math-block">\[x = 36875131794129999827197811565225474825492979968971970996283137471637224634055579\]</div>
+<div class="math-block">\[y = 154476802108746166441951315019919837485664325669565431700026634898253202035277999\]</div>
+<div class="math-block">\[z = 4373612677928697257861252602371390152816537558161613618621437993378423467772036\]</div>
+<p>To top it all off, we can plug in this beautiful monstrosity to confirm that indeed, we have obtained our solution.</p>
+<p><img alt="Mathematica verification: X0/(Y0+Z0) + Y0/(X0+Z0) + Z0/(X0+Y0) evaluates to 4" src="fig24.png" /></p>
+<blockquote>
+<p><em>The meme is a clever, or wicked, joke.</em></p>
+<p><em>- Dr. Alon Amit</em></p>
+</blockquote>
+      </article>
+      <div class="divider v" aria-hidden="true"><svg viewBox="0 -1 600 72" role="img" aria-label="Cantor set, six levels" xmlns="http://www.w3.org/2000/svg"><rect class="fc" x="0.00" y="0" width="600.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="4.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="19.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="49.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="64.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="138.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="153.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="182.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="197.53" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="404.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="419.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="449.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="464.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="538.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="553.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="582.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="597.53" y="60" width="2.47" height="3.5" rx="1.2"/></svg></div>
+    </main>
+    <footer class="footer">
+      <div class="wrap">&copy; 2026 Sarthak Dassarma. Built with plain HTML and hosted on GitHub Pages.</div>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>

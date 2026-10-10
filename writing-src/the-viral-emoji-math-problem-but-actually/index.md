@@ -1,8 +1,9 @@
 ---
 title: The Viral Emoji Math Problem, but actually
 subtitle: "TLDR: I learned about elliptic curves over two weeks just to solve the stupid viral emoji problem"
-date: 2025-11-24
-tags: Math
+date: 2025-12-01
+section: math
+summary: Solving the viral emoji problem for real: it turns out to be a question about rational points on an elliptic curve.
 ---
 
 Here is my first attempt at a longform post that seeks to be highly instructive as well as fun.

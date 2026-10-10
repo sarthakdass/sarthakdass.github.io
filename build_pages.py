@@ -558,6 +558,27 @@ projects_content = cardify(renumber(decorate(projects_content)), {
     "Puzzle Generator": ("hexes", False),
     "Black-Scholes": ("black_scholes", False),
 })
+# write-ups that live on this page (writing-src/*/index.md with `section: math`), newest first
+import build_writing  # noqa: E402
+import html as _html  # noqa: E402
+_extra = []
+for _i, _p in enumerate(build_writing.math_page_posts(), start=3):
+    _extra.append(f'''
+
+      <article class="entry">
+        <div class="entry__index" aria-hidden="true">{_i:02d}</div>
+        <div class="entry__body">
+          <header class="entry__head">
+            <h2 class="entry__title">{_html.escape(_p.title)}</h2>
+            <span class="entry__meta">{_p.date.strftime("%b %Y")}</span>
+          </header>
+          <p>{_html.escape(_p.summary or _p.subtitle)}</p>
+          <div class="entry__links">
+            <a class="btn btn--solid" href="{_p.slug}/">Read <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </div>
+      </article>''')
+math_content += "".join(_extra)
 math_content = cardify(decorate(math_content), {
     "Distribution theory notes": ("mollifier", False),
     "Sobolev Spaces and the Calculus of Variations": ("variations", False),
@@ -620,7 +641,7 @@ OUT = {
     ),
     "math.html": page(
         "math.html", "Math — Sarthak Dassarma", "",
-        stage("Math", "Notes, handouts, and write-ups, mostly typeset in LaTeX.", art=("gasket", "gasket")),
+        stage("Math", "Papers, notes, write-ups, etc.", art=("gasket", "gasket")),
         math_content, divider=True,
     ),
     "hobbies.html": page(

@@ -224,6 +224,8 @@ def load_posts(include_drafts):
         if not p.cats:
             p.cats = ["thoughts"]
         p.subtitle = meta.get("subtitle", "")
+        p.section = meta.get("section", "").strip().lower()
+        p.summary = meta.get("summary", "")
         p.extra_dir = extra_dir
         if src.endswith(".md"):
             p.body, store = render_markdown(body_src)
@@ -250,9 +252,16 @@ def posts_in(posts, slug):
     return posts if slug == "all" else [p for p in posts if slug in p.cats]
 
 
+def math_page_posts():
+    """Posts that belong on the Math page (front matter `section: math`), newest first, for build_pages.py."""
+    return [p for p in load_posts(False) if p.section == "math"]
+
+
 # ------------------------------------------------------------------ pages
 def build(page, title_markup, divider, include_drafts=False):
-    posts = load_posts(include_drafts)
+    every = load_posts(include_drafts)
+    posts = [p for p in every if not p.section]
+    math_posts = [p for p in every if p.section == "math"]
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
     os.makedirs(OUT)
@@ -369,6 +378,33 @@ def build(page, title_markup, divider, include_drafts=False):
                     src = os.path.join(p.extra_dir, f)
                     dst = os.path.join(OUT, "posts", p.slug, f)
                     (shutil.copytree if os.path.isdir(src) else shutil.copy)(src, dst)
+
+    # ---- posts that live on the Math page: math/<slug>/index.html
+    for p in math_posts:
+        sub = f'\n    <p class="stage__lede stage__lede--wide">{p.excerpt}</p>' if p.subtitle else ""
+        stage = f"""<header class="stage">
+  <div class="wrap wrap--post">
+    <a class="back-link" href="../">&larr; Math</a>
+    <h1 class="page-title page-title--post reveal">{title_markup(html.escape(p.title))}</h1>{sub}
+    <p class="post-meta"><time datetime="{p.date.isoformat()}">{p.date.strftime('%B %Y')}</time><span>{p.minutes} min read</span></p>
+  </div>
+</header>"""
+        content = f"""      <article class="post prose">
+{p.body}
+      </article>"""
+        math_head = ('<script src="../../js/writing-math.js"></script>\n'
+                     '<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>\n') if p.has_math else ""
+        css = '<link rel="stylesheet" href="../../css/writing.css">\n'
+        dest = f"math/{p.slug}"
+        write(f"{dest}/index.html",
+              page("math.html", f"{p.title} — Sarthak Dassarma", "post-page", stage, content,
+                   (p.subtitle or p.summary or re.sub(r"<[^>]+>|&[a-z#0-9]+;", "", p.excerpt))[:240],
+                   divider=True, up="../../", head_extra=css + math_head))
+        if p.extra_dir:
+            for f in os.listdir(p.extra_dir):
+                if f not in ("index.md", "index.html"):
+                    src = os.path.join(p.extra_dir, f)
+                    (shutil.copytree if os.path.isdir(src) else shutil.copy)(src, os.path.join(dest, f))
 
     # ---- RSS
     def rfc822(d):

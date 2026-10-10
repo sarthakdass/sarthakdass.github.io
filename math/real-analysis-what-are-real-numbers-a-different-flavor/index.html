@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d1016">
+<meta name="description" content="A different take on what the real numbers are, built up from the rationals through order and suprema.">
+<title>Real Analysis: What Are Real Numbers - a Different Flavor — Sarthak Dassarma</title>
+<script>(function(){var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!window.__sd){d.classList.remove('js');}},4000);})();</script>
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/writing.css">
+<script src="../../js/writing-math.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+<script src="../../js/site.js" defer></script>
+</head>
+<body class="post-page">
+
+
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="site-header">
+  <div class="topbar">
+    <a class="brand" href="../../" aria-label="Sarthak Dassarma, home">
+      <svg class="brand__mark" viewBox="92.83 80.00 50.00 75.83" aria-hidden="true" focusable="false"><defs><clipPath id="brand-dclip"><path d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/></clipPath><filter id="brand-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="0.7"/></filter></defs><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/><g clip-path="url(#brand-dclip)"><g class="brand__shade"><path fill="#000" fill-rule="evenodd" filter="url(#brand-soft)" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></g><g class="brand__s"><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></svg>
+      <span class="brand__name">Sarthak Dassarma</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="../../">
+          <span class="nav-link__roll"><span class="nav-link__label">Home</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Home</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../projects/">
+          <span class="nav-link__roll"><span class="nav-link__label">Projects</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Projects</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../math/" aria-current="page">
+          <span class="nav-link__roll"><span class="nav-link__label">Math</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Math</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../hobbies/">
+          <span class="nav-link__roll"><span class="nav-link__label">Hobbies</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Hobbies</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../writing/">
+          <span class="nav-link__roll"><span class="nav-link__label">Writing</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Writing</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../now/">
+          <span class="nav-link__roll"><span class="nav-link__label">Now</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Now</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../visuals/">
+          <span class="nav-link__roll"><span class="nav-link__label">Visuals</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Visuals</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<header class="stage">
+  <div class="wrap wrap--post">
+    <a class="back-link" href="../">&larr; Math</a>
+    <h1 class="page-title page-title--post reveal"><span class="line"><span>Real Analysis: What Are Real Numbers - a Different Flavor</span></span></h1>
+    <p class="post-meta"><time datetime="2026-01-25">January 2026</time><span>19 min read</span></p>
+  </div>
+</header>
+
+<div class="stack">
+  <div class="sheet">
+    <main class="sheet__content wrap" id="content">
+      <article class="post prose">
+<p><img alt="Meme: a man crouching by railway tracks gently touching a flower, labeled &quot;Real Analysis&quot; (the oncoming train), &quot;Freshman math majors&quot; (the man) and &quot;Calculus is cool&quot; (the flower). My Real Analysis Professor really likes this meme, so here you go" src="fig1.png" /></p>
+<p><em>Prerequisites: I suppose be comfortable with set notation and elementary set theory? For instance, if you can understand the two examples below, that should be good enough</em></p>
+<div class="math-block">\[S = A \cap B\]</div>
+<div class="math-block">\[S = \{x \in \N : x/2 \in \N\}\]</div>
+<h2 id="introduction-and-goals">Introduction and Goals<a class="anchor" href="#introduction-and-goals" title="Link to this section">#</a></h2>
+<p>The first goal of this fairly long post is to answer the questions: what the heck is a real number? How can we be sure that the real numbers even exist?</p>
+<p>We actually have a pretty good intuition of the other types of numbers:</p>
+<ul>
+<li>We start with the numbers we learned to count with. These are the natural numbers, \(\N\), which are not too hard to conceptualize. If we see a pile of candies but then a bigger pile of candies, we have this understanding of quantity to compare their respective amounts. We could use these to solve an equation such as \(x+2=69\) (formal construction: <a href="https://en.wikipedia.org/wiki/Peano_axioms">Peano Axioms</a>, or something similar).</li>
+<li>The extension of \(\N\) to the &ldquo;negatives&rdquo; is known as the set of integers, \(\Z\). Perhaps the easiest example we learned for the &ldquo;negative&rdquo; numbers is in the sense of debt where we owe people money. These numbers allow us to solve an equation such as \(x+69=2\) (formal construction: could be in the form of making a group, since the negative integers are the additive inverses of the natural numbers).</li>
+<li>
+<p>The rational numbers, \(\Q\), are an extension of \(\Z\) to &ldquo;fractions&rdquo;. Again, these are very easy to envision, as this is essentially what happens when you cut cake into slices. With these numbers, we now have the tools to solve an equation such as \(70x+7=67\) (formal construction: <em>equivalence classes of ordered pairs</em>)</p>
+<ul>
+<li>The idea here is to represent a number like 6/7 as (6, 7). Now we can &ldquo;define addition&rdquo; on these &ldquo;fractions&rdquo; as:</li>
+</ul>
+<div class="math-block">\[(a, b) + (c, d) := (ad + bc, bd)\]</div>
+<p>and multiplication as:</p>
+<div class="math-block">\[(a, b) \cdot (c, d) := (ac, bd)\]</div>
+<p>But wait! The astute reader will certainly catch an issue here: Wouldn&rsquo;t (60, 70) represent the same fraction as (6, 7)? We can&rsquo;t have this! The simple fix is to just interpret these as the same thing, even if they are not strictly equal. What we have done here is come up with a new sense of equality known as an <em>equivalence relation</em>. And with equivalence relations, we create something known as <em>equivalence classes</em>, which is really a fancy way of denoting a set of things which are all &ldquo;the same under this new version of equality&rdquo;. For example, the equivalence class of (6, 7) is the set:</p>
+<div class="math-block">\[\{(6, 7), (12, 14), (-6, -7), (-12, -14), \ldots\}\]</div>
+<p>Yes, this is certainly a little strange, but we have this nice convention where instead of using our ordered pairs as &ldquo;fractions&rdquo;, we have these equivalence classes instead! So yes, 6/7 and 60/70 are indeed equal since the equivalence class of (6, 7) and (60, 70) are identical.</p>
+<p>(<strong>For the curious reader: Google &ldquo;field of fractions&rdquo;</strong>)
+- And now the real numbers, \(\R\), which we can define as the extension of \(\Q\) to&hellip;uh&hellip; Where exactly do we go from here? How are we supposed to even believe that real numbers exist <em>in between</em> the rational numbers? Is there any evidence for this? How can we even represent these numbers? <strong>What are these numbers?</strong></p>
+</li>
+</ul>
+<p>Right, so we you really think about it, the real numbers are honestly quite unintuitive. Many of us sort of have this &ldquo;sense&rdquo; that they do exist, through our understanding of continuums such as time and motion. But as of right now, without a formal method that really shows the real numbers exist&hellip;we are at an impasse.</p>
+<h2 id="how-to-define">How To Define???<a class="anchor" href="#how-to-define" title="Link to this section">#</a></h2>
+<p>There are multiple ways to construct the real numbers where each method has the same central idea: &ldquo;By hopping only on rational numbers, I should be able to leapfrog so many times such that I get <em>really close</em> to any &lsquo;real&rsquo; number&hellip; whatever that is.&rdquo;</p>
+<h3 id="attempt-1-real-numbers-are-infinite-decimals">Attempt 1: Real Numbers are Infinite Decimals?<a class="anchor" href="#attempt-1-real-numbers-are-infinite-decimals" title="Link to this section">#</a></h3>
+<p>I suppose we should consider base ten because why not. We often see real numbers expressed as an infinite decimal such as 3.14159265358979&hellip;so why don&rsquo;t we just take the infinite decimals as our real numbers? As we add more and more decimal points, we&rsquo;re really using rational numbers to get closer and closer to the &ldquo;real numbers&rdquo; to sort of fill in the &ldquo;gap&rdquo;.</p>
+<div class="env env--definition">
+<p class="env__head"><span class="env__name">Definition</span></p>
+<p>A <em>real number</em> is a sequence of infinite decimal digits (i.e. 1, 4, 2, 7, 8, 5, 1, 2, 9, 4, 0, 1, &hellip;) combined with the location of the decimal point as well as the sign of the infinite sequence. For instance, we can define \(\pi\) as the infinite sequence (3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9, &hellip;) with the decimal point after the first digit and taking the positive sign.</p>
+</div>
+<p>Granted, this <em>could</em> work if we try pretty hard, but I&rsquo;m fairly concerned with how messy it will be as there are a few issues to address&hellip;</p>
+<p><em>Issue 1:</em> We have multiple representations of the same number. For a few examples, 0.9999999&hellip; = 1.0000000 and 67.0000000 = 0067.0000000. But perhaps we could fix this through equivalence classes like we outlined for the rational numbers before.</p>
+<p><em>Issue 2:</em> How would we describe the sum of two infinite decimals? <em>Yikes</em>, you can probably see how messy this is going to be as we conventionally add from right to left and gosh the amount of carrying that would need to be done would be so tedious. And let&rsquo;s not even get started on multiplying&hellip;</p>
+<p>So, this method sucks.</p>
+<h3 id="method-2-cauchy-sequences-are-real-numbers">Method 2: Cauchy Sequences are Real Numbers?<a class="anchor" href="#method-2-cauchy-sequences-are-real-numbers" title="Link to this section">#</a></h3>
+<p>Instead of just giving the definition, I&rsquo;ll explain my problem with this construction.</p>
+<p><em>Issue:</em> The intended audience might be very sad when reading this and thus will judge me heavily.</p>
+<p>And here&rsquo;s the definition:</p>
+<div class="env env--definition">
+<p class="env__head"><span class="env__name">Definition</span></p>
+<p>A <em>real number</em> is an equivalence class of Cauchy sequences. If we let \(C\) be the set of all infinite sequences of rational numbers</p>
+<div class="math-block">\[\{x_n\}_{n=1}^\infty\]</div>
+<p>for which:</p>
+<div class="math-block">\[\forall \epsilon \in \Q^+ \ \exists N_\epsilon \in \N \ \text{s.t.} \ \abs{x_n - x_m} &lt; \epsilon \quad \forall m, n \ge N_\epsilon\]</div>
+<p>We define the equivalence relation \(\sim\) on \(C\) as such:</p>
+<div class="math-block">\[\{x_n\}_{n=1}^\infty \sim \{y_n\}_{n=1}^\infty\]</div>
+<p>iff.</p>
+<div class="math-block">\[\lim_{n \to \infty} \abs{x_n - y_n} = 0\]</div>
+<p>Then \(\R := C / \sim\) where we define addition and multiplication naturally in the pointwise sense.</p>
+</div>
+<p>Okay, if I had to be honest, this construction is honestly <em>quite nice and easy</em>&hellip; But I can unfortunately think that there&rsquo;s just too much to unpack. Here are a couple notes for those not in my Real Analysis class (because we have been learning about this method!)</p>
+<ul>
+<li>The definition of a <em>Cauchy sequence</em> is much less scary than it looks. All it means is that it&rsquo;s a sequence that&rsquo;s &ldquo;getting closer and closer to itself&rdquo;.</li>
+<li><strong>For the curious reader: Google &ldquo;Construction of real numbers with Cauchy sequences&rdquo;</strong></li>
+</ul>
+<p>This brings me to the second goal of this post: one of my friends in Real Analysis knew of this method but was unaware of the other method I will state below, and so we joked that I should totally make a comprehensive blog post on it&hellip;</p>
+<p>This brings us to the construction that we&rsquo;ll ultimately use&hellip;</p>
+<h3 id="method-3-real-numbers-are-dedekind-cuts">Method 3: Real Numbers are Dedekind Cuts!<a class="anchor" href="#method-3-real-numbers-are-dedekind-cuts" title="Link to this section">#</a></h3>
+<p>In my opinion, this is an absolutely beautiful way to conceptualize and thereby convince yourself that real numbers exist.</p>
+<p>Intuitively, think of a Dedekind cut as the set of rational numbers that are all <em>less than</em> something. That&rsquo;s not very precise, but here are some examples:</p>
+<ul>
+<li>
+<p>If we were to take all of the rational numbers, and &ldquo;cut&rdquo; them off at 0, then we are left with only the negative rational numbers. That is, the set</p>
+<div class="math-block">\[\{q \in \Q : q &lt; 0\}\]</div>
+<p>So yes, the negative rational numbers is a Dedekind cut.
+- The set of all rational numbers less than 2,</p>
+<div class="math-block">\[\{q \in \Q : q &lt; 2\}\]</div>
+<p>is a Dedekind cut. We essentially &ldquo;stop&rdquo; the rational numbers at 2.
+- The set of all rational numbers less than -6/7 is also a Dedekind cut. You get the gist.</p>
+</li>
+</ul>
+<p>The main idea we&rsquo;re getting at is that we ideally want a Dedekind cut to represent its <em>top number</em>.</p>
+<ul>
+<li>By this, we mean a &ldquo;least upper bound&rdquo;. For example, note that the set of negative rational numbers has no maximum. However, if it &ldquo;had a maximum&rdquo;, we ideally would want it to be 0. So, we call 0 the <strong>supremum</strong> of the set of negative rational numbers, because it is the <strong>least upper bound</strong>. More on that later.</li>
+</ul>
+<p>For example, we would want this particular cut</p>
+<div class="math-block">\[\{q \in \Q : q &lt; 2\}\]</div>
+<p>to represent the real number 2. Unfortunately, if we defined a Dedekind cut as just a set of the form</p>
+<div class="math-block">\[\{q \in \Q : q &lt; r\}\]</div>
+<p>for some \(r \in \Q\), it&rsquo;s really not going to be of much help in extending the rational numbers because</p>
+<ul>
+<li>the top number of \(\{q \in \Q : q &lt; r\}\) is \(r\) and well, \(r\) must be rational. So we really just redefined rational numbers all over again&hellip;</li>
+<li>And if you instead try the definition \(\{q \in \Q : q &lt; r\}\) where \(r \in \R\), then this is really just a circular definition&hellip;because what is \(\R\)?</li>
+</ul>
+<p>Instead, we must be more subtle with our definition of the Dedekind cut:</p>
+<div class="env env--definition">
+<p class="env__head"><span class="env__name">Definition</span></p>
+<p>A non-empty subset \(D \subset \Q\) is a <em>Dedekind cut</em> if the following property holds: Whenever \(a \in D\), we have that every rational less than \(a\) is also in \(D\). Additionally, \(D\) has no maximum element.</p>
+</div>
+<p>Here&rsquo;s a few exercises to test your understanding:</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Prove that \(\{q \in \Q : q &lt; 67\}\) is a Dedekind cut.</p>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Why is \(\{q \in \Q : \abs{q} &lt; 67\}\) NOT a Dedekind cut?</p>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Why is \(\{q \in \Q : q \le 67\}\) NOT a Dedekind cut?</p>
+</div>
+<div class="env env--example">
+<p class="env__head"><span class="env__name">Example</span></p>
+<p>The set</p>
+<div class="math-block">\[\{q \in \Q : q &lt; 0\} \cup \{q \in \Q : q^2 &lt; 67\}\]</div>
+<p>is a Dedekind cut.</p>
+</div>
+<p>Intuitively, we can see that the &ldquo;top number&rdquo; of this set is going to be \(\sqrt{67}\), which is most certainly not rational! Surely, we can seal the &ldquo;gaps&rdquo;/&rdquo;holes&rdquo; among the real numbers.</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Prove that the above set described is indeed a Dedekind cut and it does not take the form \(\{q \in \Q : q &lt; r\}\) for any rational \(r\).</p>
+</div>
+<p><em>Sketch:</em> This boils down to casework. After assuming the contradiction that there exists a representation \(\{q \in \Q : q &lt; r\}\) for some rational \(r\), we prove that we must have \(r^2 = 67\) (either \(r^2 &lt; 67\) or \(r^2 &gt; 67\) imply the sets are not equal) and then prove that there is no rational satisfying \(r^2 = 67\), contradiction.</p>
+<p>Okay, so we should be convinced that we have a not too difficult definition of the real numbers.</p>
+<div class="env env--definition">
+<p class="env__head"><span class="env__name">Definition</span></p>
+<p>A real number is a Dedekind cut.</p>
+</div>
+<p>Now, if we are going to claim that these Dedekind cuts can represent the real numbers, we should give ways to add them and similar operations.</p>
+<p><em>Addition:</em> Let \(A, B \in \R\) (that is, \(A\) and \(B\) are Dedekind cuts). Then,</p>
+<div class="math-block">\[A + B := \{a + b : a \in A, b \in B\}\]</div>
+<p><em>Example:</em> Suppose \(A\) represents 33 and \(B\) represents 34. \(A = \{q \in \Q : q &lt; 33\}\) and \(B = \{q \in \Q : q &lt; 34\}\). Ideally, we would like \(A + B\) to represent 67. Does it?</p>
+<p><em>Proof:</em></p>
+<ul>
+<li>
+<p>Our claim is:</p>
+<div class="math-block">\[\{a + b : a \in A, b \in B\} = \{q \in \Q : q &lt; 67\}\]</div>
+<p>That is,</p>
+<div class="math-block">\[\{a + b : a, b \in \Q, a &lt; 33, b &lt; 34\} = \{q \in \Q : q &lt; 67\}\]</div>
+<p>We prove by double containment.</p>
+<ul>
+<li>If \(x \in \{a + b : a, b \in \Q, a &lt; 33, b &lt; 34\}\), that means \(x = a+b\) where \(a &lt; 33\) and \(b &lt; 34\) are rational numbers. Adding the inequalities gives us \(a + b &lt; 67\) and thus, \(x &lt; 67\). Since \(a, b\) are rational numbers, so is \(x\). Thus, \(x\) is a rational less than 67, which matches what we want to show.</li>
+<li>
+<p>If \(x \in \{q \in \Q : q &lt; 67\}\), then \(x\) is a rational less than 67.</p>
+<p><strong>Claim:</strong> There is a rational \(a &lt; 33\) such that \(x - a &lt; 34\).</p>
+<p><em>Proof.</em> Assume otherwise. Then \(x - a \ge 34\) for all rational numbers \(a &lt; 34\). This means that \(a + 34 \le x &lt; 67\) for all rational numbers \(a\). The idea here is that if we make \(a\) arbitrarily close to 33, then \(x\) will in a sense get &ldquo;squeezed&rdquo; out of the inequality \(a + 34 \le x &lt; 67\).</p>
+<p>For this, there is a quite elegant trick we could use! The intuition behind this is to consider expressing \(a\) as being even closer to 33 than \(x\) is to 67. That is, we could represent \(a\) as \(a = 33 - (67 - x)/2\). Clearly, we have \((67 - x) &gt; 0\) and thus we have \(a &lt; 33\) with \(a\) rational.</p>
+<p>We can simply to obtain \(a = (x - 1)/2\). If we were to plug this into our inequality \(a + 34 \le x &lt; 67\) (which MUST be true for all \(a &lt; 33\)), we get</p>
+<div class="math-block">\[\frac{x + 67}{2} \le x &lt; 67\]</div>
+<p>Can you see the contradiction? (Solve the left and right inequalities.)</p>
+<p>Now that the claim is proven, we are free to choose a rational \(a &lt; 33\) such that \(x - a &lt; 34\). Taking \(b = x - a &lt; 34\), we have \(x = a + b\), and thus, our other construction holds.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><em>Subtraction:</em> We don&rsquo;t exactly have subtraction, but we do have adding negative inverses. This of course begs the very natural question of given a Dedekind cut \(A \in \R\), how do we construct its &ldquo;negation&rdquo;?</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Why don&rsquo;t either of these attempts at defining negation work? And what would work instead?</p>
+<div class="math-block">\[\begin{aligned}
+-A &amp;:= \{-a : a \in A\} \\
+-A &amp;:= \{-a : a \notin A, a \in \Q\}
+\end{aligned}\]</div>
+</div>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>For the first one, simply letting \(A\) represent 0 makes \(\{-a : a \in A\}\) the positive rational numbers, which is certainly not a Dedekind cut.</li>
+<li>For the second one, it&rsquo;s actually quite close, but still not correct. If \(A\) represents 1, then by definition, \(-A = \{q \in \Q : q \le -1\}\). The reason this does not work is because \(-A\) has a maximum, thus it cannot be a Dedekind cut.</li>
+<li>
+<p>There&rsquo;s a really cheeky trick to skirt this issue, which is&hellip;to add 0.</p>
+<div class="math-block">\[-A := \{(-q) + z : q \in \Q \setminus A, z &lt; 0, z \in \Q\}\]</div>
+<p>Think about why this actually works!</p>
+</li>
+</ul>
+<p><em>Multiplication, Division:</em> These admittedly do get quite cumbersome, but are far better than using <strong>Attempt 1</strong>&hellip;so I won&rsquo;t include them here, but if you wish to check out the construction (which in theory is really just a bunch of casework)&hellip;take a look <a href="https://en.wikipedia.org/wiki/Construction_of_the_real_numbers">here</a>.</p>
+<h2 id="building-further-structure">Building Further Structure<a class="anchor" href="#building-further-structure" title="Link to this section">#</a></h2>
+<p>Our definition for real numbers certainly works, but now we could go one step further which really begins to demonstrate the beauty of the structure of the reals.</p>
+<div class="env env--definition">
+<p class="env__head"><span class="env__name">Definition</span></p>
+<p>The real numbers \(\R\) is the unique ordered field, up to isomorphism, that satisfies the supremum property.</p>
+</div>
+<p>This kind of covered a lot, so let&rsquo;s analyze this a bit more carefully.</p>
+<ul>
+<li>A <em>field</em> is a system of numbers in which we may comfortably add, subtract, multiply, and <em>even divide</em>! We also have the distributive property, with associativity and commutativity&hellip;essentially, it&rsquo;s nice and we like that. That&rsquo;s a good thing, not a bad thing.</li>
+<li>An <em>ordered field</em> means that we have the ability to compare any two numbers in the field using \(\le\). The \(\le\) symbol needs to satisfy a few important properties, such as \(a \le b\) and \(b \le c\) implies \(a \le c\), and \(x \le y\) and \(y \le x\) implies \(x = y\).</li>
+<li>
+<p>The <em>supremum</em> of a set \(S\) is its <em>least upper bound</em>. For example, the interval \([0, 3]\) has an upper bound of 4 since \(4 \ge\) everything in \([0, 3]\). But, it most certainly is not the least upper bound, since 3 is an even smaller upper bound. And we certainly cannot get smaller than that, thus 3 is the supremum.</p>
+<p>Note that the idea of a supremum is a more generalized form of the maximum. If a set has a maximum, like \([0, 3]\) does, then that maximum automatically becomes the supremum. Otherwise, for sets such as \([0, 3)\) or \(\{1/2, 2/3, 3/4, 4/5, \ldots\}\) then is no maximum&hellip;but there IS a supremum! Colloquially, this is what we would ideally &ldquo;like&rdquo; for the maximum to be! For the two example sets above, they are 3 and 1 respectively. We will denote the supremum of a set \(S\) as <strong>sup S</strong>.
+- The <em>supremum property</em> means that any set has an upper bound must have a <em>least</em> such upper bound, i.e. a supremum.</p>
+<p><strong>Exercise:</strong> \(\Q\) is an ordered field but does not have the supremum property. Why? (Hint: the supremums in the ordered field have to be in the field, meaning they have to be rational&hellip;)</p>
+<p>If you think about it, the supremum property is yet another way to formalize the notion of &ldquo;filling in the gaps&rdquo; between the rational numbers. The above exercise can demonstrate this as well.
+- <em>Unique up to isomorphism</em> means that there is only ONE &ldquo;real numbers&rdquo; and ANY OTHER &ldquo;real numbers&rdquo; you could come up with will basically look the same, i.e. be isomorphic to the &ldquo;real numbers&rdquo;.</p>
+</li>
+</ul>
+<p>This definition asserts some particularly bold claims: for one, it asserts the real numbers even exist in the first place. Luckily for us, we have achieved this via Dedekind cuts!</p>
+<p>But even further, we&rsquo;re claiming something far grander. We&rsquo;re also saying that no matter what construction you use to define the real numbers, they will essentially look the same as these Dedekind cuts, known as isomorphism.</p>
+<ul>
+<li>Basically, two systems of numbers are isomorphic if each number in the first system corresponds to a number in the second system such that in this correspondence, operations on the numbers act in the same way.</li>
+<li>
+<p>With this idea, we may formally define a <em>field isomorphism</em>. Let \(F_1\) and \(F_2\) be fields. \(F_1\) has operations \(+\) and \(\bullet\), whereas \(F_2\) has operations \(\oplus\) and \(\odot\). Then a field isomorphism is the bijective function \(\psi\)</p>
+<div class="math-block">\[\psi : F_1 \to F_2 \text{ where}\]</div>
+<div class="math-block">\[\begin{aligned}
+    1.\ \psi(a + b) &amp;= \psi(a) \oplus \psi(b) \\
+    2.\ \psi(a \cdot b) &amp;= \psi(a) \odot \psi(b)
+    \end{aligned}\]</div>
+<p>And if you can find such a \(\psi\), then we call \(F_1\) and \(F_2\) isomorphic.</p>
+</li>
+</ul>
+<p>Proving this is an amazing journey that beautifully encapsulates the hierarchy of systems of numbers. This is the main course of this post.</p>
+<h2 id="leveling-up">Leveling Up<a class="anchor" href="#leveling-up" title="Link to this section">#</a></h2>
+<p>Let \(\R\) and \(\R'\) be two versions of &ldquo;real numbers&rdquo;. I will now go on to show that they are isomorphic.</p>
+<p>The addition and multiplication for \(\R\) are \(+\) and \(\bullet\). For \(\R'\), the operations are \(\oplus\) and \(\odot\).</p>
+<h3 id="level-i-the-natural-numbers">Level I: The Natural Numbers<a class="anchor" href="#level-i-the-natural-numbers" title="Link to this section">#</a></h3>
+<p>Our first goal is to &ldquo;find&rdquo; the natural numbers.</p>
+<p>Included in the definition of a field is the concept of a multiplicative identity, 1. \(\R\) has a 1 and \(\R'\) has a \(1'\) as well. Then,</p>
+<div class="math-block">\[\begin{aligned}
+\N &amp;= \{1, 1+1, 1+1+1, \ldots\} \\
+\N' &amp;= \{1', 1'+1', 1'+1'+1', \ldots\}
+\end{aligned}\]</div>
+<p>We can now start to build our isomorphism. Clearly, we would want 1 to correspond to \(1'\) and so we may define</p>
+<div class="math-block">\[\psi(1) := 1'\]</div>
+<p>In general, if \(n = 1 + 1 + \ldots + 1\) and \(n' = 1' + 1' + \ldots + 1'\) where the same amount of &ldquo;ones&rdquo; are used, then we may take</p>
+<div class="math-block">\[\psi(n) := n'\]</div>
+<p>We should check for isomorphic structure, meaning we claim:</p>
+<div class="math-block">\[\begin{aligned}
+\psi(m + n) &amp;= \psi(m) \oplus \psi(n) \\
+\psi(m \cdot n) &amp;= \psi(m) \odot \psi(n)
+\end{aligned}\]</div>
+<p>Which works, by induction (<em>try it!</em>)</p>
+<h3 id="level-ii-the-integers">Level II: The Integers<a class="anchor" href="#level-ii-the-integers" title="Link to this section">#</a></h3>
+<p>We define</p>
+<div class="math-block">\[\Z = \N \cup \{0\} \cup (-\N = \{-n : n \in \N\})\]</div>
+<p>\(-n\) exists because in a field, every element has an additive inverse. We may define \(\Z'\) similarly.</p>
+<p>We seek to extend our isomorphism to the integers. We have a few obvious definitions:</p>
+<div class="math-block">\[\begin{aligned}
+\psi(-n) &amp;:= -\psi(n) \\
+\psi(0) &amp;= 0'
+\end{aligned}\]</div>
+<p>Again, we may check for isomorphic structure, claiming:</p>
+<div class="math-block">\[\psi(m + n) = \psi(m) \oplus \psi(n)\]</div>
+<p><em>Proof:</em> The only significantly problematic case is when \(m &gt; 0\) and \(n &lt; 0\). Or, we essentially need to show</p>
+<div class="math-block">\[\psi(m - n) = \psi(m) \oplus (-\psi(n))\]</div>
+<p>for all naturals \(m\) and \(n\). We have two subcases:</p>
+<ul>
+<li>
+<p>if \(m &gt; n\), then \(m - n\) is natural. Since \(n\) is natural too, we may use our previous result to obtain</p>
+<div class="math-block">\[\psi(m - n) \oplus \psi(n) = \psi(m - n + n) = \psi(m)\]</div>
+<p>which indeed, rearranges to what we want!
+- otherwise, if \(m \le n\), then \(m - n\) is zero or natural. The 0 case is trivial, so we suppose \(n &gt; m\). Then</p>
+<div class="math-block">\[\psi(m - n) = -\psi(n - m)\]</div>
+<p>by definition of \(\psi\) on the negative integers.</p>
+<p>Then, we have</p>
+<div class="math-block">\[\psi(n - m) \oplus \psi(m) = \psi(n)\]</div>
+<p>and thus</p>
+<div class="math-block">\[-\psi(m - n) \oplus \psi(m) = \psi(n)\]</div>
+<p>which rearranges to what we want!</p>
+</li>
+</ul>
+<p>(Keep in mind that we also need to show that \(\psi\) maintains a bijection across these sets, but I&rsquo;m choosing to skip it since this post has gotten quite tiring; that being said, it is not hard.)</p>
+<p>And of course, we also need to show the claim</p>
+<div class="math-block">\[\psi(m \cdot n) = \psi(m) \odot \psi(n)\]</div>
+<p>for all integers \(m\) and \(n\), which can be proved in similar fashion.</p>
+<h3 id="level-iii-the-rational-numbers">Level III: The Rational Numbers<a class="anchor" href="#level-iii-the-rational-numbers" title="Link to this section">#</a></h3>
+<p>Since we have the ability to divide in fields, we don&rsquo;t have to get too fancy here. We define</p>
+<div class="math-block">\[\Q = \left\{\frac{z}{n} : z \in \Z, n \in \N\right\}\]</div>
+<p>and \(\Q'\) similarly.</p>
+<p>To extend \(\psi\) to rational numbers, we probably can see that we would like</p>
+<div class="math-block">\[\psi(z/n) = \psi(z)/\psi(n)\]</div>
+<p>to be true&hellip;but is it safe to assume so?</p>
+<p>We claim that \(\psi\) is well-defined.</p>
+<p><em>Proof:</em> For this to be &ldquo;well-defined&rdquo;, we need is that</p>
+<div class="math-block">\[\psi(z/n)\]</div>
+<p>should not depend on the individual values of \(z\) and \(n\), but only the value of \(z/n\) itself. Thus, we shouldn&rsquo;t get different values for \(z = 1, n = 2\) and \(z = 2, n = 4\).</p>
+<p>So suppose that \(z_1/n_1 = z_2/n_2\). Then \(z_1 \bullet n_2 = z_2 \bullet n_1\). We must show that</p>
+<div class="math-block">\[\frac{\psi(z_1)}{\psi(n_1)} = \frac{\psi(z_2)}{\psi(n_2)}\]</div>
+<p>We have that</p>
+<div class="math-block">\[\psi(m \cdot n) = \psi(m) \odot \psi(n)\]</div>
+<p>from the integers, so we have:</p>
+<div class="math-block">\[\psi(z_1) \odot \psi(n_2) = \psi(z_1 \cdot n_2) = \psi(z_2 \cdot n_1) = \psi(z_2) \odot \psi(n_1)\]</div>
+<p>and dividing yields what we need.</p>
+<p>It also should be noted that we can prove the claim that this definition does not change our previous definition over the integers (plug in \(n\) and 1, and note that \(n/1\) will just give the value for \(n\)), so we certainly have a well-defined extension.</p>
+<p>I leave checking for isomorphic structure as a standard exercise.</p>
+<h3 id="boss-level-the-real-numbers">Boss Level: The Real Numbers!<a class="anchor" href="#boss-level-the-real-numbers" title="Link to this section">#</a></h3>
+<p>For the real numbers, the ultimate key is to use Dedekind cuts. We won&rsquo;t be using them to construct the real numbers, but rather to get <em>close</em> to them. But in <em>order</em> to Dedekind cuts, we need&hellip;a notion of <em>order</em>&hellip;</p>
+<p>We define \(\le\) to be the ordering on \(\R\) and \(\preceq\) be the ordering on \(\R'\). The idea is that \(\psi\) should preserve order, e.g. if \(x \le y\), then \(\psi(x) \preceq \psi(y)\).</p>
+<p>We claim that \(\psi\), restricted to natural numbers, preserves order.</p>
+<p><em>Proof:</em> Assume \(a, b \in \N\) with \(a \le b\). We show that \(\psi(a) \preceq \psi(b)\) by induction on \(b\). It is trivial for \(b = 1\), so suppose for some \(b\), we have \(\psi(a) \preceq \psi(b)\) for every \(a \preceq b\). We will aim to show the same for \(b+1\). That is, we will choose some \(a \preceq b+1\) and show that \(\psi(a) \preceq \psi(b+1)\).</p>
+<p>By the inductive hypothesis, we have</p>
+<div class="math-block">\[\begin{aligned}
+\psi(b+1) = \psi(b) + 1' &amp;\succeq \psi(a) + 1' \\
+\psi(a) + 1' &amp;\succ \psi(a)
+\end{aligned}\]</div>
+<p>hence we can indeed conclude by transitivity,</p>
+<div class="math-block">\[\psi(b+1) \succ \psi(a)\]</div>
+<p>We may also claim that \(\psi\), restricted to integers, preserves order.</p>
+<p><em>Proof:</em> Consider two integers \(a, b\) with \(a \le b\). We show that \(T(a) \le T(b)\).</p>
+<p>Note that \(a \le b\) implies that \(1 \le b-a+1\). Since \(b-a \ge 0\), \(b-a+1 \in \N\), hence by the previous claim,</p>
+<div class="math-block">\[1' \preceq \psi(b - a + 1) = \psi(b) \oplus -\psi(a) \oplus 1'\]</div>
+<p>thus what we wished to show.</p>
+<p>We may even further claim that \(\psi\), restricted to rational numbers, preserves order.</p>
+<p><em>Proof:</em> For \(a, c \in \Z\) and \(b, c \in \N\), suppose that we have \(a/b \le c/d\). Then \(ad \le bc\) and by the previous claim, \(\psi(ad) \le \psi(bc)\) and \(\psi(a)\psi(d) \le \psi(b)\psi(c)\). Thus,</p>
+<div class="math-block">\[\frac{\psi(a)}{\psi(b)} \preceq \frac{\psi(c)}{\psi(d)}\]</div>
+<p>Great! We have all these sensible things, but there&rsquo;s another issue: Dedekind cuts won&rsquo;t be that useful for &ldquo;getting close&rdquo; to a real number unless I know that I can &ldquo;get close&rdquo; at all! How can I really be so sure that for any number in \(\R\), I can get close to it using numbers in \(\Q\)? And, likewise for \(\R'\) and \(\Q'\)?</p>
+<p>The key insight is a concept known as <em>density</em>.</p>
+<div class="env env--theorem">
+<p class="env__head"><span class="env__name">Theorem</span> <span class="env__title">(Key Insight (Density))</span></p>
+<p>For all real numbers \(x, y \in \R\) with \(x &lt; y\), there exists a rational number \(q \in \Q\) such that \(x &lt; q &lt; y\).</p>
+</div>
+<p>I&rsquo;ll give the curious reader a second to try to go ahead and prove this!</p>
+<p><em>Proof:</em> The trick is that \(1/n\) can be a very small number, where \(n \in \N\). If I divide the real line into segments of \(1/n\), and \(n\) is super large, then one of the points I mark will probably lie in between \(x\) and \(y\)&hellip;which is the point we need!</p>
+<p>To wit, our first claim lies in that there exists \(n \in \N\) so large that \(1/n &lt; (y-x)\). That means all we need to do is find \(n\) such that \(n &gt; 1/(y-x)\). Is this possible?</p>
+<p>If we could not find such an \(n\), then that means \(n \le 1/(y-x)\) for all \(n \in \N\). But&hellip;there is a subtle issue here, right? <em>What would this imply about the set \(\N\)?</em></p>
+<p>We invoke the supremum property! There exists a supremum \(M = \sup \N\). \(M\) might be natural, or it may not be. To really mess this up, we will need to do a little manipulation:</p>
+<p>\(M\) is also the least upper bound of \(\N\)</p>
+<p>Thus, \(M-1\) cannot be an upper bound of \(\N\). If it were, then surely \(M\) would not be the <em>least</em> upper bound.</p>
+<p>Since \(M-1\) cannot be an upper bound, it cannot be bigger than everything in \(\N\). So there must be a natural number \(m \in \N\) such that \(M - 1 &lt; m\).</p>
+<p>But hold on, \(m+1\) is natural as well! Also, \(m+1 &gt; M\). This means that clearly, \(M\) was not even an upper bound in the first place, let alone the supremum. Absurd!</p>
+<p>So we certainly have some \(n\) such that \(1/n &lt; y-x\). What now? Let&rsquo;s consider the set</p>
+<div class="math-block">\[\{m/n : m \in \Z, m/n &lt; y\}\]</div>
+<p>Since this set has an upper bound of \(y\), it has a supremum of \(M\) by the supremum property.</p>
+<p><strong>Exercise:</strong> Prove that \(M\) is actually the maximum of the set (meaning it is actually in the set as well).</p>
+<p><em>Sketch:</em></p>
+<div class="math-block">\[M - \frac{1}{2n}\]</div>
+<p>cannot be an upper bound, because \(M\) has to be the least upper bound. Therefore, there exists \(m_0\) such that</p>
+<div class="math-block">\[M - \frac{1}{2n} \le \frac{m_0}{n} \le M\]</div>
+<p>Can you show that \(m_0/n\) is the maximum of the set? If so, then it must be \(M\).</p>
+<p>Naturally, now I claim that \(M = m_0/n\) satisfies \(x &lt; m_0/n &lt; y\). If not, then we would have to have \(m_0/n \le x &lt; y\). This puts \(m_0/n\) a bit too far away from \(y\). In fact,</p>
+<div class="math-block">\[y - \frac{m_0}{n} \ge y - x &gt; \frac{1}{n}\]</div>
+<p><strong>Exercise:</strong> Where is the contradiction?</p>
+<p>Answer: We now have</p>
+<div class="math-block">\[\frac{m_0 + 1}{n} &lt; y\]</div>
+<p>This is bad because \(m_0/n\) was supposed to be the biggest fraction of the form \(m/n\) which was less than \(y\), absurd!</p>
+<p>And so, we are done!</p>
+<p>Here&rsquo;s the extension of our bijection to the reals:</p>
+<div class="math-block">\[\psi(x) := \sup \{\psi(q) : q \in \Q, q &lt; x\}\]</div>
+<p>Colloquially, this would sound as:</p>
+<blockquote>
+<p><strong>&ldquo;Represent the real number as a Dedekind cut with that real number as the top number. Then, if you \(\psi\) everything, then the top number of the new set should be the \(\psi\) of the original real number.&rdquo;</strong></p>
+</blockquote>
+<p>We claim that this is well-defined.</p>
+<p><em>Proof:</em> By preservation of order, \(\psi(r)\) is an upper bound on the set</p>
+<div class="math-block">\[\{\psi(q) : q \in \Q, q &lt; x\}\]</div>
+<p>where \(r\) is an element of \(\Q\) that is larger than \(x\). Thus by the Supremum Property, the sup exists, hence \(\psi\) is well-defined.</p>
+<p>We also claim that this is consistent with the previous definition of \(\psi\) over the rational numbers.</p>
+<p><em>Proof:</em> We need to show that \(\psi(q)\) is the sup of</p>
+<div class="math-block">\[\{\psi(r) : r &lt; q, r \in \Q\}\]</div>
+<p>for all \(q \in \Q\). By preservation of order, it is an upper bound. To confirm that it is the least upper bound, we want to show that \(\psi(q) \le \psi(p)\) for any upper bound \(p \in \R'\). We suppose otherwise. Then, using density find rational \(q_1\) such that</p>
+<div class="math-block">\[\psi(q) \succ \psi(q_1) \succ \psi(p)\]</div>
+<p>As \(q_1 &lt; q\), we must have that</p>
+<div class="math-block">\[\psi(p) \succeq \psi(q_1)\]</div>
+<p>because it is an upper bound, absurd!</p>
+<p>And at last, we just need to check for preservation of structure.</p>
+<p>We claim:</p>
+<div class="math-block">\[\psi(x) \oplus \psi(y) = \psi(x + y)\]</div>
+<p>for all real numbers \(x\) and \(y\).</p>
+<p>I leave this proof as another exercise, but I think this will be all for now as the post has gotten ridiculously long and I am tired.</p>
+<h2 id="what-is-left-to-do">What is Left to Do?<a class="anchor" href="#what-is-left-to-do" title="Link to this section">#</a></h2>
+<p>We have a couple of loose ends to tie up, as hinted by above.</p>
+<ul>
+<li>Show that \(\psi\) preserves order on real numbers</li>
+<li>Show that \(\psi(xy) = \psi(x)\psi(y)\)</li>
+<li>Show that \(\psi\) is a bijection (which is pretty non-trivial considering what we have built up so far)</li>
+</ul>
+<h2 id="final-takeaways">Final Takeaways<a class="anchor" href="#final-takeaways" title="Link to this section">#</a></h2>
+<p>Uh, real numbers are really nontrivial to get to&hellip;but the trick is that we can get really, really close to them by using rational numbers alone. An easy way to do this is via the Dedekind cut, which admittedly does not transfer well to metric spaces (as alluded to by Cauchy sequences in Method 2), but is still one of the cleanest ways to believe that real numbers truly exist. And yes, we have proved the miraculous theorem that there is, up to isomorphism, one and only one truly possible &ldquo;real numbers&rdquo;!!</p>
+<p>This is an introduction to real analysis. I hope my classmates who have spent the last few weeks learning Cauchy sequences can find the beauty that I see with Dedekind cuts :)</p>
+      </article>
+      <div class="divider v" aria-hidden="true"><svg viewBox="0 -1 600 72" role="img" aria-label="Cantor set, six levels" xmlns="http://www.w3.org/2000/svg"><rect class="fc" x="0.00" y="0" width="600.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="4.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="19.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="49.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="64.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="138.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="153.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="182.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="197.53" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="404.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="419.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="449.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="464.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="538.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="553.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="582.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="597.53" y="60" width="2.47" height="3.5" rx="1.2"/></svg></div>
+    </main>
+    <footer class="footer">
+      <div class="wrap">&copy; 2026 Sarthak Dassarma. Built with plain HTML and hosted on GitHub Pages.</div>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>
