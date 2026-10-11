@@ -1,6 +1,6 @@
 ---
 title: A Brief Introduction to Ramsey Theory
-date: 2025-11-15
+date: 2024-12-15
 section: math
 summary: Introduces Ramsey numbers through small cases, the Erdős–Szekeres bound, Erdős's probabilistic lower bound and Schur's Theorem, followed by four worked olympiad problems.
 ---

@@ -317,8 +317,8 @@ pre {
 .clt-chart-head p { margin: 6px 0 0; color: var(--text-soft); font-size: 0.95rem; }
 
 .credit {
-  max-width: 72ch;
-  margin-top: clamp(36px, 5vw, 56px);
+  max-width: none;
+  margin: 0 0 clamp(20px, 2.5vw, 28px);
   padding: 20px 24px;
   background: var(--card);
   border: 1px solid var(--rule);
@@ -326,7 +326,7 @@ pre {
   border-radius: 16px;
   color: var(--text-mid);
 }
-.credit h2 { margin-bottom: 8px; font-size: 0.78rem; font: 500 0.78rem/1.5 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); }
+.credit h2 { margin: 0 0 8px; font: 500 0.78rem/1.5 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); }
 .credit p { margin: 0; }
 
 @media (max-width: 720px) {
@@ -454,7 +454,7 @@ pre {
 .tx-map { position: relative; border: 1px solid var(--rule); border-radius: 14px; background: #f1f3f7; overflow: hidden; aspect-ratio: 1 / 0.98; }
 .tx-svg { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; }
 .tx-svg.is-panning { cursor: grabbing; }
-.tx-zone { stroke: #fff; stroke-width: 0.7; vector-effect: non-scaling-stroke; transition: fill 0.35s; }
+.tx-zone { stroke: #fff; stroke-width: 0.7; vector-effect: non-scaling-stroke; transition: fill 0.5s cubic-bezier(0.65, 0, 0.35, 1); }
 .tx-zone:hover { stroke: var(--ink); stroke-width: 1.2; }
 .tx-hi { fill: none; stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
 .tx-zoom { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; }

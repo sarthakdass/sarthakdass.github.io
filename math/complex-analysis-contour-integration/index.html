@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d1016">
+<meta name="description" content="A guide to evaluating integrals with contour integration, built from complex arithmetic up through Cauchy&#x27;s Theorem and the Residue Theorem.">
+<title>Complex Analysis: A Guide to Contour Integration — Sarthak Dassarma</title>
+<script>(function(){var d=document.documentElement;d.classList.add('js');setTimeout(function(){if(!window.__sd){d.classList.remove('js');}},4000);})();</script>
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/writing.css">
+<script src="../../js/writing-math.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+<script src="../../js/site.js" defer></script>
+</head>
+<body class="post-page">
+
+
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="site-header">
+  <div class="topbar">
+    <a class="brand" href="../../" aria-label="Sarthak Dassarma, home">
+      <svg class="brand__mark" viewBox="92.83 80.00 50.00 75.83" aria-hidden="true" focusable="false"><defs><clipPath id="brand-dclip"><path d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/></clipPath><filter id="brand-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="0.7"/></filter></defs><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/><g clip-path="url(#brand-dclip)"><g class="brand__shade"><path fill="#000" fill-rule="evenodd" filter="url(#brand-soft)" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></g><g class="brand__s"><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></svg>
+      <span class="brand__name">Sarthak Dassarma</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="../../">
+          <span class="nav-link__roll"><span class="nav-link__label">Home</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Home</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../projects/">
+          <span class="nav-link__roll"><span class="nav-link__label">Projects</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Projects</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../math/" aria-current="page">
+          <span class="nav-link__roll"><span class="nav-link__label">Math</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Math</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../hobbies/">
+          <span class="nav-link__roll"><span class="nav-link__label">Hobbies</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Hobbies</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../writing/">
+          <span class="nav-link__roll"><span class="nav-link__label">Writing</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Writing</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../now/">
+          <span class="nav-link__roll"><span class="nav-link__label">Now</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Now</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../visuals/">
+          <span class="nav-link__roll"><span class="nav-link__label">Visuals</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Visuals</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<header class="stage">
+  <div class="wrap wrap--post">
+    <a class="back-link" href="../">&larr; Math</a>
+    <h1 class="page-title page-title--post reveal"><span class="line"><span>Complex Analysis: A Guide to Contour Integration</span></span></h1>
+    <p class="post-meta"><time datetime="2025-03-15">March 2025</time><span>37 min read</span></p>
+  </div>
+</header>
+
+<div class="stack">
+  <div class="sheet">
+    <main class="sheet__content wrap" id="content">
+      <article class="post prose post--diagrams">
+<p>This post ended up being so much longer than I anticipated. It is written with the intent of lowering the barrier to entry for learning this methodology. I hope this is helpful, and if nothing else, you can enjoy timing how long it takes you to scroll to the bottom of this post. Enjoy!</p>
+<p>When I was young, I was really fascinated by the idea of using complex numbers to evaluate integrals such as \(\displaystyle\int_{-\infty}^\infty \frac{1}{1+x^4}\,dx\). Unfortunately, I could not learn it. Any videos on YouTube showcasing the idea never really quite explained how it works or what to do. Any articles I found on the internet were simply way too advanced. This post here is meant to bridge the gap, assuming only a general knowledge of integration.</p>
+<p>I cover things like holomorphic functions because without this background, it&rsquo;s once again quite easy to fall into weird pitfalls and paradoxes. I won&rsquo;t go too much into depth into the details because that should be deferred for an actual college course.</p>
+<p>This post will be divided into several &ldquo;lessons&rdquo;, each serving a different purpose.</p>
+<h2 id="lesson-0-complex-number-arithmetic-and-review">Lesson 0: Complex Number Arithmetic and Review<a class="anchor" href="#lesson-0-complex-number-arithmetic-and-review" title="Link to this section">#</a></h2>
+<p>My first post on complex numbers established some &ldquo;hidden facts&rdquo; about complex numbers, and how to avoid common but tricky pitfalls with complex number arithmetic. Let&rsquo;s review some of the key facts.</p>
+<h3 id="complex-addition-subtraction-multiplication-division">Complex Addition, Subtraction, Multiplication, Division<a class="anchor" href="#complex-addition-subtraction-multiplication-division" title="Link to this section">#</a></h3>
+<p>If you don&rsquo;t know how to do these, then you are not ready to read this post.</p>
+<h3 id="magnitude-zzmath112zz-and-conjugation-zzmath113zz">Magnitude (\(|z|\)) and Conjugation (\(\overline{z}\))<a class="anchor" href="#magnitude-zzmath112zz-and-conjugation-zzmath113zz" title="Link to this section">#</a></h3>
+<p>If you don&rsquo;t know what these are and/or how to compute these quantities, then you are not ready to read this post.</p>
+<h3 id="complex-exponents">Complex Exponents<a class="anchor" href="#complex-exponents" title="Link to this section">#</a></h3>
+<p>Summary of Background:</p>
+<ul>
+<li>Complex exponentiation doesn&rsquo;t really have an intuitive interpretation, unless you&rsquo;d like to enlighten me.</li>
+<li>When \(z\) is a complex number, \(e^z\) is also a complex number, and it is formally defined as a power series (which is a technicality that we won&rsquo;t need).</li>
+<li>\(e^z\) satisfies basic algebraic properties for <em>real</em> exponents, that you would expect. For example, \(e^{z+w} = e^z e^w\).</li>
+</ul>
+<p>Computing complex exponents:</p>
+<ul>
+<li>\(e^x\), when \(x\) is real, is&hellip; just that.</li>
+<li>\(e^{iy}\), when \(y\) is real, is the complex number \(\cos(y) + i\sin(y)\). (ALL ANGLES ARE INTERPRETED AS RADIANS. NO DEGREES ALLOWED! THEY BREAK EVERYTHING.)</li>
+<li>In general, to compute \(e^{x+iy}\), you just combine the above two. You rewrite as \(e^{x+iy} = e^x \cdot e^{iy}\), then simplify this to \(e^x(\cos y + i \sin y)\).</li>
+<li>Intuitively, for \(z \in \C\), the <em>magnitude</em> of \(e^z\) is controlled by \(\Re z\), whereas the <em>angle</em> of \(e^z\) is controlled by \(\Im z\).</li>
+<li>Indeed, \(e^{it}\) parametrizes the unit circle as \(t\) ranges through \(\R\), with \(e^{it}\) being the complex number on the unit circle at angle \(t\).</li>
+</ul>
+<p>We will not worry about computing complex exponents with bases other than \(e\).</p>
+<p><em>Exercises</em></p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Let \(r &gt; 0\) be a fixed real number. As parameter \(t\) ranges through all real numbers, what path does the complex number \(re^{it}\) trace?</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>A circle centered at \(0\) with radius \(r\).</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Compute \(e^{(1+i)\pi}\).</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<div class="math-block">\[e^{(1+i)\pi} = e^{\pi + i\pi} = e^\pi e^{i\pi} = -e^\pi\]</div>
+</details>
+</div>
+<h3 id="polar-form">Polar Form<a class="anchor" href="#polar-form" title="Link to this section">#</a></h3>
+<p>You <em>should</em> be familiar with this, but I will review what this is just in case.</p>
+<p>We know that \(e^{i\theta}\) is the point on the complex unit circle at angle \(\theta\). By scaling the unit circle, it follows that any nonzero complex number \(z\) can be represented in the form \(z = re^{i\theta}\), where \(r &gt; 0\) is the magnitude \(|z|\) and \(\theta\) is the angle of \(z\).</p>
+<p>Summary of Facts:</p>
+<ul>
+<li>Actually, the angle is not unique. For example, \(2e^{i\pi} = 2e^{3i\pi}\). So, it is only unique up to differences of multiples of \(2\pi\).</li>
+<li>We could make the angle unique by restricting it to an interval such as \([0, 2\pi)\) or \((-\pi, \pi]\).</li>
+<li>Writing in polar form can be incredibly useful. For example, it allows one to compute quantities such as \((1+i)^{2023}\) fairly quickly.</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>\(1+i\) has magnitude \(\sqrt{2}\) and is at an angle of \(\pi/4\). So we can write it in polar form \(1+i = \sqrt{2}e^{i\pi/4}\).</li>
+<li>What is \(\sqrt{3}e^{2i\pi/3}\)? This can be evaluated purely using the rules we established for complex exponentiation, but the perspective of polar form is also useful. Here, we seek the complex number with magnitude \(\sqrt{3}\) and angle \(2\pi/3\). The complex number on the unit circle at the desired angle is \(-1/2 + (\sqrt{3}/2)i\). Scaling this by \(\sqrt{3}\), we get \(-\sqrt{3}/2 + (3/2)i\).</li>
+</ul>
+<p><em>Exercises</em></p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Write \(i\) in polar form.</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(e^{i\pi/2}\)</p>
+</details>
+</div>
+<h3 id="roots-of-unity">Roots of Unity<a class="anchor" href="#roots-of-unity" title="Link to this section">#</a></h3>
+<p>This is another thing you should know by now before reading this.</p>
+<p>Uh, basically the roots of the polynomial \(z^n - 1\) are \(\{e^{2\pi ik/n} : k = 0, 1, \cdots, n-1\}\).</p>
+<p><em>Exercises</em></p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Why?</p>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>How about \(z^n + 1\)?</p>
+<details class="spoiler">
+<summary>Hint</summary>
+<p>Make a substitution to reduce it to solving for some variable \(w\) in \(w^n - 1 = 0\).</p>
+</details>
+</div>
+<h3 id="square-root-of-complex-numbers">Square Root of Complex Numbers<a class="anchor" href="#square-root-of-complex-numbers" title="Link to this section">#</a></h3>
+<p>Summary of Facts:</p>
+<ul>
+<li>Every non-zero complex number has two square roots. So, \(\sqrt{z}\) is hard to define as a nice well-defined function, because functions can&rsquo;t output two different results.</li>
+<li>If you had to make \(\sqrt{z}\) a function, you would use the <em>principal</em> square root.</li>
+<li>This is computed by writing \(z\) in polar form \(z = re^{i\theta}\), where \(-\pi &lt; \theta &lt; \pi\), and then taking \(\sqrt{z} := \sqrt{r} \cdot e^{i\theta/2}\).</li>
+<li>(Disallowing \(\theta = \pi\) is disputable. I exclude it for &ldquo;safety&rdquo; as you shall see soon.)</li>
+<li>(There are &ldquo;other square roots&rdquo; that you can &ldquo;choose&rdquo;.)</li>
+</ul>
+<p><em>Exercises</em></p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Compute \(\sqrt{i}\), where \(\sqrt{\cdot}\) is the principal square root.</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(\sqrt{2}/2 + \sqrt{2}/2 \cdot i\)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Show that \(\sqrt{-i}\sqrt{-i} \neq \sqrt{-i \times -i}\). (Technically the RHS is undefined under my definition, but if you want you can pretend that it is \(\sqrt{-1} = i\).)</p>
+</div>
+<h3 id="complex-log">Complex Log<a class="anchor" href="#complex-log" title="Link to this section">#</a></h3>
+<p>Summary of Facts:</p>
+<ul>
+<li>This is a mess.</li>
+<li>There are infinitely many logs, and none of them are perfect.</li>
+<li>The &ldquo;best&rdquo; log is the principal log.</li>
+<li>It is calculated as follows: If we write \(z = re^{i\theta}\), where \(-\pi &lt; \theta &lt; \pi\), then \(\log z := \log(r) + i\theta\).</li>
+<li>Intuitively this makes a lot of sense: We use the &ldquo;rule&rdquo; \(\log(ab) = \log a + \log b\) to write
+  \[\log(re^{i\theta}) = \log r + \log e^{i\theta}.\]</li>
+<li>In general, however, it is NOT true that \(\log(wz) = \log w + \log z\) holds. It only works in specific cases like the above equality.</li>
+<li>(I have excluded \(\theta = \pi\) for safety, once again.)</li>
+</ul>
+<p><em>Exercises</em></p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Compute \(\log i\), where \(\log \cdot\) is the principal log.</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(i\pi/2\)</p>
+</details>
+</div>
+<h3 id="complex-trig">Complex Trig<a class="anchor" href="#complex-trig" title="Link to this section">#</a></h3>
+<p>Basically you throw out all geometric intuition for sine and cosine. Instead we have very brute-force definitions:</p>
+<div class="math-block">\[\cos z := \frac{e^{iz} + e^{-iz}}{2}\]</div>
+<div class="math-block">\[\sin z := \frac{e^{iz} - e^{-iz}}{2i}\]</div>
+<p>When \(z\) is a real number \(x\), then the formula \(e^{ix} = \cos x + i \sin x\) holds, in which case these equations are obviously true. So, these formulas are the &ldquo;most natural&rdquo; way to extend the domains of sine and cosine to take in values other than real numbers.</p>
+<p>(It is true that \(e^{iz} = \cos z + i \sin z\) as a consequence of this definition, but this doesn&rsquo;t really help you evaluate what \(\cos z\) is for complex \(z\). The point is that we know how to exponentiate complex numbers, so we use that to figure out the cosine and sine.)</p>
+<p><em>Exercises</em></p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Compute \(\cos i\).</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\((e + 1/e)/2\)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Compute \(\cos(\pi + i)\).</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<div class="math-block">\[\cos(\pi+i) = \frac{e^{i(\pi+i)} + e^{-i(\pi+i)}}{2} = \frac{e^{-1+i\pi} + e^{1-i\pi}}{2} = \frac{e^{-1}e^{i\pi} + e^{1}e^{-i\pi}}{2} = (-1/e - e)/2\]</div>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>We say that the real function \(\cos x\) is a bounded function because \(-1 \leq \cos(x) \leq 1\) for all \(x \in \R\). Can the same be said for \(\cos z\) (i.e. the complex cosine)?</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>No. \(\cos(\text{huge imaginary number})\) is huge. This suggests that \(\cos z\) and \(\sin z\) don&rsquo;t fluctuate too much when changing the real part of \(z\), but they explode when the imaginary part of \(z\) goes up.</p>
+</details>
+</div>
+<h2 id="lesson-1-differentiating-complex-expressions">Lesson 1: Differentiating Complex Expressions<a class="anchor" href="#lesson-1-differentiating-complex-expressions" title="Link to this section">#</a></h2>
+<p>The rules are all the same as for differentiating real expressions. The definition is the same (\(f'(z_0) = \lim_{z\to z_0} \frac{f(z) - f(z_0)}{z - z_0}\)). The \(i\) doesn&rsquo;t really interfere with anything - just treat it as a constant.</p>
+<p>I&rsquo;ll let you dive right into the exercises. This will show you that the answers you expect are basically just completely correct.</p>
+<p><em>Exercises</em></p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>\(\dfrac{d}{dz} iz = {}\)?</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(i\)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>\(\dfrac{d}{dz} \sin z = {}\)?</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(\cos z\)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>\(\dfrac{d}{dz} \sin(iz) = {}\)?</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(i\cos(iz)\)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>\(\dfrac{d}{dz} e^{iz} = {}\)?</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(ie^{iz}\)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>\(\dfrac{d}{dz} i^{9999999} = {}\)?</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(0\)</p>
+</details>
+</div>
+<h2 id="lesson-2-integrating-complex-expressions">Lesson 2: Integrating Complex Expressions<a class="anchor" href="#lesson-2-integrating-complex-expressions" title="Link to this section">#</a></h2>
+<p>This is really easy. If you&rsquo;re trying to integrate something like \(\displaystyle\int_a^b f(x) + g(x)i \, dx\) (where \(f, g\) are real functions), then this is literally just</p>
+<div class="math-block">\[\int_a^b f(x) \, dx + i \int_a^b g(x) \, dx.\]</div>
+<p>Alternatively, suppose that \(f\) is a complex-valued function, and you knew that \(F' = f\) for some \(F : \C \to \C\). Then you can apply the fundamental theorem of calculus (FTC)</p>
+<div class="math-block">\[\int_a^b f(x) \, dx = \int_a^b F'(x) \, dx = F(b) - F(a),\]</div>
+<p>which still works for complex numbers.</p>
+<p><em>Example</em></p>
+<p>How can we compute \(\displaystyle\int_0^\pi e^{it} \, dt\)? Well, we know that an antiderivative for \(e^{it}\) is \(\frac{1}{i}e^{it}\). So by the FTC we compute</p>
+<div class="math-block">\[\int_0^\pi e^{it} \, dt = \frac{1}{i}e^{it}\Big|_{t=0}^{\pi} = \frac{1}{i}(e^{i\pi} - e^0) = \frac{-2}{i} = \boxed{2i}.\]</div>
+<p>But let&rsquo;s say you&rsquo;re not feeling confident about this computation. We could also have split the integrand into the real part and the imaginary part to get</p>
+<div class="math-block">\[\int_0^\pi e^{it} \, dt = \int_0^\pi \cos t + i\sin t \, dt = \int_0^\pi \cos t \, dt + i\int_0^\pi \sin t \, dt = 0 + i(2) = \boxed{2i}.\]</div>
+<p>In general, all &ldquo;nice properties&rdquo; you are familiar with for integrating real expressions will naturally carry over to integrating complex expressions. For example we still have linearity such as</p>
+<div class="math-block">\[\int_a^b if(x) \, dx = i\int_a^b f(x) \, dx.\]</div>
+<p>Note that the variable we integrate with respect to MUST be a real number, ranging over an interval! Integrals such as &ldquo;\(\displaystyle\int_\C z \, dz\)&rdquo; or &ldquo;\(\displaystyle\int_{-i}^i z^2 \, dz\)&rdquo; do not make sense, for example. (<em>Well, actually the second integral is kinda ok for weird reasons, but please avoid it for now lol.</em>)</p>
+<p><em>Exercises</em></p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>\(\displaystyle\int_0^1 it \, dt = {}\)?</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(i/2\) (note that you can just move the \(i\) out)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>\(\displaystyle\int_0^1 (x+i)^{2023} \, dx = {}\)?</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(\dfrac{1}{2024}\left((1+i)^{2024} - i^{2024}\right)\)</p>
+</details>
+</div>
+<p><strong>ANNOYING WARNING:</strong> What is \(\displaystyle\int_{-1}^1 \frac{1}{-1+it} \, dt\)? You might be tempted to say that \(\frac{1}{i}\log(-1+it)\) is an antiderivative and then plug in the limits. This is WRONG! The reason is because the \(\log\) won&rsquo;t be defined at \(t = 0\). This isn&rsquo;t just a cheap reason to say not do this: The integrand jumps quite a bit at \(t = 0\), which breaks the FTC for a subtle reason. (Now you see why I exclude negative reals! As long as you stay where functions are defined, bad things don&rsquo;t happen.)</p>
+<p>More generally, if you get a weird result or paradox in your computations, and they involve a square root or log, there is a good chance that these subtleties are tripping you up. It&rsquo;s ok if you don&rsquo;t understand what&rsquo;s going wrong.</p>
+<h2 id="lesson-3-contour-integrals">Lesson 3: Contour Integrals<a class="anchor" href="#lesson-3-contour-integrals" title="Link to this section">#</a></h2>
+<p>An integral that looks like</p>
+<div class="math-block">\[\int_\gamma f(z) \, dz\]</div>
+<p>is called a <em>contour integral</em>. One major difference from before is that it&rsquo;s a \(dz\), meaning that the &ldquo;variable&rdquo; ranges over complex numbers!</p>
+<p>Let&rsquo;s talk about what this means.</p>
+<ul>
+<li>\(f(z)\) is a complex-valued function over complex numbers. That means that it can take in complex numbers and output complex numbers. It can be like, \(e^{iz}\) or \(\cos z\) or \(3z^2\) or \(1/z\) or&hellip; basically anything in terms of a complex variable \(z\).</li>
+<li>\(\gamma\) is a <em>curve</em> in the complex plane. It&rsquo;s basically a path you can draw from a point \(a \in \C\) to a point \(b \in \C\).</li>
+</ul>
+<p>Curves/paths need an orientation too: You either go one way or the other. Here are some examples of paths.</p>
+<ul>
+<li>This thingy is a path! Let&rsquo;s call it \(\gamma\).</li>
+</ul>
+<p><img alt="The path γ in the complex plane, starting at the lower left and ending at the upper right" src="fig1.png" /></p>
+<ul>
+<li>This thingy is a different path because it&rsquo;s going the other way, so we call it \(-\gamma\).</li>
+</ul>
+<p><img alt="The path −γ, which is γ traversed in the opposite direction" src="fig2.png" /></p>
+<ul>
+<li>This is a totally different path, so we&rsquo;re giving it a different letter.</li>
+</ul>
+<p><img alt="The path α, going from the lower left across to the right and then up" src="fig3.png" /></p>
+<ul>
+<li>The unit circle is an important example of a path that loops.</li>
+</ul>
+<p><img alt="The unit circle, oriented counter-clockwise" src="fig4.png" /></p>
+<p>One way to denote this path is by \(\partial D\). Whenever we talk about the unit circle as a path, you should assume that we&rsquo;re going counter-clockwise. (The starting point doesn&rsquo;t really matter.)</p>
+<ul>
+<li>It&rsquo;s ok for paths to have sharp corners. This sector boundary is a perfectly good path! (It also loops)</li>
+</ul>
+<p><img alt="The boundary of a sector of the unit disc, oriented counter-clockwise" src="fig5.png" /></p>
+<p>How do you integrate over a path? Here are the steps.</p>
+<ol>
+<li>Let&rsquo;s say the path is called \(\gamma\). First, find a <em>parametrization</em> for \(\gamma\). A parametrization is a function \(\varphi(t)\) that traces out the \(\gamma\) path. For example, if \(\gamma\) is the unit circle, a parametrization is given by \(e^{it}\) as \(t\) ranges from \(0\) to \(2\pi\).</li>
+<li>Once you have a parametrization \(\varphi : [a, b] \to \C\) for \(\gamma\), the contour integral is given by</li>
+</ol>
+<div class="math-block">\[\int_\gamma f(z) \, dz := \int_a^b f(\varphi(t))\varphi'(t) \, dt.\]</div>
+<p>It&rsquo;s important that you know how to do this, so let&rsquo;s do three examples.</p>
+<h3 id="example-1">Example 1<a class="anchor" href="#example-1" title="Link to this section">#</a></h3>
+<p>Let&rsquo;s compute the contour integral \(\displaystyle\int_{\partial D} \frac{1}{z} \, dz\), where \(\partial D\) is the unit circle oriented counter-clockwise.</p>
+<p>A parametrization for \(\partial D\) is the function \(e^{it}\) as \(t\) ranges from \(0\) to \(2\pi\). Thus the integral is just</p>
+<div class="math-block">\[\int_{\partial D} \frac{1}{z} \, dz = \int_0^{2\pi} \frac{1}{e^{it}} \cdot \left(\frac{d}{dt}e^{it}\right) dt = \int_0^{2\pi} \frac{ie^{it}}{e^{it}} \, dt = \int_0^{2\pi} i \, dt = \boxed{2\pi i}.\]</div>
+<h3 id="example-2">Example 2<a class="anchor" href="#example-2" title="Link to this section">#</a></h3>
+<p>Let&rsquo;s try a more annoying example. Compute the contour integral \(\displaystyle\int_\Gamma \frac{1}{z} \, dz\), where \(\Gamma\) is the square with vertices \(\pm 1 \pm i\), oriented counter-clockwise.</p>
+<p><img alt="The square Γ with vertices ±1 ± i, oriented counter-clockwise" src="fig6.png" /></p>
+<p>Man, it&rsquo;s annoying to make a single function that traces out the entire square! Fortunately, because of properties of contour integrals, we&rsquo;re allowed to split this path up into four nicer paths, which are each easier to parametrize. Here, I want to split this up into the four segments that make up the square.</p>
+<p><img alt="The square split into its four sides Γ₁, Γ₂, Γ₃, Γ₄" src="fig7.png" /></p>
+<p>I&rsquo;m allowed to split up the contour integral into the sum of four smaller contour integrals over these smaller paths:</p>
+<div class="math-block">\[\int_\Gamma \frac{1}{z} \, dz = \int_{\Gamma_1} \frac{1}{z} \, dz + \int_{\Gamma_2} \frac{1}{z} \, dz + \int_{\Gamma_3} \frac{1}{z} \, dz + \int_{\Gamma_4} \frac{1}{z} \, dz\]</div>
+<p>So we just need to compute these four integrals. (Yeah yeah yeah it&rsquo;s still annoying, but what can you do&hellip;)</p>
+<ul>
+<li>The lower side \(\Gamma_1\) can be parametrized by the function \(t - i\) as \(t\) ranges from \(-1\) to \(1\). So</li>
+</ul>
+<div class="math-block">\[\int_{\Gamma_1} \frac{1}{z} \, dz = \int_{-1}^1 \frac{1}{t-i} \cdot \left(\frac{d}{dt}t - i\right) dt = \int_{-1}^1 \frac{1}{t-i} \, dt\]</div>
+<p>Being wary of the warning at the end of Lesson 2, we will NOT be using the complex (principal) log to quickly evaluate this. (Here it should work fine, but I want to be veerrryyyy careful, and so should you!) Let&rsquo;s find a different way to evaluate this.</p>
+<p>Remember: If you are ever nervous about what things you&rsquo;re allowed to do with complex integrals, you can always sidestep the issue by splitting the integral into the real part and the imaginary part. <strong>This is ALWAYS ok.</strong> Here, we can do this by multiplying by the conjugate:</p>
+<div class="math-block">\[\int_{-1}^1 \frac{1}{t-i} \, dt = \int_{-1}^1 \frac{t+i}{(t-i)(t+i)} \, dt = \int_{-1}^1 \frac{t+i}{t^2+1} \, dt = \int_{-1}^1 \frac{t}{t^2+1} \, dt + i\int_{-1}^1 \frac{1}{t^2+1} \, dt.\]</div>
+<p>The first integral evaluates to \(0\) by symmetry (the integrand is odd), and the second integral is \(i\tan^{-1}(t)\Big|_{t=-1}^{1} = i\pi/2\). Thus</p>
+<div class="math-block">\[\int_{\Gamma_1} \frac{1}{z} \, dz = i\pi/2.\]</div>
+<ul>
+<li>The right side \(\Gamma_2\) can be parametrized by the function \(1 + it\) as \(t\) ranges from \(-1\) to \(1\). So</li>
+</ul>
+<div class="math-block">\[\int_{\Gamma_2} \frac{1}{z} \, dz = \int_{-1}^1 \frac{1}{1+it} \cdot \left(\frac{d}{dt}1+it\right) dt = i\int_{-1}^1 \frac{1}{1+it} \, dt.\]</div>
+<p>If you do the same trick as we did for \(\Gamma_1\), you get that \(\displaystyle\int_{\Gamma_2} \frac{1}{z} \, dz = i\pi/2\). Again.
+- \(\Gamma_3\) is parametrized by \(-t + i\), \(t \in [-1, 1]\) and we get \(\displaystyle\int_{\Gamma_3} \frac{1}{z} \, dz = i\pi/2\) by the same process.
+- \(\displaystyle\int_{\Gamma_4} \frac{1}{z} \, dz = i\pi/2\) by the same process.</p>
+<p>Thus \(\displaystyle\int_\Gamma \frac{1}{z} \, dz = i\pi/2 + i\pi/2 + i\pi/2 + i\pi/2 = \boxed{2i\pi}\). Wait, isn&rsquo;t that the same answer as the previous example? Strange.</p>
+<h3 id="example-3-kinda">Example 3, Kinda<a class="anchor" href="#example-3-kinda" title="Link to this section">#</a></h3>
+<p>Let&rsquo;s compute the contour integral \(\displaystyle\int_\gamma e^z \, dz\), where \(\gamma\) is the following pacman shape of radius \(1\):</p>
+<p><img alt="A pacman shape of radius 1 with its mouth opening to the right, oriented counter-clockwise" src="fig8.png" /></p>
+<p>We need to split this into three different parts.</p>
+<p><img alt="The pacman split into γ₁ (the upper straight edge, going outward), γ₂ (the arc) and γ₃ (the lower straight edge, coming back to the origin)" src="fig9.png" /></p>
+<p>The first part, \(\gamma_1\), is parametrized by \(e^{i\pi/4}t\) for \(t \in [0, 1]\). So the integral over \(\gamma_1\) is</p>
+<div class="math-block">\[\begin{aligned}
+\int_{\gamma_1} e^z \, dz &amp;= \int_0^1 e^{e^{i\pi/4}t} \cdot \left(\frac{d}{dt}e^{i\pi/4}t\right) dt \\
+&amp;= \int_0^1 e^{e^{i\pi/4}t} \cdot e^{i\pi/4} \, dt = e^{i\pi/4}\int_0^1 e^{e^{i\pi/4}t} \, dt.
+\end{aligned}\]</div>
+<p>This might look complicated, but the integrand is basically just of the form \(e^{ct}\) where \(c\) is a constant. So its antiderivative is \(c^{-1}e^{ct}\), meaning that this integral evaluates to</p>
+<div class="math-block">\[e^{i\pi/4}\int_0^1 e^{e^{i\pi/4}t} \, dt = e^{e^{i\pi/4}t}\Big|_{t=0}^{1} = e^{e^{i\pi/4}} - 1.\]</div>
+<p>The third part, \(\gamma_3\), is handled similarly. It runs from \(e^{-i\pi/4}\) back into the origin, so we parametrize it by \(e^{-i\pi/4}(1-t)\) for \(t \in [0, 1]\):</p>
+<div class="math-block">\[\int_{\gamma_3} e^z \, dz = \int_0^1 e^{e^{-i\pi/4}(1-t)} \cdot \left(\frac{d}{dt}e^{-i\pi/4}(1-t)\right) dt = \cdots = 1 - e^{e^{-i\pi/4}}\]</div>
+<p>Now we tackle the second part, \(\gamma_2\). This is parametrized by \(e^{it}\) for \(t \in [\pi/4, 7\pi/4]\). So</p>
+<div class="math-block">\[\int_{\gamma_2} e^z \, dz = \int_{\pi/4}^{7\pi/4} e^{e^{it}} \cdot \left(\frac{d}{dt}e^{it}\right) dt = \int_{\pi/4}^{7\pi/4} e^{e^{it}} \cdot ie^{it} \, dt.\]</div>
+<p>This integral sucks to evaluate, so I&rsquo;m not going to do it. (note that making the &ldquo;substitution&rdquo; \(u = e^{it}\) doesn&rsquo;t actually help you because it just goes backwards a step.)</p>
+<p>Darn, if only there was some really cool theorem that could help solve this problem. What a shame.</p>
+<p><em>Summary of Contour Integral Properties</em></p>
+<ul>
+<li>It&rsquo;s linear, so \(\displaystyle\int_\gamma f(z) + g(z) \, dz = \int_\gamma f(z) \, dz + \int_\gamma g(z) \, dz\), and also \(\displaystyle\int_\gamma c \cdot f(z) \, dz = c\int_\gamma f(z) \, dz\).</li>
+<li>It&rsquo;s &ldquo;additive on paths&rdquo;. So if you split a path \(\gamma\) into two paths \(\gamma_1\) and \(\gamma_2\), then \(\displaystyle\int_\gamma f(z) \, dz = \int_{\gamma_1} f(z) \, dz + \int_{\gamma_2} f(z) \, dz\). We used this property to do Example 2.</li>
+<li>Reversing the direction of the path will negate the integral. That is, if \(\gamma\) is a path and \(-\gamma\) is that same path but going the opposite way, then \(\displaystyle\int_{-\gamma} f(z) \, dz = -\int_\gamma f(z) \, dz\).</li>
+</ul>
+<p>(<em>Stupid warning: If you&rsquo;re intentionally trying to break math, it&rsquo;s possible to take contour integrals over really strange paths that completely destroy this post. It&rsquo;s basically impossible for you to do that unless you try though, because those paths that might do that are REALLY nasty and hard to come up with, so don&rsquo;t worry.</em>)</p>
+<p><em>Exercises</em></p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Let \(\log\) denote the principal logarithm, so that \(\log(re^{i\theta}) = \log(r) + i\theta\) whenever \(r &gt; 0\) and \(\theta \in (-\pi, \pi)\). Demonstrate the identity</p>
+<div class="math-block">\[\log(re^{i\theta}) = \int_\gamma \frac{1}{z} \, dz,\]</div>
+<p>where \(\gamma\) is the path that starts at \(1\), moves left/right to the real number \(r\), then moves along a \(\theta\)-radian arc centered at \(0\) with radius \(r\) in order to reach the complex number \(re^{i\theta}\).</p>
+<p><img alt="The path γ: from 1 along the real axis to r, then along the arc to re^{iθ}" src="fig10.png" /></p>
+<p>(If you want, you may assume that \(r &gt; 1\) and \(\theta &gt; 0\) so you don&rsquo;t have to consider multiple cases.)</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Naturally, we split this path into the two obvious parts.</p>
+<p><img alt="The path split into γ₁ (the segment from 1 to r) and γ₂ (the arc from r to re^{iθ})" src="fig11.png" /></p>
+<p>The first part, \(\gamma_1\), is parametrized by \(t\) for \(t \in [1, r]\), so we have that</p>
+<div class="math-block">\[\int_{\gamma_1} \frac{1}{z} \, dz = \int_1^r \frac{1}{t} \, dt = \log r.\]</div>
+<p>The second part, \(\gamma_2\), is parametrized by \(re^{it}\) for \(t \in [0, \theta]\), so we have that</p>
+<div class="math-block">\[\int_{\gamma_2} \frac{1}{z} \, dz = \int_0^\theta \frac{1}{re^{it}} \cdot \left(\frac{d}{dt}re^{it}\right) dt = \int_0^\theta \frac{1}{re^{it}} \cdot ire^{it} \, dt = \int_0^\theta i \, dt = i\theta.\]</div>
+<p>In sum,</p>
+<div class="math-block">\[\int_\gamma \frac{1}{z} \, dz = \int_{\gamma_1} \frac{1}{z} \, dz + \int_{\gamma_2} \frac{1}{z} \, dz = \log r + i\theta.\]</div>
+</details>
+</div>
+<h2 id="lesson-4-holomorphic-functions">Lesson 4: Holomorphic Functions<a class="anchor" href="#lesson-4-holomorphic-functions" title="Link to this section">#</a></h2>
+<p>In the complex world, &ldquo;holomorphic&rdquo; is just a fancy word for &ldquo;differentiable&rdquo;. All of the functions we&rsquo;ve mentioned so far are holomorphic:</p>
+<ul>
+<li>Polynomials like \(z^n + z^2 - z + 3\) are holomorphic, over all \(z \in \C\).</li>
+<li>\(e^z\) is holomorphic, over all \(z \in \C\).</li>
+<li>\(\cos z\) is holomorphic, over all \(z \in \C\).</li>
+<li>Rational functions such as \(1/z\) or \(\dfrac{1}{z^2+1}\) are holomorphic, wherever they are defined.</li>
+<li>Combining things from above (using addition, multiplication, composition, etc.) will still make a holomorphic function. For example, \(\sin(z^2) - 1/\cos(e^z)\) is holomorphic, wherever it is defined.</li>
+</ul>
+<p>If you want more fancy words: A function that is holomorphic on the whole complex plane is called <em>entire</em>.</p>
+<p>Some functions are a bit more subtle.</p>
+<ul>
+<li>The principal square root \(\sqrt{z}\) is holomorphic wherever it is defined, <strong>because I excluded the negative reals in the definition</strong>. If you define the square root over the negative reals, then it won&rsquo;t be holomorphic&hellip; or even continuous! This is why it&rsquo;s so important to restrict the principal square root to the <em>slit plane</em> \(\C \setminus \{x \in \R : x \leq 0\}\).</li>
+<li>The principal log \(\log z\) is holomorphic for the same reason. Its derivative is \(1/z\) (with domain being the slit plane).</li>
+</ul>
+<p>Not everything is holomorphic.</p>
+<ul>
+<li>Unsurprising Counterexample: \(|z|\) is not holomorphic. It has a &ldquo;sharp corner&rdquo; at \(0\). (In fact it fails to be holomorphic at every point, but the corner is the obvious culprit.)</li>
+<li>Surprising Counterexample: \(\overline{z}\) is not holomorphic! Very roughly speaking, this is because conjugation messes up rotations.</li>
+</ul>
+<p>(<em>Holomorphic functions satisfy some really insanely cool properties. They&rsquo;re honestly miracles. We won&rsquo;t really talk about these miracles, though, since that would make this post longer than it needs to be.</em>)</p>
+<p>Here is the motto I want you to take away from this lesson: Holomorphic functions are really nice, and you should not try and apply any of the theorems we talk about to functions that are not holomorphic. I can&rsquo;t guarantee that the numbers will work out if you do that. Fortunately, basically all sane things that you would consider integrating are holomorphic!</p>
+<h2 id="lesson-5-cauchys-theorem">Lesson 5: Cauchy&rsquo;s Theorem<a class="anchor" href="#lesson-5-cauchys-theorem" title="Link to this section">#</a></h2>
+<p>So here&rsquo;s a CRAZY fact.</p>
+<div class="env env--theorem">
+<p class="env__head"><span class="env__name">Theorem</span> <span class="env__title">(Cauchy)</span></p>
+<p>Suppose \(f\) is a holomorphic function. Suppose \(\gamma\) is a path that loops. If \(f\) is defined everywhere inside the loop, then</p>
+<div class="math-block">\[\int_\gamma f(z) \, dz = 0.\]</div>
+</div>
+<h3 id="example-1_1">Example 1<a class="anchor" href="#example-1_1" title="Link to this section">#</a></h3>
+<p>What is \(\displaystyle\int_{\partial D} \sin(e^z) + e^{e^{e^z}} - e^{\cos(z^2)} \, dz\)? Remember that \(\partial D\) is the unit circle oriented counter-clockwise. Well, the integrand is holomorphic, and it&rsquo;s defined on the entire plane (so it&rsquo;s defined inside the unit circle). Since the unit circle loops, the answer to this integral must be \(\boxed{0}\).</p>
+<h3 id="example-2_1">Example 2<a class="anchor" href="#example-2_1" title="Link to this section">#</a></h3>
+<p>What is \(\displaystyle\int_\gamma \cos(\cos(\cos(\cos(\cos(z))))) \, dz\), where \(\gamma\) is the following curve?</p>
+<p><img alt="A closed curve γ in the complex plane that loops around and crosses itself" src="fig12.png" /></p>
+<p>Well, the integrand is holomorphic, defined everywhere, and the path loops, so it&rsquo;s \(\boxed{0}\).</p>
+<h3 id="example-3">Example 3<a class="anchor" href="#example-3" title="Link to this section">#</a></h3>
+<p>Remember that annoying pacman integral \(\displaystyle\int_\gamma e^z \, dz\)?</p>
+<p><img alt="The pacman shape from before" src="fig8.png" /></p>
+<p>Well, \(e^z\) is very holomorphic, is defined everywhere, and the path loops, so without needing to do any annoying computations I can say that the integral is \(\boxed{0}\).</p>
+<h3 id="non-example-1">Non-Example 1<a class="anchor" href="#non-example-1" title="Link to this section">#</a></h3>
+<p>It is not true that \(\displaystyle\int_{\partial D} \overline{z} \, dz = 0\). In fact, if we work it out</p>
+<div class="math-block">\[\int_{\partial D} \overline{z} \, dz = \int_0^{2\pi} \overline{e^{it}} \cdot ie^{it} \, dt = \int_0^{2\pi} e^{-it} \cdot ie^{it} \, dt = \int_0^{2\pi} i \, dt = 2\pi i,\]</div>
+<p>this integral will be equal to \(2\pi i\).</p>
+<p>That&rsquo;s strange. \(\partial D\) is just a circle, so it definitely loops&hellip; and \(\overline{z}\) is defined inside the circle too. What went wrong? Can you figure it out? The reason is that&hellip;</p>
+<details class="spoiler">
+<summary>Show the reason</summary>
+<p>\(\overline{z}\) is not holomorphic! That&rsquo;s why I needed to talk about holomorphic functions, so you don&rsquo;t try and apply the theorems we discuss to bad functions like \(\overline{z}\). The last thing I want is for you to try something like that, and then think that math is broken!</p>
+</details>
+<h3 id="non-example-2">Non-Example 2<a class="anchor" href="#non-example-2" title="Link to this section">#</a></h3>
+<p>It is not true that \(\displaystyle\int_{\partial D} \frac{1}{z} \, dz = 0\). In fact, if we work it out</p>
+<div class="math-block">\[\int_{\partial D} z^{-1} \, dz = \int_0^{2\pi} e^{-it} \cdot ie^{it} \, dt = \int_0^{2\pi} i \, dt = 2\pi i,\]</div>
+<p>this integral will be equal to \(2\pi i\).</p>
+<p>Huh? \(\partial D\) is a looping path, and \(\dfrac{1}{z}\) is holomorphic wherever it is defined. What went wrong this time? The reason is that&hellip;</p>
+<details class="spoiler">
+<summary>Show the reason</summary>
+<p>\(1/z\) is not defined everywhere inside the circle! The number \(0\) lies in the interior of the unit circle, and \(1/z\) breaks at \(z = 0\).</p>
+<p>We call \(z = 0\) a <em>singularity</em> of \(1/z\). In particular, it is a <em>pole</em> of \(1/z\). Because \(1/z\) has a pole inside the loop, we cannot apply Cauchy&rsquo;s theorem.</p>
+</details>
+<h3 id="example-4">Example 4<a class="anchor" href="#example-4" title="Link to this section">#</a></h3>
+<p>Let \(f\) be a holomorphic function that is defined everywhere on \(\C\) (i.e. &ldquo;\(f\) is entire&rdquo;). Let \(w_1\) and \(w_2\) be two complex numbers, and consider two different paths that start at \(w_1\) and end at \(w_2\). Call these paths \(\alpha\) and \(\beta\).</p>
+<p><img alt="Two paths α and β from w₁ to w₂" src="fig13.png" /></p>
+<p>It turns out that \(\displaystyle\int_\alpha f(z) \, dz = \int_\beta f(z) \, dz\)! This means that the path integral between \(w_1\) and \(w_2\) is the same, no matter what path you take.</p>
+<p>Why is that the case? Let&rsquo;s reverse one of the paths&hellip; say, \(\beta\).</p>
+<p><img alt="The paths α and −β from w₁ to w₂, where −β is β reversed" src="fig14.png" /></p>
+<p>Hey, now that&rsquo;s a loop! So by Cauchy&rsquo;s Theorem,</p>
+<div class="math-block">\[\int_\alpha f(z) \, dz + \int_{-\beta} f(z) \, dz = 0.\]</div>
+<p>But remember: Reversing the direction of a path will negate the integral over it. So \(\displaystyle\int_{-\beta} f(z) \, dz = -\int_\beta f(z) \, dz\). This means that</p>
+<div class="math-block">\[\int_\alpha f(z) \, dz - \int_\beta f(z) \, dz = 0.\]</div>
+<p>So yeah, the integrals are equal!</p>
+<p><em>Exercises</em></p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Compute the contour integral</p>
+<div class="math-block">\[\int_{\partial D} e^{e^{e^{e^{e^z}}}} \, dz.\]</div>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>It&rsquo;s just \(0\).</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Remember Lesson 3 Exercise 1? You showed that for any \(w \in \C\) that is not zero or a negative real number, we have the identity</p>
+<div class="math-block">\[\int_\gamma \frac{1}{z} \, dz = \log w,\]</div>
+<p>where \(\gamma\) is some carefully-chosen path from \(1\) to \(w\).</p>
+<p>Prove that, actually, this identity holds no matter what path \(\gamma\) we choose from \(1\) to \(w\) (as long as it doesn&rsquo;t cross the negative real line, where \(\log\) would be undefined).</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>We use the principle that we learned from Example 4. If \(\gamma\) is the carefully-chosen path from the exercise, and \(\gamma'\) is some other path from \(1\) to \(w\), then we want to show that the integrals \(\displaystyle\int_\gamma 1/z \, dz\) and \(\displaystyle\int_{\gamma'} 1/z \, dz\) are the same.</p>
+<p>All we need to show is that if we reverse the path \(\gamma'\) to get \(-\gamma'\), then the paths \(\gamma\) and \(-\gamma'\) form a loop that we can apply Cauchy&rsquo;s Theorem to.</p>
+<p>Well, \(1/z\) is holomorphic over all \(z \neq 0\), so the only thing that can go wrong is if the singularity at \(z = 0\) is inside the loop formed by \(\gamma\) and \(-\gamma'\). But this can&rsquo;t happen because neither of these two paths cross the negative real line!</p>
+<p>So nothing can go wrong, and so we can apply Cauchy&rsquo;s Theorem to deduce that the two original integrals are indeed equal.</p>
+</details>
+</div>
+<h2 id="lesson-6-residues">Lesson 6: Residues<a class="anchor" href="#lesson-6-residues" title="Link to this section">#</a></h2>
+<p>The <strong>Residue Theorem</strong> is basically Cauchy&rsquo;s Theorem but better. To understand it, we need to know how to calculate a function&rsquo;s <em>residue</em> at a singularity.</p>
+<p>I won&rsquo;t give you the &ldquo;correct&rdquo; definition of what a residue is, because that would make this post a lot longer and more complicated. So I&rsquo;ll just tell you how to calculate it in some simple cases.</p>
+<p><strong>General Setting:</strong> A holomorphic function \(f\) may not be defined at some complex number \(z_0\). But, it would have something called a <em>residue</em> at this \(z_0\). A prototypical example is the function \(1/z\) being not defined at \(z = 0\). \(1/z\) has no value at \(z = 0\), but it has a residue.</p>
+<p><strong>General Idea:</strong> The residue of a function at a certain point tells you how much &ldquo;spinning&rdquo; it induces around that point.</p>
+<p><strong>How to calculate the residue in most cases:</strong> If \((z - z_0)f(z)\) is continuous at \(z_0\) (meaning, we can &ldquo;plug in the hole&rdquo; at \(z = z_0\) to make the function \((z - z_0)f(z)\) nice), then the residue is simply</p>
+<div class="math-block">\[\lim_{z \to z_0} (z - z_0)f(z)\]</div>
+<p>(i.e. the residue is the number we need to plug into the hole). The residue is denoted by \(\displaystyle\operatorname*{Res}_{z=z_0} f(z)\).</p>
+<p>This is a very informal definition, so it will make a lot more sense when we try some examples.</p>
+<h3 id="example-1_2">Example 1<a class="anchor" href="#example-1_2" title="Link to this section">#</a></h3>
+<p>\(1/z\) is not defined at \(z = 0\), but it has a residue there. What is it? To find it, all we need to do is multiply by \((z - 0) = z\) to make the singularity go away. Indeed, when we multiply \(1/z\) by \(z\), we get \(1\), which is nice. The value of \(1\) at \(z = 0\) is&hellip; well, \(1\). So the residue is \(1\). i.e. \(\displaystyle\operatorname*{Res}_{z=0} \frac{1}{z} = 1\).</p>
+<h3 id="example-2_2">Example 2<a class="anchor" href="#example-2_2" title="Link to this section">#</a></h3>
+<p>\(\dfrac{1}{\sin z}\) is not defined at \(z = 0\), but it has a residue there. What is it? To find it, we need to multiply by \((z - 0) = z\) to try and make the singularity go away. When we multiply \(1/\sin z\) by \(z\), we get \(\dfrac{z}{\sin z}\).</p>
+<p>At first glance, it&rsquo;s not clear if we made the singularity go away. But if you took Calculus, you might know that \(\displaystyle\lim_{x \to 0} \frac{x}{\sin x} = 1\). The same limit holds in the complex world (and you can verify this by a Taylor expansion</p>
+<div class="math-block">\[\frac{z}{\sin z} = \frac{z}{z - z^3/6 + \cdots} = \frac{1}{1 - z^2/6 + \cdots}\]</div>
+<p>and this is \(1\) when you plug in \(z = 0\)). That is, \(\displaystyle\lim_{z \to 0} \frac{z}{\sin z} = 1\). The \(z\) factor helped make this limit possible! Because of this, the residue is easily found: It is exactly equal to that limit, which is \(1\). i.e. \(\displaystyle\operatorname*{Res}_{z=0} \frac{1}{\sin z} = 1\).</p>
+<h3 id="example-3_1">Example 3<a class="anchor" href="#example-3_1" title="Link to this section">#</a></h3>
+<p>\(\dfrac{1}{z^2+1}\) is not defined at \(z = i\), but it has a residue there. What is it? To find it, we need to multiply by \((z - i)\) to make the singularity go away. Indeed,</p>
+<div class="math-block">\[\frac{z-i}{z^2+1} = \frac{z-i}{(z-i)(z+i)} = \frac{1}{z+i}.\]</div>
+<p>This new expression has no singularity at \(z = i\) anymore! So we successfully got rid of the badness at \(z = i\). The residue is then equal to the limit \(\displaystyle\lim_{z \to i} \frac{1}{z+i}\). But as I said, this new function is nice at \(z = i\), so to evaluate the limit we can just plug in \(z = i\) to get \(\dfrac{1}{2i}\). This is the residue! And we can write \(\displaystyle\operatorname*{Res}_{z=i} \frac{1}{z^2+1} = \frac{1}{2i}\).</p>
+<h3 id="non-example">Non-Example<a class="anchor" href="#non-example" title="Link to this section">#</a></h3>
+<p>\(1/z^2\) is not defined at \(z = 0\), but it has a residue there. What is it? To try and find it, we could multiply by \(z - 0 = z\) to get \(1/z\). But this doesn&rsquo;t remove the singularity because \(1/z\) is still bad at \(z = 0\). Oops!</p>
+<p>That means that the easy method I gave you doesn&rsquo;t work here. It turns out that \(\displaystyle\operatorname*{Res}_{z=0} \frac{1}{z^2} = 0\), for reasons that I will explain below.</p>
+<p><em>Wait so what is the residue, actually? And how do I find the residue of higher-order poles, like in \(1/z^2\)?</em></p>
+<p>To ease optional eyestrain, I&rsquo;m going to put this in spoilers.</p>
+<details class="spoiler">
+<summary>The Methodology and Rough Motivation</summary>
+<p>So, functions like \(\dfrac{1}{\sin^2 z}\) are not that nice. But they&rsquo;re a quotient of two nice (i.e. holomorphic) functions. Because of this, we call such functions <em>meromorphic</em>, more or less. It turns out that functions like these always have a &ldquo;two-sided Taylor series&rdquo;, meaning that the series can include negative-integer-exponent terms like \(1/z\) or \(1/z^2\) to account for the &ldquo;badness&rdquo; at singularities. For example, the series expansion of \(1/\sin z\) at \(z = 0\) is</p>
+<div class="math-block">\[\frac{1}{\sin z} = \frac{1}{z} + \frac{z}{6} + \frac{7z^3}{360} + \frac{31z^5}{15120} + \cdots,\]</div>
+<p>and the series expansion of \(1/\sin^2 z\) at \(z = 0\) is given by</p>
+<div class="math-block">\[\frac{1}{\sin^2 z} = \frac{1}{z^2} + \frac{1}{3} + \frac{z^2}{15} + \frac{2z^4}{189} + \cdots.\]</div>
+<p><strong>The coefficient of the \(1/z\) term is the residue.</strong> (More generally, when the pole is at \(z_0\), then the residue is the coefficient of \(1/(z - z_0)\) in the series expansion around \(z_0\).) Intuitively, we look at this term because it is the only term that gives you a non-zero result when you compute its contour integral over a path that loops around \(0\). So it is the only term that induces &ldquo;spin&rdquo;.</p>
+<p>For example, from the series above, we can see that \(\displaystyle\operatorname*{Res}_{z=0} \frac{1}{\sin z} = 1\) (as we saw earlier!), and that \(\displaystyle\operatorname*{Res}_{z=0} \frac{1}{\sin^2 z} = 0\).</p>
+<p>What is \(\displaystyle\operatorname*{Res}_{z=0} \frac{1}{z^2}\)? Well, the series for \(1/z^2\) is</p>
+<div class="math-block">\[\frac{1}{z^2} = \frac{1}{z^2} + \frac{0}{z} + 0 + 0z + 0z^2 + \cdots,\]</div>
+<p>so the residue is the coefficient of \(1/z\) in this series, which is \(0\).</p>
+<p>There is a formula for finding the residue of things like \(1/\sin^2 z\) that have &ldquo;higher-order poles&rdquo;. It&rsquo;s a two step process.</p>
+<p>To find \(\displaystyle\operatorname*{Res}_{z=z_0} f(z)\)&hellip;</p>
+<ol>
+<li>First, find the smallest natural number \(n\) for which \((z - z_0)^n f(z)\) becomes nice, so that the singularity is basically gone.</li>
+<li>Then, the residue is given by this formula:</li>
+</ol>
+<div class="math-block">\[\operatorname*{Res}_{z=z_0} f(z) = \frac{1}{(n-1)!}\lim_{z \to z_0} \frac{d^{n-1}}{dz^{n-1}}\left[(z - z_0)^n f(z)\right]\]</div>
+<p>As nasty as it is, it kinda makes sense. Multiplying by \((z - z_0)^n\) shifts the terms in the series <em>just enough</em> so that all the terms have positive exponents. Then, differentiating \(n-1\) times shifts it back the other way, but also kills all low-order terms&hellip; except for that one term (the one that used to be the \(1/(z - z_0)\) term) that we need! In fact, after we&rsquo;re done taking derivatives, the constant term will be \((n-1)!\) multiplied by what used to be the coefficient of \(1/(z - z_0)\). Sending \(z \to z_0\) gets rid of all the other terms, leaving us with just the residue&hellip; alone!</p>
+</details>
+<p><em>Exercises</em></p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Compute \(\displaystyle\operatorname*{Res}_{z=42} \frac{\log z}{z - 42}\).</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Multiplying by \((z - 42)\) removes the singularity at \(42\), leaving us with \(\log z\), and indeed this is nice at \(z = 42\). Plugging in \(z = 42\) gives</p>
+<div class="math-block">\[\boxed{\operatorname*{Res}_{z=42} \frac{\log z}{z - 42} = \log 42}.\]</div>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Compute \(\displaystyle\operatorname*{Res}_{z=i} \frac{1}{z^4 - 1}\).</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>We write \(\dfrac{1}{z^4-1} = \dfrac{1}{(z-1)(z+1)(z+i)(z-i)}\). Now we remove the singularity by multiplying by \((z - i)\). This leaves us with \(\dfrac{1}{(z-1)(z+1)(z+i)}\), which is now indeed nice at \(z = i\). Plugging in \(z = i\) gives</p>
+<div class="math-block">\[\boxed{\operatorname*{Res}_{z=i} \frac{1}{z^4-1} = \frac{1}{(i-1)(i+1)(i+i)}}.\]</div>
+<p>Whatever that is.</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>(Using the Ugly Formula) Compute \(\displaystyle\operatorname*{Res}_{z=1} \frac{\log z}{(z-1)^3}\).</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>First step: How many times do we need to multiply by \((z - 1)\) so that the function becomes nice at \(z = 1\)? At first glance, it might seem like you want to do it three times so that it becomes \(\log z\), and this is definitely nice at \(z = 1\). But actually, just two times is enough! This is because \(\log z\) has a zero at \(z = 1\).</p>
+<p>How can we verify that \(\dfrac{\log z}{z-1}\) is nice at \(z = 1\)? Meaning, does this have a limit when we send \(z \to 1\)? One way to do this is using the Taylor series for \(\log(1-z)\). We can write</p>
+<div class="math-block">\[\log z = \log(1 - (1-z)) = -(1-z) - \frac{(1-z)^2}{2} - \frac{(1-z)^3}{3} - \cdots,\]</div>
+<p>so that</p>
+<div class="math-block">\[\frac{\log z}{z-1} = 1 - \frac{z-1}{2} + \frac{(z-1)^2}{3} - \cdots.\]</div>
+<p>This clearly does not explode at \(z = 1\), so this proves that \(\dfrac{\log z}{z-1}\) is continuous at \(z = 1\).</p>
+<p>So \(n = 2\) is the power we need.</p>
+<p>Second step: We now have to use the formula. \((z-1)^2 \cdot f(z)\) is just \(\dfrac{\log z}{z-1}\).</p>
+<p>Now we differentiate this \(2 - 1 = 1\) times. By the quotient rule, this is equal to</p>
+<div class="math-block">\[\frac{\frac{z-1}{z} - \log z}{(z-1)^2}.\]</div>
+<p>Now we need to take the limit of this as \(z \to 1\). Blegh. Let&rsquo;s first make a substitution \(w = z - 1\). This will make things a bit simpler to write.</p>
+<div class="math-block">\[\lim_{z \to 1} \frac{\frac{z-1}{z} - \log z}{(z-1)^2} = \lim_{w \to 0} \frac{\frac{w}{1+w} - \log(1+w)}{w^2} = \lim_{w \to 0} \frac{w - (1+w)\log(1+w)}{(1+w)w^2}\]</div>
+<p>We can find this limit using the Taylor expansion for \(\log(1+w)\). The expression is equal to</p>
+<div class="math-block">\[\frac{w - (1+w)(w - w^2/2 + \text{blah})}{(1+w)w^2} = \frac{-w^2/2 + \text{blahblah}}{(1+w)w^2} = \frac{-1}{2(1+w)} + \text{blahblahblah}.\]</div>
+<p>The &ldquo;blah&rdquo; terms go to \(0\) fast enough so that we can ignore them (I&rsquo;m not being very rigorous). So if we send \(w \to 0\) here, we get</p>
+<div class="math-block">\[\boxed{\operatorname*{Res}_{z=1} \frac{\log z}{(z-1)^3} = \frac{-1}{2}}.\]</div>
+</details>
+</div>
+<h2 id="lesson-7-the-residue-theorem">Lesson 7: The Residue Theorem<a class="anchor" href="#lesson-7-the-residue-theorem" title="Link to this section">#</a></h2>
+<p>We&rsquo;re finally here.</p>
+<p>The Residue Theorem gives us a very simple way to evaluate basically any contour integral!</p>
+<p>To reduce complexity, the theorem will only be for &ldquo;simple loops&rdquo;, which are basically loops that don&rsquo;t intersect themselves. (So circles are good, but figure-8&rsquo;s are not.)</p>
+<div class="env env--theorem">
+<p class="env__head"><span class="env__name">Theorem</span> <span class="env__title">(Residue Theorem)</span></p>
+<p>Let \(\gamma\) be a simple looping path, which loops in the counter-clockwise direction. Let \(f\) be a holomorphic (meromorphic) function that is not defined (i.e. has a &ldquo;pole&rdquo;) at some points \(z_1, z_2, \cdots, z_k\) inside the loop. Then</p>
+<div class="math-block">\[\int_\gamma f(z) \, dz = 2\pi i\sum_{j=1}^k \operatorname*{Res}_{z=z_j} f(z).\]</div>
+</div>
+<p>In other words, the contour integral is just \(2\pi i\) times the sum of all residues inside the loop.</p>
+<h3 id="example-1_3">Example 1<a class="anchor" href="#example-1_3" title="Link to this section">#</a></h3>
+<p>Let us return to this classic example of integrating \(1/z\) around the unit circle.</p>
+<div class="math-block">\[\int_{\partial D} \frac{1}{z} \, dz\]</div>
+<p>There is exactly one point in the interior of the circle where \(1/z\) explodes, and that is \(z = 0\). The residue of \(1/z\) at \(z = 0\), as we saw before, is \(1\). Thus we may apply the Residue Theorem to get</p>
+<div class="math-block">\[\int_{\partial D} \frac{1}{z} \, dz = 2\pi i \times \operatorname*{Res}_{z=0} \frac{1}{z} = \boxed{2\pi i}.\]</div>
+<h3 id="example-2_3">Example 2<a class="anchor" href="#example-2_3" title="Link to this section">#</a></h3>
+<p>Let us return to Lesson 3 Example 2, where we once again integrate \(1/z\), but this time around a square.</p>
+<p><img alt="The square Γ with vertices ±1 ± i, oriented counter-clockwise" src="fig6.png" /></p>
+<p>What is \(\displaystyle\int_\Gamma \frac{1}{z} \, dz\)? Again, there is only one place inside this square where the integrand explodes: \(z = 0\). The residue there has not changed: It&rsquo;s still \(1\). So \(\displaystyle\int_\Gamma \frac{1}{z} \, dz = \boxed{2\pi i}\), just like in the previous example.</p>
+<p>This shows that the integral of \(1/z\) around <em>any</em> path that loops around \(0\) will be \(2\pi i\). (As long as you loop only once, and you loop in the counter-clockwise direction.)</p>
+<h3 id="example-3_2">Example 3<a class="anchor" href="#example-3_2" title="Link to this section">#</a></h3>
+<p>Let \(\gamma\) be a (simple) loop oriented counter-clockwise. Let \(f\) be a holomorphic function that is defined everywhere in the interior of this loop.</p>
+<p>Then the sum of the residues inside the loop is&hellip; well, \(0\), because there are no singularities to deal with (and hence no residues to sum up). So \(\displaystyle\int_\gamma f(z) \, dz = 0\). This is Cauchy&rsquo;s Theorem.</p>
+<h3 id="example-4_1">Example 4<a class="anchor" href="#example-4_1" title="Link to this section">#</a></h3>
+<p>Let \(\partial D(r)\) be the circle centered at \(0\) of radius \(r\), oriented counter-clockwise. When \(r \neq 1\), what are the possible values of the integral</p>
+<div class="math-block">\[\int_{\partial D(r)} \frac{1}{z + 1/z} \, dz ?\]</div>
+<p>First let us write it as</p>
+<div class="math-block">\[\int_{\partial D(r)} \frac{z}{z^2+1} \, dz = \int_{\partial D(r)} \frac{z}{(z+i)(z-i)} \, dz.\]</div>
+<p>This tells us that the integrand explodes at only two points: \(z = i\) and \(z = -i\).</p>
+<p>First case: If \(0 &lt; r &lt; 1\), then the interior of the disk of radius \(r\) won&rsquo;t contain either \(i\) or \(-i\), meaning that the integrand is defined everywhere inside it. So by Cauchy&rsquo;s Theorem, we would get \(\displaystyle\int_{\partial D(r)} \frac{z}{z^2+1} \, dz = 0\).</p>
+<p>Second case: If \(r &gt; 1\), then the interior of the disk of radius \(r\) will contain <em>both</em> \(i\) and \(-i\). We need to sum up the residues at both of these singularities.</p>
+<p>For \(z = i\), we multiply the integrand by \(z - i\) to get \(\dfrac{z}{z+i}\). Plugging in \(z = i\) into this will give us \(\dfrac{i}{2i} = \dfrac{1}{2}\), so \(\displaystyle\operatorname*{Res}_{z=i} \frac{z}{z^2+1} = \frac{1}{2}\).</p>
+<p>For \(z = -i\), we instead multiply by \(z + i\) to get \(\dfrac{z}{z-i}\). Plugging in \(z = -i\) gives \(\dfrac{-i}{-2i} = \dfrac{1}{2}\), so \(\displaystyle\operatorname*{Res}_{z=-i} \frac{z}{z^2+1} = \frac{1}{2}\).</p>
+<p>Therefore, by the Residue Theorem,</p>
+<div class="math-block">\[\int_{\partial D(r)} \frac{z}{z^2+1} \, dz = 2\pi i\left(\operatorname*{Res}_{z=i} \frac{z}{z^2+1} + \operatorname*{Res}_{z=-i} \frac{z}{z^2+1}\right) = 2\pi i(1/2 + 1/2) = 2\pi i.\]</div>
+<p>The two possible values are \(\boxed{0}\) and \(\boxed{2\pi i}\).</p>
+<p><em>Exercises</em></p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Compute \(\displaystyle\int_{\partial D} \frac{1}{\sin z} \, dz\).</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(2\pi i\)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Compute \(\displaystyle\int_{\partial D(\pi + 0.001)} \frac{1}{\sin z} \, dz\). (Careful!)</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(-2\pi i\)</p>
+</details>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>There are actually <strong>three</strong> singularities you need to worry about: \(-\pi\), \(0\), and \(\pi\). Since \(\displaystyle\lim_{z \to \pi} \frac{z - \pi}{\sin z} = -1\), we have \(\displaystyle\operatorname*{Res}_{z=\pi} \frac{1}{\sin z} = -1\), and similarly for \(-\pi\). The integral is then \(2\pi i(-1 + 1 - 1) = -2\pi i\).</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Compute \(\displaystyle\int_\gamma \frac{e^z}{z^4 - 1} \, dz\), where \(\gamma\) is the rectangle with vertices \(\pm 100 \pm 0.5i\), oriented counter-clockwise.</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>The singularities are \(z = -1, 1, i, -i\). But only two of them lie inside the interior of the looping rectangle: \(-1\) and \(1\).</p>
+<p>The residue at \(1\) is just \(\dfrac{e^z}{(z+1)(z+i)(z-i)}\) evaluated at \(z = 1\), which is \(\dfrac{e^1}{2(1+i)(1-i)} = \dfrac{e}{4}\).</p>
+<p>The residue at \(-1\) is just \(\dfrac{e^z}{(z-1)(z+i)(z-i)}\) evaluated at \(z = -1\), which is \(\dfrac{e^{-1}}{-2(-1+i)(-1-i)} = \dfrac{1}{-4e}\).</p>
+<p>By the Residue Theorem, we conclude that</p>
+<div class="math-block">\[\int_\gamma \frac{e^z}{z^4-1} \, dz = \boxed{2\pi i\left(\frac{e}{4} - \frac{1}{4e}\right)}.\]</div>
+</details>
+</div>
+<h2 id="lesson-8-finally-we-can-have-some-fun">Lesson 8: Finally, we can have some fun!<a class="anchor" href="#lesson-8-finally-we-can-have-some-fun" title="Link to this section">#</a></h2>
+<p>We have been stuck in complex land for 7 (8?) lessons. It&rsquo;s time to wake up and get back to reality.</p>
+<h3 id="example-1_4">Example 1<a class="anchor" href="#example-1_4" title="Link to this section">#</a></h3>
+<p>If you&rsquo;ve taken calculus, you probably know how to evaluate the integral</p>
+<div class="math-block">\[\int_{-\infty}^\infty \frac{1}{1+x^2} \, dx\]</div>
+<p>by using the fact that \(\arctan(x)\) is an antiderivative for the integrand. But what if we didn&rsquo;t know that? It turns out that we can evaluate this integral using the power of complex numbers. Specifically, we will use contour integration. The techniques are difficult to explain without example, so we will walk through how to evaluate this integral so that you learn these techniques along the way.</p>
+<p>The first issue we face is that the limits \(-\infty\) and \(+\infty\) are unwieldy for applying any techniques we&rsquo;ve learned. Here is how we fix that.</p>
+<p><strong>Key Idea 1:</strong> <em>Indefinite integrals are really just limits of definite integrals.</em></p>
+<p>Instead of examining \(\displaystyle\int_{-\infty}^\infty \frac{1}{1+x^2} \, dx\), we can study \(\displaystyle\int_{-R}^R \frac{1}{1+x^2} \, dx\) where \(R &gt; 0\) is a large number. We&rsquo;ll play with this definite integral, and then eventually we will send \(R \to +\infty\). Sound like a plan?</p>
+<p>Great, but how do complex numbers possibly relate to evaluating \(\displaystyle\int_{-R}^R \frac{1}{1+x^2} \, dx\)?</p>
+<p><strong>Key Idea 2:</strong> <em>Integrals over the real line are just integrals over the real-axis path!</em></p>
+<p>Aha! We can reinterpret this integral as a path integral \(\displaystyle\int_{\gamma_1} \frac{1}{1+z^2} \, dz\) in the complex plane, where \(\gamma_1\) is the straight line segment between \(-R\) and \(R\).</p>
+<p><img alt="The straight line segment γ₁ from −R to R along the real axis" src="fig15.png" /></p>
+<details class="spoiler">
+<summary>Why is this ok?</summary>
+<p>This path is parametrized by \(t\) where \(t \in (-R, R)\). Then, by definition of integrating over paths, we have:</p>
+<div class="math-block">\[\int_{\gamma_1} \frac{1}{1+z^2} \, dz = \int_{-R}^R \frac{1}{1+t^2} \cdot \left(\frac{d}{dt}t\right) dt = \int_{-R}^R \frac{1}{1+t^2} \, dt,\]</div>
+<p>which is exactly the integral we are trying to study!</p>
+</details>
+<p>Nice! Now we&rsquo;re kinda in complex land&hellip; though, we haven&rsquo;t <em>really</em> used complex numbers yet, we kinda just reframed the problem. What can we use now?</p>
+<p><strong>Key Idea 3:</strong> <em>Close the loop so that we can apply Cauchy&rsquo;s Theorem and/or the Residue Theorem!</em></p>
+<p>Ah! The path we have right now is just a segment. It&rsquo;s not a loop yet, so we can&rsquo;t apply the powerful theorems we&rsquo;ve been learning. So we need to <em>close the loop</em> by drawing a path from \(R\) back to \(-R\).</p>
+<p>What kind of path should we draw? <strong>This step is usually the tricky part.</strong> It takes some experience and practice to choose the correct contour. Here, it turns out that it doesn&rsquo;t matter too much, as long as it&rsquo;s reasonable. So we&rsquo;ll choose the most natural path: <em>A semicircle!</em></p>
+<p><img alt="The semicircle γ₂ closing up the segment γ₁ into a loop" src="fig16.png" /></p>
+<p>On one hand, this makes the path a loop, and now we can apply the Residue Theorem! Yay! On the other hand, this means that there is another part of the path that we need to integrate over. Wouldn&rsquo;t that mess up our computation? What do semicircles have to do with anything? This should be concerning.</p>
+<p>It turns out that the semicircle part of the loop doesn&rsquo;t matter in the long run: It will &ldquo;vanish&rdquo; when we send \(R \to +\infty\), which is why this is ok. I&rsquo;ll explain why it vanishes soon, but roughly speaking it vanishes because \(\dfrac{1}{1+z^2}\) gets really small when \(z\) is very far away from \(0\), and integrating a smaller and smaller expression gets you a smaller and smaller result.</p>
+<p>Enough dilly-dallying! Let&rsquo;s start by writing an expression for the contour integral over this whole loop, which we shall call \(\gamma\).</p>
+<p>The first part is the bottom part, \(\gamma_1\). Well, we already know that \(\displaystyle\int_{\gamma_1} \frac{1}{1+z^2} \, dz\) is just equal to \(\displaystyle\int_{-R}^R \frac{1}{1+x^2} \, dx\), so that&rsquo;s easy. The second part is the semicircular arc, \(\gamma_2\). This is parametrized by \(Re^{it}\) for \(t \in (0, \pi)\). Thus</p>
+<div class="math-block">\[\int_{\gamma_2} \frac{1}{1+z^2} \, dz = \int_0^\pi \frac{1}{1+(Re^{it})^2} \cdot \left(\frac{d}{dt}Re^{it}\right) dt = \int_0^\pi \frac{iRe^{it}}{1+R^2e^{2it}} \, dt.\]</div>
+<p>So the integral over the whole loop \(\gamma\) can be written as</p>
+<div class="math-block">\[\int_\gamma \frac{1}{1+z^2} \, dz = \int_{-R}^R \frac{1}{1+x^2} \, dx + \int_0^\pi \frac{iRe^{it}}{1+R^2e^{2it}} \, dt.\]</div>
+<p>Now we apply the Residue Theorem to set this equal to a nice number. To apply the Residue Theorem, we need to study the integrand \(\dfrac{1}{1+z^2}\). Well, it&rsquo;s certainly holomorphic (meromorphic), but it&rsquo;s not defined everywhere. It explodes (it has poles) at \(z = i\) and \(z = -i\). Let&rsquo;s mark that on our diagram.</p>
+<p><img alt="The semicircular contour with the poles at i and −i marked by crosses" src="fig17.png" /></p>
+<p>We only care about when \(R\) is big&hellip; and when \(R\) is big, the pole \(z = i\) is always contained inside the loop! (And \(z = -i\) is always outside, so we don&rsquo;t care about it.) Thus, the contour integral around the loop will only pick up the residue at \(z = i\). Let&rsquo;s calculate that residue. We can write</p>
+<div class="math-block">\[\frac{1}{1+z^2} = \frac{1}{(z+i)(z-i)}.\]</div>
+<p>Then we hope to get rid of the singularity by multiplying by a single factor of \((z - i)\). This results in \(\dfrac{1}{z+i}\), and indeed we have removed the singularity, so the residue is given by evaluating this new expression at \(z = i\), which is \(\dfrac{1}{2i}\). By the Residue Theorem, we now have that</p>
+<div class="math-block">\[\int_{-R}^R \frac{1}{1+x^2} \, dx + \int_0^\pi \frac{iRe^{it}}{1+R^2e^{2it}} \, dt = \int_\gamma \frac{1}{1+z^2} \, dz = 2\pi i \operatorname*{Res}_{z=i} \frac{1}{1+z^2} = 2\pi i \cdot \frac{1}{2i} = \pi.\]</div>
+<p>You might recognize that \(\pi\) should be the answer to the integral! We&rsquo;re getting closer now. All we have to do now is send \(R \to +\infty\). This gives us that</p>
+<div class="math-block">\[\int_{-\infty}^\infty \frac{1}{1+x^2} \, dx + \lim_{R \to +\infty} \int_0^\pi \frac{iRe^{it}}{1+R^2e^{2it}} \, dt = \pi.\]</div>
+<p>If you only care about getting the answer (because you&rsquo;re like in an integration bee or something), you can stop now and say &ldquo;clearly the limit \(\displaystyle\lim_{R \to +\infty} \int_0^\pi \frac{iRe^{it}}{1+R^2e^{2it}} \, dt\) is \(0\)&rdquo; by waving your hands. That&rsquo;s ok. But if you are curious about why this vanishes, I&rsquo;ll give you two options.</p>
+<details class="spoiler">
+<summary>Option 1: Intuitive Reasoning</summary>
+<p>The integrand has one \(R\) on top and an \(R^2\) on the bottom, so as \(R\) gets huge, the magnitude of the integrand should be asymptotically \(\dfrac{1}{R}\). This goes to \(0\) as \(R \to +\infty\).</p>
+</details>
+<details class="spoiler">
+<summary>Option 2: Rigorous Reasoning</summary>
+<p><strong>Key Idea 3.5:</strong> <em>Write a chain of inequalities that ends with an expression in terms of \(R\) that clearly goes to \(0\).</em></p>
+<p>To show that the integral goes to \(0\), we&rsquo;re really trying to show that its absolute value goes to \(0\). That is, we want to prove that</p>
+<div class="math-block">\[\left|\int_0^\pi \frac{iRe^{it}}{1+R^2e^{2it}} \, dt\right| \to 0\]</div>
+<p>as \(R \to +\infty\).</p>
+<p>Here&rsquo;s the general idea: If, for example, we can show an inequality that looks like</p>
+<div class="math-block">\[\left|\int_0^\pi \frac{iRe^{it}}{1+R^2e^{2it}} \, dt\right| \overset{?}{\leq} \frac{100}{R},\]</div>
+<p>then we would win because \(100/R \to 0\) as \(R \to +\infty\), and that must mean that the integral we&rsquo;re looking at also has to go to \(0\)!</p>
+<p>In other words, our goal is to get an upper bound that goes to \(0\) as \(R \to +\infty\).</p>
+<p>To do this, we need a few tools.</p>
+<ol>
+<li>(Triangle Inequality) \(|z + w| \leq |z| + |w|\) for all \(z, w \in \C\).</li>
+<li>(Integral Triangle Inequality) \(\displaystyle\left|\int_a^b f(t) \, dt\right| \leq \int_a^b |f(t)| \, dt\), always!</li>
+</ol>
+<p>First, we apply the integral triangle inequality to shove the absolute value bars inside.</p>
+<div class="math-block">\[\left|\int_0^\pi \frac{iRe^{it}}{1+R^2e^{2it}} \, dt\right| \leq \int_0^\pi \left|\frac{iRe^{it}}{1+R^2e^{2it}}\right| dt\]</div>
+<p>Next, we manipulate this expression using absolute value properties.</p>
+<div class="math-block">\[\begin{aligned}
+&amp;= \int_0^\pi \frac{|iRe^{it}|}{|1+R^2e^{2it}|} \, dt \\
+&amp;= \int_0^\pi \frac{R}{|1+R^2e^{2it}|} \, dt
+\end{aligned}\]</div>
+<p>The numerator simplified nicely, but the bottom needs to be tamed still. To continue, we use the triangle inequality, which tells us that \(|R^2e^{2it}| \leq |-1| + |1+R^2e^{2it}|\), which rearranges to the <em>lower</em> bound \(|1+R^2e^{2it}| \geq R^2 - 1\). You might be thinking that this is the wrong way, but actually, since we&rsquo;re in the denominator, we need a lower bound in order to write an upper bound on the whole fraction. That is, since \(|1+R^2e^{2it}| \geq R^2 - 1\), we have that \(\dfrac{R}{|1+R^2e^{2it}|} \leq \dfrac{R}{R^2-1}\). So we can continue &ldquo;going up&rdquo;!</p>
+<div class="math-block">\[\int_0^\pi \frac{R}{|1+R^2e^{2it}|} \, dt \leq \int_0^\pi \frac{R}{R^2-1} \, dt\]</div>
+<p>Wait a second, \(t\) doesn&rsquo;t appear anymore! So we can evaluate this upper bound.</p>
+<div class="math-block">\[= \frac{\pi R}{R^2-1}\]</div>
+<p>This is an upper bound that goes to \(0\) as \(R \to +\infty\)! That&rsquo;s exactly what we needed, therefore we can conclude that</p>
+<div class="math-block">\[\lim_{R \to +\infty} \int_0^\pi \frac{iRe^{it}}{1+R^2e^{2it}} \, dt = 0.\]</div>
+</details>
+<p>Whatever you do, we finally have ended up with</p>
+<div class="math-block">\[\boxed{\int_{-\infty}^\infty \frac{1}{1+x^2} \, dx = \pi},\]</div>
+<p>and so we are done!</p>
+<p>The next example shows that sometimes, the given integrand is not necessarily the thing we would like to integrate.</p>
+<h3 id="example-2_4">Example 2<a class="anchor" href="#example-2_4" title="Link to this section">#</a></h3>
+<p>Let us evaluate the integral</p>
+<div class="math-block">\[\int_{-\infty}^\infty \frac{\cos x}{1+x^2} \, dx.\]</div>
+<p>We will use the same exact approach, but the cosine here is annoying to deal with. One way to deal with it is to use the fact that \(\cos z = \dfrac{e^{iz}+e^{-iz}}{2}\), because \(e^{iz}\) is easier to deal with. However, a much easier approach is to realize that \(\cos x\) is just the real part of \(e^{ix}\)!</p>
+<p><strong>Key Idea 4:</strong> <em>If there is a sine or cosine, consider replacing it with \(e^{ix}\). Under suitable conditions, the real/imaginary part of the new integral will be exactly the original integral.</em></p>
+<p>So we can instead think about the integral</p>
+<div class="math-block">\[\int_{-\infty}^\infty \frac{e^{ix}}{1+x^2} \, dx.\]</div>
+<p>Once we evaluate this, we take the real part of the answer, and this will be the answer to the integral \(\displaystyle\int_{-\infty}^\infty \frac{\cos x}{1+x^2} \, dx\).</p>
+<p>Let&rsquo;s run the process again! We use the same contour as before. I&rsquo;m going to go a bit faster now and explain the steps a little less than before.</p>
+<p><img alt="The same semicircular contour, with the poles at i and −i marked" src="fig17.png" /></p>
+<p>The integral over the bottom is just \(\displaystyle\int_{-R}^R \frac{e^{ix}}{1+x^2} \, dx\), which will be what we want when we send \(R \to +\infty\).</p>
+<p>The integral over the semicircular arc will be</p>
+<div class="math-block">\[\int_{\gamma_2} \frac{e^{iz}}{1+z^2} \, dz = \int_0^\pi \frac{e^{iRe^{it}} \cdot iRe^{it}}{1+R^2e^{2it}} \, dt.\]</div>
+<p>The residue of \(\dfrac{e^{iz}}{1+z^2}\) at \(z = i\) is simply \(\dfrac{e^{iz}}{z+i}\) evaluated at \(z = i\), which is \(\dfrac{1}{2ie}\). Thus, by the Residue Theorem, we have</p>
+<div class="math-block">\[\int_{-R}^R \frac{e^{ix}}{1+x^2} \, dx + \int_0^\pi \frac{e^{iRe^{it}} \cdot iRe^{it}}{1+R^2e^{2it}} \, dt = 2\pi i \cdot \frac{1}{2ie} = \frac{\pi}{e}.\]</div>
+<p>Sending \(R \to +\infty\), we have</p>
+<div class="math-block">\[\int_{-\infty}^\infty \frac{e^{ix}}{1+x^2} \, dx + \int_0^\pi \frac{e^{iRe^{it}} \cdot iRe^{it}}{1+R^2e^{2it}} \, dt = \frac{\pi}{e}\]</div>
+<details class="spoiler">
+<summary>The integral in the middle vanishes</summary>
+<div class="math-block">\[\begin{aligned}
+\left|\int_0^\pi \frac{e^{iRe^{it}} \cdot iRe^{it}}{1+R^2e^{2it}} \, dt\right| &amp;\leq \int_0^\pi \frac{\left|e^{iRe^{it}} \cdot iRe^{it}\right|}{|1+R^2e^{2it}|} \, dt \\
+&amp;\leq R\int_0^\pi \frac{\left|e^{iRe^{it}}\right|}{R^2-1} \, dt \\
+&amp;= R\int_0^\pi \frac{\left|e^{i(R\cos t + iR\sin t)}\right|}{R^2-1} \, dt \\
+&amp;= \frac{R}{R^2-1}\int_0^\pi e^{-R\sin t} \, dt
+\end{aligned}\]</div>
+<p>Now use the fact that \(\sin t \geq 0\) over the domain of integration.</p>
+<div class="math-block">\[\leq \frac{R}{R^2-1}\int_0^\pi 1 \, dt = \frac{\pi R}{R^2-1} \to 0\]</div>
+</details>
+<p>and so therefore</p>
+<div class="math-block">\[\int_{-\infty}^\infty \frac{e^{ix}}{1+x^2} \, dx = \frac{\pi}{e}.\]</div>
+<p>The original integral, \(\displaystyle\int_{-\infty}^\infty \frac{\cos x}{1+x^2} \, dx\), is thus the real part of \(\pi/e\)&hellip; which is just \(\pi/e\). We conclude that</p>
+<div class="math-block">\[\boxed{\int_{-\infty}^\infty \frac{\cos x}{1+x^2} \, dx = \frac{\pi}{e}}.\]</div>
+<p>This next example shows that the &ldquo;arcs&rdquo; we draw aren&rsquo;t always negligible. They might actually be useful.</p>
+<h3 id="example-3_3">Example 3<a class="anchor" href="#example-3_3" title="Link to this section">#</a></h3>
+<p>Let us evaluate the <em>improper Riemann</em> integral</p>
+<div class="math-block">\[\int_{-\infty}^\infty \frac{\sin x}{x} \, dx.\]</div>
+<details class="spoiler">
+<summary>Why do I specify Riemann?</summary>
+<p>There are two types of integrals: Riemann and Lebesgue. Although these two types of integrals give the same answer in almost all cases, most mathematicians use Lebesgue integrals because they have nicer properties and are so much easier to work with.</p>
+<p>\(\sin x / x\) is an example of a function where the two types of integrals differ. It is Riemann-integrable (in an improper sense), whereas in the Lebesgue sense it is not integrable!</p>
+</details>
+<p>Firstly, instead of looking at \(\sin x\), we will look at \(e^{ix}\). So we will take the <em>imaginary</em> part of the answer to the integral \(\displaystyle\int_{-\infty}^\infty \frac{e^{ix}}{x} \, dx\).</p>
+<p>Now we choose the contour.</p>
+<p><strong>Key Idea 5:</strong> <em>The contour you choose needs to dodge singularities (while also sticking to the real line as much as it can).</em></p>
+<p>We&rsquo;re tempted to pick the same semi-circular contour, but there is a problem: The semicircle crosses \(z = 0\), where \(\dfrac{\sin z}{z}\) is not defined. We must &ldquo;dodge&rdquo; this singularity with&hellip; another semi-circular arc.</p>
+<p>So, in addition to having a bit \(R &gt; 0\) for the big circular arc, we will also need a small \(\varepsilon &gt; 0\) that controls the radius of a <em>small</em> semi-circular arc that serves to dodge this singularity. In all, the contour we choose will have four parts.</p>
+<p><img alt="The contour made of a large semicircle of radius R and a small semicircle of radius ε dodging the origin, joined by two segments of the real axis" src="fig18.png" /></p>
+<p>The integrals over the two straight-segment parts are simply \(\displaystyle\int_{-R}^{-\varepsilon} \frac{e^{ix}}{x} \, dx\) and \(\displaystyle\int_\varepsilon^R \frac{e^{ix}}{x} \, dx\). When we add these together and send \(R \to +\infty\) and \(\varepsilon \to 0^+\), that will give us \(\displaystyle\int_{-\infty}^\infty \frac{e^{ix}}{x} \, dx\), the integral we need to study. (Technically, this is a principal value since we cut out a symmetric gap around \(0\), but that&rsquo;s harmless here: the real part \(\cos x / x\) is odd so it contributes nothing, and the imaginary part \(\sin x / x\) is perfectly nice at \(0\).)</p>
+<p>The integral over the larger semicircular arc is</p>
+<div class="math-block">\[\int_0^\pi \frac{e^{iRe^{it}} \cdot Rie^{it}}{Re^{it}} \, dt = \int_0^\pi ie^{iRe^{it}} \, dt.\]</div>
+<p>The integral over the smaller semicircular arc is</p>
+<div class="math-block">\[-\int_0^\pi \frac{e^{i\varepsilon e^{it}} \cdot \varepsilon ie^{it}}{\varepsilon e^{it}} \, dt = -\int_0^\pi ie^{i\varepsilon e^{it}} \, dt.\]</div>
+<p>(The integral is negated because the contour is going clockwise, not counter-clockwise!)</p>
+<p>By Cauchy&rsquo;s Theorem (there are no singularities inside the loop!), the integral over the entire contour is \(0\). That is,</p>
+<div class="math-block">\[\int_{-R}^{-\varepsilon} \frac{e^{ix}}{x} \, dx + \int_\varepsilon^R \frac{e^{ix}}{x} \, dx + \int_0^\pi ie^{iRe^{it}} \, dt - \int_0^\pi ie^{i\varepsilon e^{it}} \, dt = 0\]</div>
+<p>When we send \(R \to +\infty\), the third term vanishes.</p>
+<details class="spoiler">
+<summary>Why the third term vanishes</summary>
+<div class="math-block">\[\begin{aligned}
+\left|\int_0^\pi ie^{iRe^{it}} \, dt\right| &amp;\leq \int_0^\pi \left|ie^{iRe^{it}}\right| dt \\
+&amp;= \int_0^\pi \left|e^{iR(\cos t + i\sin t)}\right| dt \\
+&amp;= \int_0^\pi e^{-R\sin t} \, dt
+\end{aligned}\]</div>
+<p>If you know what &ldquo;dominated convergence&rdquo; is, you can now win easily, because the integrand goes to \(0\) as \(R \to +\infty\) and the integrand is dominated by the constant function \(1\), which has a finite integral, so \(\displaystyle\lim_{R \to +\infty} \int_0^\pi e^{-R\sin t} \, dt = 0\).</p>
+<p>Otherwise, here is an alternative: Use the fact that \(\sin(t)\) is symmetric about \(\pi/2\) to set this equal to</p>
+<div class="math-block">\[= 2\int_0^{\pi/2} e^{-R\sin t} \, dt.\]</div>
+<p>Now, use the fact that the line segment between \((0, 0)\) and \((\pi/2, 1)\) lies under the graph of \(\sin t\). This tells us that \(\sin t \geq \dfrac{2}{\pi}t\), which implies that \(-R\sin t \leq \dfrac{-2Rt}{\pi}\). Hence we may go up with:</p>
+<div class="math-block">\[\begin{aligned}
+&amp;\leq 2\int_0^{\pi/2} e^{\frac{-2Rt}{\pi}} \, dt \\
+&amp;= \frac{\pi(1-e^{-R})}{R} \to 0
+\end{aligned}\]</div>
+</details>
+<p>so</p>
+<div class="math-block">\[\int_{-\infty}^{-\varepsilon} \frac{e^{ix}}{x} \, dx + \int_\varepsilon^\infty \frac{e^{ix}}{x} \, dx - \int_0^\pi ie^{i\varepsilon e^{it}} \, dt = 0\]</div>
+<p>Now we need to send \(\varepsilon \to 0^+\)&hellip;</p>
+<div class="math-block">\[\int_{-\infty}^\infty \frac{e^{ix}}{x} \, dx = \lim_{\varepsilon \to 0^+} \int_0^\pi ie^{i\varepsilon e^{it}} \, dt\]</div>
+<p>&hellip;but that last term isn&rsquo;t going to vanish! It will have an actual limit.</p>
+<p>I don&rsquo;t want to make this post any longer so I&rsquo;m going to be extremely not rigorous. We write</p>
+<div class="math-block">\[\lim_{\varepsilon \to 0^+} \int_0^\pi ie^{i\varepsilon e^{it}} \, dt = \int_0^\pi \lim_{\varepsilon \to 0^+} ie^{i\varepsilon e^{it}} \, dt = \int_0^\pi i \, dt = i\pi.\]</div>
+<details class="spoiler">
+<summary>More Rigor</summary>
+<p>The issue is swapping the limit and integral. You cannot do that in general. Here is more or less how you go about doing it right: You have to use something called the <strong>(Lebesgue) Dominated Convergence Theorem</strong>. This needs two ingredients.</p>
+<p><strong>Ingredient 1: Pointwise Convergence</strong></p>
+<p>What this means is that the integrand has a limit basically everywhere. Here, we see that the limit \(\displaystyle\lim_{\varepsilon \to 0^+} ie^{i\varepsilon e^{it}}\) always exists (and is equal to \(i\)) no matter what \(t\) is.</p>
+<p><strong>Ingredient 2: Domination</strong></p>
+<p>What this means is that you can find an <em>integrable upper bound</em> for the absolute value of the integrand that does NOT depend on the limit variable (which, here, would be \(\varepsilon\)). Integrable means &ldquo;has finite integral&rdquo;.</p>
+<p>Here, I can write</p>
+<div class="math-block">\[\left|ie^{i\varepsilon e^{it}}\right| = \left|e^{i\varepsilon(\cos t + i\sin t)}\right| = e^{-\varepsilon\sin t} \leq 1.\]</div>
+<p>\(1\) is a valid dominator because it does not depend on \(\varepsilon\) and it is integrable (i.e. \(\displaystyle\int_0^\pi |1| \, dt &lt; \infty\)).</p>
+<p>With these two ingredients, we are allowed to switch the limit and the integral.</p>
+</details>
+<p>Therefore,</p>
+<div class="math-block">\[\int_{-\infty}^\infty \frac{e^{ix}}{x} \, dx = i\pi.\]</div>
+<p>The original integral, \(\displaystyle\int_{-\infty}^\infty \frac{\sin x}{x} \, dx\), is just the imaginary part of \(i\pi\)&hellip; which is \(\pi\). Thus</p>
+<div class="math-block">\[\boxed{\int_{-\infty}^\infty \frac{\sin x}{x} \, dx = \pi}.\]</div>
+<p>Our last example uses contour integration in a &ldquo;backwards&rdquo; way.</p>
+<h3 id="example-4_2">Example 4<a class="anchor" href="#example-4_2" title="Link to this section">#</a></h3>
+<p>Let us evaluate the integral</p>
+<div class="math-block">\[\int_0^{2\pi} \frac{\sin^2 t}{5+4\cos t} \, dt.\]</div>
+<p>Two problems: (1) I don&rsquo;t like trig functions. (2) I like complex numbers. Both of these problems are easily solved using the following formulas:</p>
+<div class="math-block">\[\cos t = \frac{e^{it}+e^{-it}}{2}\]</div>
+<div class="math-block">\[\sin t = \frac{e^{it}-e^{-it}}{2i}\]</div>
+<p>Let&rsquo;s replace the cosines and sines with these guys and see what happens!</p>
+<div class="math-block">\[\begin{aligned}
+\int_0^{2\pi} \frac{\sin^2 t}{5+4\cos t} \, dt &amp;= \int_0^{2\pi} \frac{\left(\frac{e^{it}-e^{-it}}{2i}\right)^2}{5+4\cdot\frac{e^{it}+e^{-it}}{2}} \, dt \\
+&amp;= \frac{-1}{4}\int_0^{2\pi} \frac{e^{2it}-2+e^{-2it}}{5+2e^{it}+2e^{-it}} \, dt
+\end{aligned}\]</div>
+<p>Hm, since \(e^{it}\) appears so much, this <em>kinda</em> looks like the integral we would get if we were integrating some function over the contour \(\partial D\)&hellip; right? Could we do something with this?</p>
+<p><strong>Key Idea 6:</strong> <em>Sometimes, you can manipulate the integrand so that it becomes the formula for a contour integral.</em></p>
+<p>Remember that if we parametrize \(\partial D\) by \(e^{it}\), then the integral \(\displaystyle\int_{\partial D} f(z) \, dz\) is given by \(\displaystyle\int_0^{2\pi} f(e^{it}) \cdot ie^{it} \, dt\). So&hellip; what this means is that if we manipulate our integrand to look like \(f(e^{it}) \cdot ie^{it}\), then we can apply this formula <em>backwards</em> to write the integral as a contour integral!</p>
+<p>The extra factor we need is \(ie^{it}\)&hellip; so let&rsquo;s just force it in!</p>
+<div class="math-block">\[\frac{-1}{4}\int_0^{2\pi} \frac{e^{2it}-2+e^{-2it}}{5+2e^{it}+2e^{-it}} \, dt = \frac{-1}{4}\int_0^{2\pi} \frac{e^{2it}-2+e^{-2it}}{(5+2e^{it}+2e^{-it})ie^{it}} \cdot ie^{it} \, dt\]</div>
+<p>Voila! By applying the formula for contour integrals in reverse, this is just the contour integral</p>
+<div class="math-block">\[\begin{aligned}
+\frac{-1}{4}\int_{\partial D} \frac{z^2-2+z^{-2}}{(5+2z+2z^{-1})iz} \, dz &amp;= \frac{-1}{4i}\int_{\partial D} \frac{z^4-2z^2+1}{z^2(2z^2+5z+2)} \, dz \\
+&amp;= \frac{-1}{4i}\int_{\partial D} \frac{(z^2-1)^2}{z^2(2z+1)(z+2)} \, dz.
+\end{aligned}\]</div>
+<p>We now apply the Residue Theorem! The integrand explodes at three points: \(z = 0\), \(z = -1/2\) and \(z = -2\). Only \(z = 0\) and \(z = -1/2\) are inside the circle. Calculating the residue at \(z = -1/2\) is pretty easy, but \(z = 0\) is more annoying because it is a second-order pole, so using the easy method I outlined doesn&rsquo;t really work. There are two ways to proceed.</p>
+<details class="spoiler">
+<summary>Method 1: The Ugly Formula</summary>
+<p>If you read about the ugly formula back in Lesson 6, you know the steps to actually find the residue at \(z = 0\).</p>
+<p>First, we need to find the first power of \((z - 0) = z\) that will get rid of the singularity. Obviously, it&rsquo;s \(z^2\).</p>
+<p>Now, we multiply by that to get rid of the singularity. This leaves us with \(\dfrac{z^4-2z^2+1}{2z^2+5z+2}\).</p>
+<p>Now, we differentiate this \(2 - 1 = 1\) times. By the quotient rule, this gives</p>
+<div class="math-block">\[\frac{(4z^3-4z)(2z^2+5z+2) - (z^4-2z^2+1)(4z+5)}{(2z^2+5z+2)^2}.\]</div>
+<p>Finally, we plug in \(z = 0\) into this to get \(\dfrac{-5}{4}\). This is the residue!</p>
+<p>As for the residue at \(z = -1/2\), we multiply by \(z + 1/2\) to leave us with \(\dfrac{(z^2-1)^2}{z^2(2)(z+2)}\) (note the extra factor of \(2\)), and now when we plug in \(z = -1/2\), that&rsquo;s just</p>
+<div class="math-block">\[\frac{((-1/2)^2-1)^2}{(-1/2)^2(2)(-1/2+2)} = \frac{9/16}{(1/4)(2)(3/2)} = \frac{3}{4}.\]</div>
+<p>Altogether, we conclude that</p>
+<div class="math-block">\[\frac{1}{-4i}\int_{\partial D} \frac{(z^2-1)^2}{z^2(2z+1)(z+2)} \, dz = \frac{1}{-4i} \cdot 2\pi i\left[\frac{-5}{4} + \frac{3}{4}\right] = \boxed{\frac{\pi}{4}}.\]</div>
+</details>
+<details class="spoiler">
+<summary>Method 2: Partial Fractions</summary>
+<p>This is a very simple workaround, but it might be a tad more tedious. If we use &ldquo;Heaviside cover-up partial fraction decomposition&rdquo;, we can find that</p>
+<div class="math-block">\[\frac{(z^2-1)^2}{z^2(2z+1)(z+2)} = \frac{1/2}{z^2} + \frac{-3/4}{z+2} + \frac{3/4}{z+1/2} + \frac{-5/4}{z} + \frac{1}{2}.\]</div>
+<p>So the integral we need to evaluate is just</p>
+<div class="math-block">\[\frac{-1}{4i}\int_{\partial D} \frac{1/2}{z^2} + \frac{-3/4}{z+2} + \frac{3/4}{z+1/2} + \frac{-5/4}{z} + \frac{1}{2} \, dz.\]</div>
+<p>So we can just go term by term!</p>
+<ul>
+<li>We have \(\displaystyle\int_{\partial D} \frac{1/2}{z^2} \, dz = 0\), if you plug in a parametrization and do it manually.</li>
+<li>\(\displaystyle\int_{\partial D} \frac{-3/4}{z+2} \, dz = 0\) by Cauchy&rsquo;s Theorem.</li>
+<li>\(\displaystyle\int_{\partial D} \frac{3/4}{z+1/2} \, dz = \frac{3\pi i}{2}\) by the Residue Theorem.</li>
+<li>\(\displaystyle\int_{\partial D} \frac{-5/4}{z} \, dz = \frac{-5\pi i}{2}\) by the Residue Theorem.</li>
+<li>\(\displaystyle\int_{\partial D} \frac{1}{2} \, dz = 0\) by Cauchy&rsquo;s Theorem.</li>
+</ul>
+<p>Therefore,</p>
+<div class="math-block">\[\frac{-1}{4i}\int_{\partial D} \frac{(z^2-1)^2}{z^2(2z+1)(z+2)} \, dz = \frac{-1}{4i}\left(\frac{3\pi i}{2} - \frac{5\pi i}{2}\right) = \boxed{\frac{\pi}{4}}.\]</div>
+</details>
+<p>Either way, we got the answer of \(\boxed{\dfrac{\pi}{4}}\). Whew!</p>
+<h2 id="your-turn">Your Turn<a class="anchor" href="#your-turn" title="Link to this section">#</a></h2>
+<p>The way to master this method is by practicing! I have provided a number of practice problems that are in <strong>no particular order</strong>. If you need them, the hints will basically remove any guesswork you need to do by telling you what contour to take and/or what methodologies to use. And, just in case you want more guidance, I&rsquo;ve written out the solution to two of these problems.</p>
+<p>Happy integrating!</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Evaluate \(\displaystyle\int_0^\infty \frac{1}{1+x^4} \, dx\).</p>
+<details class="spoiler">
+<summary>Hint</summary>
+<p>You can use a semicircle contour, and the symmetry of the integrand. The two residues you need to deal with are at \(z = (\pm 1 + i)/\sqrt{2}\).</p>
+<p>Alternatively, use this:</p>
+<p><img alt="A quarter-circle contour of radius R in the first quadrant, with the four poles marked by crosses" src="fig19.png" /></p>
+<p>That way you only need to deal with one residue.</p>
+</details>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(\dfrac{\pi}{2\sqrt{2}}\)</p>
+</details>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Let&rsquo;s use the quarter arc contour given in the hint. The integral over this contour is</p>
+<div class="math-block">\[\int_0^R \frac{1}{1+x^4} \, dx - i\int_0^R \frac{1}{1+x^4} \, dx + \int_0^{\pi/2} \frac{Rie^{it}}{1+R^4e^{4it}} \, dt.\]</div>
+<p>(Note that we used the fact that \(i^4 = 1\) for the second term.) Let&rsquo;s use the Residue Theorem to evaluate this. The only residue inside the quarter arc is the one at \(e^{i\pi/4} = (1+i)/\sqrt{2} =: z_0\). The residue at this singularity is</p>
+<div class="math-block">\[\frac{1}{(z_0 - e^{3i\pi/4})(z_0 - e^{5i\pi/4})(z_0 - e^{7i\pi/4})} = \frac{1}{(\sqrt{2})(\sqrt{2}(1+i))(\sqrt{2}i)} = \frac{1}{2^{3/2}(-1+i)} = \frac{-1-i}{2^{5/2}}.\]</div>
+<p>It follows by the Residue Theorem that</p>
+<div class="math-block">\[\int_0^R \frac{1}{1+x^4} \, dx - i\int_0^R \frac{1}{1+x^4} \, dx + \int_0^{\pi/2} \frac{Rie^{it}}{1+R^4e^{4it}} \, dt = 2\pi \cdot \frac{1-i}{2^{5/2}}.\]</div>
+<p>Sending \(R \to +\infty\), we get</p>
+<div class="math-block">\[\int_0^\infty \frac{1}{1+x^4} \, dx - i\int_0^\infty \frac{1}{1+x^4} \, dx = 2\pi \cdot \frac{1-i}{2^{5/2}}\]</div>
+<p>because the third term vanishes (and this is not hard to show and/or intuit). Dividing by \(1 - i\), we end up with</p>
+<div class="math-block">\[\boxed{\int_0^\infty \frac{1}{1+x^4} \, dx = \frac{\pi}{2^{3/2}}}.\]</div>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Evaluate \(\displaystyle\int_0^\infty \frac{\log x}{1+x^4} \, dx\).</p>
+<details class="spoiler">
+<summary>Small Hint</summary>
+<p>We can&rsquo;t use a semicircle here either, because it would cross the negative real line, and \(\log\) isn&rsquo;t defined there. Well, we still want to draw a loop that goes from \(0\) to \(R\) in a straight line and then gets back to \(0\). What&rsquo;s a natural way to go from \(R\) to \(0\)?</p>
+<p>Also, to evaluate principal logs, keep in mind that \(\log z = \log(r) + i\theta\) where \(r = |z|\) and \(\theta \in (-\pi, \pi)\) is such that \(z = re^{i\theta}\).</p>
+</details>
+<details class="spoiler">
+<summary>Big Hint</summary>
+<p>Use this:</p>
+<p><img alt="The same quarter-circle contour of radius R, with the four poles marked by crosses" src="fig19.png" /></p>
+</details>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(\dfrac{-\pi^2}{8\sqrt{2}}\)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>(*) Evaluate \(\displaystyle\int_0^\infty \frac{1}{1+x^3} \, dx\).</p>
+<details class="spoiler">
+<summary>Subtle Hint</summary>
+<p>The semicircle contour doesn&rsquo;t work here either. Think about what went wrong. Then, think of a better way to make a path from \(R\) back to \(0\).</p>
+</details>
+<details class="spoiler">
+<summary>Big Hint</summary>
+<p>Use this:</p>
+<p><img alt="A sector of angle 2π/3 and radius R, with the three poles of 1/(1+z³) marked by crosses" src="fig20.png" /></p>
+</details>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(\dfrac{2\pi}{3\sqrt{3}}\)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>(*) Can you find a formula for \(\displaystyle\int_0^\infty \frac{1}{1+x^n} \, dx\) for positive integers \(n\)?</p>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Evaluate \(\displaystyle\int_0^\pi \frac{d\theta}{1+\cos^2\theta}\).</p>
+<details class="spoiler">
+<summary>Hint 1</summary>
+<p>Replace \(\cos\theta\) with \((e^{i\theta}+e^{-i\theta})/2\).</p>
+</details>
+<details class="spoiler">
+<summary>Hint 2</summary>
+<p>Turn it into a contour integral on \(\partial D\). Except&hellip; the parametrization is going to be different if you want a full loop, since the upper bound is \(\pi\), not \(2\pi\). Hmm&hellip; look at what terms you have in your integrand, any nice ideas pop up?</p>
+</details>
+<details class="spoiler">
+<summary>Hint 3</summary>
+<p>Write the integrand in the form \(\displaystyle\int_0^\pi f(e^{2i\theta}) \cdot 2ie^{2i\theta} \, d\theta\).</p>
+</details>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(\dfrac{\pi}{\sqrt{2}}\)</p>
+</details>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Use the &ldquo;backwards&rdquo; trick, like in Example 4.</p>
+<div class="math-block">\[\begin{aligned}
+\int_0^\pi \frac{1}{1+\cos^2 t} \, dt &amp;= \int_0^\pi \frac{1}{1+\left(\frac{e^{it}+e^{-it}}{2}\right)^2} \, dt \\
+&amp;= 4\int_0^\pi \frac{1}{e^{2it}+6+e^{-2it}} \, dt \\
+&amp;= \frac{2}{i}\int_0^\pi \frac{1}{e^{4it}+6e^{2it}+1} \cdot 2ie^{2it} \, dt \\
+&amp;= \frac{2}{i}\int_{\partial D} \frac{1}{z^2+6z+1} \, dz \\
+&amp;= \frac{2}{i}\int_{\partial D} \frac{1}{(z-(-3+2\sqrt{2}))(z-(-3-2\sqrt{2}))} \, dz
+\end{aligned}\]</div>
+<p>The only singularity that lies inside the unit circle is \(z = -3 + 2\sqrt{2}\). The residue at this singularity is \(\dfrac{1}{z-(-3-2\sqrt{2})}\) evaluated at \(z = -3+2\sqrt{2}\), or \(\dfrac{1}{4\sqrt{2}}\). So by the Residue Theorem,</p>
+<div class="math-block">\[\frac{2}{i}\int_{\partial D} \frac{1}{(z-(-3+2\sqrt{2}))(z-(-3-2\sqrt{2}))} \, dz = \frac{2}{i} \cdot 2\pi i \cdot \frac{1}{4\sqrt{2}} = \boxed{\frac{\pi}{\sqrt{2}}}.\]</div>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Evaluate \(\displaystyle\int_0^{2\pi} \frac{d\theta}{13+12\cos\theta}\).</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(\dfrac{2\pi}{5}\)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Evaluate \(\displaystyle\int_{-\infty}^\infty \frac{1-\cos x}{x^2} \, dx\).</p>
+<details class="spoiler">
+<summary>Hint 1</summary>
+<p>Instead integrate \(\displaystyle\int_{-\infty}^\infty \frac{1-e^{ix}}{x^2} \, dx\) and take its real part.</p>
+</details>
+<details class="spoiler">
+<summary>Hint 2</summary>
+<p>Use a semi-circular contour that dodges \(0\).</p>
+</details>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(\pi\)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>(*) Evaluate \(\displaystyle\int_0^\infty \cos(x^2) \, dx\).</p>
+<details class="spoiler">
+<summary>Hint 1</summary>
+<p>The best integrand to look at is \(e^{-z^2}\). You want to use the Gaussian integral.</p>
+</details>
+<details class="spoiler">
+<summary>Hint 2</summary>
+<p>This contour was hard to come up with. Use this:</p>
+<p><img alt="A sector of angle π/4 and radius R" src="fig21.png" /></p>
+</details>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(\sqrt{\pi/8}\)</p>
+</details>
+</div>
+      </article>
+      <div class="divider v" aria-hidden="true"><svg viewBox="0 -1 600 72" role="img" aria-label="Cantor set, six levels" xmlns="http://www.w3.org/2000/svg"><rect class="fc" x="0.00" y="0" width="600.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="4.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="19.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="49.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="64.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="138.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="153.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="182.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="197.53" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="404.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="419.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="449.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="464.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="538.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="553.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="582.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="597.53" y="60" width="2.47" height="3.5" rx="1.2"/></svg></div>
+    </main>
+    <footer class="footer">
+      <div class="wrap">&copy; 2026 Sarthak Dassarma. Built with plain HTML and hosted on GitHub Pages.</div>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>

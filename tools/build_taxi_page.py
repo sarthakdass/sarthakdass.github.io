@@ -87,7 +87,7 @@ CONTENT = r"""      <p class="tx-lead">Once the data errors are stripped away, h
       <section class="tx-sec" aria-labelledby="tx-h-tree">
         <h2 id="tx-h-tree">The decision tree</h2>
         <p>Tipping depends on interactions (an airport pickup at midnight is not simply &ldquo;airport&rdquo; plus &ldquo;midnight&rdquo;) and on thresholds like fare size, and a tree handles both without any scaling. I used mlpack&rsquo;s <code>DecisionTree</code> with Gini impurity, depth 12 and at least 100 rows per leaf. At each node it picks the split with the largest drop in impurity:</p>
-        <div class="formula">\[ G = 1 - \sum_k p_k^2, \qquad \Delta G = G_{\text{parent}} - \sum_{c} \frac{n_c}{n}\,G_c . \]</div>
+        <div class="formula">\[ \begin{aligned} G &= 1 - \sum_k p_k^2, \\[6pt] \Delta G &= G_{\text{parent}} - \sum_{c} \frac{n_c}{n}\,G_c. \end{aligned} \]</div>
         <p>The 31 features are the raw trip fields plus engineered flags for airports, Midtown, rush hour and weekend nights, and the smoothed share of generous tips in each pickup and dropoff zone. That target encoding of zone \(z\), with \(m = 50\) pseudo-trips pulling small zones toward the overall rate \(\bar p\), is</p>
         <div class="formula">\[ \operatorname{enc}(z) = \frac{\sum_{i \in z} y_i + m\,\bar{p}}{n_z + m}, \]</div>
         <p>and it is fitted on training rows only, so nothing about the test trips leaks in. The tree was trained once, on 80% of January, and then scored on data it had not seen:</p>

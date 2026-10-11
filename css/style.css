@@ -384,7 +384,7 @@ p { margin: 0 0 1em; }
   padding-bottom: clamp(20px, 2.5vw, 30px);
 }
 
-.home .sheet { padding-top: clamp(40px, 6vw, 72px); }
+.home .sheet { padding-top: clamp(20px, 3vw, 36px); }
 
 /* ---------- Links (made noticeable) ---------- */
 
@@ -950,3 +950,16 @@ p { margin: 0 0 1em; }
 
 /* ---------- Brand mark: the hover spin is drawn by js/site.js (a perspective-projected slab) ---------- */
 .brand__shade { opacity: 0; }
+
+/* Math page: category headings above the cards */
+.math-section {
+  margin: 0 0 18px;
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+}
+.math-section:not(:first-child) { margin-top: clamp(36px, 5vw, 56px); }
+
+/* Cards tilt in 3D on hover; keep the figure on its own layer so its thin strokes
+   are not re-rasterised (and fringed) at fractional pixels while the card rotates. */
+.entry[data-tilt] .entry__fig { backface-visibility: hidden; transform: translateZ(0); }

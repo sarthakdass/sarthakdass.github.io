@@ -113,7 +113,7 @@
           <p class="tx-small">Where tips actually fall, as a percentage of the fare (January, card trips). The vertical line is the cutoff we picked.</p>
           <div class="tx-quantrail" aria-hidden="true"><span class="tx-mark" id="tx-th-mark"></span><div id="tx-quant"></div></div>
         </div>
-        <p>Every number below is reported next to its always-&ldquo;generous&rdquo; baseline, and the <em>lift</em> over that baseline is the figure to watch.</p>
+        <p>Every number below is reported next to its always-&ldquo;generous&rdquo; baseline.</p>
       </section>
 
       <section class="tx-sec" aria-labelledby="tx-h-noise">
@@ -135,7 +135,7 @@
       <section class="tx-sec" aria-labelledby="tx-h-tree">
         <h2 id="tx-h-tree">The decision tree</h2>
         <p>Tipping depends on interactions (an airport pickup at midnight is not simply &ldquo;airport&rdquo; plus &ldquo;midnight&rdquo;) and on thresholds like fare size, and a tree handles both without any scaling. I used mlpack&rsquo;s <code>DecisionTree</code> with Gini impurity, depth 12 and at least 100 rows per leaf. At each node it picks the split with the largest drop in impurity:</p>
-        <div class="formula">\[ G = 1 - \sum_k p_k^2, \qquad \Delta G = G_{\text{parent}} - \sum_{c} \frac{n_c}{n}\,G_c . \]</div>
+        <div class="formula">\[ \begin{aligned} G &= 1 - \sum_k p_k^2, \\[6pt] \Delta G &= G_{\text{parent}} - \sum_{c} \frac{n_c}{n}\,G_c. \end{aligned} \]</div>
         <p>The 31 features are the raw trip fields plus engineered flags for airports, Midtown, rush hour and weekend nights, and the smoothed share of generous tips in each pickup and dropoff zone. That target encoding of zone \(z\), with \(m = 50\) pseudo-trips pulling small zones toward the overall rate \(\bar p\), is</p>
         <div class="formula">\[ \operatorname{enc}(z) = \frac{\sum_{i \in z} y_i + m\,\bar{p}}{n_z + m}, \]</div>
         <p>and it is fitted on training rows only, so nothing about the test trips leaks in. The tree was trained once, on 80% of January, and then scored on data it had not seen:</p>
@@ -162,8 +162,8 @@
       </section>
 
       <section class="tx-sec" aria-labelledby="tx-h-map">
-        <h2 id="tx-h-map">Where you are matters more than when</h2>
-        <p>Here is the model&rsquo;s view of the city, by pickup zone. Switch layers, hover or tap a zone for its numbers, and zoom into Manhattan. The January layers compare the model with reality on trips it never trained on. The February layers use a month it never saw, and compare weekday mornings with Friday and Saturday nights. The color spectrum legend is below.</p>
+        <h2 id="tx-h-map">Location trumps timing</h2>
+        <p>Here is the model&rsquo;s view of the city, by pickup zone. The color spectrum legend is below.</p>
 
         <div class="tx-card tx-card--map">
           <div class="tx-layers" id="tx-layers"></div>
@@ -206,7 +206,7 @@
 
       <aside class="credit tx-credit">
         <h2>Data and limits</h2>
-        <p>Trip data comes from the NYC Taxi &amp; Limousine Commission (TLC) yellow taxi trip records for 2025, and the zone boundaries from the TLC taxi zone shapefile. Everything here covers card payments only, since cash tips are not recorded, and it describes patterns, not causes. The maps are drawn from the project&rsquo;s own folium output, rebuilt for this page. The full write-up, code, and instructions to reproduce every number are in my <a href="https://github.com/sarthakdass/taxi-ml" target="_blank" rel="noopener">sarthakdass/taxi-ml</a> repository.</p>
+        <p>Trip data comes from the NYC Taxi &amp; Limousine Commission (TLC) yellow taxi trip records for 2025, and the zone boundaries from the TLC taxi zone shapefile. Everything here covers card payments only, since cash tips are not recorded, and it describes patterns. The maps are drawn from my project&rsquo;s own folium output, which I rebuilt for this page. The full write-up, code, and instructions are in my <a href="https://github.com/sarthakdass/taxi-ml" target="_blank" rel="noopener">sarthakdass/taxi-ml</a> repository.</p>
       </aside>
     </main>
     <footer class="footer">
