@@ -5,7 +5,7 @@ date: 2026-09-13
 tags: Not-so-investigative journalism
 ---
 
-This is a part 2 of one of my earlier posts, [Why are Indians deemed to be one of the token unattractive races of society?](https://oofset.substack.com/p/why-are-indians-deemed-to-be-one)
+This is a part 2 of one of my earlier posts, [Why are Indians deemed to be one of the token unattractive races of society?](../why-are-indians-deemed-to-be-one-of-the-token-unattractive-races-of-society/)
 
 ![Watercolor illustration of a woman in a white sari holding a clay pot](fig1.jpg)
 

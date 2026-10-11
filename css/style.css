@@ -14,6 +14,7 @@
   --card: #f8f9fb;
   --rule: #cfd4de;
   --chip: #e1e5ed;
+  --bar: rgba(236, 239, 244, 0.93);
 
   --text: #11141b;
   --text-mid: #2f3644;
@@ -110,7 +111,7 @@ p { margin: 0 0 1em; }
 /* once the page has scrolled onto the light sheet, the row gets a flat paper bar */
 .site-header.on-light {
   --fg: var(--text);
-  background: rgba(236, 239, 244, 0.93);
+  background: var(--bar);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-bottom-color: var(--rule);
@@ -963,3 +964,67 @@ p { margin: 0 0 1em; }
 /* Cards tilt in 3D on hover; keep the figure on its own layer so its thin strokes
    are not re-rasterised (and fringed) at fractional pixels while the card rotates. */
 .entry[data-tilt] .entry__fig { backface-visibility: hidden; transform: translateZ(0); }
+
+/* ---------- Optional dark mode (opt-in via the sun / moon button in the top row) ---------- */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #161b25;
+  --card: #1c222e;
+  --rule: #2c3445;
+  --chip: #262d3b;
+  --bar: rgba(22, 27, 37, 0.92);
+  --text: #e6e9f0;
+  --text-mid: #c6ccd9;
+  --text-soft: #98a2b5;
+  --link: #ff9272;
+  --lilac-ink: #aab3ff;
+  --wcard-text: #aab3ff;
+}
+html[data-theme="dark"] .entry,
+html[data-theme="dark"] .formula,
+html[data-theme="dark"] .vtile,
+html[data-theme="dark"] .wcard { box-shadow: 0 24px 42px -30px rgba(0, 0, 0, 0.7); }
+html[data-theme="dark"] .sheet a:not(.btn):hover { background: rgba(255, 130, 100, 0.2); }
+html[data-theme="dark"] .tx-tab.is-on,
+html[data-theme="dark"] .tx-seg button.is-on,
+html[data-theme="dark"] .sheet a.wtab.is-on,
+html[data-theme="dark"] .sheet a.wtab.is-on:hover { background: var(--on-dark); border-color: var(--on-dark); color: var(--ink); }
+html[data-theme="dark"] .tx-zoom button:hover { background: var(--on-dark); color: var(--ink); }
+html[data-theme="dark"] .tx-zone:hover,
+html[data-theme="dark"] .tx-hi { stroke: var(--on-dark); }
+html[data-theme="dark"] .tx-zone { stroke: var(--card); }
+html[data-theme="dark"] .dossier dd.hit,
+html[data-theme="dark"] .playbar__msg.is-win { color: #c084fc; }
+html[data-theme="dark"] .prose img { filter: brightness(0.92); }
+/* line-art figures with white backgrounds: invert so the paper shows through, keep hues */
+html[data-theme="dark"] .post--diagrams img { filter: invert(1) hue-rotate(180deg); mix-blend-mode: screen; }
+
+.theme-toggle {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-left: clamp(8px, 1.6vw, 18px);
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.3s;
+}
+.theme-toggle:hover { background: rgba(127, 135, 155, 0.18); border-color: rgba(127, 135, 155, 0.35); }
+.theme-toggle svg { width: 19px; height: 19px; display: block; }
+.theme-toggle .ic-sun { display: none; }
+html[data-theme="dark"] .theme-toggle .ic-sun { display: block; }
+html[data-theme="dark"] .theme-toggle .ic-moon { display: none; }
+.topbar .nav { margin-left: auto; }
+@media (max-width: 720px) {
+  .theme-toggle { width: 32px; height: 32px; margin-left: 6px; }
+  .theme-toggle svg { width: 17px; height: 17px; }
+}
+.theme-fade, .theme-fade * { transition: background-color 0.3s, color 0.3s, border-color 0.3s, fill 0.3s, stroke 0.3s !important; }
+.nav { display: flex; align-items: center; }
+.nav .theme-toggle { margin-bottom: 6px; }

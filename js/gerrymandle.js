@@ -244,7 +244,7 @@
     board.parentNode.insertBefore(bar, board.nextSibling);
     var hint = document.createElement('p');
     hint.className = 'playhint';
-    hint.textContent = 'Drag across tiles to draw a district, or click a tile to add or remove it. Dragging out of a dashed district extends it; dragging over drawn tiles erases them. Dashed outlines are districts still open; solid ones hold exactly ' + N + ' houses.';
+    hint.textContent = 'Drag across tiles to draw a district, or click a tile to add or remove it. In one drag you can switch freely between extending a district and erasing tiles. Dashed outlines are districts still open; solid ones hold exactly ' + N + ' houses.';
     board.parentNode.insertBefore(hint, board);
 
     var flash = '';
@@ -280,6 +280,12 @@
       tiles.forEach(function (t, i) { var d = dist(t.c, [p.x, p.y]); if (d < bd) { bd = d; best = i; } });
       return bd <= HEX_RADIUS * 0.95 ? best : -1;
     }
+    /* One drag can mix extending and erasing:
+       - a drag that starts on an empty tile builds a district; sliding back over that district's own tiles
+         takes them out again, and sliding onto open tiles keeps adding;
+       - a drag that starts on a drawn tile edits: open tiles it enters are added to the district it is in
+         the middle of, drawn tiles it enters are erased, and it can switch between the two at any moment.
+       A plain click (no movement) on a drawn tile just removes that tile. */
     var drag = null;
     svg.style.touchAction = 'none';
     svg.addEventListener('pointerdown', function (ev) {
@@ -288,37 +294,41 @@
       if (t < 0) return;
       ev.preventDefault();
       try { svg.setPointerCapture(ev.pointerId); } catch (e) { /* not essential */ }
-      if (assign[t] >= 0) { drag = { mode: 'pending', last: t, start: t, id: assign[t] }; return; }  // click removes; drag decides below
-      drag = { mode: 'add', last: t, cur: addTile(t, null) };
+      if (assign[t] >= 0) { drag = { edit: true, pending: true, start: t, last: t, cur: assign[t] }; return; }
+      drag = { edit: false, pending: false, start: t, last: t, cur: addTile(t, null) };
       render();
     });
     svg.addEventListener('pointermove', function (ev) {
       if (!drag) return;
       var t = tileAt(ev);
       if (t < 0 || t === drag.last) return;
-      if (drag.mode === 'pending') {
-        // Dragging out of a drawn district onto open ground next to it extends that district;
-        // dragging onto another drawn tile (or anywhere not extendable) erases instead.
-        var sid = drag.id, st = drag.start;
-        var canExtend = assign[t] < 0 && assign[st] === sid && tiles[st].nb.indexOf(t) >= 0 &&
-                        (!tiles[t].party || !isFull(sid));
-        if (canExtend) { drag.mode = 'add'; drag.cur = sid; }
-        else { drag.mode = 'erase'; removeTile(st); }
+      if (drag.pending) {
+        drag.pending = false;
+        var st = drag.start, sid = drag.cur;
+        var extend = assign[t] < 0 && assign[st] === sid && tiles[st].nb.indexOf(t) >= 0 &&
+                     (!tiles[t].party || !isFull(sid));
+        if (!extend) { removeTile(st); drag.cur = null; }
       }
+      var prev = drag.last;
       drag.last = t;
-      if (drag.mode === 'erase') { if (assign[t] >= 0) removeTile(t); }
-      else if (assign[t] < 0) {
+      var a = assign[t];
+      if (a >= 0) {
+        if (drag.edit || a === drag.cur) {
+          removeTile(t);
+          drag.cur = (assign[prev] >= 0 && prev !== t) ? assign[prev] : null;   // keep building from where we were
+        }
+      } else {
         var id = addTile(t, drag.cur);
         if (id != null) drag.cur = id;
       }
       render();
     });
     function end(ev) {
-      if (drag && drag.mode === 'pending') { removeTile(drag.start); render(); }  // plain click: remove the tile
+      if (drag && drag.pending) { removeTile(drag.start); render(); }   // plain click: remove the tile
       drag = null; try { svg.releasePointerCapture(ev.pointerId); } catch (e) { /* ignore */ }
     }
     svg.addEventListener('pointerup', end);
-    svg.addEventListener('pointercancel', function (ev) { if (drag && drag.mode === 'pending') drag.mode = 'none'; end(ev); });
+    svg.addEventListener('pointercancel', function (ev) { if (drag) drag.pending = false; end(ev); });
 
     render();
   }

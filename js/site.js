@@ -431,3 +431,36 @@
   brand.addEventListener('pointerenter', spin);
   brand.addEventListener('focus', spin);
 })();
+
+/* ------------------------------------------------------------------
+   Optional dark mode: a sun / moon button at the end of the top row.
+   Light is the default; the choice is remembered on this device.
+   ------------------------------------------------------------------ */
+(function () {
+  var nav = document.querySelector('.site-header .nav');
+  if (!nav) return;
+  var root = document.documentElement;
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'theme-toggle';
+  btn.innerHTML =
+    '<svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 14.6A8.6 8.6 0 0 1 9.4 3.6a8.6 8.6 0 1 0 11 11z"/></svg>' +
+    '<svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>';
+  function isDark() { return root.getAttribute('data-theme') === 'dark'; }
+  function sync() {
+    var d = isDark();
+    btn.setAttribute('aria-label', d ? 'Switch to light mode' : 'Switch to dark mode');
+    btn.title = d ? 'Switch to light mode' : 'Switch to dark mode';
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', d ? '#0a0d12' : '#0d1016');
+  }
+  btn.addEventListener('click', function () {
+    root.classList.add('theme-fade');
+    if (isDark()) root.removeAttribute('data-theme'); else root.setAttribute('data-theme', 'dark');
+    try { localStorage.setItem('sd-theme', isDark() ? 'dark' : 'light'); } catch (e) { /* private mode */ }
+    sync();
+    setTimeout(function () { root.classList.remove('theme-fade'); }, 400);
+  });
+  nav.appendChild(btn);
+  sync();
+})();

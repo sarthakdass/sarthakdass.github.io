@@ -76,14 +76,14 @@ FIG = {
 }
 
 FOOTER_INNER = (
-    "&copy; 2026 Sarthak Dassarma. Built with plain HTML and hosted on GitHub Pages."
+    "&copy; 2026 Sarthak Dassarma. Hosted on GitHub Pages."
 )
 DIVIDER = f'\n      <div class="divider v" aria-hidden="true">{FIG["cantor"]}</div>'
 
 # Runs before first paint: marks the page as JS-enabled and, if we arrived through the
 # stacked-sheet transition, keeps the sheets covering the page until they sweep away.
 HEAD_SCRIPT = (
-    "<script>(function(){var d=document.documentElement;d.classList.add('js');"
+    "<script>(function(){var d=document.documentElement;d.classList.add('js');try{if(localStorage.getItem('sd-theme')==='dark')d.setAttribute('data-theme','dark');}catch(e){}"
     "setTimeout(function(){if(!window.__sd){d.classList.remove('js');}},4000);})();</script>"
 )
 
@@ -503,7 +503,7 @@ hobbies_content = '''      <section class="block" aria-labelledby="academic">
       <section class="block" aria-labelledby="other">
         <h2 class="block__title" id="other">Other Hobbies</h2>
         <ul class="plain" style="margin-top:24px">
-          <li><strong>Logic puzzles.</strong> <a href="https://eev.ee/fyi/variant-sudoku/" target="_blank" rel="noopener">Variant sudoku</a> puzzles follow typical sudoku rules, but typically with a twist. Sometimes you may have to "color" cells that you know are the same but don't know the value of yet, and sometimes you will even have to construct the regions of the puzzle yourself.</li>
+          <li><strong>Logic puzzles.</strong> <a href="https://eev.ee/fyi/variant-sudoku/" target="_blank" rel="noopener">Variant sudoku</a> puzzles follow typical sudoku rules, but with twists such as coloring in cells, creating regions, etc.</li>
           <li><strong>Crosswords.</strong> I enjoy constructing and solving crosswords, especially <a href="https://en.wikipedia.org/wiki/Cryptic_crossword" target="_blank" rel="noopener">cryptic crosswords</a>.</li>
           <li><strong>Basketball.</strong> My personal preference is playing pickup basketball with my established friend groups, but I also practice alone and enjoy playing at new parks and making new friends. I also love learning and engaging in discussions about the history of basketball.</li>
           <li><strong>Watching sports.</strong> I enjoy watching most sports, notably: basketball, American football, cricket, football ("soccer").</li>
@@ -622,7 +622,6 @@ def tile(key, name, tone, where, tag, wide):
 
 visuals_content = f"""      <section class="block" aria-labelledby="gallery">
         <h2 class="block__title" id="gallery">The gallery</h2>
-        <p class="block__lede">Dark tiles are meant for the dark top layer; light tiles are small thumbnails and icons for cards.</p>
         <div class="gal">
 {chr(10).join(tile(*t) for t in TILES)}
         </div>
