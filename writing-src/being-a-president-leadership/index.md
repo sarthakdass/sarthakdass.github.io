@@ -84,7 +84,7 @@ When I say "she didn't have the right standards" I don't mean that she didn't ca
 
 Fortunately it's easy to communicate your standards as long as you are earnest about them: show yourself following them. In other words, set a good example. Like a team captain reprimanding their teammates during drills, you will occasionally have to hold people accountable and remind them what you guys are all about, albeit not as directly.
 
-That's all it took. Her problems, along with everyone else's, got so much better in a couple of months. Of course, it's important to acknowledge that *these improvements happened with their efforts, not mine*. All I did, whether implicitly or explicitly, was [provide them with some direction](../advice-as-a-vector/).
+That's all it took. Her problems, along with everyone else's, got so much better in a couple of months. Of course, it's important to acknowledge that *these improvements happened with their efforts, not mine*. All I did, whether implicitly or explicitly, was provide them with some direction.
 
 Having high standards doesn't just make your product better. Paradoxically, it makes the production process that much easier as well: if doing things right starts coming naturally to you, then you'll do it right the first time and won't have to fix it the second time around.
 

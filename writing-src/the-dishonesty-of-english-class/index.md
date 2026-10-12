@@ -1,0 +1,17 @@
+---
+title: "The dishonesty of English class"
+date: 2026-10-12
+tags: Thoughts
+---
+
+There’s a general consensus that you should only write about what you know. The threshold for “knowing” differs from person to person. There are plenty of tech bloggers using Medium that pretty much admit to not knowing what they are doing, whereas there are some people who will never write in fear of being wrong. Where in the middle you should lie is up to personal taste, but I *hope* that there is at least agreement that we should all strive not to deliberately write on things we don’t know about.
+
+English class breaks this expectation in the most spectacular of ways. The most important skills in writing are finding what you know enough to write about (both because you want what you’re writing to interest you and for the sake of intellectual honesty), and knowing when to retreat. Particularly the latter. Out of the essays I’ve discarded or left unpublished, there are drafts with anywhere between 10 and 1,000 words. (Typically not more, because I learn to give up on dead ends pretty fast.)
+
+In English class it is never a choice to just stop writing an essay. And if we accept that writing can do harm to other people (it is not hard to think of some examples), why can’t it do harm to yourself? You are not just writing about things you don’t know about, you are writing about things you don’t even care enough to learn. Just as using the wrong running stance can give you bad muscle memory which will hurt you later down the road, writing about the wrong topics can make bullshitting a habit. Bullshitting is a useful skill to have, but few people besides car dealers want it to be their only skill. Yet that is what English promotes for 12 straight years of your life (and possibly more, depending on what college you go to if any).
+
+There is a question of audience. Because your English papers are terrible and you never wanted to write them in the first place, the only people who will ever read your papers are your teacher and a couple of classmates. But just as what you write about can become a habit, who you write it for can as well. You are not writing an exploratory essay which you explicitly acknowledge has a high chance of being wrong. You are trying to pass off the knowledge you gained or pulled out of your ass in the last hour as genuine, deep, etc. Which it is not. So your only choice in English class is to write for stupid people, even if your audience doesn’t happen to be, because that’s your only hope for successfully bullshitting your essay past them.
+
+English class is a perverse cycle: your intelligence gets insulted, and in the process, all you can do is insult the intelligence of other people by lying and misrepresenting the knowledge you have. I’m not saying you shouldn’t explore new ideas in your writing. But you should not, for even a second, take on the role of some omniscient being evaluating a book about things you have never experienced, or weighing policies you have never bothered to study. You have a limited perspective, and if you ever want to expand it, you have to acknowledge that.
+
+And for the love of everything, it’s fine to write “I think” when it appropriately reflects the confidence you have. Be honest about your biases, undermine your own credibility when it makes sense, and above all, don’t try to pass off bullshit just because your teacher couldn’t be bothered to stop you.

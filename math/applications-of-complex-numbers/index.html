@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d1016">
+<meta name="description" content="Ten &quot;real&quot; applications of complex numbers, from rotating points and trig identities to the Central Limit Theorem and fractional derivatives, with worked solutions to the exercises.">
+<title>Applications of Complex Numbers — Sarthak Dassarma</title>
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{if(localStorage.getItem('sd-theme')==='dark')d.setAttribute('data-theme','dark');}catch(e){}setTimeout(function(){if(!window.__sd){d.classList.remove('js');}},4000);})();</script>
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/writing.css">
+<script src="../../js/writing-math.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+<script src="../../js/site.js" defer></script>
+</head>
+<body class="post-page">
+
+
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="site-header">
+  <div class="topbar">
+    <a class="brand" href="../../" aria-label="Sarthak Dassarma, home">
+      <svg class="brand__mark" viewBox="92.83 80.00 50.00 75.83" aria-hidden="true" focusable="false"><defs><clipPath id="brand-dclip"><path d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/></clipPath><filter id="brand-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="0.7"/></filter></defs><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/><g clip-path="url(#brand-dclip)"><g class="brand__shade"><path fill="#000" fill-rule="evenodd" filter="url(#brand-soft)" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></g><g class="brand__s"><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></svg>
+      <span class="brand__name">Sarthak Dassarma</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="../../">
+          <span class="nav-link__roll"><span class="nav-link__label">Home</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Home</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../projects/">
+          <span class="nav-link__roll"><span class="nav-link__label">Projects</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Projects</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../math/" aria-current="page">
+          <span class="nav-link__roll"><span class="nav-link__label">Math</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Math</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../hobbies/">
+          <span class="nav-link__roll"><span class="nav-link__label">Hobbies</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Hobbies</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../writing/">
+          <span class="nav-link__roll"><span class="nav-link__label">Writing</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Writing</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../now/">
+          <span class="nav-link__roll"><span class="nav-link__label">Now</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Now</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../visuals/">
+          <span class="nav-link__roll"><span class="nav-link__label">Visuals</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Visuals</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<header class="stage">
+  <div class="wrap wrap--post">
+    <a class="back-link" href="../">&larr; Math</a>
+    <h1 class="page-title page-title--post reveal"><span class="line"><span>Applications of Complex Numbers</span></span></h1>
+    <p class="post-meta"><time datetime="2026-07-15">July 2026</time><span>29 min read</span></p>
+  </div>
+</header>
+
+<div class="stack">
+  <div class="sheet">
+    <main class="sheet__content wrap" id="content">
+      <article class="post prose">
+<p>Despite not being &ldquo;real&rdquo;, complex numbers somehow have fascinating applications to &ldquo;real&rdquo; settings. That is, complex numbers can be introduced to solve problems that do not at all reference complex numbers. Despite having seen many such instances, I continue to be amused by these applications. Let&rsquo;s talk about 10 of them:</p>
+<ol>
+<li>Geometry</li>
+<li>Trigonometric Identities</li>
+<li>Sums of Two Squares</li>
+<li>Roots of Unity Filtering</li>
+<li>Physics</li>
+<li>Solving Differential Equations</li>
+<li>Integrals</li>
+<li>Infinite sums</li>
+<li>Proof of the Central Limit Theorem</li>
+<li>Fractional Derivatives and Embeddings of Fractional Sobolev Spaces</li>
+</ol>
+<h2 id="1-geometry">1. Geometry<a class="anchor" href="#1-geometry" title="Link to this section">#</a></h2>
+<p><strong>Rotate points with ease!</strong></p>
+<p>This may be &ldquo;backwards&rdquo; in terms of which result depends on the other, but complex numbers are incredibly useful for rotations. This is because when multiplying complex numbers, you are really multiplying their magnitudes and adding their angles. This follows from, say, sine and cosine angle sum formulae, and it is also &ldquo;easy to see&rdquo; if you write complex numbers in polar form (though this is not at all a rigorous argument). But where this method really shines is when dealing with cartesian coordinates. If we have a point \((a, b) \in \mathbb{R}^2\), and we wish to rotate this about the origin by \(60\) degrees, then complex numbers makes this incredibly simple to execute: Just multiply the complex number \(a + bi\) by \(\cos(60) + i\sin(60)\).</p>
+<p>The second-best way to rotate points is via linear algebra. But even if you remember the rotation matrix, it&rsquo;s probably much faster to use complex numbers. Moreover, you can even use the complex number method to derive the rotation matrix! Since</p>
+<div class="math-block">\[(a + bi)(\cos\theta + i\sin\theta) = a\cos\theta - b\sin\theta + (a\sin\theta + b\cos\theta)i,\]</div>
+<p>we see that the rotation of \((a, b)\) about \((0, 0)\) by an angle \(\theta\) is given by</p>
+<div class="math-block">\[\begin{bmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{bmatrix} \begin{bmatrix} a \\ b \end{bmatrix}.\]</div>
+<p>(Yes, we can argue this also by knowing that rotation is a linear transformation and then plugging in basis vectors. But that requires thinking. This method does not!)</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Using complex methods, find the area of an equilateral triangle whose vertices have \(x\)-coordinates \(0\), \(1\), and \(3\), in some order.</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Slide the triangle vertically (which changes no \(x\)-coordinates) so that the vertex with \(x\)-coordinate \(0\) sits at the origin, and call the other two vertices \(B\) and \(C\). Since the triangle is equilateral, \(C\) is \(B\) rotated about the origin by \(60^\circ\) in one direction or the other. Reflecting over the \(x\)-axis changes no \(x\)-coordinates either, so we may assume the rotation is counterclockwise: \(C = B\left(\tfrac12 + \tfrac{\sqrt3}{2}i\right)\).</p>
+<p>Suppose \(B\) is the vertex with \(x\)-coordinate \(1\), so \(B = 1 + ki\) for some real \(k\). Then</p>
+<div class="math-block">\[\operatorname{Re}(C) = \operatorname{Re}\!\left((1 + ki)\left(\tfrac12 + \tfrac{\sqrt3}{2}i\right)\right) = \tfrac12 - \tfrac{\sqrt3}{2}k = 3,\]</div>
+<p>so \(k = -\tfrac{5}{\sqrt3}\). The side length \(|B|\) then satisfies \(|B|^2 = 1 + \tfrac{25}{3} = \tfrac{28}{3}\).</p>
+<p>(If instead \(B\) is the vertex with \(x\)-coordinate \(3\), then \(B = 3 + ki\) and \(\operatorname{Re}(C) = \tfrac32 - \tfrac{\sqrt3}{2}k = 1\) gives \(k = \tfrac1{\sqrt3}\) and \(|B|^2 = 9 + \tfrac13 = \tfrac{28}{3}\) again, as it must.)</p>
+<p>An equilateral triangle with side length \(s\) has area \(\tfrac{\sqrt3}{4}s^2\), so the area is</p>
+<div class="math-block">\[\frac{\sqrt3}{4}\cdot\frac{28}{3} = \boxed{\frac{7\sqrt3}{3}}.\]</div>
+</details>
+</div>
+<p>Complex numbers are so intertwined with the concept of rotation that Asymptote&rsquo;s coordinate system is literally complex numbers, which hence allows you to multiply points together.</p>
+<h3 id="other-applications-to-euclidean-geometry">Other applications to Euclidean geometry<a class="anchor" href="#other-applications-to-euclidean-geometry" title="Link to this section">#</a></h3>
+<p>Viewing the Euclidean plane as being the same as the complex plane \(\mathbb{C}\) gives some useful algebraic structure to geometry that allows one to algebraically prove certain statements. It lets you &ldquo;add&rdquo; points, of course, though this isn&rsquo;t that thrilling since this is a &ldquo;standard&rdquo; vector space operation. The true power (and really the only reason why you&rsquo;d want to be in the complex plane versus \(\mathbb{R}^2\)) is the ability to <em>multiply</em> points. For example, you can prove that a triangle with vertices \(a, b, c \in \mathbb{C}\), listed counterclockwise, is equilateral iff</p>
+<div class="math-block">\[a + \omega b + \omega^2 c = 0\]</div>
+<p>where \(\omega\) is a primitive third root of unity, such as</p>
+<div class="math-block">\[\omega = e^{2\pi i/3} = \frac{-1}{2} + \frac{\sqrt3}{2}i.\]</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Prove this fact. (Avoid &ldquo;bashing&rdquo; it, there are nice ways to argue both directions.)</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Since \(1 + \omega + \omega^2 = 0\), we have \(\omega^2 = -1 - \omega\), so</p>
+<div class="math-block">\[a + \omega b + \omega^2 c = (a - c) + \omega(b - c).\]</div>
+<p>Hence the condition \(a + \omega b + \omega^2 c = 0\) says exactly that</p>
+<div class="math-block">\[a - c = -\omega\,(b - c) = e^{-i\pi/3}(b - c),\]</div>
+<p>because \(-\omega = e^{i\pi}e^{2\pi i/3} = e^{5\pi i/3} = e^{-i\pi/3}\). In words: the vector from \(c\) to \(a\) is the vector from \(c\) to \(b\) turned <em>clockwise</em> by \(60^\circ\).</p>
+<p>(\(\Leftarrow\)) If this holds, then sides \(ca\) and \(cb\) have the same length and meet at an angle of \(60^\circ\). A triangle with two equal sides and a \(60^\circ\) angle between them is equilateral.</p>
+<p>(\(\Rightarrow\)) If the triangle is equilateral, then \(|a - c| = |b - c|\) and the angle at \(c\) is \(60^\circ\), so \(a - c\) is \(b - c\) turned by \(60^\circ\) in one direction or the other. Listing the vertices \(a, b, c\) counterclockwise means that going from \(c\) to \(b\) to \(a\) turns clockwise, which is the clockwise turn above. So \(a - c = e^{-i\pi/3}(b - c)\), which is the condition.</p>
+<p>(If the vertices are listed clockwise instead, swap \(\omega\) and \(\omega^2\): the condition becomes \(a + \omega^2 b + \omega c = 0\).)</p>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Use this fact to prove Napoleon&rsquo;s Theorem: if equilateral triangles are erected outward on the three sides of any triangle, then the centers of those three equilateral triangles form an equilateral triangle.</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Let the triangle be \(ABC\) with vertices \(a, b, c \in \mathbb{C}\) listed counterclockwise. Let \(a'\) be the apex of the outward equilateral triangle on side \(BC\). Going \(B \to C \to A'\) turns clockwise (because \(A'\) lies on the opposite side of \(BC\) from \(A\)), so the vertices \(b, a', c\) are listed counterclockwise, and the fact gives</p>
+<div class="math-block">\[b + \omega a' + \omega^2 c = 0 \quad\Longrightarrow\quad a' = -\omega^2 b - \omega c,\]</div>
+<p>using \(\omega^{-1} = \omega^2\). The center of an equilateral triangle is its centroid, so the center of the triangle on \(BC\) is</p>
+<div class="math-block">\[p = \frac{b + c + a'}{3} = \frac{(1 - \omega^2)b + (1 - \omega)c}{3}.\]</div>
+<p>The same computation on the other two sides (shift \(a \to b \to c \to a\)) gives the other two centers,</p>
+<div class="math-block">\[q = \frac{(1 - \omega^2)c + (1 - \omega)a}{3}, \qquad r = \frac{(1 - \omega^2)a + (1 - \omega)b}{3}.\]</div>
+<p>Let \(S = a + \omega b + \omega^2 c\). Using \(\omega^3 = 1\), we can check that \(b + \omega c + \omega^2 a = \omega^2 S\) and \(c + \omega a + \omega^2 b = \omega S\). Therefore</p>
+<div class="math-block">\[\begin{aligned}3(p + \omega q + \omega^2 r) &amp;= (1 - \omega^2)(b + \omega c + \omega^2 a) \\ &amp;\qquad + (1 - \omega)(c + \omega a + \omega^2 b) \\ &amp;= \left[(1 - \omega^2)\omega^2 + (1 - \omega)\omega\right]S.\end{aligned}\]</div>
+<p>The bracket is \((\omega^2 - \omega) + (\omega - \omega^2) = 0\). So \(p + \omega q + \omega^2 r = 0\), and by the fact above (the \(\Leftarrow\) direction), \(pqr\) is equilateral. \(\blacksquare\)</p>
+</details>
+</div>
+<p>This is just the tip of the iceberg. A more in-depth study of this topic is best deferred to some works of Evan Chen.</p>
+<h2 id="2-trigonometric-identities-made-easy">2. Trigonometric identities made easy<a class="anchor" href="#2-trigonometric-identities-made-easy" title="Link to this section">#</a></h2>
+<p>The sine and cosine angle sum identities can be quite difficult to remember on a first encounter. The way I &ldquo;memorized&rdquo; them was quite silly: I simply derived them on the spot whenever I needed them, and each subsequent derivation got faster and faster until I could procure them so fast that I had effectively memorized them. Indeed, &ldquo;proving&rdquo; the identities reduces to nothing more of the following back-of-the-envelope calculation:</p>
+<div class="math-block">\[\begin{aligned}\cos(A+B) + i\sin(A+B) &amp;= e^{iA}e^{iB} \\ &amp;= (\cos A + i\sin A)(\cos B + i\sin B) \\ &amp;= \cos A\cos B - \sin A\sin B \\ &amp;\qquad + (\cos A\sin B + \sin A\cos B)i.\end{aligned}\]</div>
+<p>The angle sum identities can thus be derived in mere seconds!</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Derive the triple-angle formula \(\cos(3\theta) = 4\cos^3\theta - 3\cos\theta\) using complex methods.</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>By de Moivre, \(\cos(3\theta) + i\sin(3\theta) = (\cos\theta + i\sin\theta)^3\). Expanding the cube and taking real parts,</p>
+<div class="math-block">\[\begin{aligned}\cos(3\theta) &amp;= \cos^3\theta - 3\cos\theta\sin^2\theta \\ &amp;= \cos^3\theta - 3\cos\theta(1 - \cos^2\theta) \\ &amp;= 4\cos^3\theta - 3\cos\theta.\end{aligned}\]</div>
+</details>
+</div>
+<p>In general, you see a good bit of &ldquo;complex bashing&rdquo; in Olympiad settings that concern trigonometry. Essentially, if one wishes to prove some identity that involves \(\sin\) and \(\cos\), we can try writing</p>
+<div class="math-block">\[\sin x = \frac{e^{ix} - e^{-ix}}{2i}\]</div>
+<p>and</p>
+<div class="math-block">\[\cos x = \frac{e^{ix} + e^{-ix}}{2}.\]</div>
+<p>While this can be quite messy, it often ends up clarifying the situation since exponentials are more &ldquo;flexible&rdquo; to algebraically work with than sine and cosine.</p>
+<p>As a last remark here, let&rsquo;s eviscerate a particularly &ldquo;fearsome&rdquo; trigonometric identity: The tangent addition formula for multiple angles. That is,</p>
+<div class="math-block">\[\tan(\theta_1 + \theta_2 + \ldots + \theta_n) = \frac{s_1 - s_3 + s_5 - s_7 + \ldots}{1 - s_2 + s_4 - s_6 + \ldots},\]</div>
+<p>where</p>
+<div class="math-block">\[s_k = \sum_{S \subseteq \{1, \cdots, n\},\, |S| = k}\ \prod_{j \in S} \tan\theta_j\]</div>
+<p>is the \(k\)th symmetric polynomial in \(\tan\theta_1, \cdots, \tan\theta_n\). For example,</p>
+<div class="math-block">\[\tan(A + B + C) = \frac{\tan A + \tan B + \tan C - \tan A\tan B\tan C}{1 - \tan A\tan B - \tan A\tan C - \tan B\tan C}.\]</div>
+<p>When this was taught to me first, I recall the argument being a bit of an inductive mess. But such pains are completely sidestepped using complex numbers!</p>
+<p>Let&rsquo;s start by finding a complex number \(a\) whose argument is \(A\). How about \(a = 1 + i\tan A\)? Define \(b\) and \(c\) similarly. Then the product \(abc\) has argument \(A + B + C\), and \(\tan(A + B + C)\) will be given by the quotient of the imaginary and real parts of \(abc\). Computing,</p>
+<div class="math-block">\[\begin{aligned}abc &amp;= (1 + i\tan A)(1 + i\tan B)(1 + i\tan C) \\ &amp;= 1 - \tan A\tan B - \tan A\tan C - \tan B\tan C \\ &amp;\qquad + (\tan A + \tan B + \tan C - \tan A\tan B\tan C)i.\end{aligned}\]</div>
+<p>The tangent addition formula shows up immediately with practically no effort, and the argument is equally easy for the general case of \(n\) angles.</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Evaluate the infinite sum</p>
+<div class="math-block">\[\sum_{n=1}^\infty \frac{\cos n}{2^n}\]</div>
+<p>using complex numbers.</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Since \(\cos n = \operatorname{Re}(e^{in})\), the sum is the real part of a geometric series with ratio \(e^{i}/2\), which has magnitude \(\tfrac12 &lt; 1\):</p>
+<div class="math-block">\[\sum_{n=1}^\infty \left(\frac{e^i}{2}\right)^n = \frac{e^i/2}{1 - e^i/2} = \frac{e^i}{2 - e^i}.\]</div>
+<p>Multiplying the top and bottom by the conjugate \(2 - e^{-i}\) of the denominator,</p>
+<div class="math-block">\[\frac{e^i}{2 - e^i} = \frac{e^i(2 - e^{-i})}{|2 - e^i|^2} = \frac{2e^i - 1}{5 - 4\cos 1}.\]</div>
+<p>Taking the real part,</p>
+<div class="math-block">\[\sum_{n=1}^\infty \frac{\cos n}{2^n} = \boxed{\frac{2\cos 1 - 1}{5 - 4\cos 1}}.\]</div>
+</details>
+</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Let \(\theta \in \mathbb{R}\) be a constant. Using complex numbers, obtain a closed form for the finite sum</p>
+<div class="math-block">\[a_n := \sum_{k=0}^n \sin(k\theta),\]</div>
+<p>and deduce that the sequence \(\{a_n\}_{n=0}^\infty\) is bounded. (Note that if \(\sin\) is replaced with \(\cos\), the same statement holds except for when \(\theta\) is an integer multiple of \(2\pi\).)</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>If \(\theta\) is an integer multiple of \(2\pi\), every term is \(0\) and \(a_n = 0\) for all \(n\), which is bounded. Otherwise \(e^{i\theta} \neq 1\), and \(a_n\) is the imaginary part of a finite geometric series:</p>
+<div class="math-block">\[\begin{aligned}\sum_{k=0}^n e^{ik\theta} &amp;= \frac{e^{i(n+1)\theta} - 1}{e^{i\theta} - 1} \\ &amp;= \frac{e^{i(n+1)\theta/2}\left(e^{i(n+1)\theta/2} - e^{-i(n+1)\theta/2}\right)}{e^{i\theta/2}\left(e^{i\theta/2} - e^{-i\theta/2}\right)} \\ &amp;= e^{in\theta/2}\,\frac{\sin\frac{(n+1)\theta}{2}}{\sin\frac{\theta}{2}}.\end{aligned}\]</div>
+<p>Taking the imaginary part (the factor \(e^{in\theta/2}\) contributes \(\sin\frac{n\theta}{2}\)),</p>
+<div class="math-block">\[a_n = \frac{\sin\frac{n\theta}{2}\,\sin\frac{(n+1)\theta}{2}}{\sin\frac{\theta}{2}}.\]</div>
+<p>The numerator has absolute value at most \(1\), so \(|a_n| \le \dfrac{1}{|\sin(\theta/2)|}\) for every \(n\). Hence \(\{a_n\}\) is bounded.</p>
+</details>
+</div>
+<h2 id="3-sums-of-two-squares">3. Sums of two squares<a class="anchor" href="#3-sums-of-two-squares" title="Link to this section">#</a></h2>
+<p>A famous result in elementary number theory is that if there are positive integers \(x\) and \(y\), each of which can be written as the sum of two perfect squares, then the product \(xy\) can also be written as the sum of two squares! This miraculous statement can be proven with the help of complex numbers.</p>
+<p>Suppose \(x = a^2 + b^2\) and \(y = c^2 + d^2\). Then</p>
+<div class="math-block">\[x = |a + bi|^2\]</div>
+<p>and</p>
+<div class="math-block">\[y = |c + di|^2.\]</div>
+<p>Therefore</p>
+<div class="math-block">\[\begin{aligned}xy &amp;= |a + bi|^2|c + di|^2 \\ &amp;= |(a + bi)(c + di)|^2 \\ &amp;= |ac - bd + (bc + ad)i|^2 \\ &amp;= (ac - bd)^2 + (bc + ad)^2.\end{aligned}\]</div>
+<p>Voila.</p>
+<p>Of course, one could have jumped straight to the identity \((a^2 + b^2)(c^2 + d^2) = (ac - bd)^2 + (bc + ad)^2\) without ever mentioning complex numbers, but good luck finding this without the help of our imaginary friends.</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Using the help of complex numbers, show that if \(x\) is a positive even integer that can be written as the sum of two squares, then \(x/2\) can also be written as the sum of two squares.</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Write \(x = a^2 + b^2 = |a + bi|^2\). Since \(x\) is even, \(a\) and \(b\) have the same parity (if one were even and the other odd, \(a^2 + b^2\) would be odd). Therefore \(a + b\) and \(b - a\) are both even. Now divide \(a + bi\) by \(1 + i\), which has \(|1 + i|^2 = 2\):</p>
+<div class="math-block">\[\frac{a + bi}{1 + i} = \frac{(a + bi)(1 - i)}{2} = \frac{a + b}{2} + \frac{b - a}{2}\,i.\]</div>
+<p>Both the real and imaginary parts are integers, and taking squared magnitudes,</p>
+<div class="math-block">\[\frac{x}{2} = \frac{|a + bi|^2}{|1 + i|^2} = \left(\frac{a + b}{2}\right)^2 + \left(\frac{b - a}{2}\right)^2.\]</div>
+</details>
+</div>
+<h2 id="4-roots-of-unity-filtering">4. Roots of Unity Filtering<a class="anchor" href="#4-roots-of-unity-filtering" title="Link to this section">#</a></h2>
+<p>Suppose we have a (possibly infinite) polynomial \(P(x) = a_0 + a_1x + a_2x^2 + \ldots\). The sum of the coefficients of \(P\) is given as \(P(1)\), clearly. How about the sum of <em>every other</em> coefficient? If we wish to obtain a nice expression for \(a_0 + a_2 + a_4 + \ldots\), one trick is to observe that</p>
+<div class="math-block">\[P(1) = a_0 + a_1 + a_2 + a_3 + \ldots\]</div>
+<div class="math-block">\[P(-1) = a_0 - a_1 + a_2 - a_3 + \ldots\]</div>
+<p>and then sum these equalities to obtain</p>
+<div class="math-block">\[P(1) + P(-1) = 2a_0 + 2a_2 + 2a_4 + \ldots.\]</div>
+<p>We have hence killed all non-even terms by introducing \((-1)\), which lets us conclude that the sum of every other coefficient, \(a_0 + a_2 + \ldots\), is exactly \(\dfrac{P(1) + P(-1)}{2}\).</p>
+<p>What about every <em>third</em> coefficient? Is there a nice expression for \(a_0 + a_3 + a_6 + \ldots\)? The answer is yes, and we can actually do the same trick to obtain it. Last time, we killed all non-even terms using the fact that \(1 + (-1) = 0\). How do we kill all <em>non-multiple-of-3</em> terms? We simply go into the complex plane, using the fact that \(1 + \omega + \omega^2 = 0\) where \(\omega\) is a (primitive) third root of unity!</p>
+<p>If \(\omega\) is, say, \(-\dfrac12 + \dfrac{\sqrt3}{2}i\), then \(\omega^3 = 1\) and \(1 + \omega + \omega^2 = 0\). So \(1 + \omega^n + (\omega^2)^n\) is \(3\) exactly when \(n\) is a multiple of \(3\), and otherwise it is \(0\), vanishing into thin air. A good picture to have in mind for convincing yourself that this is true, and for visualizing what exactly is going on here, is to view \(1^n\), \(\omega^n\), and \((\omega^2)^n\) as &ldquo;propellors&rdquo; rotating in the complex plane at different speeds. The \(1^n\) propellor stays at \(1\) without ever moving. The \(\omega^n\) propellor starts at \(1\) and rotates \(120\) degrees counter-clockwise every time \(n\) increments. The \((\omega^2)^n\) rotates at twice the speed, rotating \(240\) degrees counter-clockwise every time \(n\) goes up. In this visualization, the three propellors meet up exactly when \(n\) is a multiple of \(3\), but otherwise they are evenly spaced around \(0\), which causes the cancellation.</p>
+<p>To spell out the punchline, we plug in \(1\), \(\omega\), and \(\omega^2\) into \(P\) to get</p>
+<div class="math-block">\[P(1) = a_0 + a_1 + a_2 + a_3 + \ldots\]</div>
+<div class="math-block">\[P(\omega) = a_0 + a_1\omega + a_2\omega^2 + a_3\omega^3 + \ldots\]</div>
+<div class="math-block">\[P(\omega^2) = a_0 + a_1\omega^2 + a_2\omega^4 + a_3\omega^6 + \ldots\]</div>
+<p>and summing these gives</p>
+<div class="math-block">\[P(1) + P(\omega) + P(\omega^2) = a_0(3) + a_1(0) + a_2(0) + a_3(3) + \ldots.\]</div>
+<p>Thus</p>
+<div class="math-block">\[a_0 + a_3 + a_6 + \ldots = \frac{P(1) + P(\omega) + P(\omega^2)}{3}.\]</div>
+<p>This neat trick works when \(3\) is replaced with any prime number.</p>
+<p>This method, known as &ldquo;Roots of Unity Filtering&rdquo;, is especially useful when applied to certain polynomials \(P\). A common choice is \(P(x) = (1 + x)^n = \displaystyle\sum_{k=0}^n \binom{n}{k}x^k\), which gives a beautiful expression for sums such as</p>
+<div class="math-block">\[\sum_{k=0}^{100} \binom{300}{3k}.\]</div>
+<p>If you haven&rsquo;t seen this little sleight of hand yet, it is worth computing. (And if you&rsquo;re stuck, this demonstration is literally on every other site that talks about roots of unity filtering.)</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Use the methods of complex numbers to find a smooth function \(f : \mathbb{R} \to \mathbb{R}\), written in closed form, such that the sequence of derivatives of \(f\) has period \(3\). (That is, \(f''' = f\) but \(f' \neq f\).) Your expression for \(f\) should not involve non-real numbers.</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Let \(\omega = e^{2\pi i/3} = -\tfrac12 + \tfrac{\sqrt3}{2}i\). The complex function \(g(x) = e^{\omega x}\) satisfies \(g''' = \omega^3 g = g\), but \(g' = \omega g \neq g\). Now take real parts:</p>
+<div class="math-block">\[f(x) = \operatorname{Re}\left(e^{\omega x}\right) = e^{-x/2}\cos\!\left(\frac{\sqrt3}{2}x\right).\]</div>
+<p>Since differentiation commutes with taking real parts, \(f^{(k)} = \operatorname{Re}\left(\omega^k e^{\omega x}\right)\). In particular \(f''' = \operatorname{Re}(\omega^3 e^{\omega x}) = f\), while \(f' = \operatorname{Re}(\omega e^{\omega x}) \neq f\) (for example, \(f(0) = 1\) but \(f'(0) = \operatorname{Re}(\omega) = -\tfrac12\)).</p>
+</details>
+</div>
+<h2 id="5-acceleration-of-uniform-circular-motion">5. Acceleration of uniform circular motion<a class="anchor" href="#5-acceleration-of-uniform-circular-motion" title="Link to this section">#</a></h2>
+<p><em>Disclaimer: I am not a physicist.</em></p>
+<p>This is rather informal and, as far as I&rsquo;m aware, not an actual &ldquo;application&rdquo; of complex numbers. It&rsquo;s a fun connection to make, however!</p>
+<p>If you took some form of physics, you are probably aware that the acceleration of an object undergoing uniform circular motion about a center \(O\) is a vector that points <em>towards</em> \(O\). If you&rsquo;re like me, you probably found this extremely unintuitive and/or remarkable. Why does it point exactly towards the center? Complex numbers can help us understand why. An object rotating about the complex origin \(0\) with angular velocity \(\omega\) will at</p>
+<div class="math-block">\[e^{i\omega t}\]</div>
+<p>after \(t\) seconds. This is the position of the object over time. Differentiating gives the velocity over time,</p>
+<div class="math-block">\[i\omega e^{i\omega t}.\]</div>
+<p>Lastly, differentiating this gives the acceleration of the object over time,</p>
+<div class="math-block">\[-\omega^2 e^{i\omega t}.\]</div>
+<p>The position vector \(e^{i\omega t}\) and the acceleration vector \(-\omega^2 e^{i\omega t}\) are pointing in opposite directions at all times. In other words, if we place the acceleration vector at the position of the position vector, then it will point towards \(0\), the center of rotation.</p>
+<h2 id="6-differential-equations">6. Differential Equations<a class="anchor" href="#6-differential-equations" title="Link to this section">#</a></h2>
+<h3 id="elementary-applications">Elementary Applications<a class="anchor" href="#elementary-applications" title="Link to this section">#</a></h3>
+<p>Differential equations can be solved with the help of complex numbers. Consider, for example, the differential equation for periodic motion or whatever it&rsquo;s called,</p>
+<div class="math-block">\[u'' = -ku\]</div>
+<p>where \(k &gt; 0\) is the spring constant. Practically speaking the &ldquo;best&rdquo; way to solve this in my opinion is to make the substitution \(u(t) = v(\sqrt{k}\,t)\) to eliminate the \(k\), and then guess that \(v(t) = a\sin t + b\cos t\). But you&rsquo;d only guess this if you pretty much know what the solution is (and this would be expected from you in practice), so just for fun let&rsquo;s try and derive the solution &ldquo;from scratch&rdquo;.</p>
+<p>Let \(D\) be the &ldquo;differentiation operator&rdquo;. Then the ODE may be written as \((D^2 + kI)u = 0\), where \(I\) is the &ldquo;identity&rdquo;. We can then make the factorization</p>
+<div class="math-block">\[(D + \sqrt{k}\,iI)(D - \sqrt{k}\,iI)u = 0.\]</div>
+<p>(If you haven&rsquo;t seen this trick before, it SHOULD feel suspicious. Fortunately it turns out that this is actually perfectly rigorous if you think hard enough.)</p>
+<p>This lets us decouple the ODE into a simple system. Let \(v = (D - \sqrt{k}\,iI)u\). Then we can start by solving \((D + \sqrt{k}\,iI)v = 0\), i.e.</p>
+<div class="math-block">\[v' + \sqrt{k}\,iv = 0. \tag{*}\]</div>
+<p>Of course, it&rsquo;s crucial to recognize that we are now allowing our solutions to be complex-valued, i.e. of type \(\mathbb{R} \to \mathbb{C}\) rather than just \(\mathbb{R} \to \mathbb{R}\). This is not a mistake because finding all solutions of the former type will also find all solutions of the latter type.</p>
+<p>Solving \((*)\) using your favorite method (such as the rather non-rigorous &ldquo;separate and integrate&rdquo;, or perhaps using an integrating factor, or even by guessing, like I just did), we end up with \(v(t) = v(0)e^{-\sqrt{k}\,it}\). Now, from \(v = (D - \sqrt{k}\,iI)u = u' - \sqrt{k}\,iu\), we get a first-order ODE for \(u\),</p>
+<div class="math-block">\[v(0)e^{-\sqrt{k}\,it} = u'(t) - \sqrt{k}\,iu(t).\]</div>
+<p>Using your favorite method (probably integrating factors), we get the solution</p>
+<div class="math-block">\[u(t) = Ae^{-\sqrt{k}\,it} + Be^{\sqrt{k}\,it}\]</div>
+<p>for constants \(A\) and \(B\). These are all the <em>complex</em> solutions. To recover the <em>real</em> solutions, some more work should be done, which I will omit. (Do beware that \(A\) and \(B\) are not necessarily real.)</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>An ant is placed on each corner of a square of side length \(2024\). Each ant walks towards its counter-clockwise neighbor at a speed of \(42\) units per second. Eventually the ants will converge at the center of the square. Using complex numbers, prove that each ant will have travelled exactly \(2024\) units.</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Put the center of the square at the origin. By symmetry, the four ants always sit at the corners of a square centered at the origin, so if one ant is at \(z(t)\), the others are at \(iz\), \(-z\), and \(-iz\). The ant at \(z\) walks towards its counter-clockwise neighbor at \(iz\), so its velocity has magnitude \(42\) and direction \(\dfrac{iz - z}{|iz - z|}\):</p>
+<div class="math-block">\[z' = 42\cdot\frac{(i - 1)z}{\sqrt2\,|z|}.\]</div>
+<p>Write \(z = re^{i\theta}\) in polar form, where \(r\) and \(\theta\) depend on \(t\). Then \(z' = (r' + ir\theta')e^{i\theta}\), and \(\dfrac{i - 1}{\sqrt2} = e^{3\pi i/4} = -\dfrac{1}{\sqrt2} + \dfrac{1}{\sqrt2}i\). Dividing both sides by \(e^{i\theta}\) and comparing real parts gives</p>
+<div class="math-block">\[r' = -\frac{42}{\sqrt2}.\]</div>
+<p>So each ant&rsquo;s distance from the center shrinks at the constant rate \(\dfrac{42}{\sqrt2}\) units per second. The ants start at distance \(\dfrac{2024}{\sqrt2}\) (half the diagonal), so they all reach the center at time</p>
+<div class="math-block">\[T = \frac{2024/\sqrt2}{42/\sqrt2} = \frac{2024}{42}.\]</div>
+<p>Each ant moves at speed \(42\), so it travels \(42 \cdot \dfrac{2024}{42} = \boxed{2024}\) units. \(\blacksquare\)</p>
+</details>
+</div>
+<h3 id="advanced-applications">Advanced Applications<a class="anchor" href="#advanced-applications" title="Link to this section">#</a></h3>
+<p>This is not the only way to employ complex numbers, however. We can also try using the Fourier Transform, which in this post we define to be</p>
+<div class="math-block">\[\mathcal{F}(u)(\xi) = \hat{u}(\xi) := \int_{\mathbb{R}} u(t)e^{-2\pi i\xi t}\,dt.\]</div>
+<p>Provided sufficient regularity and decay properties on \(u\), we have that</p>
+<div class="math-block">\[\mathcal{F}(u')(\xi) = -2\pi i\xi\,\mathcal{F}(u)(\xi).\]</div>
+<p>This allows us to effectively turn differentiation into multiplication. Applying this to the spring equation,</p>
+<div class="math-block">\[(-2\pi i\xi)^2\hat{u}(\xi) = -k\hat{u}(\xi).\]</div>
+<p>Strangely, this equation seems to suggest that the only solution is \(\hat{u}(\xi) = 0\), so that \(u(x) = 0\). What gives?</p>
+<p>The issue is that you can only take the Fourier transform of \(u\) provided that \(u\) has sufficient decay properties, e.g. something like \(|u(x)| \le \dfrac{A}{1 + |x|^2}\). So in a way, trying to solve the spring equation using Fourier methods has given us every possible solution that decays to \(0\) at infinity. Indeed, \(u(x) = 0\) is the only such solution.</p>
+<p>So is this approach doomed? It is not, but fixing this will (1) require some very advanced theory, and (2) doesn&rsquo;t necessarily find all solutions either (the saving grace here, though, is that it does appear to find all solutions &ldquo;symbolically&rdquo;). The advanced theory we need is called the theory of <em>distributions</em>, particularly that of <em>tempered distributions</em>. A full discussion of this will be deferred to a different post because it really is quite advanced, but the gist is that distributions are a generalization of functions. Some properties include:</p>
+<ul>
+<li>If \(f\) does not grow too fast, then it is also a tempered distribution.</li>
+<li>If \(f\) is a tempered distribution, then you can take its Fourier transform \(\hat{f}\) to get another tempered distribution.</li>
+<li>You can add tempered distributions, and this interacts well with the Fourier transform.</li>
+<li>You cannot multiply tempered distributions. But you can multiply tempered distributions by a smooth function. For example, if \(f\) is a tempered distribution, then so is \(xf(x)\).</li>
+<li>We still have the nice identity \(\mathcal{F}(u')(\xi) = -2\pi i\xi\,\mathcal{F}(u)(\xi)\), which holds &ldquo;in the sense of distributions&rdquo;. That is, you shouldn&rsquo;t view each side as a function. Rather you should see each side as a tempered distribution.</li>
+</ul>
+<p>Now let us solve the spring equation, and I will make exactly one (fatal!) error that I shall address at the end. Taking the Fourier transform again gives</p>
+<div class="math-block">\[(-2\pi i\xi)^2\hat{u}(\xi) = -k\hat{u}(\xi).\]</div>
+<p>This rearranges to</p>
+<div class="math-block">\[(2\pi\xi - \sqrt{k})(2\pi\xi + \sqrt{k})\hat{u}(\xi) = 0. \tag{*}\]</div>
+<p>It might seem like we&rsquo;ve wound up at the same problem. Isn&rsquo;t the only solution here \(\hat{u}(\xi) = 0\)? This would be true if this equation was an equality of functions. But it&rsquo;s an equality of distributions, so the intuitive &ldquo;algebra&rdquo; doesn&rsquo;t actually apply. It turns out that the solution to a equation such as \((x - a)f(x) = 0\) for \(f\), in the sense of distributions, is given by \(f = c \cdot \delta_a\) where \(\delta_a\) is the <em>Dirac delta distribution</em> at \(a\) and \(c\) is any constant. This is not that easy to prove, but it is powerful here. Applying this twice to \((*)\), we find the distributional solution</p>
+<div class="math-block">\[\hat{u}(\xi) = c_1\delta_{-\sqrt{k}/(2\pi)} + c_2\delta_{\sqrt{k}/(2\pi)}\]</div>
+<p>for any constants \(c_1\) and \(c_2\). Applying the inverse Fourier transform on both sides recovers the solution to the spring equation. I&rsquo;ll defer the details (and the more rigorous argument) for another post.</p>
+<p>I promised that there was a fatal error. Indeed, the error here was the assumption that the solution \(u\) could be treated as a (tempered) distribution. Unfortunately, we do not know a priori that this is the case, since a solution such as \(u(x) = e^x\) actually grows too fast to be interpreted as a tempered distribution. Hence, this method is unable to rule out candidates such as \(u(x) = e^x\).</p>
+<p>One silver lining is that if you just &ldquo;pretend&rdquo; that you could work with \(e^x\) as a distribution and do the algebra to solve a differential equation such as \(u' = u\), then you will find that the method still recovers the solution, even though the steps cease to be legal. Also, this tool can be used in conjunction with other theorems to find all solutions or to even just obtain some useful information, particularly in more complicated differential equations.</p>
+<p>The Fourier transform (in multiple dimensions) can also be used to solve partial differential equations such as \(\Delta u = f\), but I won&rsquo;t pursue this matter here.</p>
+<h2 id="7-evaluation-of-integrals">7. Evaluation of integrals<a class="anchor" href="#7-evaluation-of-integrals" title="Link to this section">#</a></h2>
+<p>The topic of using <em>contour integration</em> to evaluate certain integrals has been beaten to death, this time by me. For a full discussion please see my post, <a href="../complex-analysis-contour-integration/">Complex Analysis: A Guide to Contour Integration</a>.</p>
+<p>I&rsquo;ll add that contour integration isn&rsquo;t the only way for complex numbers to evaluate integrals. If there is a way to introduce complex numbers which can simplify matters, there&rsquo;s a good chance that this can be made to work. Let us, for example, evaluate the integral</p>
+<div class="math-block">\[\int_0^x \frac{1}{1 + t^2}\,dt.\]</div>
+<p>The answer, of course, is \(\arctan(x)\). Let us try to derive this using complex numbers.</p>
+<p>As suggested in my previous writings concerning complex numbers, there are some dangerous pitfalls that we must beware of. It is easy to fall for such traps and end up with nonsense, but fortunately I am here to light the way. We begin by factoring over the complex numbers to rewrite the integral as</p>
+<div class="math-block">\[\frac{1}{2i}\int_0^x \frac{1}{t - i} - \frac{1}{t + i}\,dt.\]</div>
+<p>This is perfectly legal. Next, it is in fact true that this integral is simply equal to</p>
+<div class="math-block">\[= \frac{1}{2i}\left[(\log(x - i) - \log(-i)) - (\log(x + i) - \log(i))\right].\]</div>
+<p>But you will fall into a pit unless you know precisely what \(\log(\cdot)\) means for complex numbers. Here, it refers to the principal logarithm (there is some reasoning that should be applied to justify that this works; namely one ought to avoid the perilous negative real line). A bit more precisely, we are choosing a particular branch of the complex logarithm that contains all the complex numbers we&rsquo;re working with. Working with the principal log (characterized by \(\log(re^{i\theta}) = \log r + \theta i\) for \(-\pi &lt; \theta &lt; \pi\)) and drawing some pictures, we discover the following:</p>
+<div class="math-block">\[\log(x + i) = \log(\sqrt{x^2 + 1}) + \arctan(1/x)i\]</div>
+<div class="math-block">\[\log(x - i) = \log(\sqrt{x^2 + 1}) - \arctan(1/x)i\]</div>
+<div class="math-block">\[\log i = \pi i/2\]</div>
+<div class="math-block">\[\log(-i) = -\pi i/2\]</div>
+<p>Hence our integral is</p>
+<div class="math-block">\[\int_0^x \frac{1}{1 + t^2}\,dt = \frac{1}{2i}\left[-2\arctan(1/x)i + \pi i\right] = \boxed{\frac{\pi}{2} - \arctan(1/x)}.\]</div>
+<p>This may look different from the claimed integral of \(\arctan x\), but fortunately these two expressions are the same (why?).</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Evaluate the integral</p>
+<div class="math-block">\[\int_0^\pi e^x\cos x\,dx\]</div>
+<p>using complex numbers (instead of the usual integration by parts).</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Since \(e^x\cos x = \operatorname{Re}\left(e^{x}e^{ix}\right) = \operatorname{Re}\left(e^{(1+i)x}\right)\), and the real part commutes with integration,</p>
+<div class="math-block">\[\int_0^\pi e^x\cos x\,dx = \operatorname{Re}\int_0^\pi e^{(1+i)x}\,dx = \operatorname{Re}\left[\frac{e^{(1+i)\pi} - 1}{1 + i}\right].\]</div>
+<p>We computed earlier that \(e^{(1+i)\pi} = -e^\pi\), so this is</p>
+<div class="math-block">\[\operatorname{Re}\left[\frac{-e^\pi - 1}{1 + i}\right] = \operatorname{Re}\left[-(e^\pi + 1)\cdot\frac{1 - i}{2}\right] = \boxed{-\frac{e^\pi + 1}{2}}.\]</div>
+</details>
+</div>
+<h2 id="8-evaluation-of-infinite-sums">8. Evaluation of infinite sums<a class="anchor" href="#8-evaluation-of-infinite-sums" title="Link to this section">#</a></h2>
+<p>In a previous exercise I asked you to evaluate \(\displaystyle\sum_{n=1}^\infty \frac{\cos n}{2^n}\) using complex numbers. This is one instance of complex numbers being the silver bullet for evaluating an infinite sum, but there are other (less elementary) applications.</p>
+<h3 id="fourier-series">Fourier series<a class="anchor" href="#fourier-series" title="Link to this section">#</a></h3>
+<p>The Fourier series of a periodic function is, morally speaking, its Fourier transform under the Fourier transform of &ldquo;type&rdquo; \(\mathbb{T} \to \mathbb{Z}\). This seemingly &ldquo;abstract nonsense&rdquo; view of Fourier series is actually quite helpful for making much of the properties shared by both Fourier series and the &ldquo;classic&rdquo; Fourier transform more intuitive. A more extended discussion of Fourier series and/or the Fourier transform will be reserved for a separate post, but I felt motivated to provide a few insights here.</p>
+<p>Taking the Fourier series of certain simple functions and plugging some values into them can often lead to interesting identities. Unfortunately the converse is, at least for me, far more difficult; it is a tall task to look at an infinite sum and proceed to conjure up a proof via Fourier series.</p>
+<p>Let us, for example, take the function \(f(x) = |x|\) over \((-1, 1)\). Morally speaking we view this as a \(2\)-periodic function on \(\mathbb{R}\) by extending \(f\) periodically. To obtain the Fourier series of \(f\) with high probability of success, and without the help of the extreme &ldquo;abstract&rdquo; view, we can follow these steps.</p>
+<ol>
+<li>Determine what frequencies we need to use. We need to use all frequencies \(x \mapsto e^{-i\xi x}\) that repeat every \(2\), i.e. are invariant under a phase shift of \(2\). It&rsquo;s not hard to reason out that the frequencies we should use are \(x \mapsto e^{-n\pi ix}\) for every integer \(n\).</li>
+<li>Scale the frequencies so that they have unit \(L^2\) norm. That is, we want to define \(e_n(x) := c \cdot e^{-n\pi ix}\) where \(c &gt; 0\) is chosen so that \(\displaystyle\int_{-1}^1 |e_n(x)|^2\,dx = 1\). Seeing that \(|e_n(x)| = 1\), it&rsquo;s not hard to find that \(c = 1/\sqrt2\). We need to do this so that the frequencies \(\{e_n\}_{n \in \mathbb{Z}}\) form an orthonormal basis for \(L^2(-1, 1)\).</li>
+<li>Now the \(n\)th Fourier coefficient of \(f\) is simply the \(e_n\)-component of \(f\) under the orthonormal basis \(\{e_n\}_{n \in \mathbb{Z}}\), which is given by the inner product</li>
+</ol>
+<div class="math-block">\[\begin{aligned}\hat{f}(n) = \langle f, e_n\rangle &amp;= \int_{-1}^1 |x| \cdot \frac{1}{\sqrt2}e^{-n\pi ix}\,dx \\ &amp;= \sqrt2\int_0^1 x\cos(n\pi x)\,dx \\ &amp;= -\sqrt2\int_0^1 \frac{\sin n\pi x}{n\pi}\,dx \\ &amp;= \frac{\sqrt2(\cos(n\pi) - 1)}{n^2\pi^2} \\ &amp;= \begin{cases} 0, &amp; n \text{ even} \\[2pt] \dfrac{-2\sqrt2}{n^2\pi^2}, &amp; n \text{ odd}.\end{cases}\end{aligned}\]</div>
+<p>Oh but you&rsquo;ll notice that this actually doesn&rsquo;t work for \(n = 0\), so we need to compute separately that</p>
+<div class="math-block">\[\hat{f}(0) = \langle f, e_0\rangle = \int_{-1}^1 |x| \cdot \frac{1}{\sqrt2}\,dx = \frac{1}{\sqrt2}.\]</div>
+<p>Voila! You have successfully found the Fourier series</p>
+<div class="math-block">\[\begin{aligned}|x| = f(x) &amp;= \sum_{n=-\infty}^\infty \hat{f}(n)e_n(x) \\ &amp;= \sum_{n &lt; 0,\ \text{odd}} \frac{-2\sqrt2}{n^2\pi^2}e_n(x) + \frac{1}{\sqrt2}e_0 \\ &amp;\qquad + \sum_{n &gt; 0,\ \text{odd}} \frac{-2\sqrt2}{n^2\pi^2}e_n(x)\end{aligned} \tag{*}\]</div>
+<p>without memorization. (I <em>could</em> combine the positive and negative parts to write everything in terms of \(\cos \pi nx\), but I don&rsquo;t want to for reasons that may become apparent. Also I think it&rsquo;s more instructive like this.)</p>
+<p>Note that writing down \((*)\) willy-nilly is actually a bit reckless. It is not always going to be true that both sides of \((*)\) are equal for every \(x\). To avoid pitfalls, it should first be shown that \(f\) is continuous (which is obvious here) and that \(\displaystyle\sum_{n \in \mathbb{Z}} |\hat{f}(n)| &lt; \infty\) (which is not too hard). The motivation and rationale for these conditions will be deferred for another post.</p>
+<p>Once you&rsquo;ve shown that, it&rsquo;s safe to plug in numbers into \((*)\) and see what you get. Let&rsquo;s try \(x = 0\) for fun. Noting that \(e_n(0) = 1/\sqrt2\) for all \(n\), we get</p>
+<div class="math-block">\[0 = \frac12 + 2\sum_{n \in \mathbb{N}\ \text{odd}} \frac{-2}{n^2\pi^2},\]</div>
+<p>which rearranges to \(\displaystyle\sum_{n \in \mathbb{N}\ \text{odd}} \frac{1}{n^2} = \frac{\pi^2}{8}\). Wow! We have recovered the Basel sum, \(\displaystyle\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}\) (and if you&rsquo;re not sure how this immediately follows, you should figure it out!).</p>
+<p>But wait, there&rsquo;s more to glean from \((*)\)! By Parseval&rsquo;s identity, or the fact that the Fourier transform is an isometry, we know that</p>
+<div class="math-block">\[\int_{-1}^1 |f(x)|^2\,dx = \sum_{n \in \mathbb{Z}} |\hat{f}(n)|^2.\]</div>
+<p>This gives</p>
+<div class="math-block">\[\frac23 = \frac12 + 2\sum_{n \in \mathbb{N}\ \text{odd}} \frac{8}{n^4\pi^4},\]</div>
+<p>which rearranges to \(\displaystyle\sum_{n \in \mathbb{N}\ \text{odd}} \frac{1}{n^4} = \frac{\pi^4}{96}\). This recovers the formula</p>
+<div class="math-block">\[\zeta(4) = \sum_{n=1}^\infty \frac{1}{n^4} = \frac{\pi^4}{90}.\]</div>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Let \(a \neq 0\) be a real constant. Derive the identity</p>
+<div class="math-block">\[\sum_{n=-\infty}^\infty \frac{1}{a^2 + n^2} = \frac{\pi\coth(\pi a)}{a}\]</div>
+<p>by abusing the power of complex numbers.</p>
+<details class="spoiler">
+<summary>Hint 1</summary>
+<p>Find the Fourier series of \(e^{a|x|}\) over some centered interval, such as \((-1/2, 1/2)\). Don&rsquo;t be afraid to &ldquo;adjust&rdquo; \(a\) later on if the resulting identities you obtain are not quite what you want. The computation is pretty clean; if you notice the right things, no part of this should be tedious.</p>
+</details>
+<details class="spoiler">
+<summary>Hint 2</summary>
+<p>You can compute the Fourier coefficients with very little pain by first using symmetry to rid yourself of the pesky absolute value (and, collaterally, eliminate the imaginary part of the frequency). Then, to tame what remains, use a trick/methodology mentioned earlier in this post. (Is there a nice way to find \(\displaystyle\int_0^a \cos(bx)e^{cx}\,dx\)?)</p>
+</details>
+<details class="spoiler">
+<summary>Hint 3</summary>
+<p>Once you have reduced the problem to tackling a sum, it is useful to let \(E\) be the sum of the even-indexed terms and let \(O\) be the sum of the odd-indexed terms. Then your goal is to compute \(E + O\) based on a system of equations involving \(E\) and \(O\).</p>
+</details>
+<details class="spoiler">
+<summary>Hint 4</summary>
+<p>If you have only one equation, use a clever trick to immediately procure another. This trick is suggested by the form of the final answer. Once you have found a second equation, some slick algebra can give you \(E + O\) without actually solving for either \(E\) or \(O\).</p>
+</details>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Following Hint 1, we use a different letter for the constant in the exponent, so let \(b \neq 0\) be real (we will set \(b = 2\pi a\) at the end), and let \(g(x) = e^{b|x|}\) on \((-1/2, 1/2)\), extended to a \(1\)-periodic function. This extension is continuous (since \(g(-1/2) = g(1/2)\)) and piecewise smooth, so its Fourier series converges to \(g(x)\) at every point. Its coefficients are</p>
+<div class="math-block">\[c_n = \int_{-1/2}^{1/2} e^{b|x|}e^{-2\pi inx}\,dx = 2\int_0^{1/2} e^{bx}\cos(2\pi nx)\,dx,\]</div>
+<p>where we used the symmetry of \(e^{b|x|}\) to get rid of the absolute value and the imaginary part (Hint 2). To finish the integral, write \(e^{bx}\cos(2\pi nx) = \operatorname{Re}\left(e^{(b + 2\pi in)x}\right)\):</p>
+<div class="math-block">\[\begin{aligned}\int_0^{1/2} e^{(b + 2\pi in)x}\,dx &amp;= \frac{e^{(b + 2\pi in)/2} - 1}{b + 2\pi in} \\ &amp;= \frac{(-1)^n e^{b/2} - 1}{b + 2\pi in} \\ &amp;= \frac{\left((-1)^n e^{b/2} - 1\right)(b - 2\pi in)}{b^2 + 4\pi^2n^2}.\end{aligned}\]</div>
+<p>Taking the real part,</p>
+<div class="math-block">\[c_n = \frac{2b\left((-1)^n e^{b/2} - 1\right)}{b^2 + 4\pi^2n^2}.\]</div>
+<p>Now we plug in numbers to \(g(x) = \sum_n c_n e^{2\pi inx}\). Let</p>
+<div class="math-block">\[E = \sum_{n\ \text{even}} \frac{1}{b^2 + 4\pi^2n^2}, \qquad O = \sum_{n\ \text{odd}} \frac{1}{b^2 + 4\pi^2n^2},\]</div>
+<p>as in Hint 3 (the sums run over all even or odd integers \(n\), positive and negative), so that our goal is \(E + O\).</p>
+<p>At \(x = 0\), we have \(g(0) = 1 = \sum_n c_n\), which says</p>
+<div class="math-block">\[1 = 2b\left(e^{b/2}(E - O) - (E + O)\right).\]</div>
+<p>That&rsquo;s one equation. For another (Hint 4), plug in \(x = 1/2\), where \(e^{2\pi in/2} = (-1)^n\) and \(g(1/2) = e^{b/2} = \sum_n (-1)^n c_n\):</p>
+<div class="math-block">\[e^{b/2} = 2b\left(e^{b/2}(E + O) - (E - O)\right).\]</div>
+<p>Write \(S = E + O\) and \(D = E - O\). The two equations are</p>
+<div class="math-block">\[1 = 2b\left(e^{b/2}D - S\right), \qquad e^{b/2} = 2b\left(e^{b/2}S - D\right).\]</div>
+<p>Multiply the first by \(e^{b/2}\) and add it to the second; the \(S\) terms cancel:</p>
+<div class="math-block">\[2e^{b/2} = 2bD\left(e^b - 1\right) \quad\Longrightarrow\quad D = \frac{e^{b/2}}{b(e^b - 1)}.\]</div>
+<p>Substituting back into the first equation,</p>
+<div class="math-block">\[S = e^{b/2}D - \frac{1}{2b} = \frac{e^b}{b(e^b - 1)} - \frac{1}{2b} = \frac{e^b + 1}{2b(e^b - 1)} = \frac{\coth(b/2)}{2b}.\]</div>
+<p>That is, \(\displaystyle\sum_{n \in \mathbb{Z}} \frac{1}{b^2 + 4\pi^2n^2} = \frac{\coth(b/2)}{2b}\). Finally, set \(b = 2\pi a\):</p>
+<div class="math-block">\[\frac{1}{4\pi^2}\sum_{n \in \mathbb{Z}} \frac{1}{a^2 + n^2} = \frac{\coth(\pi a)}{4\pi a},\]</div>
+<p>and multiplying by \(4\pi^2\),</p>
+<div class="math-block">\[\sum_{n=-\infty}^\infty \frac{1}{a^2 + n^2} = \frac{\pi\coth(\pi a)}{a}.\]</div>
+</details>
+</div>
+<h3 id="poisson-summation">Poisson Summation<a class="anchor" href="#poisson-summation" title="Link to this section">#</a></h3>
+<p>Poisson summation is a tool that can be used to tackle sums of the form</p>
+<div class="math-block">\[\sum_{n=-\infty}^\infty f(n),\]</div>
+<p>where \(f : \mathbb{R} \to \mathbb{R}\) is a continuous function that &ldquo;decreases rapidly&rdquo; as \(x \to \pm\infty\). For such functions, Poisson summation states that you can replace \(f\) with its Fourier transform without changing the value of the sum. That is,</p>
+<div class="math-block">\[\sum_{n=-\infty}^\infty f(n) = \sum_{n=-\infty}^\infty \hat{f}(n).\]</div>
+<p>It is normal to feel that this identity is absurd. Two of the proofs I know of include using Fourier series and using contour integration of a cleverly-chosen function.</p>
+<p>Poisson summation happens to be an essential tool in analytic number theory, but I am not an expert in this field so I cannot say much on that matter. Amazingly, it is also used crucially for proving optimal results in the study of sphere packings (<a href="https://en.wikipedia.org/wiki/Sphere_packing">https://en.wikipedia.org/wiki/Sphere_packing</a>), though it should be noted that such applications use the multi-dimensional form</p>
+<div class="math-block">\[\sum_{n \in \mathbb{Z}^d} f(n) = \sum_{n \in \mathbb{Z}^d} \hat{f}(n)\]</div>
+<p>or further generalizations.</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Use Poisson summation to solve the previous exercise. It is helpful to first prove the identity</p>
+<div class="math-block">\[\int_{-\infty}^\infty \frac{\cos x}{x^2 + a^2}\,dx = \frac{e^{-a}\pi}{a}\]</div>
+<p>for \(a &gt; 0\), by using contour integration. Or you can just assume it&rsquo;s true if you aren&rsquo;t good at that yet.</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p><em>The integral.</em> Let \(a &gt; 0\). Integrate \(\dfrac{e^{iz}}{z^2 + a^2}\) over the boundary of the upper half-disk of radius \(R &gt; a\). On the big semicircle, \(|e^{iz}| \le 1\) and the denominator has size about \(R^2\), so that part of the integral is at most about \(\pi R \cdot \dfrac{1}{R^2 - a^2} \to 0\). The only pole inside is at \(z = ia\), where the residue is \(\dfrac{e^{-a}}{2ia}\). By the Residue Theorem,</p>
+<div class="math-block">\[\int_{-\infty}^\infty \frac{e^{ix}}{x^2 + a^2}\,dx = 2\pi i\cdot\frac{e^{-a}}{2ia} = \frac{\pi e^{-a}}{a}.\]</div>
+<p>The imaginary part of the left side is the integral of an odd function, so it vanishes, and taking real parts gives the claimed identity.</p>
+<p><em>The sum.</em> Take \(a &gt; 0\) (the sum is even in \(a\), so this is enough) and \(f(x) = \dfrac{1}{x^2 + a^2}\), which is continuous and decays quickly enough for Poisson summation. Its Fourier transform is, using that the sine part is odd,</p>
+<div class="math-block">\[\hat{f}(\xi) = \int_{-\infty}^\infty \frac{\cos(2\pi\xi x)}{x^2 + a^2}\,dx.\]</div>
+<p>For \(\xi \neq 0\), substitute \(x = \dfrac{u}{2\pi|\xi|}\):</p>
+<div class="math-block">\[\begin{aligned}\hat{f}(\xi) &amp;= \int_{-\infty}^\infty \frac{\cos u}{\dfrac{u^2}{4\pi^2\xi^2} + a^2}\cdot\frac{du}{2\pi|\xi|} \\ &amp;= 2\pi|\xi|\int_{-\infty}^\infty \frac{\cos u}{u^2 + (2\pi a|\xi|)^2}\,du \\ &amp;= 2\pi|\xi|\cdot\frac{\pi e^{-2\pi a|\xi|}}{2\pi a|\xi|} \\ &amp;= \frac{\pi}{a}e^{-2\pi a|\xi|},\end{aligned}\]</div>
+<p>where we applied the identity from the first part with \(2\pi a|\xi|\) in place of \(a\). This formula also holds at \(\xi = 0\), since \(\hat{f}(0) = \int \frac{dx}{x^2 + a^2} = \frac{\pi}{a}\). Now Poisson summation says</p>
+<div class="math-block">\[\begin{aligned}\sum_{n \in \mathbb{Z}} \frac{1}{a^2 + n^2} &amp;= \sum_{n \in \mathbb{Z}} \frac{\pi}{a}e^{-2\pi a|n|} \\ &amp;= \frac{\pi}{a}\left(1 + \frac{2e^{-2\pi a}}{1 - e^{-2\pi a}}\right) \\ &amp;= \frac{\pi}{a}\cdot\frac{1 + e^{-2\pi a}}{1 - e^{-2\pi a}} \\ &amp;= \frac{\pi\coth(\pi a)}{a}.\end{aligned}\]</div>
+</details>
+</div>
+<h2 id="9-the-central-limit-theorem">9. The Central Limit Theorem<a class="anchor" href="#9-the-central-limit-theorem" title="Link to this section">#</a></h2>
+<p>The <strong>Central Limit Theorem</strong> (CLT) states that with enough data, all distributions are normal (Gaussian) distributions, i.e. look like bell curves. More formally: If \(X_n\) is a sequence of independent and identically distributed random variables with mean \(\mu\) and variance \(\sigma^2\), then</p>
+<div class="math-block">\[\frac{X_1 + \ldots + X_n - n\mu}{\sqrt{n}\,\sigma}\]</div>
+<p>converges in distribution to a \(N(0, 1)\) random variable. This is a scary fact. But what&rsquo;s even more frightening is that this result can be proven using complex numbers. In fact, it is a very pretty, brief and elegant proof.</p>
+<p>The proof uses a probabilistic version of the Fourier transform, called the <em>characteristic function</em>: If \(X\) is a random variable, we can define its &ldquo;Fourier transform&rdquo; \(\phi_X : \mathbb{R} \to \mathbb{C}\) via</p>
+<div class="math-block">\[\phi_X(t) := \mathbb{E}e^{itX}.\]</div>
+<p>The distribution of a random variable is captured fully by its characteristic function (<em>this requires proof</em>), and moreover the characteristic function of a sum of independent random variables turns into a product! This makes the characteristic function a powerful tool for tackling the CLT, which we will now provide (roughly) the proof of.</p>
+<p>Assume for simplicity that \(\mu = 0\) and \(\sigma^2 = 1\). (In fact, this can be assumed WLOG.) Now if \(Y_n := \dfrac{X_1 + \ldots + X_n}{\sqrt{n}}\), then</p>
+<div class="math-block">\[\phi_{Y_n}(t) = \mathbb{E}\left[e^{it(X_1 + \ldots + X_n)/\sqrt{n}}\right] = \mathbb{E}\left[e^{itX_1/\sqrt{n}}e^{itX_2/\sqrt{n}}\cdots e^{itX_n/\sqrt{n}}\right].\]</div>
+<p>Since the variables are independent, this splits into a product of expectations.</p>
+<div class="math-block">\[= \mathbb{E}e^{itX_1/\sqrt{n}}\,\mathbb{E}e^{itX_2/\sqrt{n}}\cdots\mathbb{E}e^{itX_n/\sqrt{n}}\]</div>
+<p>Since the variables have the same distribution, all these expectations are the same.</p>
+<div class="math-block">\[= \left(\mathbb{E}e^{itX_1/\sqrt{n}}\right)^n\]</div>
+<p>Now we rewrite \(e^{itX_1/\sqrt{n}}\) by Taylor expansion.</p>
+<div class="math-block">\[e^{itX_1/\sqrt{n}} = 1 + \frac{iX_1}{\sqrt{n}}t - \frac{t^2}{2n}X_1^2 + \text{Remainder}\]</div>
+<p>The most difficult part of this proof is dealing with the remainder term, and it requires some technical bounds. I will omit these parts of the proof. But intuitively you should know that the remainder term here is on the order of \(t^3/n^{3/2}\), in some sense.</p>
+<p>Taking the expectation of each side (and using \(\mathbb{E}X_1 = 0\), \(\mathbb{E}X_1^2 = 1\)) now gives</p>
+<div class="math-block">\[\mathbb{E}e^{itX_1/\sqrt{n}} = 1 - \frac{t^2}{2n} + \text{Remainder},\]</div>
+<p>and now raising to the \(n\)th power gives</p>
+<div class="math-block">\[\phi_{Y_n}(t) = \left(\mathbb{E}e^{itX_1/\sqrt{n}}\right)^n = \left(1 - \frac{t^2}{2n} + \text{Remainder}\right)^n.\]</div>
+<p>Now, since the remainder term is on the order of like \(1/n^{3/2}\), we can consider it asymptotically insignificant compared to the leading term \(t^2/(2n)\). Thus, by handwavingly ignoring the remainder, we find that</p>
+<div class="math-block">\[\lim_{n \to \infty} \phi_{Y_n}(t) = \lim_{n \to \infty}\left(1 - \frac{t^2}{2n}\right)^n = e^{-t^2/2}.\]</div>
+<p>(Be rest assured that taming the remainder to make this argument rigorous isn&rsquo;t <em>too</em> bad to do.) The above limit basically means that \(Y_n\) converges in distribution to a random variable whose characteristic function is \(e^{-t^2/2}\). It turns out that \(e^{-t^2/2}\) is exactly the characteristic function of a standard Gaussian! That&rsquo;s the proof. (&hellip;modulo proving all those properties of characteristic functions that we relied on.)</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Use complex numbers to show that if \(X\) and \(Y\) are independent random variables such that \(X\) and \(X + Y\) have the same distribution, then \(Y = 0\) (almost surely).</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Since \(X\) and \(X + Y\) have the same distribution, they have the same characteristic function. By independence, \(\phi_{X+Y}(t) = \phi_X(t)\phi_Y(t)\), so</p>
+<div class="math-block">\[\phi_X(t) = \phi_X(t)\,\phi_Y(t) \qquad\text{for all } t.\]</div>
+<p>The function \(\phi_X\) is continuous with \(\phi_X(0) = 1\), so there is a \(\delta &gt; 0\) with \(\phi_X(t) \neq 0\) for \(|t| &lt; \delta\). Dividing by \(\phi_X(t)\) gives \(\phi_Y(t) = 1\) for all \(|t| &lt; \delta\).</p>
+<p>Take the real part: \(\mathbb{E}\left[1 - \cos(tY)\right] = 0\) for \(|t| &lt; \delta\). Since \(1 - \cos(tY) \ge 0\), this forces \(\cos(tY) = 1\) almost surely, that is, \(tY \in 2\pi\mathbb{Z}\) almost surely. Apply this with \(t_1 = \delta/2\) and \(t_2 = \delta/(2\sqrt2)\). Almost surely there are integers \(m, n\) with \(Y = \dfrac{2\pi m}{t_1} = \dfrac{2\pi n}{t_2}\), so \(m\,t_2 = n\,t_1\). If \(n \neq 0\) then \(m/n = t_1/t_2 = \sqrt2\), which is impossible for integers, so \(n = 0\), hence \(m = 0\) and \(Y = 0\). \(\blacksquare\)</p>
+</details>
+</div>
+<h2 id="10-fractional-derivatives-and-sobolev-embeddings">10. Fractional derivatives and Sobolev embeddings<a class="anchor" href="#10-fractional-derivatives-and-sobolev-embeddings" title="Link to this section">#</a></h2>
+<p>First, do note that there are many notions of fractional derivatives, and they are not at all equivalent. It&rsquo;s also not that clear how they are useful. However, it sounds cool.</p>
+<p>Complex numbers give one method of defining a notion of fractional differentiation. Let \(f(x)\) be a nice function. Then it is well-known that the Fourier transform converts derivatives of \(f\) into multiplication by a term:</p>
+<div class="math-block">\[\mathcal{F}(f')(\xi) = -2\pi i\xi\,\hat{f}(\xi)\]</div>
+<p>Of course, this works inductively for any number of derivatives.</p>
+<div class="math-block">\[\mathcal{F}(f^{(n)})(\xi) = (-2\pi i\xi)^n\hat{f}(\xi)\]</div>
+<p>In particular, we get the identity</p>
+<div class="math-block">\[f^{(n)}(x) = \mathcal{F}^{-1}\left((-2\pi i\xi)^n\hat{f}(\xi)\right),\]</div>
+<p>which gives a rather awkward method of taking \(n\) derivatives of \(f\).</p>
+<p>But now this begs the question: What if in the above identity we allow \(n\) to be a non-integer? Then this would give a way to <em>define</em> a notion of taking \(s\) derivatives, where \(s\) is any real number.</p>
+<div class="math-block">\[f^{(s)}(x) := \mathcal{F}^{-1}\left((-2\pi i\xi)^s\hat{f}(\xi)\right)\]</div>
+<p>This is clearly consistent with &ldquo;classical&rdquo; differentiation by definition, so this definition is reasonable provided that \(f\) is nice. It should be noted that we should be a wee bit careful with what &ldquo;\(i^s\)&rdquo; means when \(s\) is not an integer, but I don&rsquo;t feel like discussing this.</p>
+<p>I&rsquo;m going to use this definition to compute the fractional derivatives of the insultingly simple function \(f(x) = 1\). Before you complain, I have very good reason for keeping it simple &mdash; if we try to use the above definition, we immediately run into a problem! Namely, this choice of \(f\) does not have a Fourier transform because it does not have sufficient decay at \(\pm\infty\).</p>
+<p>While this is certainly a major issue, it can be sidestepped with the knowledge that such functions <em>do</em> have Fourier transforms, <em>in the sense of distributions</em>. As I&rsquo;ve previously suggested, this is quite advanced, so it is not easy for me to explain precisely how this works at a low level. Rigorously, we can find that \(\hat{f} = \delta_0\) where \(\delta_0\) is the Dirac delta at \(0\). Now \(\mathcal{F}^{-1}((-2\pi i\xi)^s\delta_0)\) is the distribution acting as follows:</p>
+<div class="math-block">\[\langle\mathcal{F}^{-1}((-2\pi i\xi)^s\delta_0), \phi\rangle = \langle(-2\pi i\xi)^s\delta_0, \hat{\phi}\rangle = \langle\delta_0, (-2\pi i\xi)^s\hat{\phi}\rangle\]</div>
+<p>Aha! By definition of \(\delta_0\), this expression is just \((-2\pi i \cdot 0)^s\hat{\phi}(0)\). If \(s &gt; 0\), this is just \(0 = \langle 0, \phi\rangle\). If \(s = 0\), this is \(\hat{\phi}(0)\) (because \(0^0 = 1\)), which is equal to \(\displaystyle\int_{\mathbb{R}}\phi = \langle 1, \phi\rangle\). Thus for \(s \ge 0\),</p>
+<div class="math-block">\[f^{(s)}(x) = \begin{cases} 1, &amp; s = 0 \\ 0, &amp; s &gt; 0. \end{cases}\]</div>
+<p>The next simplest function we can try differentiating is \(f(x) = x\). The first immediate issue is, of course, that \(x\) can&rsquo;t be Fourier&rsquo;d in the usual sense, so we must again interpret distributionally. It&rsquo;s not trivial, but you can show that \(\hat{x} = \dfrac{1}{-2\pi i}\delta_0'\) where \(\delta_0'\) is the distributional derivative of \(\delta_0\). (One way to demonstrate this is to work backwards by proving that</p>
+<div class="math-block">\[\langle\mathcal{F}^{-1}(\delta_0'), \phi\rangle = \langle\delta_0', \hat{\phi}\rangle = \langle\delta_0, -(\hat{\phi})'\rangle = \left.\frac{d}{d\xi}\right|_{\xi=0} -\hat{\phi}(\xi) = \langle x, -2\pi i\phi\rangle.\]</div>
+<p>I&rsquo;m not sure how I&rsquo;d figure it out more directly.) Now</p>
+<div class="math-block">\[\begin{aligned}\langle x^{(s)}, \phi\rangle &amp;= \langle\mathcal{F}^{-1}((-2\pi i)^{s-1}\xi^s\delta_0'), \phi\rangle \\ &amp;= \langle(-2\pi i)^{s-1}\xi^s\delta_0', \hat{\phi}\rangle \\ &amp;= \langle\delta_0', (-2\pi i)^{s-1}\xi^s\hat{\phi}\rangle \\ &amp;= \left.\frac{d}{d\xi}\right|_{\xi=0} (-2\pi i)^{s-1}\xi^s\hat{\phi}(\xi) \\ &amp;= s(-2\pi i)^{s-1}0^{s-1}\hat{\phi}(0) + (-2\pi i)^{s-1}0^s\hat{\phi}'(0) \\ &amp;= s(-2\pi i)^{s-1}0^{s-1}\langle 1, \phi\rangle + (-2\pi i)^{s-1}0^s\langle -2\pi ix, \phi\rangle \\ &amp;= \langle s(-2\pi i)^{s-1}0^{s-1} + x(-2\pi i)^s 0^s, \phi\rangle.\end{aligned}\]</div>
+<p>We conclude that</p>
+<div class="math-block">\[x^{(s)} = s\cdot 0^{s-1} + x\cdot 0^s.\]</div>
+<p>Let&rsquo;s check that this is consistent for integer values of \(s\). When \(s = 0\) (using the convention that \(0 \cdot \infty = 0\)), this is just \(x\). When \(s = 1\), this is \(1\). When \(s \ge 2\), this is \(0\). Hence we did not mess up. We can also write this derivative piece-wise in \(s\) as</p>
+<div class="math-block">\[x^{(s)} = \begin{cases} x, &amp; s = 0 \\ \text{DNE}, &amp; 0 &lt; s &lt; 1 \\ 1, &amp; s = 1 \\ 0, &amp; s &gt; 1. \end{cases}\]</div>
+<p>This procedure can be used to take the (Fourier-wise) fractional derivative of various expressions, but as you can probably tell, computing an exact expression for such derivatives is rather cumbersome in practice. What&rsquo;s far more useful is the consideration of <em>spaces</em> of functions for which you can take a fractional derivative, which can pop up in the study of PDE, interpolation theory, and other deep regions of analysis. Of particular interest is the Hilbert space \(H^s(\mathbb{R}^d)\) of functions \(f \in L^2(\mathbb{R}^d)\) that satisfy</p>
+<div class="math-block">\[\int_{\mathbb{R}^d}(1 + |\xi|^2)^s|\hat{f}(\xi)|^2\,d\xi &lt; \infty,\]</div>
+<p>which happens to be equal to the fractional Sobolev space \(W^{s,2}(\mathbb{R}^d)\), where \(W^{s,p}(\mathbb{R}^d)\) is defined as the space of functions \(f \in L^p(\mathbb{R}^d)\) for which</p>
+<div class="math-block">\[\int_{\mathbb{R}^d \times \mathbb{R}^d}\frac{|f(x) - f(y)|^p}{|x - y|^{d + sp}}\,d(x, y) &lt; \infty.\]</div>
+<p>For \(s\) a positive integer, this in turn is just the Sobolev space of functions which admit \(s\) weak derivatives, so these abstractions are certainly grounded in reality (provided you consider weak derivatives to be at all grounded in reality&hellip;).</p>
+<p>In fact, \(f \mapsto \left(\displaystyle\int_{\mathbb{R}^d}(1 + |\xi|^2)^s|\hat{f}(\xi)|^2\,d\xi\right)^{1/2}\) gives an equivalent norm for the topology on \(H^s(\mathbb{R}^d)\), which allows some very neat proofs in the realm of Sobolev spaces. A particularly easy result to get is Morrey&rsquo;s Embedding, which states that if \(\alpha = s - d/2 \in (0, 1)\) then \(H^s(\mathbb{R}^d) \hookrightarrow C^{0,\alpha}(\mathbb{R}^d)\). Equivalently, for any Schwartz function \(f \in \mathcal{S}(\mathbb{R}^d)\) we have the bound</p>
+<div class="math-block">\[|f|_{C^{0,\alpha}} \lesssim \|f\|_{H^s}.\]</div>
+<p>To show this, first fix \(x, y \in \mathbb{R}^d\) and use Fourier inversion to write</p>
+<div class="math-block">\[\begin{aligned}|f(x) - f(y)| &amp;= \left|\int_{\mathbb{R}^d}\hat{f}(\xi)\left(e^{2\pi ix\cdot\xi} - e^{2\pi iy\cdot\xi}\right)d\xi\right| \\ &amp;\le \int_{\mathbb{R}^d}|\hat{f}(\xi)|\left|e^{2\pi ix\cdot\xi} - e^{2\pi iy\cdot\xi}\right|d\xi.\end{aligned}\]</div>
+<p>Since we wish to use the funny Fourier norm on \(H^s\), we now multiply and divide by the appropriate expression and apply Cauchy-Schwarz.</p>
+<div class="math-block">\[= \int_{\mathbb{R}^d}(1 + |\xi|^2)^{s/2}|\hat{f}(\xi)|\cdot\frac{\left|e^{2\pi ix\cdot\xi} - e^{2\pi iy\cdot\xi}\right|}{(1 + |\xi|^2)^{s/2}}\,d\xi\]</div>
+<div class="math-block">\[\le \left(\int_{\mathbb{R}^d}(1 + |\xi|^2)^s|\hat{f}(\xi)|^2\,d\xi\right)^{1/2}\left(\int_{\mathbb{R}^d}\frac{\left|e^{2\pi ix\cdot\xi} - e^{2\pi iy\cdot\xi}\right|^2}{(1 + |\xi|^2)^s}\,d\xi\right)^{1/2}\]</div>
+<div class="math-block">\[\lesssim \|f\|_{H^s}\left(\int_{\mathbb{R}^d}\frac{\left|e^{2\pi ix\cdot\xi} - e^{2\pi iy\cdot\xi}\right|^2}{(1 + |\xi|^2)^s}\,d\xi\right)^{1/2}\]</div>
+<p>It remains to prove that \(\displaystyle\int_{\mathbb{R}^d}\frac{\left|e^{2\pi ix\cdot\xi} - e^{2\pi iy\cdot\xi}\right|^2}{(1 + |\xi|^2)^s}\,d\xi \lesssim |x - y|^{\alpha}\). Since integrals over \(\mathbb{R}^d\) are kinda awful, it makes sense to split it as a sum of an integral over \(|\xi| &lt; R\) and an integral over \(|\xi| &gt; R\), with \(R\) to be chosen later. Near \(0\) we use the estimate</p>
+<div class="math-block">\[\begin{aligned}\left|e^{2\pi ix\cdot\xi} - e^{2\pi iy\cdot\xi}\right|^2 &amp;= \left|e^{2\pi i\xi\cdot(x - y)} - 1\right|^2 \\ &amp;= \left(\cos(2\pi\xi\cdot(x - y)) - 1\right)^2 + \sin^2(2\pi\xi\cdot(x - y)) \\ &amp;\lesssim 1 - \cos(2\pi\xi\cdot(x - y)) \\ &amp;\le 4\pi^2|\xi\cdot(x - y)|^2 \\ &amp;\lesssim |\xi|^2|x - y|^2.\end{aligned}\]</div>
+<p>Far from \(0\), we use the stupid estimate \(\left|e^{2\pi ix\cdot\xi} - e^{2\pi iy\cdot\xi}\right|^2 \le 4 \lesssim 1\). Putting this together,</p>
+<div class="math-block">\[\begin{aligned}\int_{\mathbb{R}^d}\frac{\left|e^{2\pi ix\cdot\xi} - e^{2\pi iy\cdot\xi}\right|^2}{(1 + |\xi|^2)^s}\,d\xi &amp;\lesssim \\ &amp;\qquad \int_{\mathbb{R}^d}\frac{1}{(1 + |\xi|^2)^s} \\ &amp;\qquad\qquad\cdot\left(1_{\{|\xi| &lt; R\}}|x - y|^2|\xi|^2 + 1_{\{|\xi| &gt; R\}}\right)d\xi\end{aligned}\]</div>
+<div class="math-block">\[\lesssim \int_{\mathbb{R}^d}\frac{1}{|\xi|^{2s}}\cdot\left(1_{\{|\xi| &lt; R\}}|x - y|^2|\xi|^2 + 1_{\{|\xi| &gt; R\}}\right)d\xi\]</div>
+<div class="math-block">\[\lesssim \int_0^\infty\frac{r^{d-1}}{r^{2s}}\cdot\left(1_{(0,R)}r^2|x - y|^2 + 1_{(R,\infty)}\right)dr\]</div>
+<div class="math-block">\[= |x - y|^2\int_0^R r^{d+1-2s}\,dr + \int_R^\infty r^{d-1-2s}\,dr \lesssim |x - y|^2R^{d+2-2s} + R^{d-2s}.\]</div>
+<p>Now we choose \(R\), and it makes sense to take \(R = |x - y|^{-1}\). This gives the final upper bound (up to a constant) of \(|x - y|^{2s-d} = |x - y|^{2\alpha}\), completing the proof.</p>
+<p>Actually to really show the desired embedding we should control the \(\|\cdot\|_\infty\) norm. I will leave this to you.</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Use complex numbers to prove that any \(f \in H^s(\mathbb{R}^d)\), where \(s &gt; d/2\), is actually bounded with upper bound</p>
+<div class="math-block">\[\|f\|_\infty \lesssim \|f\|_{H^s}\]</div>
+<p>(up to a constant depending only on \(s\) and \(d\)).</p>
+<p>I must stress that the above statement does not involve complex numbers!</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>Multiply and divide by \((1 + |\xi|^2)^{s/2}\) and apply Cauchy-Schwarz, exactly as in the Morrey argument:</p>
+<div class="math-block">\[\begin{aligned}\|\hat{f}\|_{L^1} &amp;= \int_{\mathbb{R}^d}(1 + |\xi|^2)^{s/2}|\hat{f}(\xi)|\cdot(1 + |\xi|^2)^{-s/2}\,d\xi \\ &amp;\le \|f\|_{H^s}\left(\int_{\mathbb{R}^d}\frac{d\xi}{(1 + |\xi|^2)^s}\right)^{1/2}.\end{aligned}\]</div>
+<p>In polar coordinates the last integral is a constant times \(\displaystyle\int_0^\infty\frac{r^{d-1}}{(1 + r^2)^s}\,dr\), which is finite exactly when \(2s &gt; d\) (the integrand behaves like \(r^{d-1-2s}\) near infinity). So \(C_{s,d} := \left(\displaystyle\int_{\mathbb{R}^d}(1 + |\xi|^2)^{-s}\,d\xi\right)^{1/2} &lt; \infty\) depends only on \(s\) and \(d\), and \(\|\hat{f}\|_{L^1} \le C_{s,d}\|f\|_{H^s}\).</p>
+<p>Since \(\hat{f} \in L^1\), Fourier inversion applies, and for (almost) every \(x\),</p>
+<div class="math-block">\[|f(x)| = \left|\int_{\mathbb{R}^d}\hat{f}(\xi)e^{2\pi ix\cdot\xi}\,d\xi\right| \le \|\hat{f}\|_{L^1} \le C_{s,d}\|f\|_{H^s}.\]</div>
+<p>Hence \(\|f\|_\infty \lesssim \|f\|_{H^s}\). (The same computation shows \(f\) agrees almost everywhere with a continuous function, since it is the inverse transform of an \(L^1\) function.)</p>
+</details>
+</div>
+<p>One last (tough) exercise for you.</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span></p>
+<p>Use complex numbers to prove that for any \(f, g \in H^s(\mathbb{R}^d)\), where \(s &gt; d/2\), we have the inequality</p>
+<div class="math-block">\[\|fg\|_{H^s} \lesssim \|f\|_{H^s}\|g\|_{H^s}.\]</div>
+<p>(Hint: You will need to use Young&rsquo;s Convolution Inequality. One form of this inequality is as follows: For \(f, g, h : \mathbb{R}^d \to \mathbb{R}\) and \(p, q, r \ge 1\) with \(\dfrac1p + \dfrac1q + \dfrac1r = 2\), we have</p>
+<div class="math-block">\[\left|\int_{\mathbb{R}^d}\int_{\mathbb{R}^d} f(x)g(x - y)h(y)\,dx\,dy\right| \le \|f\|_{L^p}\|g\|_{L^q}\|h\|_{L^r}.\]</div>
+<p>)</p>
+<details class="spoiler">
+<summary>Additional Hint</summary>
+<p>Use the bound \((1 + |x|^2)^s \lesssim (1 + |y|^2)^s + (1 + |x - y|^2)^s\).</p>
+</details>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>The Fourier transform turns products into convolutions: \(\widehat{fg} = \hat{f} * \hat{g}\), that is, \(\widehat{fg}(\xi) = \displaystyle\int_{\mathbb{R}^d}\hat{f}(\eta)\hat{g}(\xi - \eta)\,d\eta\). So</p>
+<div class="math-block">\[\|fg\|_{H^s} = \left\|(1 + |\xi|^2)^{s/2}\,(\hat{f} * \hat{g})(\xi)\right\|_{L^2_\xi}.\]</div>
+<p>By the Additional Hint (applied with \(x = \xi\) and \(y = \eta\), and then taking square roots),</p>
+<div class="math-block">\[(1 + |\xi|^2)^{s/2} \lesssim (1 + |\eta|^2)^{s/2} + (1 + |\xi - \eta|^2)^{s/2}.\]</div>
+<p>Define \(F(\xi) = (1 + |\xi|^2)^{s/2}|\hat{f}(\xi)|\) and \(G(\xi) = (1 + |\xi|^2)^{s/2}|\hat{g}(\xi)|\), so that \(\|F\|_{L^2} = \|f\|_{H^s}\) and \(\|G\|_{L^2} = \|g\|_{H^s}\). Then</p>
+<div class="math-block">\[\begin{aligned}(1 + |\xi|^2)^{s/2}\,\left|(\hat{f} * \hat{g})(\xi)\right| &amp;\lesssim \int_{\mathbb{R}^d}\left[(1 + |\eta|^2)^{s/2} + (1 + |\xi - \eta|^2)^{s/2}\right] \\ &amp;\qquad\qquad\cdot|\hat{f}(\eta)||\hat{g}(\xi - \eta)|\,d\eta \\ &amp;= \left(F * |\hat{g}|\right)(\xi) + \left(|\hat{f}| * G\right)(\xi).\end{aligned}\]</div>
+<p>We bound the \(L^2\) norm of each convolution by testing against \(h \in L^2\) with \(\|h\|_{L^2} = 1\) and using Young&rsquo;s inequality with \(p = 2\), \(q = 1\), \(r = 2\) (note \(\tfrac12 + 1 + \tfrac12 = 2\)):</p>
+<div class="math-block">\[\begin{aligned}\left\|F * |\hat{g}|\right\|_{L^2} &amp;= \sup_{\|h\|_2 = 1}\left|\iint F(\eta)|\hat{g}|(\xi - \eta)h(\xi)\,d\eta\,d\xi\right| \\ &amp;\le \|F\|_{L^2}\|\hat{g}\|_{L^1}\|h\|_{L^2} \\ &amp;= \|f\|_{H^s}\|\hat{g}\|_{L^1},\end{aligned}\]</div>
+<p>and in the same way \(\left\||\hat{f}| * G\right\|_{L^2} \le \|\hat{f}\|_{L^1}\|g\|_{H^s}\). (Reflecting \(\hat{g}\), which changes none of its norms, puts these integrals in the exact form of the inequality in the hint.) Finally, since \(s &gt; d/2\), the previous exercise&rsquo;s Cauchy-Schwarz estimate gives \(\|\hat{f}\|_{L^1} \lesssim \|f\|_{H^s}\) and \(\|\hat{g}\|_{L^1} \lesssim \|g\|_{H^s}\). Putting everything together,</p>
+<div class="math-block">\[\|fg\|_{H^s} \lesssim \|f\|_{H^s}\|g\|_{H^s} + \|f\|_{H^s}\|g\|_{H^s} \lesssim \|f\|_{H^s}\|g\|_{H^s}. \qquad\blacksquare\]</div>
+</details>
+</div>
+<p>What I have presented here is only those applications that I am most familiar with. There are far more magical uses for complex numbers in &ldquo;real&rdquo; settings, many of which are likely unknown to me. What applications do you know of? Feel free to share.</p>
+      </article>
+      <div class="divider v" aria-hidden="true"><svg viewBox="0 -1 600 72" role="img" aria-label="Cantor set, six levels" xmlns="http://www.w3.org/2000/svg"><rect class="fc" x="0.00" y="0" width="600.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="4.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="19.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="49.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="64.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="138.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="153.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="182.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="197.53" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="404.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="419.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="449.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="464.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="538.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="553.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="582.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="597.53" y="60" width="2.47" height="3.5" rx="1.2"/></svg></div>
+    </main>
+    <footer class="footer">
+      <div class="wrap">&copy; 2026 Sarthak Dassarma. Hosted on GitHub Pages.</div>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>
