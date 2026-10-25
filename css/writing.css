@@ -285,3 +285,6 @@
 /* Diagram-heavy posts (class "post--diagrams"): keep the figures a comfortable size and let their white
    backgrounds melt into the page. */
 .post--diagrams img { display: block; width: min(100%, 440px); height: auto; margin: 1.2em auto; border-radius: 0; mix-blend-mode: multiply; }
+
+/* Footnote jumps (and any in-post anchor) land a few lines below the fixed header */
+.prose [id] { scroll-margin-top: 8rem; }
