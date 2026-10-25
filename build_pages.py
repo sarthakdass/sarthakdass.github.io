@@ -89,7 +89,7 @@ HEAD_SCRIPT = (
 
 INTERESTS = [
     "Algebraic geometry", "Combinatorics", "Distribution theory", "Functional analysis",
-    "Measure theory", "Optimization", "Contest math", "Quantitative finance",
+    "Measure theory", "Optimization",
 ]
 
 
@@ -474,13 +474,7 @@ hobbies_content = '''      <section class="block" aria-labelledby="academic">
               <li>Functional analysis</li>
               <li>Measure theory</li>
               <li>Optimization</li>
-              <li>Contest math (not seriously for a while, but I used to dabble in the Olympiads)
-                <ul>
-                  <li>I also participated in the Putnam. I was a 2025 Top 500 Scorer with a score of 30</li>
-                  <li>I was featured in <a href="https://www.scu.edu/news-and-events/feature-stories/2026/stories/math-major-and-putnam-standout-wants-to-change-the-way-you-think-about-math.html" target="_blank" rel="noopener">a very nice article</a></li>
-                </ul>
-              </li>
-              <li>Quantitative finance / financial market games</li>
+              <li>I used to participate in math contests and Olympiads; I was a <a href="https://news.scu.edu/math-major-and-putnam-standout-wants-to-change-the-way-you-think-about-math/" target="_blank" rel="noopener">2025 Putnam Top 500 Scorer</a> with a score of 30. I believe that contests are great for building problem-solving skills, gaining exposure to interests, and meeting brilliant people. I also believe that they are strictly a (fun!) means to an end. If you partake in contests, I encourage you to reflect on what you truly want to do in life.</li>
             </ul>
           </div>
           <div class="group">
