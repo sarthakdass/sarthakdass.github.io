@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d1016">
+<meta name="description" content="Three pieces on the math behind Genshin Impact: optimal price bargaining, a crafting showdown between Sucrose and Dori, and probability bounds on artifact critical value.">
+<title>Mathematics in Genshin Impact — Sarthak Dassarma</title>
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{if(localStorage.getItem('sd-theme')==='dark')d.setAttribute('data-theme','dark');}catch(e){}setTimeout(function(){if(!window.__sd){d.classList.remove('js');}},4000);})();</script>
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/writing.css">
+<script src="../../js/writing-math.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+<script src="../../js/site.js" defer></script>
+</head>
+<body class="post-page">
+
+
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="site-header">
+  <div class="topbar">
+    <a class="brand" href="../../" aria-label="Sarthak Dassarma, home">
+      <svg class="brand__mark" viewBox="92.83 80.00 50.00 75.83" aria-hidden="true" focusable="false"><defs><clipPath id="brand-dclip"><path d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/></clipPath><filter id="brand-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="0.7"/></filter></defs><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M107.6,154.3C106.5,154.3 106.3,154.0 107.1,153.4C108.7,152.1 109.0,151.5 109.0,149.4C109.0,147.6 109.1,147.5 110.7,147.8C112.6,148.1 112.6,148.0 112.7,149.8C112.8,151.6 112.9,151.9 113.6,152.4C114.8,153.3 119.8,153.3 121.6,152.4C122.0,152.2 122.6,152.0 123.0,151.9C123.3,151.8 123.9,151.6 124.2,151.3C124.6,151.1 125.4,150.6 125.9,150.3C126.9,149.7 130.6,146.0 131.1,145.2C131.2,145.0 131.4,144.8 131.4,144.8C131.5,144.8 131.7,144.4 131.9,144.0C132.1,143.5 132.4,143.1 132.5,143.0C132.9,142.8 135.1,137.7 135.1,137.0C135.1,136.9 135.3,136.5 135.4,136.1C135.9,135.0 136.8,131.0 137.0,128.9C137.4,124.8 137.1,116.4 136.5,114.5C136.4,114.1 136.2,113.2 136.1,112.6C136.0,111.5 135.2,108.8 134.6,107.4C134.4,106.9 134.1,106.1 134.0,105.6C133.7,104.7 133.1,103.5 132.5,102.7C132.3,102.4 132.1,102.0 132.0,101.8C132.0,101.6 131.7,101.1 131.4,100.8C131.2,100.5 131.0,100.2 131.0,100.1C131.0,99.6 127.7,96.3 126.8,95.7C125.0,94.7 123.6,94.0 122.8,93.9C122.4,93.8 121.7,93.6 121.4,93.4C120.8,93.1 120.3,93.1 118.0,93.0C114.9,92.9 114.3,93.0 113.5,93.6C112.6,94.4 112.6,94.6 112.6,107.7C112.6,143.5 112.6,142.4 112.3,142.7C111.8,143.3 109.2,142.8 109.0,142.1C109.0,141.9 108.9,131.2 108.9,118.3L108.9,94.9L108.4,94.1C108.1,93.6 107.6,93.1 107.3,92.9C106.1,92.1 106.6,91.3 108.0,91.6C108.5,91.8 109.7,91.8 112.2,91.7C116.2,91.6 121.1,91.8 122.2,92.2C122.6,92.4 123.4,92.6 124.0,92.8C124.6,93.0 125.4,93.2 125.7,93.4C126.1,93.6 126.6,93.8 127.0,93.9C127.3,94.0 127.7,94.3 127.9,94.5C128.1,94.7 128.4,94.9 128.7,95.1C130.1,95.7 134.0,99.2 134.9,100.7C135.1,100.9 135.5,101.6 135.9,102.1C136.9,103.5 139.0,107.6 139.0,108.1C139.0,108.3 139.1,108.6 139.3,108.9C139.5,109.3 139.8,110.0 139.9,110.6C140.0,111.3 140.2,112.0 140.3,112.2C140.7,113.3 141.2,117.1 141.4,120.8C141.5,123.4 141.0,129.1 140.4,130.8C140.2,131.1 140.1,131.9 139.9,132.5C139.8,133.1 139.6,133.8 139.5,134.1C139.3,134.4 139.1,135.1 139.0,135.5C138.9,135.9 138.6,136.6 138.4,137.0C138.1,137.4 138.0,137.8 138.0,138.0C138.0,138.1 137.8,138.5 137.5,138.8C137.3,139.1 137.0,139.6 136.9,139.9C136.8,140.3 136.6,140.7 136.5,140.9C136.3,141.1 136.0,141.5 135.9,141.8C135.4,142.9 133.3,145.7 131.7,147.4C130.4,148.7 127.8,151.0 127.5,151.0C127.4,151.0 127.1,151.1 126.8,151.3C126.3,151.8 123.7,153.1 123.3,153.1C123.2,153.1 122.8,153.3 122.5,153.4C121.2,154.1 119.2,154.3 113.7,154.4C110.9,154.4 108.1,154.4 107.6,154.3Z"/><g clip-path="url(#brand-dclip)"><g class="brand__shade"><path fill="#000" fill-rule="evenodd" filter="url(#brand-soft)" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></g><g class="brand__s"><path fill="currentColor" stroke="currentColor" stroke-width="0.45" stroke-linejoin="round" fill-rule="evenodd" d="M110.1,145.9C109.3,145.8 108.5,145.7 108.2,145.5C107.9,145.3 107.3,145.1 106.8,145.0C106.2,144.9 105.7,144.7 105.6,144.5C105.5,144.4 105.1,144.2 104.8,144.1C104.1,143.9 102.6,143.1 102.0,142.5C101.9,142.3 101.4,142.0 101.1,141.9C100.7,141.7 99.6,140.7 98.6,139.6C97.5,138.5 96.6,137.6 96.5,137.6C96.1,137.6 95.9,138.1 95.8,139.4C95.7,140.1 95.4,141.2 95.2,141.7C95.0,142.3 94.8,143.0 94.8,143.2C94.8,143.4 94.7,143.7 94.6,143.7C94.5,143.8 94.4,142.8 94.5,139.7C94.5,137.4 94.5,135.2 94.4,134.8C94.1,132.9 95.1,132.3 96.0,133.9C97.0,135.9 99.7,139.1 101.5,140.4C104.3,142.4 104.9,142.8 105.0,142.8C105.1,142.8 105.7,143.0 106.2,143.3C108.7,144.5 110.5,144.9 113.4,144.9C115.5,144.9 116.2,144.8 116.8,144.6C117.2,144.4 118.0,144.2 118.5,144.0C119.1,143.9 119.9,143.6 120.3,143.3C120.7,143.0 121.1,142.8 121.2,142.8C121.6,142.8 125.0,139.6 125.0,139.2C125.0,139.1 125.1,138.9 125.3,138.7C125.5,138.5 125.7,138.1 125.9,137.6C126.1,137.2 126.3,136.6 126.5,136.3C126.7,136.0 126.9,134.9 127.1,133.5C127.7,129.6 127.1,126.5 125.2,123.8C124.6,123.0 122.2,120.5 121.7,120.2C121.4,120.0 120.9,119.6 120.5,119.3C120.1,119.0 119.7,118.8 119.6,118.8C119.4,118.8 119.2,118.6 119.0,118.5C118.9,118.3 118.6,118.1 118.4,118.0C118.2,118.0 117.7,117.7 117.4,117.5C117.0,117.2 116.4,116.9 116.1,116.7C115.7,116.5 115.2,116.2 114.9,115.9L114.3,115.4L114.4,113.5C114.6,110.9 114.5,110.9 118.0,113.0C118.4,113.2 119.0,113.5 119.2,113.7C119.5,113.9 120.1,114.3 120.6,114.6C123.9,116.8 127.5,121.0 128.0,123.4C128.1,123.7 128.3,124.3 128.5,124.7C129.1,126.2 129.3,132.4 128.7,134.6C128.4,135.8 127.8,137.4 127.4,138.0C126.0,140.2 125.5,140.8 124.6,141.7C123.4,142.9 122.6,143.5 121.6,144.0C121.2,144.2 120.6,144.6 120.2,144.8C119.8,145.0 119.4,145.1 119.2,145.1C119.0,145.1 118.6,145.3 118.2,145.5C117.1,146.1 113.4,146.3 110.1,145.9ZM105.3,110.4C104.9,110.1 104.1,109.4 103.5,108.8C102.2,107.7 100.4,105.4 100.0,104.6C99.9,104.3 99.6,103.9 99.5,103.8C99.4,103.6 99.0,102.6 98.6,101.4C97.5,97.6 97.5,93.3 98.7,90.1C101.2,83.7 108.6,80.1 115.4,82.0C116.6,82.4 118.3,83.1 118.8,83.6C119.1,83.8 119.4,84.0 119.5,84.0C119.6,84.0 120.1,84.4 120.6,84.9L121.5,85.9L121.9,85.3C122.8,84.2 123.1,83.9 123.2,84.0C123.2,84.0 123.3,85.1 123.3,86.5C123.4,88.6 123.4,89.0 123.1,89.3C122.8,89.8 122.2,89.5 122.0,88.7C121.6,87.6 117.6,84.0 116.7,84.0C116.6,84.0 116.3,83.8 115.9,83.6C114.6,82.6 108.7,82.5 107.5,83.4C107.2,83.6 106.7,83.8 106.3,83.9C105.9,84.0 105.4,84.3 105.1,84.5C104.9,84.8 104.6,85.0 104.5,85.0C104.1,85.0 101.0,88.4 101.0,88.8C101.0,88.9 100.8,89.4 100.5,89.9C99.5,92.1 99.4,96.8 100.3,98.8C100.6,99.3 100.8,99.9 100.9,100.1C100.9,100.4 101.1,100.7 101.3,100.9C101.5,101.1 101.7,101.5 101.9,101.9C102.4,102.8 104.6,105.1 105.8,105.8C106.4,106.2 106.8,106.6 106.9,106.9C107.1,107.4 107.0,110.7 106.9,111.0C106.7,111.3 106.0,111.1 105.3,110.4Z"/></g></svg>
+      <span class="brand__name">Sarthak Dassarma</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__links">
+        <li><a class="nav-link" href="../../">
+          <span class="nav-link__roll"><span class="nav-link__label">Home</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Home</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../projects/">
+          <span class="nav-link__roll"><span class="nav-link__label">Projects</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Projects</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../math/" aria-current="page">
+          <span class="nav-link__roll"><span class="nav-link__label">Math</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Math</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../hobbies/">
+          <span class="nav-link__roll"><span class="nav-link__label">Hobbies</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Hobbies</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../writing/">
+          <span class="nav-link__roll"><span class="nav-link__label">Writing</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Writing</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../now/">
+          <span class="nav-link__roll"><span class="nav-link__label">Now</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Now</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+        <li><a class="nav-link" href="../../visuals/">
+          <span class="nav-link__roll"><span class="nav-link__label">Visuals</span><span class="nav-link__label nav-link__label--dup" aria-hidden="true">Visuals</span></span>
+          <span class="nav-link__line" aria-hidden="true"></span>
+        </a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<header class="stage">
+  <div class="wrap wrap--post">
+    <a class="back-link" href="../">&larr; Math</a>
+    <h1 class="page-title page-title--post reveal"><span class="line"><span>Mathematics in Genshin Impact</span></span></h1>
+    <p class="post-meta"><time datetime="2026-10-25">October 2026</time><span>24 min read</span></p>
+  </div>
+</header>
+
+<div class="stack">
+  <div class="sheet">
+    <main class="sheet__content wrap" id="content">
+      <article class="post prose">
+<p>Genshin is probably not as popular nowadays but there was a time where it had a chokehold over most of my friends shortly after the COVID pandemic. Regardless, I will write this for a general audience although if you play the game, you will probably enjoy this post more.</p>
+<p><em>Genshin Impact</em> is a relatively new game by MiHoYo.</p>
+<ul>
+<li>It is an <em>open world</em> game, meaning that it consists of a huge world map to explore. No area is locked for exploration, meaning you can basically go anywhere you want from the getgo (except Inazuma)</li>
+<li>It is an <em>RPG</em>. You play as various characters and you can level them up in various ways to make them stronger, so that you can tackle stronger enemies and bosses.</li>
+<li>Lastly, it is a <em>gacha game</em>, which is one of the more notorious aspects of Genshin. Essentially, this means that there are heavy luck-based mechanics for getting new characters (and weapons). Moreover, you can spend real-life money to increase the odds of getting a certain character you want. This is how they make money, since Genshin itself is a free (!) game.</li>
+<li>Genshin is insanely popular for the open world, its anime art-style, and (bluntly) cute girls according to my friends.</li>
+</ul>
+<p>I will be showcasing how math can be surprisingly helpful in deep end Genshin Impact theory in three (in my opinion) increasingly rigorous facets of the game. This is my own work, but I won&rsquo;t be surprised if this math has been done before.</p>
+<div class="disclaimers">
+<p class="disclaimers__title">DISCLAIMERS</p>
+<ol>
+<li>Genshin Impact is a highly addictive game. Seriously, it will very likely take up a ton of your free time. Do not start playing unless you have a ton of time to kill.</li>
+<li>The gacha system in Genshin Impact is gambling, which is addictive. Do NOT spend money on this game unless you are a millionaire. If you do spend money, please be careful and be mindful of your spendings. Gambling addiction has destroyed lives, even in gachas, and it can happen to you.</li>
+<li>(That being said, Genshin Impact is certainly a beautiful game, and despite its faults, most of my friends express immense happiness to have gotten to experience its world. If you&rsquo;ve been looking for a new game to play, I am sure they would all recommend giving Genshin a try. Just make sure you have the time to kill, and be careful when dealing with the Gacha aspects.)</li>
+</ol>
+</div>
+<h2 id="bargaining-prices">Bargaining Prices<a class="anchor" href="#bargaining-prices" title="Link to this section">#</a></h2>
+<p><img alt="A Genshin Impact bargaining minigame: a shopkeeper with his arms crossed beside a &quot;Barter&quot; panel showing a current offer of 13000 on a slider between 11500 and 14000" src="pricing-barter.jpg" /></p>
+<h3 id="the-premise">The Premise<a class="anchor" href="#the-premise" title="Link to this section">#</a></h3>
+<p>Genshin Impact includes minigames in which you negotiate on a price with someone. You get some number of attempts to offer a price until they get very upset. The goal is to purchase what you want by offering the lowest price you can.</p>
+<p>Let&rsquo;s formulate this into mathspeak. Let \(n\) be a positive integer. The price \(p\) of a prize is selected uniformly at random from the interval \([0, 1]\), but is not revealed to you. You are to offer a price \(x\) between \(0\) and \(1\).</p>
+<ul>
+<li>If \(x \ge p\), then the prize is sold and you pay \(x\).</li>
+<li>If \(x &lt; p\), you&rsquo;re told that the offer is too low, and you must offer another price.</li>
+</ul>
+<p>You may get a total of \(n\) attempts to offer a price. You <em>must</em> succeed in buying the prize within the \(n\) attempts.</p>
+<p>What strategy should I follow to minimize the expected value of the price I end up paying?</p>
+<p><strong>Example game 1</strong></p>
+<p>Let \(n = 5\).</p>
+<ol>
+<li>I offer \(0.3\). It&rsquo;s not enough. (I now know that \(0.3 &lt; p \le 1\))</li>
+<li>I offer \(0.7\). This happens to be enough, and so I end up paying \(0.7\) with three attempts to spare.</li>
+</ol>
+<p><strong>Example game 2</strong></p>
+<p>Let \(n = 4\).</p>
+<ol>
+<li>I offer \(0.1\). It&rsquo;s not enough. (I now know that \(0.1 &lt; p \le 1\))</li>
+<li>I offer \(0.2\). It&rsquo;s still not enough. (I now know that \(0.2 &lt; p \le 1\))</li>
+<li>I offer \(0.8\). It&rsquo;s still not enough.</li>
+<li>I&rsquo;m out of extra attempts, so I must offer \(1\) now to guarantee the purchase. This is indeed enough and I pay \(1\).</li>
+</ol>
+<h3 id="solution">Solution<a class="anchor" href="#solution" title="Link to this section">#</a></h3>
+<p>We claim that the minimum you need to pay in expectation is</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>\(\frac12+\frac1{2n}\).</p>
+</details>
+<p>The first observation is that we can fully decide which prices to offer beforehand. We shouldn&rsquo;t need to change our strategy in the middle of the game based on what happens. Also, each offer should be higher than the previous offer. So, let&rsquo;s suppose that our first offer is \(x_1\), then the next offer is \(x_2\) <em>more</em> than that, and then the next offer increases by another \(x_3\), and so on. So our list of offers is:</p>
+<ul>
+<li>\(x_1\)</li>
+<li>\(x_1 + x_2\)</li>
+<li>\(x_1 + x_2 + x_3\)</li>
+<li>\(\dots\)</li>
+<li>\(x_1 + x_2 + x_3 + \dots + x_n\)</li>
+</ul>
+<p>If we ever actually have to use up all our offering attempts, then the last offer must be \(1\). That means that our variables must be subject to the condition \(x_1 + x_2 + \dots + x_n = 1\).</p>
+<p>What&rsquo;s the expected value of the amount we end up paying?</p>
+<ul>
+<li>There&rsquo;s an \(x_1\) chance that \(0 \le p \le x_1\), and if this happens then we pay \(x_1\), so one of the terms for the expected value is \(x_1(x_1)\).</li>
+<li>There&rsquo;s an \(x_2\) chance that \(x_1 &lt; p \le x_1 + x_2\), and if this happens then we pay \(x_1 + x_2\), so the next term is \(x_2(x_1 + x_2)\).</li>
+<li>There&rsquo;s an \(x_3\) chance that \(x_1 + x_2 &lt; p \le x_1 + x_2 + x_3\), and if this happens then we pay \(x_1 + x_2 + x_3\), so the next term is \(x_3(x_1 + x_2 + x_3)\).</li>
+<li>\(\dots\)</li>
+<li>There&rsquo;s an \(x_n\) chance that \(x_1 + \dots + x_{n-1} &lt; p \le x_1 + \dots + x_n\), and if this happens then we pay \(x_1 + x_2 + \dots + x_n\), so the last term is \(x_n(x_1 + x_2 + \dots + x_n)\).</li>
+</ul>
+<p>Altogether, the expected value is:</p>
+<div class="math-block">\[x_1(x_1) + x_2(x_1 + x_2) + x_3(x_1 + x_2 + x_3) + \dots + x_n(x_1 + \dots + x_n)\]</div>
+<p>Using the distributive property, this can be expanded to become</p>
+<div class="math-block">\[(x_1^2 + x_2^2 + \dots + x_n^2) + (x_1x_2 + x_1x_3 + x_2x_3 + \dots + x_{n-1}x_n).\]</div>
+<p>That is, we have the sum of the squares, and then we add up every possible way to multiply an \(x_i\) and an \(x_j\) (with \(i \ne j\)).</p>
+<p>This reminds me a lot of how you expand \((x_1 + x_2 + \dots + x_n)^2\). This is great, because \(x_1 + x_2 + \dots + x_n = 1\), so this could really help simplify things.</p>
+<p>Hmm, it&rsquo;s not <em>quite</em> the same expression though, since</p>
+<div class="math-block">\[1 = (x_1 + x_2 + \dots + x_n)^2 = (x_1^2 + x_2^2 + \dots + x_n^2) + 2(x_1x_2 + x_1x_3 + x_2x_3 + \dots + x_{n-1}x_n).\]</div>
+<p>But that right side does kinda look like it! Let&rsquo;s do some algebra to &ldquo;massage&rdquo; this expression into what the expected value looks like. First, we add \((x_1^2 + x_2^2 + \dots + x_n^2)\) to both sides.</p>
+<div class="math-block">\[(x_1^2 + x_2^2 + \dots + x_n^2) + 1 = 2(x_1^2 + x_2^2 + \dots + x_n^2) + 2(x_1x_2 + x_1x_3 + x_2x_3 + \dots + x_{n-1}x_n)\]</div>
+<p>Then, we divide by \(2\).</p>
+<div class="math-block">\[\frac{(x_1^2 + x_2^2 + \dots + x_n^2) + 1}{2} = (x_1^2 + x_2^2 + \dots + x_n^2) + (x_1x_2 + x_1x_3 + x_2x_3 + \dots + x_{n-1}x_n)\]</div>
+<p>And hey, that right side is now the expected value! So</p>
+<div class="math-block">\[\text{Expected Value} = \frac{(x_1^2 + x_2^2 + \dots + x_n^2) + 1}{2}.\]</div>
+<p>Huh, what were we trying to do again? Right, we&rsquo;re trying to find the minimum possible expected value for some nice choices for \(x_1, x_2, \cdots, x_n\), and so we&rsquo;re trying to find the minimum possible value of \(\dfrac{(x_1^2 + x_2^2 + \dots + x_n^2) + 1}{2}\).</p>
+<p>Inequality fans know what&rsquo;s coming! We use the powerful QM-AM inequality!</p>
+<div class="math-block">\[\sqrt{\frac{x_1^2 + x_2^2 + \dots + x_n^2}{n}} \ge \frac{x_1 + x_2 + \dots + x_n}{n}\]</div>
+<p>If we rearrange this, we get that</p>
+<div class="math-block">\[x_1^2 + x_2^2 + \dots + x_n^2 \ge \frac{(x_1 + x_2 + \dots + x_n)^2}{n} = \frac1n.\]</div>
+<p>The helpful \(x_1 + x_2 + \dots + x_n = 1\) came to the rescue again! Now,</p>
+<div class="math-block">\[\text{Expected Value} = \frac{(x_1^2 + x_2^2 + \dots + x_n^2) + 1}{2} \ge \frac{1/n + 1}{2} = \boxed{\frac12 + \frac1{2n}},\]</div>
+<p>which is what I claimed.</p>
+<p>But remember, whenever you&rsquo;re proving that something is the minimum, you always have to prove that it&rsquo;s <em>obtainable</em>. Right now, I&rsquo;ve only shown that \(\frac12 + \frac1{2n}\) is a lower bound. If I wanted a lower bound, I could just pick like \(-12345\) and be done with it, that&rsquo;s no fun.</p>
+<p>The only part where an inequality came in was when we used QM-AM. That means that the only way to obtain the proposed minimum value is to achieve the <em>equality case</em> in the inequality</p>
+<div class="math-block">\[\sqrt{\frac{x_1^2 + x_2^2 + \dots + x_n^2}{n}} \ge \frac{x_1 + x_2 + \dots + x_n}{n}.\]</div>
+<p>Fortunately some smart people already figured out that this happens exactly when all the variables are equal, i.e. \(x_1 = x_2 = \dots = x_n\). Combined with the condition that \(x_1 + x_2 + \dots + x_n = 1\), we see that the minimum expected value is obtained when we choose \(x_1 = 1/n\), \(x_2 = 1/n\), \(\cdots\), and \(x_n = 1/n\).</p>
+<p>This finishes the proof, and that &ldquo;equality case&rdquo; also tells us that the best strategy is to offer \(1/n\), then \(2/n\), then \(3/n\), etc. all the way up to \(n/n\).</p>
+<hr />
+<p>It&rsquo;s always useful to do a quick sanity check to make sure that the answer you get makes sense.</p>
+<p>When I plug in \(n = 1\), the minimum expected value is \(1\). This makes sense because your first offer has to be \(1\).</p>
+<p>Also, it makes sense that the minimum expected value keeps decreasing the more offers you&rsquo;re allowed to make.</p>
+<p>What&rsquo;s interesting is that, no matter how many offers we&rsquo;re allowed to make, we can never do better than \(1/2\) in expected value. This probably makes sense, because the expected value of \(p\) in the first place is \(1/2\), and we shouldn&rsquo;t anticipate being able to do better than the original expected value.</p>
+<p>Hm, this makes me wonder what happens if \(p\) was <em>not</em> chosen with a uniform distribution&hellip; Will it always be the case that we can&rsquo;t do better than \(\mathbb{E}p\)? Exciting!</p>
+<h2 id="sucrose-vs-dori">Sucrose vs. Dori<a class="anchor" href="#sucrose-vs-dori" title="Link to this section">#</a></h2>
+<p>In Genshin, there is a very simplistic &ldquo;crafting&rdquo; system. Different characters give different bonuses when crafting. Two such characters are Sucrose and Dori.</p>
+<p><img alt="The in-game descriptions of Sucrose, who has a 10% chance to obtain double the product when crafting Character and Weapon Enhancement Materials, and Dori, who has a 25% chance to recover some of the materials used when crafting Character and Weapon Materials" src="crafting-bonuses.png" /></p>
+<p>Here is the setup, in alternative terms: Suppose you start with \(n\) &ldquo;tokens&rdquo;. Sucrose and Dori are two different people that can exchange your tokens for money.</p>
+<ul>
+<li>When you give Sucrose \(3\) tokens, she will give you a dollar. Then, there is a \(10\%\) chance that she gives you a second dollar.</li>
+<li>When you give Dori \(3\) tokens, she will give you a dollar. Then, there is a \(25\%\) chance that she gives you back \(1\) token.</li>
+</ul>
+<p>Naturally, your goal is to make as much money as possible. Who should you exchange your tokens with? (For simplicity, let&rsquo;s assume you pick exactly one person to exchange tokens with, i.e. you don&rsquo;t exchange with both of them in some order, which a priori could be wise for small values of \(n\).)</p>
+<p>I invite you to think about this! It&rsquo;s not a crazy hard problem (at least, compared to some of the other stuff I talk about here&hellip;), and it can be a good exercise. Read on for the solution.</p>
+<hr />
+<p>So it turns out that&hellip;</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>Sucrose and Dori are surprisingly neck and neck! For large values of \(n\), Sucrose beats Dori, but only by about \(0.0030n\). You&rsquo;d need like \(300+\) tokens before you expect to see any real difference! I think that&rsquo;s quite remarkable, given how small the given numbers in the problem are.</p>
+</details>
+<p>Let&rsquo;s do the math now.</p>
+<h3 id="analysis-of-sucrose">Analysis of Sucrose<a class="anchor" href="#analysis-of-sucrose" title="Link to this section">#</a></h3>
+<p>This is the easy part. If you choose Sucrose, then you don&rsquo;t get any tokens back, so you&rsquo;ll make exactly \(\lfloor n/3 \rfloor\) exchanges. In expectation, a tenth of these exchanges will grant an extra dollar, so the expected number of dollars you can get from Sucrose is \((1 + 1/10)\lfloor n/3 \rfloor = \boxed{\dfrac{11}{10}\left\lfloor \dfrac n3 \right\rfloor}\).</p>
+<p>As \(n \to +\infty\), this is asymptotically equivalent to the fraction \(\dfrac{11}{30}n\).</p>
+<h3 id="analysis-of-dori-heuristics">Analysis of Dori: Heuristics<a class="anchor" href="#analysis-of-dori-heuristics" title="Link to this section">#</a></h3>
+<p>Here, we&rsquo;ll make a reasonable guess as to what the answer should be approximately by playing fast and loose with our logic.</p>
+<p>If we start with \(n\) tokens, then at the start we can make around \(n/3\) exchanges to get \(n/3\) dollars. Then, we get about a quarter of this number in tokens back, i.e. we get around \(n/12\) tokens returned. Now, we can make around \(n/36\) exchanges to get \(n/36\) dollars, and we&rsquo;ll get \(n/144\) tokens back. The pattern is clear: If we keep doing this &ldquo;forever&rdquo;, then the expected value seems to be like a geometric series:</p>
+<div class="math-block">\[\frac n3 + \frac n{36} + \frac n{144 \cdot 3} + \dots\]</div>
+<p>The ratio between terms is \(\dfrac1{12}\), so this sums to \(\dfrac{n/3}{1 - 1/12} = \dfrac{4n}{11}\). This is our guess for the asymptotic ratio as \(n \to +\infty\). And, note how close this is to Sucrose&rsquo;s ratio! \(11/30\) is <em>veerryyyyy close</em> to \(4/11\) &mdash; if we cross multiply by \(30 \times 11\), the difference is \(121\) vs. \(120\).</p>
+<p>The reason why this is a &ldquo;guess&rdquo; is because we assumed a lot of uniformity. For example, we assumed that we&rsquo;d get exactly \(n/12\) tokens back, which is a reasonable guess but not representative of reality because it&rsquo;s only the expected value, so carrying the value of \(n/12\) forward is not necessarily going to work.</p>
+<h3 id="analysis-of-dori-exact-value">Analysis of Dori: Exact Value<a class="anchor" href="#analysis-of-dori-exact-value" title="Link to this section">#</a></h3>
+<p>Let&rsquo;s try to glean a formula for the exact expected value of dollars you get from Dori as a function of \(n\). Let this expected value be \(f(n)\).</p>
+<p>Since your number of tokens can change, it is natural to try and set up a recurrence. Let&rsquo;s start with \(n\) tokens, and spend \(3\) of those tokens. There are two possibilities:</p>
+<ul>
+<li>With \(3/4\) chance, Dori only gives you a dollar, so your expected value in this case is \(1 + f(n-3)\).</li>
+<li>With \(1/4\) chance, Dori gives you a dollar and increments your number of tokens by \(1\), so your expected value in this case is \(1 + f(n-2)\).</li>
+</ul>
+<p>It follows that:</p>
+<div class="math-block">\[f(n) = 1 + \frac34 f(n-3) + \frac14 f(n-2)\]</div>
+<p>This is the recurrence we need!</p>
+<p>It&rsquo;s always good to compute some of the first few terms of \(f(n)\) to make sure that we&rsquo;re on the right track. We can manually find that \(f(0) = f(1) = f(2) = 0\) and \(f(3) = f(4) = 1\), and indeed this is consistent with our recurrence.</p>
+<p>We now need to turn the recurrence into a nice formula. Unfortunately it&rsquo;s not going to be nice. First, for \(n \ge 4\) we can stack two copies of the recurrence on top of each other:</p>
+<div class="math-block">\[f(n) = 1 + \frac34 f(n-3) + \frac14 f(n-2)\]</div>
+<div class="math-block">\[f(n-1) = 1 + \frac34 f(n-4) + \frac14 f(n-3)\]</div>
+<p>Then we subtract them to obtain:</p>
+<div class="math-block">\[f(n) = f(n-1) + \frac14 f(n-2) + \frac12 f(n-3) - \frac34 f(n-4)\]</div>
+<p><em>(Sanity check: The sum of coefficients on each side is equal, so I didn&rsquo;t mess up.)</em> What this process does is eliminate the \(1\).</p>
+<p>Now, the characteristic polynomial for this recurrence is given by</p>
+<div class="math-block">\[x^4 - x^3 - \frac14 x^2 - \frac12 x + \frac34.\]</div>
+<p>Without any calculation we know \(x = 1\) must be a root (why?) and that this must factor as</p>
+<div class="math-block">\[(x-1)\left(x^3 - \frac14 x - \frac34\right).\]</div>
+<p>We see that \(x = 1\) is a root of the cubic (why is this not surprising?), and so this factors further as</p>
+<div class="math-block">\[(x-1)^2\left(x^2 + x + 3/4\right).\]</div>
+<p>By the quadratic formula, we see that the roots of the characteristic polynomial are \(1\) (a double root) and \(\dfrac{-1}{2} \pm \dfrac{i}{\sqrt2}\).</p>
+<p>By the theorem that relates recurrences to the roots of their characteristic polynomial, it follows that the closed form for \(f(n)\) is</p>
+<div class="math-block">\[f(n) = A \cdot 1^n + Bn \cdot 1^n + C\left(\frac{-1}{2} + \frac{i}{\sqrt2}\right)^n + D\left(\frac{-1}{2} - \frac{i}{\sqrt2}\right)^n\]</div>
+<p>for constants \(A, B, C, D\). (The \(Bn\) term is there because of the double root.)</p>
+<p>Fortunately, we have quite a few obvious starting values of \(f\) that we can use! Plugging in \(n = 0, 1, 2, 3\) gives the following system:</p>
+<div class="math-block">\[\begin{cases}
+A + C + D = 0 \\
+A + B + \left(\frac{-1}{2} + \frac{i}{\sqrt2}\right)C + \left(\frac{-1}{2} - \frac{i}{\sqrt2}\right)D = 0 \\
+A + 2B + \left(\frac{-1}{2} + \frac{i}{\sqrt2}\right)^2 C + \left(\frac{-1}{2} - \frac{i}{\sqrt2}\right)^2 D = 0 \\
+A + 3B + \left(\frac{-1}{2} + \frac{i}{\sqrt2}\right)^3 C + \left(\frac{-1}{2} - \frac{i}{\sqrt2}\right)^3 D = 1
+\end{cases}\]</div>
+<p>Of course, no sane person would or should be solving this by hand, so I plugged this into Wolfram Alpha and got the following solution:</p>
+<div class="math-block">\[A = \frac{-48}{121},\quad B = \frac4{11},\quad C = \frac{24}{121} - \frac{14\sqrt2}{121}i,\quad D = \frac{24}{121} + \frac{14\sqrt2}{121}i\]</div>
+<p>Thus our closed form, and the expected value of dollars we get from \(n\) tokens, is:</p>
+<div class="math-block">\[\boxed{\frac4{11}n - \frac{48}{121} + 2\operatorname{Re}\left[\left(\frac{24}{121} - \frac{14\sqrt2}{121}i\right)\left(\frac{-1}{2} + \frac{i}{\sqrt2}\right)^n\right]}\]</div>
+<p>(I combined both complex parts since they happened to be conjugates&hellip; to the surprise of not many people.)</p>
+<p>What is the consequence of this formula? Well, note that \(\left|\dfrac{-1}{2} + \dfrac{i}{\sqrt2}\right| &lt; 1\), so that whole real-part/complex term will tend to \(0\) rapidly as \(n \to +\infty\). In other words, the oscillatory part of the formula is not significant at all in the long run. And, the term \(\dfrac{48}{121}\) is just a constant, so although this constant will prevail as \(n \to \infty\), it&rsquo;s not <em>asymptotically</em> significant when compared to the linear growth of the term \(\dfrac4{11}n\). So in the long run, the expected value will asymptotically look like \(\dfrac4{11}n\) &mdash; just as we had claimed in the heuristics!</p>
+<h2 id="artifact-critical-value-distributions">Artifact Critical Value Distributions<a class="anchor" href="#artifact-critical-value-distributions" title="Link to this section">#</a></h2>
+<p>Particularly, we&rsquo;ll be exploring the <em>artifact system</em>. An <strong>artifact</strong> is one of many things that can be leveled up and optimized in order to make a particular character better.</p>
+<p>The main question is: <strong>How can we compute the probability of getting an artifact that is &ldquo;as good&rdquo; as this one (or some other artifact)?</strong> We&rsquo;ll need to quantify exactly what this means, but hopefully it&rsquo;s enough to give you an idea of what we&rsquo;re trying to do here.</p>
+<h3 id="part-1-artifact-substat-mechanics-and-theory">Part 1: Artifact Substat Mechanics and Theory<a class="anchor" href="#part-1-artifact-substat-mechanics-and-theory" title="Link to this section">#</a></h3>
+<p>If you want to cut right to the chase and skip reading this part, here is a picture that summarizes everything you need to know:</p>
+<p class="theme-pair"><img class="on-light" src="fig-artifact-light.png" alt="A screenshot of an artifact in Genshin Impact with labels pointing to the character, the rarity (5 stars), the level, the artifact itself, the artifact name (Gladiator's Nostalgia), the main stat (HP 4,780) and the substats, with a note that the substats are the only thing we care about for this analysis"><img class="on-dark" src="fig-artifact-dark.png" alt="" aria-hidden="true"></p>
+
+<p>We only care about artifacts that have <strong>CRIT Rate</strong> and <strong>CRIT DMG</strong>. The quality of such artifacts is measured via the <u>critical value</u>:</p>
+<div class="math-block">\[\boxed{\text{Critical Value} := (\text{CRIT DMG}) + 2(\text{CRIT Rate})}\]</div>
+<p><img alt="The substats of the artifact above: ATK+18, CRIT Rate+6.6%, CRIT DMG+20.2%, ATK+9.9%" src="fig-crit-stats.png" /></p>
+<p>So the above artifact has:</p>
+<div class="math-block">\[\text{CV} = 20.2 + 2(6.6) = \boxed{33.4}\]</div>
+<p>At levels 4, 8, 12, 16, and 20, the game will choose a <u>random</u> substat and increase it by a <u>random</u> amount.</p>
+<ul>
+<li>If CRIT Rate is chosen, the increase is selected randomly from: \(\{2.72, 3.11, 3.50, 3.89\}\)</li>
+<li>If CRIT DMG is chosen, the increase is selected randomly from: \(\{5.44, 6.22, 6.99, 7.77\}\)</li>
+</ul>
+<p>Don&rsquo;t care about others.</p>
+<p>(The initial value of the substat is also chosen from these sets.)</p>
+<p><img alt="An artifact at level +19, with the substats Energy Recharge 49.6%, CRIT DMG 7.0%, ATK 5.3%, ATK 27 and DEF 19.0%" src="fig-level19.png" /></p>
+<p>Enhancing it by one level (<strong>+1 level</strong>) gives the &ldquo;Enhancement Success&rdquo; screen below, which takes the artifact to level +20:</p>
+<p><img alt="The Enhancement Success screen for the artifact leveling up to +20: Energy Recharge is crossed out, and CRIT DMG goes from 7.0% to 14.8%, an increase of +7.77, highlighted in red" src="fig-enhancement.png" /></p>
+<p>In the picture above:</p>
+<ul>
+<li>CRIT DMG was chosen with \(1/4\) chance.</li>
+<li>The \(+7.77\) increase was chosen with \(1/4\) chance.</li>
+</ul>
+<p><strong><u>GENERAL GOAL</u>:</strong> Estimate or bound the probability of getting high Critical Value artifacts.</p>
+<p>For example, how could we find a very small number \(p &gt; 0\) such that</p>
+<div class="math-block">\[\mathbb{P}(\text{An artifact gets a CV} \ge 50) &lt; p?\]</div>
+<p>This would give a good idea of how unlikely such an event would be.</p>
+<p>I&rsquo;m including this because this part may be long and boring. But if you want some details and/or motivation, here it is.</p>
+<h4 id="the-basics">The Basics<a class="anchor" href="#the-basics" title="Link to this section">#</a></h4>
+<p>An artifact is basically an accessory with magical powers or something. This might be a bit overwhelming, but here are all the possible different characteristics of an artifact:</p>
+<ul>
+<li><strong>Not Important Things:</strong> Seriously this isn&rsquo;t important
+
+<details class="spoiler">
+<summary>Elaboration</summary>
+
+<p>An artifact can be a hat, a timepiece, a cup, a flower, or a feather. A character may wield one artifact from each of these types. Moreover, each artifact belongs to a set of 5 (one of each type). You get certain magical bonuses for equipping several artifacts from the same set. For example, if both my hat and my flower are from the &ldquo;Gladiator&rdquo; set, then I get an attack increase.</p>
+</details>
+</li>
+<li><strong>Rarity:</strong> There are five different rarities, from 1* to 5*.</li>
+<li><strong>Level:</strong> All artifacts start at Level 0. By doing stuff, you can level up an artifact to increase its effectiveness. The maximum level depends on its rarity, and is given by \(4 \times \text{Rarity}\) (in particular, a 5* artifact has max level 20). Higher max levels is one of the main benefits for higher rarity artifacts.</li>
+<li><strong>Main Stat:</strong> This is the primary &ldquo;magical power/buff&rdquo; of the artifact. For example, the main stat could be &ldquo;+35% HP%&rdquo;, meaning that your HP is increased by a factor of \(1.35\). The main stat increases as you level up the artifact.</li>
+<li><strong>Substats:</strong> These are the secondary &ldquo;side buffs&rdquo; of the artifact. Although they tend to be weaker than the main stat, there are multiple of them and they can contribute significantly to the character&rsquo;s overall power. The substats (kinda) increase as you level up the artifact. Unfortunately there&rsquo;s some nuance here, and in fact it&rsquo;s going to be the main subject of this post. More on that later!</li>
+</ul>
+<p>The picture from before should help you digest this.</p>
+<h4 id="critical-hits">Critical Hits<a class="anchor" href="#critical-hits" title="Link to this section">#</a></h4>
+<p>If you&rsquo;ve ever played an RPG, you probably recognize what a <em>critical hit</em> is. For example, let&rsquo;s say your character normally does \(100\) damage. Every time you hit an enemy, there is a certain probability that you deal extra damage. The probability is called the <strong>critical rate</strong>, and the extra damage is called the <strong>critical damage</strong>. I&rsquo;ll abbreviate these as &ldquo;crit rate&rdquo; and &ldquo;crit damage&rdquo;, or sometimes CR and CD.</p>
+<p>Let&rsquo;s start off with a (not that important) small exercise! By the way, most people like to write \(\mathbb{E}[X]\) to denote the expected value of the random variable \(X\). Unfortunately, I prefer to write the bracketless \(\mathbb{E}X\). I just think it looks cool. Sorry!</p>
+<div class="env env--exercise">
+<p class="env__head"><span class="env__name">Exercise</span> <span class="env__title">(Warmup)</span></p>
+<p>Suppose that your crit rate is \(\mathrm{CR}\) and your crit damage is \(\mathrm{CD}\). That is, every hit has a \(\mathrm{CR}\) chance of dealing \(1 + \mathrm{CD}\) times more damage than usual. If \(A\) is the attack you normally deal, then what is the expected value of damage dealt by a single hit?</p>
+<details class="spoiler">
+<summary>Solution</summary>
+<p>There is a \(\mathrm{CR}\) chance of dealing \((1 + \mathrm{CD})A\) damage, and a \(1 - \mathrm{CR}\) chance of dealing \(A\) damage. Hence if \(H\) is the random variable representing the damage dealt by a particular hit, then:</p>
+<div class="math-block">\[\mathbb{E}H = \mathrm{CR}(1 + \mathrm{CD})A + (1 - \mathrm{CR})A = (1 + \mathrm{CR}\,\mathrm{CD})A\]</div>
+<p>This shows that crit rate and crit damage are actually <em>equally important</em> in determining your overall damage output!</p>
+</details>
+</div>
+<p>The conclusion of this exercise leads to the next concept&hellip;</p>
+<h4 id="critical-value">Critical Value<a class="anchor" href="#critical-value" title="Link to this section">#</a></h4>
+<p>Deep-end Genshin Impact theory dictates that the most important stats to maximize for optimizing any heavy-damage character are the Crit Damage and the Crit Rate! Hence, much of the focus in artifact analysis revolves around these two stats.</p>
+<p>Although it is possible to get a crit-related main stat on an artifact, such artifacts are not worth analyzing too much because they are more &ldquo;clear cut&rdquo;.</p>
+<details class="spoiler">
+<summary>Elaboration</summary>
+<p>Remember that a character can wield 5 artifacts, one of each type! Only one type (the hat) can actually get a CD or CR main stat. In this case, if you get, say, a CD main stat for the hat, then you can&rsquo;t get a CD substat because you can&rsquo;t have two of the same stat. Because of this, if you actually get a hat with either of these crit stats, all you need to do is get a substat of the <em>other</em> type of crit stat and try and hope that that substat is leveled up the most (more on what that means later). Basically, <strong>the goal here is really obvious</strong>. However, on other types of artifacts, like the flower, you can never get a crit stat as the main stat. So you want to get two of the substats to be CD and CR. But how much should you hope to level each of these? Do you value more CD or value more CR? It&rsquo;s not so obvious.</p>
+</details>
+<p>Hence, we&rsquo;re going to assume that the artifact has a non-crit main stat. Then, the goal is to maximize the &ldquo;value&rdquo; you get from the crit substats.</p>
+<p>How is such &ldquo;value&rdquo; estimated? Deep-end Genshin theory coined a simple formula for a quantity called the <strong>critical value</strong> (&ldquo;crit value&rdquo;, or \(\mathrm{CV}\)) that computes exactly this!</p>
+<div class="math-block">\[\mathrm{CV} := \mathrm{CD} + 2 \times \mathrm{CR}\]</div>
+<p>You might be wondering why crit rate (CR) is valued two times more than crit damage (CD). It&rsquo;s not because it&rsquo;s necessarily more important (see the warmup exercise!). The reason is different, but simple: <em>CR substats are hardcoded by the game to be typically half that of CD</em>. That is, more CR is twice as hard to get than more CD.</p>
+<p>If you&rsquo;re a non-Genshin player and made it this far, then congrats! Your artifact meta-gaming knowledge is now above average. Pat yourself on the back, take a sip of water, then get up and stretch your legs a bit&hellip; because we still have one more subsection to go before we can dive into the math.</p>
+<h4 id="how-substats-increase-with-level">How substats increase with level<a class="anchor" href="#how-substats-increase-with-level" title="Link to this section">#</a></h4>
+<p>Firstly, if you&rsquo;re optimizing artifacts for critical value, then you&rsquo;re probably in the endgame.</p>
+<details class="spoiler">
+<summary>Elaboration</summary>
+<p>No need to tryhard this much in the early/mid game! There are much easier things to upgrade in the first 5 or so weeks of playing&hellip;</p>
+</details>
+<p>This means that you&rsquo;re probably not caring too much about optimizing 4* artifacts at this point. Therefore:</p>
+<p><strong>ASSUMPTION 1: All artifacts are 5* rarity</strong></p>
+<p>Consequently, the max level of an artifact is 20.</p>
+<p>When you first obtain an artifact, it starts at level 0. What about the substats? Well, it starts out with either 3 or 4 different substats, based on chance. But that&rsquo;s annoying to think about. Let&rsquo;s assume that you got lucky.</p>
+<p><strong>ASSUMPTION 2: All artifacts start with 4 substats</strong></p>
+<p>You might be worried about the rigor of this post. Don&rsquo;t be! All these assumptions are in favor of the player. The final probability I get will ultimately be an upper bound anyways, so it will still work. Also, if you study the math, I&rsquo;m sure you can figure out how to fix it to account for these cases if you really wanted to.</p>
+<p>Alright, so we&rsquo;re assuming that any particular artifact will start with 4 substats at Level 0. In this case, it can&rsquo;t gain any more, so now they can only be increased. Therefore, if these four substats don&rsquo;t include <em>both</em> CD and CR, then it&rsquo;s&hellip; not very good. Let&rsquo;s assume that you got lucky, and that you have both a CD and CR substat.</p>
+<p><strong>ASSUMPTION 3: 2 of the 4 substats are crit damage and crit rate</strong></p>
+<p><em>This</em> is actually not wonderfully likely. Whatever the final probability is, you can probably at least divide it by 5 (EDIT: Actually this apparently has around 1% chance of happening) to account for this single assumption (not to mention the others!). It&rsquo;s not too hard to factor the case into the calculations though, it&rsquo;ll just make this post much longer than it needs to be.</p>
+<p>Great, with all these assumptions in favor of the player, it&rsquo;s now time to talk about how these substats are upgraded as the artifact is leveled up. Here&rsquo;s how it works:</p>
+<ul>
+<li>A substat upgrade occurs every 4 levels. That is, an upgrade occurs at levels 4, 8, 12, 16, and 20 (a total of five times).</li>
+<li>The upgrade is done as follows: A <em>random substat is picked</em>, and then that substat is increased.</li>
+<li>The increase itself is chosen at random, and is dictated by the bottommost table at <a href="https://genshin-impact.fandom.com/wiki/Artifact/Stats">Artifact/Stats | Genshin Impact Wiki | Fandom</a> (read the page if you want, but no need).</li>
+</ul>
+<p>Here are the exact values we care about:</p>
+<ul>
+<li>If the game chose to increase a CD substat, then the increase is chosen uniformly at random from \(\{5.44, 6.22, 6.99, 7.77\}\).</li>
+<li>If the game chose to increase a CR substat, then the increase is chosen uniformly at random from \(\{2.72, 3.11, 3.50, 3.89\}\).</li>
+</ul>
+<p>How is the initial value of a substat chosen? It&rsquo;s simply chosen from these above sets. So, for example, if an artifact indeed starts with a CD substat at level 0, then that substat is equally likely to be any of \(5.44\), \(6.22\), \(6.99\), or \(7.77\).</p>
+<p>And&hellip; that&rsquo;s it! Now take a look at my friend&rsquo;s artifact.</p>
+<p><img alt="A level +20 Goblet of Thundering Deep with an ATK main stat of 46.6%, and substats DEF+19, CRIT DMG+34.2%, CRIT Rate+7.4% and ATK+18" src="goblet.png" /></p>
+<p>You can see that the CV is \(49\). That&rsquo;s pretty high!</p>
+<p><strong>MAIN QUESTION: How lucky did my friend get with their CV? In general, how can you estimate the probability of getting some high CV artifact?</strong></p>
+<p>Finally, the math can start. Buckle your seatbelts.</p>
+<h3 id="part-2-the-weak-markov-bound">Part 2: The Weak Markov Bound<a class="anchor" href="#part-2-the-weak-markov-bound" title="Link to this section">#</a></h3>
+<div class="env env--theorem">
+<p class="env__head"><span class="env__name">Theorem</span> <span class="env__title">(Markov&#x27;s Inequality)</span></p>
+<p>Let \(X\) be a random variable that takes non-negative real values. Then for all \(t &gt; 0\):</p>
+<div class="math-block">\[\mathbb{P}(X \ge t) \le \frac{\mathbb{E}X}{t}\]</div>
+</div>
+<p>You can see why this would be useful to use: By letting \(X\) be the random variable representing the Critical Value of an artifact, we can, say, set \(t = 50\) to get a bound on how unlikely it is to get an artifact of \(\mathrm{CV} \ge 50\). The only thing we really need to do is compute the expected value of \(X\).</p>
+<p>The main tool here is just linearity of expectation:</p>
+<ul>
+<li>By linearity of expectation, \(\mathbb{E}[\mathrm{CV}] = \mathbb{E}[\mathrm{CD}] + 2\mathbb{E}[\mathrm{CR}]\).</li>
+<li>By linearity again, the expectation of the crit damage is just the expected value of its initial value plus the sum of the expected increases across each of the 5 substat upgradings.</li>
+<li>Expected initial value is \(\dfrac{5.44 + 6.22 + 6.99 + 7.77}{4} = 6.605\).</li>
+<li>If the CD is increased, then the expected value of the increase is, again, \(6.605\). But there&rsquo;s only a \(1/4\) chance that CD is chosen, so the expected increase of each upgrade is \(6.605/4 = 1.65125\).</li>
+<li>In total, the expected value of the final CD is \(6.605 + 5(1.65125) = 14.86125\).</li>
+<li>Similarly, the expected value of the final CR is \(3.305 + 5\left(\dfrac{3.305}{4}\right) = 7.43625\).</li>
+<li>Therefore \(\mathbb{E}[\mathrm{CV}] = 14.86125 + 2(7.43625) = \boxed{29.734}\) (rounded).</li>
+</ul>
+<p>Using this, we can get an upper bound on the probability that my friend got their \(49\) CV artifact:</p>
+<div class="math-block">\[\mathbb{P}(\mathrm{CV} \ge 49) \le \frac{29.734}{49} = 0.607\]</div>
+<p>&hellip;er, that&rsquo;s not a very good upper bound. This doesn&rsquo;t at all prove that their artifact was a miracle. We&rsquo;ll have to do better&hellip;</p>
+<h3 id="part-3-chebyshev-to-the-rescue">Part 3: Chebyshev to the Rescue!<a class="anchor" href="#part-3-chebyshev-to-the-rescue" title="Link to this section">#</a></h3>
+<div class="env env--definition">
+<p class="env__head"><span class="env__name">Definition</span> <span class="env__title">(Variance)</span></p>
+<p>The <em>variance</em> of a random variable \(X\) is essentially a measure of how much it differs from its mean (expected value), giving more weight to larger deviation than smaller ones. It is given by:</p>
+<div class="math-block">\[\operatorname{Var}X := \mathbb{E}\left[(X - \mathbb{E}X)^2\right]\]</div>
+</div>
+<p>In this form, the definition makes a lot of sense. But, by linearity of expectation, this can be manipulated into a form that is easier to compute as follows:</p>
+<div class="math-block">\[\operatorname{Var}X = \mathbb{E}\left[X^2 - 2X\mathbb{E}X + (\mathbb{E}X)^2\right] = \mathbb{E}[X^2] - 2(\mathbb{E}X)(\mathbb{E}X) + (\mathbb{E}X)^2 = \mathbb{E}[X^2] - (\mathbb{E}X)^2\]</div>
+<p>Note that \((\mathbb{E}X)^2\) and \(\mathbb{E}[X^2]\) are not the same thing!!! (If you&rsquo;re not convinced, try computing both quantities when \(X\) represents a random dice roll.)</p>
+<p>Now we can get to the theorem that will ultimately help us&hellip;</p>
+<div class="env env--theorem">
+<p class="env__head"><span class="env__name">Theorem</span> <span class="env__title">(Chebyshev&#x27;s Inequality)</span></p>
+<p>Let \(X\) be a random variable. Then:</p>
+<div class="math-block">\[\mathbb{P}(|X - \mathbb{E}X| \ge t) \le \frac{\operatorname{Var}X}{t^2}\]</div>
+</div>
+<p>You can see why this might be better: The denominator now increases quadratically (instead of linearly) in \(t\). Hopefully, this will result in a sharper upper bound!</p>
+<p>To compute \(\operatorname{Var}\mathrm{CV}\), we need to compute both \(\mathbb{E}[\mathrm{CV}]\) and \(\mathbb{E}[\mathrm{CV}^2]\). Fortunately, we did the first one already. The problem is going to be computing the second one. How the heck do we figure that out without bashing out every possible value for \(\mathrm{CV}\)?</p>
+<p>First, let&rsquo;s do some housekeeping. We can write \(\mathrm{CV} = \mathrm{CD} + 2\mathrm{CR}\), so by linearity of expectation:</p>
+<div class="math-block">\[\mathbb{E}[\mathrm{CV}^2] = \mathbb{E}[(\mathrm{CD} + 2\mathrm{CR})^2] = \mathbb{E}[\mathrm{CD}^2] + 4\mathbb{E}[\mathrm{CD}\,\mathrm{CR}] + 4\mathbb{E}[\mathrm{CR}^2]\]</div>
+<p>We <strong>cannot</strong> simplify the middle term to \(\mathbb{E}[\mathrm{CD}]\mathbb{E}[\mathrm{CR}]\). That&rsquo;s only allowed if \(\mathrm{CD}\) and \(\mathrm{CR}\) were independent random variables. But they aren&rsquo;t! (Exercise: Why?)</p>
+<p>Now what? The key idea is to do some MORE housekeeping by &ldquo;modeling&rdquo; what exactly \(\mathrm{CD}\) and \(\mathrm{CR}\) are. Remember: Each of these random variables consists of some random initial value, plus 5 possible increases. This inspires trying to rewrite them using these parts as random variables!</p>
+<p>Let&rsquo;s consider \(\mathrm{CD}\). We may write \(\mathrm{CD} = A + X_1 + X_2 + X_3 + X_4 + X_5\), where \(A\) is the random variable representing the initial value, and \(X_i\) is the variable representing the possible increase.</p>
+<p>\(A\) is just uniformly chosen from \(\{5.44, 6.22, 6.99, 7.77\}\), so that&rsquo;s easy. As for \(X_i\), it&rsquo;s trickier. There&rsquo;s a \(3/4\) chance that the CD is not increased, so \(X_i = 0\) with probability \(3/4\). But there&rsquo;s a \(1/4\) chance that it IS chosen, in which case the value is chosen randomly from \(\{5.44, 6.22, 6.99, 7.77\}\). Hence the distribution of \(X_i\) is given by the following table:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Value</th>
+<th style="text-align: center;">\(0\)</th>
+<th style="text-align: center;">\(5.44\)</th>
+<th style="text-align: center;">\(6.22\)</th>
+<th style="text-align: center;">\(6.99\)</th>
+<th style="text-align: center;">\(7.77\)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Probability</td>
+<td style="text-align: center;">\(3/4\)</td>
+<td style="text-align: center;">\(1/16\)</td>
+<td style="text-align: center;">\(1/16\)</td>
+<td style="text-align: center;">\(1/16\)</td>
+<td style="text-align: center;">\(1/16\)</td>
+</tr>
+</tbody>
+</table>
+<p>Now we can compute:</p>
+<div class="math-block">\[\mathbb{E}[\mathrm{CD}^2] = \mathbb{E}\left[\left(A + \sum_{i=1}^5 X_i\right)^2\right]\]</div>
+<p>We need to do some unfortunate expanding here&hellip;</p>
+<div class="math-block">\[= \mathbb{E}[A^2] + 2\sum_{i=1}^5 \mathbb{E}[AX_i] + \sum_{i=1}^5\sum_{j=1}^5 \mathbb{E}[X_iX_j]\]</div>
+<p>This looks horrific, but bear with me! First, notice that all the \(X_i\) have the <em>same distribution</em>, because they all represent an increase of the same substat. What this means is that their expected values must be the same! The expectation of \(AX_i\) should also be the same for all \(i\). So we can simplify a bit:</p>
+<div class="math-block">\[= \mathbb{E}[A^2] + 10\mathbb{E}[AX_1] + \sum_{i=1}^5\sum_{j=1}^5 \mathbb{E}[X_iX_j]\]</div>
+<p>To deal with the second term, we first split it into two sums: One where \(i = j\), and another where \(i \ne j\).</p>
+<div class="math-block">\[= \mathbb{E}[A^2] + 10\mathbb{E}[AX_1] + \sum_{i=1}^5 \mathbb{E}[X_iX_i] + \sum_{i \ne j} \mathbb{E}[X_iX_j]\]</div>
+<p>Now here&rsquo;s the punchline: <strong>The \(X_i\) are actually independent!</strong> This is because, say, if CD is increased at lvl 4, then this won&rsquo;t affect the potential for further increases at lvl 8, 12, etc., and so \(\mathbb{E}[X_iX_j] = \mathbb{E}X_i\mathbb{E}X_j = \mathbb{E}X_1\mathbb{E}X_1\). (Of course, you should note that this cannot be done when \(i = j\), because variables can&rsquo;t be independent against themselves&hellip; unless you&rsquo;re doing something dumb.) This gives us more simplification!</p>
+<div class="math-block">\[= \mathbb{E}[A^2] + 10\mathbb{E}[A]\mathbb{E}[X_1] + 5\mathbb{E}[X_1^2] + 20(\mathbb{E}X_1)^2\]</div>
+<p>That&rsquo;s great! All of these values are easily computable. If you want to be really fancy, you can note that \(\mathbb{E}X_1 = \dfrac34(0) + \dfrac14\mathbb{E}A\), and \(\mathbb{E}[X_1^2] = \dfrac34(0) + \dfrac14\mathbb{E}[A^2]\), letting us simplify even more:</p>
+<div class="math-block">\[= \mathbb{E}[A^2] + 10\mathbb{E}[A]\left(\frac14\mathbb{E}A\right) + \frac54\mathbb{E}[A^2] + 20\left(\frac14\mathbb{E}A\right)^2\]</div>
+<div class="math-block">\[= \mathbb{E}[A^2] + \frac52(\mathbb{E}A)^2 + \frac54\mathbb{E}[A^2] + \frac54(\mathbb{E}A)^2\]</div>
+<div class="math-block">\[= \frac94\mathbb{E}[A^2] + \frac{15}4(\mathbb{E}A)^2\]</div>
+<p>Similarly, if we separate \(\mathrm{CR}\) using the variables \(B, Y_1, \cdots, Y_5\) defined in the same way, then:</p>
+<div class="math-block">\[\mathbb{E}[\mathrm{CR}^2] = \frac94\mathbb{E}[B^2] + \frac{15}4(\mathbb{E}B)^2\]</div>
+<p>We&rsquo;re halfway there! But now there&rsquo;s this pesky \(\mathbb{E}[\mathrm{CD}\,\mathrm{CR}]\) term. How will we evaluate that? &hellip;well, using the same trick of course! This is literally just:</p>
+<div class="math-block">\[\mathbb{E}[\mathrm{CD}\,\mathrm{CR}] = \mathbb{E}\left[(A + X_1 + \cdots + X_5)(B + Y_1 + \cdots + Y_5)\right]\]</div>
+<p>Some more nasty expanding is in order, but don&rsquo;t worry&hellip; it will collapse quickly.</p>
+<div class="math-block">\[= \mathbb{E}A\mathbb{E}B + 5\mathbb{E}A\mathbb{E}Y_1 + 5\mathbb{E}B\mathbb{E}X_1 + \sum_{i=1}^5\sum_{j=1}^5 \mathbb{E}[X_iY_j]\]</div>
+<p>I jumped the gun a bit there. Make sure you understand how exactly we can get the above by using identical distributions of the \(X_i\) (and \(Y_i\)) as well as applying independence properly (be sure to understand <em>which</em> pairs of variables can be considered independent!)</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>The only pairs of variables that aren&rsquo;t independent are those that actually interfere with each other. That is, \(X_i\) and \(Y_i\). This is because if the CD is upgraded on one turn, it&rsquo;s impossible for the CR to be upgraded on the same turn.</p>
+</details>
+<p>Let&rsquo;s again split this sum:</p>
+<div class="math-block">\[= \mathbb{E}A\mathbb{E}B + 5\mathbb{E}A\mathbb{E}Y_1 + 5\mathbb{E}B\mathbb{E}X_1 + \sum_{i=1}^5 \mathbb{E}[X_iY_i] + \sum_{i \ne j} \mathbb{E}[X_iY_j]\]</div>
+<p>Here&rsquo;s the magic: I claim that \(\displaystyle\sum_{i=1}^5 \mathbb{E}[X_iY_i] = 0\). Why is that?</p>
+<details class="spoiler">
+<summary>Answer</summary>
+<p>Because again, <strong>if one crit substat is upgraded, then the other substat can&rsquo;t be upgraded at the same time.</strong> Mathematically, if \(X_i &gt; 0\), then \(Y_i = 0\), and if \(Y_i &gt; 0\) then \(X_i = 0\). No matter what, one of these variables must be \(0\) because there is always a crit substat that&rsquo;s NOT upgraded at some point. Therefore, \(X_iY_i\) is ALWAYS \(0\). That means the expected value is certainly \(0\) as well!</p>
+</details>
+<p>So this devolves into:</p>
+<div class="math-block">\[= \mathbb{E}A\mathbb{E}B + 5\mathbb{E}A\mathbb{E}Y_1 + 5\mathbb{E}B\mathbb{E}X_1 + 20\mathbb{E}[X_1]\mathbb{E}[Y_1]\]</div>
+<div class="math-block">\[= \mathbb{E}A\mathbb{E}B + \frac54\mathbb{E}A\mathbb{E}B + \frac54\mathbb{E}A\mathbb{E}B + \frac54\mathbb{E}A\mathbb{E}B\]</div>
+<div class="math-block">\[= \frac{19}4\mathbb{E}A\mathbb{E}B\]</div>
+<p>Voila! Therefore:</p>
+<div class="math-block">\[\mathbb{E}[\mathrm{CV}^2] = \mathbb{E}[\mathrm{CD}^2] + 4\mathbb{E}[\mathrm{CD}\,\mathrm{CR}] + 4\mathbb{E}[\mathrm{CR}^2]\]</div>
+<div class="math-block">\[= \frac94\mathbb{E}[A^2] + \frac{15}4(\mathbb{E}A)^2 + 9\mathbb{E}[B^2] + 15(\mathbb{E}B)^2 + 19\mathbb{E}A\mathbb{E}B\]</div>
+<p>Finally, let&rsquo;s start plugging stuff in:</p>
+<ul>
+<li>\(\mathbb{E}A = \dfrac{5.44 + 6.22 + 6.99 + 7.77}{4} = 6.605\)</li>
+<li>\(\mathbb{E}[A^2] = \dfrac{5.44^2 + 6.22^2 + 6.99^2 + 7.77^2}{4} \approx 44.379\)</li>
+<li>\(\mathbb{E}B = \dfrac{2.72 + 3.11 + 3.50 + 3.89}{4} = 3.305\)</li>
+<li>\(\mathbb{E}[B^2] = \dfrac{2.72^2 + 3.11^2 + 3.50^2 + 3.89^2}{4} \approx 11.113\)</li>
+</ul>
+<div class="math-block">\[\mathbb{E}[\mathrm{CV}^2] = \frac94(44.379) + \frac{15}4(6.605)^2 + 9(11.113) + 15(3.305)^2 + 19(6.605)(3.305) \approx 942.074\]</div>
+<p>Recalling that \(\mathbb{E}[\mathrm{CV}] = 29.734\), we can finally get:</p>
+<div class="math-block">\[\operatorname{Var}\mathrm{CV} = \mathbb{E}[\mathrm{CV}^2] - \mathbb{E}[\mathrm{CV}]^2 = \boxed{57.98}\]</div>
+<p>Brilliant! Finally let&rsquo;s put this into Chebyshev&rsquo;s inequality:</p>
+<div class="math-block">\[\mathbb{P}(|\mathrm{CV} - 29.734| \ge t) \le \frac{57.98}{t^2}\]</div>
+<p>To bound the probability that my friend got their \(49\) CV artifact, we first write:</p>
+<div class="math-block">\[\mathbb{P}(\mathrm{CV} \ge 49) = \mathbb{P}(\mathrm{CV} - 29.734 \ge 19.266)\]</div>
+<div class="math-block">\[= \mathbb{P}(|\mathrm{CV} - 29.734| \ge 19.266) - \mathbb{P}(29.734 - \mathrm{CV} \ge 19.266)\]</div>
+<div class="math-block">\[= \mathbb{P}(|\mathrm{CV} - 29.734| \ge 19.266) - \mathbb{P}(10.468 \ge \mathrm{CV})\]</div>
+<p>Now note that \(\mathbb{P}(10.468 \ge \mathrm{CV}) = 0\) (why?), so this is:</p>
+<div class="math-block">\[= \mathbb{P}(|\mathrm{CV} - 29.734| \ge 19.266) \le \frac{57.98}{19.266^2} = \boxed{0.156}\]</div>
+<p>This is much better than the Markov bound we had earlier! It&rsquo;s still quite a bit off from the actual probability (which turns out to be around \(0.003\) or less, by a Monte Carlo simulation), but it&rsquo;s nice to have some bound that can be mathematically derived without a computer. Also, keep in mind that if you remove the assumptions that the artifact starts with 4 substats and will always have crit rate and crit damage to start with, then this probability is even lower!</p>
+<p>Is there a way to lower this upper bound using a different method? I&rsquo;m not sure. I&rsquo;ve tried some other things like the Central Limit Theorem, but it did not improve on \(0.156\). Feel free to try your hand at lowering the bound if you can :)</p>
+<p>If you have tolerated, dare I hope&hellip;enjoyed?, the entirety of this post, I ask you to humor me one last time with a bad pun: this game is so widespread it sure is making an impact on this gen(era)shin.</p>
+      </article>
+      <div class="divider v" aria-hidden="true"><svg viewBox="0 -1 600 72" role="img" aria-label="Cantor set, six levels" xmlns="http://www.w3.org/2000/svg"><rect class="fc" x="0.00" y="0" width="600.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="12" width="200.00" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="24" width="66.67" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="36" width="22.22" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="48" width="7.41" height="3.5" rx="1.2"/><rect class="fc" x="0.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="4.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="14.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="19.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="44.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="49.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="59.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="64.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="133.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="138.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="148.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="153.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="177.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="182.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="192.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="197.53" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="400.00" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="404.94" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="414.81" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="419.75" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="444.44" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="449.38" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="459.26" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="464.20" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="533.33" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="538.27" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="548.15" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="553.09" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="577.78" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="582.72" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="592.59" y="60" width="2.47" height="3.5" rx="1.2"/><rect class="fc" x="597.53" y="60" width="2.47" height="3.5" rx="1.2"/></svg></div>
+    </main>
+    <footer class="footer">
+      <div class="wrap">&copy; 2026 Sarthak Dassarma. Hosted on GitHub Pages.</div>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>

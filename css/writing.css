@@ -288,3 +288,12 @@
 
 /* Footnote jumps (and any in-post anchor) land a few lines below the fixed header */
 .prose [id] { scroll-margin-top: 8rem; }
+
+/* Mathematics in Genshin Impact: disclaimers block + light/dark pair of one annotated screenshot */
+.prose .disclaimers { margin: 1.8em 0; }
+.prose .disclaimers__title { margin: 0 0 0.4em; font-size: 1.5rem; text-decoration: underline; text-underline-offset: 0.18em; }
+.prose .theme-pair { margin: 1.6em 0; }
+.prose .theme-pair img { display: block; width: 100%; height: auto; max-width: 805px; border-radius: 0; }
+.prose .theme-pair .on-dark { display: none; }
+html[data-theme="dark"] .prose .theme-pair .on-light { display: none; }
+html[data-theme="dark"] .prose .theme-pair .on-dark { display: block; }
