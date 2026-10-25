@@ -462,11 +462,29 @@ def taxi():
     return open(path, encoding="utf-8").read()
 
 
+def ripples():
+    """Two pebbles, two sets of ring crests. Where crests of one meet crests of the other the waves add; that is the
+    superposition principle of the linearized shallow-water equations (Shallow Water Simulation)."""
+    W, H = 300, 190
+    srcs = [((108, 104), "a"), ((192, 86), "l")]
+    body = f'<clipPath id="ripple-clip"><rect x="0" y="0" width="{W}" height="{H}"/></clipPath><g clip-path="url(#ripple-clip)">'
+    for (cx, cy), cls in srcs:
+        for k in range(9):
+            r = 9 + 19 * k
+            op = 0.95 * 0.80 ** k
+            c = cls + (" t" if k == 0 else "")
+            body += f'<circle class="{c}" style="opacity:{op:.2f}" cx="{cx}" cy="{cy}" r="{r}"/>'
+    body += "</g>"
+    for (cx, cy), cls in srcs:
+        body += f'<circle class="f{cls}" cx="{cx}" cy="{cy}" r="3.2"/>'
+    return _svg(f"0 0 {W} {H}", body, "Ripples from two pebbles overlapping")
+
+
 FIGS = {
     "gasket": gasket, "sierpinski": sierpinski, "elliptic": elliptic, "elliptic_icon": elliptic_icon, "cantor": cantor,
     "hilbert": hilbert, "mollifier": mollifier, "variations": variations, "spread": spread,
     "black_scholes": black_scholes, "hexes": hexes, "epicycle": epicycle, "fano": fano,
-    "contours": contours, "random_walks": random_walks, "arzela_ascoli": arzela_ascoli, "clt": clt, "taxi": taxi,
+    "contours": contours, "random_walks": random_walks, "arzela_ascoli": arzela_ascoli, "clt": clt, "taxi": taxi, "ripples": ripples,
 }
 
 if __name__ == "__main__":

@@ -503,3 +503,48 @@ pre {
 @media (max-width: 620px) {
   #tx-results .tx-bar, #tx-groups .tx-bar, #tx-noise .tx-bar { grid-template-columns: 1fr; }
 }
+
+/* ---------- Shallow Water Simulation ---------- */
+
+.canvas-card--sw canvas { height: auto; aspect-ratio: 2 / 1; cursor: crosshair; }
+.canvas-card--sw canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; border-radius: 22px; }
+.canvas-card--sw .status { max-width: 55%; }
+
+.sw-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+
+.sw-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px 32px;
+  margin-top: 26px;
+}
+.sw-field { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.sw-field__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.sw-field__name { font: 500 0.78rem/1.5 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); }
+.sw-field__val { font: 500 0.85rem/1.5 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--text); white-space: nowrap; }
+.sw-field .clt-slider { max-width: none; }
+.sw-field__hint { margin: 0; font-size: 0.85rem; line-height: 1.45; color: var(--text-soft); }
+
+.notes ul { margin: 0 0 1.1em; padding-left: 1.2em; color: var(--text-mid); }
+.notes li { margin: 0 0 0.6em; }
+.notes li:last-child { margin-bottom: 0; }
+
+@media (max-width: 900px) {
+  .sw-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .canvas-card--sw .status { max-width: 100%; }
+  .canvas-card--sw .readout { top: 40px; right: auto; left: 18px; max-width: calc(100% - 36px); text-align: left; }
+}
+@media (max-width: 520px) {
+  .sw-controls { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+}
+
+/* wave-interaction switch (same row height as a slider, so the grid stays even) */
+.sw-switch { position: relative; display: flex; align-items: center; height: 32px; cursor: pointer; }
+.sw-switch input { position: absolute; width: 46px; height: 26px; margin: 0; opacity: 0; cursor: pointer; }
+.sw-switch__track { position: relative; width: 46px; height: 26px; border-radius: 13px; background: var(--rule); transition: background 0.15s; }
+.sw-switch__track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--card); box-shadow: 0 1px 3px rgba(13, 16, 22, 0.35); transition: transform 0.15s; }
+.sw-switch input:checked + .sw-switch__track { background: var(--accent); }
+.sw-switch input:checked + .sw-switch__track::after { transform: translateX(20px); }
+.sw-switch input:focus-visible + .sw-switch__track { outline: 2px solid var(--accent); outline-offset: 4px; }

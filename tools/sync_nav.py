@@ -17,7 +17,7 @@ sys.path.insert(0, root)
 from build_pages import nav  # noqa: E402
 
 new = nav("projects.html", "../")
-for path in ["projects/clt-visualization.html", "projects/fourier-visualization.html", "projects/gerrymandle-boards.html"]:
+for path in ["projects/clt-visualization.html", "projects/fourier-visualization.html", "projects/gerrymandle-boards.html", "projects/shallow-water-simulation.html"]:
     if not os.path.exists(path):
         continue
     h = open(path, encoding="utf-8").read()
