@@ -237,7 +237,7 @@ p { margin: 0 0 1em; }
   position: relative;
   overflow: hidden;
   color: var(--on-dark);
-  padding: clamp(118px, 18vh, 170px) 0 clamp(96px, 14vh, 140px);
+  padding: clamp(108px, 15vh, 132px) 0 clamp(108px, 14vh, 120px);
   background:
     radial-gradient(60% 85% at 90% -15%, rgba(255, 90, 54, 0.32), transparent 62%),
     radial-gradient(50% 70% at 0% 105%, rgba(143, 155, 255, 0.2), transparent 62%),
@@ -295,7 +295,7 @@ p { margin: 0 0 1em; }
 }
 
 .page-title {
-  font-size: clamp(2.7rem, 7vw, 5.2rem);
+  font-size: clamp(2.4rem, 5.6vw, 4.2rem);
   line-height: 1;
   letter-spacing: -0.045em;
   font-weight: 800;
@@ -310,7 +310,8 @@ p { margin: 0 0 1em; }
 }
 
 .display {
-  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-size: clamp(1.9rem, 8.4vw, 4.6rem);
+  white-space: nowrap;
   line-height: 0.93;
   letter-spacing: -0.05em;
   font-weight: 800;
@@ -318,10 +319,11 @@ p { margin: 0 0 1em; }
 }
 
 .display .dot { color: var(--accent); }
+.display.reveal .line { display: inline-block; vertical-align: top; }
 
 .home .stage {
-  padding-top: clamp(104px, 14vh, 150px);
-  padding-bottom: clamp(88px, 12vh, 112px);
+  padding-top: clamp(100px, 12vh, 120px);
+  padding-bottom: clamp(104px, 14vh, 116px);
 }
 
 .stage .contact { margin-top: 30px; }
@@ -446,6 +448,10 @@ p { margin: 0 0 1em; }
   border-color: var(--text);
   color: var(--paper);
 }
+
+/* same button in lilac (LinkedIn) */
+.btn--solid.btn--lilac { background: var(--lilac); border-color: var(--lilac); }
+.btn--solid.btn--lilac:hover { background: var(--text); border-color: var(--text); color: var(--paper); }
 
 /* ---------- Home ---------- */
 
@@ -754,32 +760,6 @@ p { margin: 0 0 1em; }
 [data-tilt].is-tilting::before { opacity: 1; }
 [data-tilt].is-tilting::after { opacity: 0.85; }
 
-/* ---------- 5 · Interest marquee (hobbies) ---------- */
-.marquee {
-  position: relative;
-  z-index: 1;
-  margin-top: clamp(36px, 5vw, 56px);
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-.marquee__track {
-  display: flex;
-  width: max-content;
-  animation: marquee-scroll 36s linear infinite;
-}
-.marquee:hover .marquee__track,
-.marquee.is-paused .marquee__track { animation-play-state: paused; }
-.marquee__track span {
-  padding: 0 22px;
-  font: 800 clamp(1.5rem, 3.6vw, 2.4rem)/1.1 var(--font-display);
-  letter-spacing: -0.04em;
-  color: #fff;
-  white-space: nowrap;
-}
-.marquee__track span:nth-child(4n+3) { color: transparent; -webkit-text-stroke: 1.5px var(--on-dark); }
-.marquee__track i { color: var(--accent); font-style: normal; }
-@keyframes marquee-scroll { to { transform: translateX(-33.3333%); } }  /* the track holds three copies */
 
 .chip-btn {
   display: none;
@@ -795,28 +775,8 @@ p { margin: 0 0 1em; }
 }
 .chip-btn:hover { background: rgba(255, 255, 255, 0.14); border-color: rgba(255, 255, 255, 0.5); }
 .js .chip-btn { display: inline-flex; }
-.marquee-controls {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  margin-top: 18px;
-}
-.marquee-arrows { display: inline-flex; gap: 8px; }
-.marquee-arrows[hidden] { display: none; }
 .chip-btn--icon { padding: 0.68em 1.05em; }
-.chip-btn[aria-pressed="true"][data-marquee-arrows] {
-  background: rgba(255, 90, 54, 0.18);
-  border-color: var(--accent);
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .marquee__track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; }
-  .marquee__track .dup { display: none; }
-  .marquee-controls { display: none; }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .js .reveal .line > span { transform: none; transition: none; }
@@ -1025,6 +985,15 @@ html[data-theme="dark"] .theme-toggle .ic-moon { display: none; }
   .theme-toggle { width: 32px; height: 32px; margin-left: 6px; }
   .theme-toggle svg { width: 17px; height: 17px; }
 }
-.theme-fade, .theme-fade * { transition: background-color 0.3s, color 0.3s, border-color 0.3s, fill 0.3s, stroke 0.3s !important; }
+/* theme switch: the browser cross-fades one snapshot of the page into the next (GPU-composited, so no per-element repaint hiccups) */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.55s; animation-timing-function: cubic-bezier(0.33, 0, 0.2, 1); }
+/* fallback for browsers without View Transitions: fade only the big surfaces and text, briefly */
+.theme-fade body, .theme-fade .sheet, .theme-fade .site-header, .theme-fade .entry, .theme-fade .wcard, .theme-fade .vtile { transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease; }
 .nav { display: flex; align-items: center; }
 .nav .theme-toggle { margin-bottom: 6px; }
+
+/* home: Cantor-set divider with a note beside it */
+.divider-row { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 10px 32px; margin: clamp(48px, 7vw, 72px) 0 0; }
+.divider-row .divider { margin: 0; flex: none; }
+.divider-note { margin: 0; font-size: 0.92rem; color: var(--text-mid); }
+

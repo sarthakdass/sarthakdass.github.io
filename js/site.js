@@ -455,11 +455,21 @@
     if (meta) meta.setAttribute('content', d ? '#0a0d12' : '#0d1016');
   }
   btn.addEventListener('click', function () {
-    root.classList.add('theme-fade');
-    if (isDark()) root.removeAttribute('data-theme'); else root.setAttribute('data-theme', 'dark');
-    try { localStorage.setItem('sd-theme', isDark() ? 'dark' : 'light'); } catch (e) { /* private mode */ }
-    sync();
-    setTimeout(function () { root.classList.remove('theme-fade'); }, 400);
+    function flip() {
+      if (isDark()) root.removeAttribute('data-theme'); else root.setAttribute('data-theme', 'dark');
+      try { localStorage.setItem('sd-theme', isDark() ? 'dark' : 'light'); } catch (e) { /* private mode */ }
+      sync();
+    }
+    var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (document.startViewTransition && !calm) {
+      document.startViewTransition(flip);
+    } else if (calm) {
+      flip();
+    } else {
+      root.classList.add('theme-fade');
+      flip();
+      setTimeout(function () { root.classList.remove('theme-fade'); }, 500);
+    }
   });
   nav.appendChild(btn);
   sync();

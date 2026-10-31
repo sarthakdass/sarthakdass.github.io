@@ -2,7 +2,7 @@
 """Re-skins the raw output of the Gerrymandle puzzle generator into the site theme.
 
 Run from the site root:
-    python3 tools/restyle_gerrymandle.py  path/to/raw-generator-output.html  projects/gerrymandle-boards.html
+    python3 tools/restyle_gerrymandle.py  path/to/raw-generator-output.html  puzzles/gerrymandle-boards/index.html
 
 It keeps every board, count and sentence exactly as generated; it only swaps the page shell and
 styling (css/style.css + css/projects.css), renames the map panel class `.stage` -> `.board`

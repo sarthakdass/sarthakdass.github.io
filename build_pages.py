@@ -19,9 +19,8 @@ PAGES = [
     ("projects.html", "Projects"),
     ("math.html", "Math"),
     ("hobbies.html", "Hobbies"),
+    ("puzzles.html", "Puzzles"),
     ("writing.html", "Writing"),
-    ("now.html", "Now"),
-    ("visuals.html", "Visuals"),
 ]
 
 FONTS = (
@@ -327,12 +326,13 @@ home_stage = '''<header class="stage" data-paths>
     <h1 class="display reveal"><span class="line"><span>Sarthak</span></span> <span class="line"><span>Dassarma<span class="dot">.</span></span></span></h1>
     <div class="contact">
       <a class="btn btn--solid" href="https://github.com/sarthakdass" target="_blank" rel="noopener">GitHub <span aria-hidden="true">&nearr;</span></a>
+      <a class="btn btn--solid btn--lilac" href="https://www.linkedin.com/in/sarthak-dassarma/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">&nearr;</span></a>
       <span class="chip-mono">s.dassarma [at] columbia [dot] edu</span>
     </div>
   </div>
 </header>'''
 
-home_content = '''      <p class="statement">I&rsquo;m a first-year (applied) mathematics graduate student at Columbia University. I enjoy bridging abstract mathematical structures with real-world problems.</p>
+home_content = '''      <p class="statement">I&rsquo;m a first-year (applied) mathematics graduate student at Columbia University. I enjoy bridging abstract mathematical structures with real-world problems. Here&rsquo;s what I&rsquo;m up to <a href="now/">now</a>.</p>
       <p class="aside">I completed my undergraduate studies at Santa Clara University, where I studied pure mathematics with an emphasis in applied mathematics.</p>'''
 
 # ------------------------------------------------------------- PROJECTS
@@ -391,7 +391,7 @@ projects_content = '''      <section class="block" aria-labelledby="coding">
           <p>Designed a bitmask-based exhaustive search algorithm to partition a hex grid into connected districts, using recursive backtracking with branch-and-bound pruning. Built a randomized generate-and-test search that samples board layouts and colorings, then re-verifies each candidate for solution uniqueness. Wrote a template-free HTML/SVG renderer in pure Python to turn structured puzzle data into an interactive site.</p>
           <ul class="tags"><li>Python</li><li>HTML</li></ul>
           <div class="entry__links">
-            <a class="btn btn--solid" href="projects/gerrymandle-boards.html" target="_blank" rel="noopener">Live link <span aria-hidden="true">&nearr;</span></a>
+            <a class="btn btn--solid" href="puzzles/gerrymandle-boards/" target="_blank" rel="noopener">Live link <span aria-hidden="true">&nearr;</span></a>
             <a class="btn" href="https://github.com/sarthakdass/gerrymandle-puzzles" target="_blank" rel="noopener">Source <span aria-hidden="true">&nearr;</span></a>
           </div>
         </div>
@@ -435,14 +435,12 @@ math_content = '''      <article class="entry">
         <div class="entry__body">
           <header class="entry__head">
             <h2 class="entry__title">Distribution theory notes</h2>
-            <span class="entry__meta">In progress</span>
+            <span class="entry__meta">Nov 2026</span>
           </header>
-          <p>Working notes &mdash; to be posted soon.</p>
-          <!--
+          <p>A semi-formal introduction, with applications.</p>
           <div class="entry__links">
-            <a class="btn btn--solid" href="papers/distribution-theory-notes.pdf" target="_blank" rel="noopener">Notes (PDF) <span aria-hidden="true">&nearr;</span></a>
+            <a class="btn btn--solid btn--lilac" href="papers/distribution-theory-notes.pdf" target="_blank" rel="noopener">Notes (PDF) <span aria-hidden="true">&nearr;</span></a>
           </div>
-          -->
         </div>
       </article>
 
@@ -497,8 +495,8 @@ hobbies_content = '''      <section class="block" aria-labelledby="academic">
       <section class="block" aria-labelledby="other">
         <h2 class="block__title" id="other">Other Hobbies</h2>
         <ul class="plain" style="margin-top:24px">
-          <li><strong>Logic puzzles.</strong> <a href="https://eev.ee/fyi/variant-sudoku/" target="_blank" rel="noopener">Variant sudoku</a> puzzles follow typical sudoku rules, but with twists such as coloring in cells, creating regions, etc.</li>
-          <li><strong>Crosswords.</strong> I enjoy constructing and solving crosswords, especially <a href="https://en.wikipedia.org/wiki/Cryptic_crossword" target="_blank" rel="noopener">cryptic crosswords</a>.</li>
+          <li><a href="../puzzles/"><strong>Logic puzzles.</strong></a> Variant sudoku puzzles follow typical sudoku rules, but with twists such as coloring in cells, creating regions, etc.</li>
+          <li><strong>Crosswords.</strong> I enjoy constructing and solving crosswords, especially cryptic crosswords.</li>
           <li><strong>Basketball.</strong> My personal preference is playing pickup basketball with my established friend groups, but I also practice alone and enjoy playing at new parks and making new friends. I also love learning and engaging in discussions about the history of basketball.</li>
           <li><strong>Watching sports.</strong> I enjoy watching most sports, notably: basketball, American football, cricket, football ("soccer").</li>
           <li><a href="https://setwithforks.com/" target="_blank" rel="noopener"><strong>Set</strong></a> is a card game played with a special deck of 3<sup>4</sup> = 81 cards where each card has four features that distinguish it from the others: color, shape, shading, and number. For each feature, there are three variants. Your aim is to select a set which is a combination of three cards such that for each of the four features, the variants of that feature expressed by the three cards are either all the same or all different. I hold the world record in 7 of the 16 game modes, including the base variant where I have completed a 24-set game in 23.25 seconds and Set-Chain, where I have completed a 34-set game in 27.85 seconds.</li>
@@ -525,12 +523,12 @@ now_content = '''      <dl class="now">
         </div>
         <div class="now__row">
           <dt>Where I am/will be working</dt>
-          <dd>I am finishing up my summer research and pursuing my master's in applied mathematics. My interests are much more heavily skewed towards mathematics, particularly in subjects like algebraic geometry, combinatorics, analysis, etc.</dd>
+          <dd>I am pursuing my master's in applied mathematics. However, my interests are more directly involved in algebraic geometry and the &ldquo;purer&rdquo; side of analysis despite its ubiquitous applications.</dd>
         </div>
       </dl>
 
       <ul class="bullets">
-        <li>I am spending quite a bit of time writing up my distribution theory notes, and hope to publish that soon.</li>
+        <li>I am spending quite a bit of time writing up my measure theory notes, and hope to publish that soon.</li>
         <li>I plan to spend a little bit of time studying up on financial concepts, conducting some mock trading, etc.</li>
         <li>In the medium to long term, I want teaching mathematics to be a part of my life. Currently it is not, and I have not been seriously looking into ways to change this in the short term.</li>
       </ul>'''
