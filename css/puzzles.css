@@ -8,9 +8,10 @@
   --sd-user: #5b67d8;      /* big digits the player types (the lilac, darkened for the paper) */
   --sd-mark: #525b6c;
   --sd-sel: #8f9bff;
+  --sd-bad: #e8431f;
   --sd-line: #cf3a3a;
 }
-html[data-theme="dark"] .sd { --sd-user: #aab3ff; --sd-mark: #98a2b5; }
+html[data-theme="dark"] .sd { --sd-user: #aab3ff; --sd-mark: #98a2b5; --sd-bad: #ff7a59; }
 
 .back-link { color: var(--on-dark-soft); }
 
@@ -259,3 +260,9 @@ html[data-theme="dark"] .sd.is-paused .sd__board svg { filter: blur(14px); }
 .sd.is-fs .sd__padrow { grid-template-columns: minmax(0, 1fr) 76px; gap: 10px; }
 .sd.is-fs .sd__controls, .sd.is-fs .sd__keys, .sd.is-fs .sd__modes, .sd.is-fs .sd__actions { gap: 8px; }
 @media (max-width: 860px) { .sd.is-fs { --S: min(calc(100vw - 40px), calc(100vh - 380px)); } .sd.is-fs .sd__play { display: flex; } .sd.is-fs .sd__timer { font-size: 1.1rem; } .sd.is-fs button.sd-key, .sd.is-fs button.sd-tool { min-height: 44px; } }
+
+/* matching digits, and digits that clash with the board */
+.sd-same { fill: none; stroke: var(--sd-sel); stroke-width: 6; pointer-events: none; }
+.sd .sd-digit.is-bad, .sd .sd-corner.is-bad, .sd .sd-center .is-bad { fill: var(--sd-bad); }
+.sd button.sd-key.is-done { background: #aab0bc; color: #e9ecf1; box-shadow: none; }
+html[data-theme="dark"] .sd button.sd-key.is-done { background: #323847; color: #6d7588; }

@@ -70,7 +70,7 @@
     // ---------- static board ----------
     var svg = [];
     svg.push('<rect class="sd-bg" x="-4" y="-4" width="908" height="908"/>');
-    svg.push('<g id="sd-colors"></g><g id="sd-sel"></g>');
+    svg.push('<g id="sd-colors"></g><g id="sd-same"></g><g id="sd-sel"></g>');
     var thin = "", thick = "";
     for (var n = 1; n < 9; n++) {
       var p = n * 100, line = "M" + p + " 0V900M0 " + p + "H900";
@@ -97,6 +97,7 @@
     board.innerHTML = svg.join("");
     var gColors = document.getElementById("sd-colors");
     var gSel = document.getElementById("sd-sel");
+    var gSame = document.getElementById("sd-same");
     var gText = document.getElementById("sd-text");
     var hit = document.getElementById("sd-hit");
 
@@ -107,9 +108,36 @@
       return out;
     }
 
+    // does another filled-in (big) digit in the same row, column or box equal d?
+    function clash(v, i, d) {
+      var r = Math.floor(i / 9), c = i % 9, br = r - r % 3, bc = c - c % 3, k, j2;
+      for (k = 0; k < 9; k++) {
+        j2 = r * 9 + k; if (j2 !== i && v[j2] === d) return true;
+        j2 = k * 9 + c; if (j2 !== i && v[j2] === d) return true;
+        j2 = (br + Math.floor(k / 3)) * 9 + bc + (k % 3); if (j2 !== i && v[j2] === d) return true;
+      }
+      return false;
+    }
+    var doneDigit = [];
+    function applyDone() {
+      var colorMode = effMode() === "color";
+      Array.prototype.forEach.call(keyBtns, function (b) {
+        var d = +b.getAttribute("data-n");
+        b.classList.toggle("is-done", !colorMode && !!doneDigit[d]);
+      });
+    }
+
     function render() {
-      var colors = "", sel = "", text = "";
+      var colors = "", sel = "", text = "", same = "";
       var i, x, y;
+      var v = [], counts = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      for (i = 0; i < 81; i++) { v[i] = given[i] || S.d[i] || 0; if (v[i]) counts[v[i]]++; }
+      for (i = 1; i <= 9; i++) doneDigit[i] = counts[i] >= 9;
+      var picked = {};
+      selected.forEach(function (s) { if (v[s]) picked[v[s]] = true; });
+      for (i = 0; i < 81; i++) {
+        if (v[i] && picked[v[i]]) same += '<rect class="sd-same" x="' + ((i % 9) * 100 + 5) + '" y="' + (Math.floor(i / 9) * 100 + 5) + '" width="90" height="90" rx="8"/>';
+      }
       for (i = 0; i < 81; i++) {
         x = (i % 9) * 100; y = Math.floor(i / 9) * 100;
         if (S.c[i]) colors += '<rect x="' + x + '" y="' + y + '" width="100" height="100" fill="' + COLORS[S.c[i] - 1] + '" fill-opacity="0.78"/>';
@@ -122,23 +150,24 @@
         if (given[i]) {
           text += '<text class="sd-given" x="' + (x + 50) + '" y="' + (y + 52) + '">' + given[i] + "</text>";
         } else if (S.d[i]) {
-          text += '<text class="sd-digit" x="' + (x + 50) + '" y="' + (y + 52) + '">' + S.d[i] + "</text>";
+          text += '<text class="sd-digit' + (clash(v, i, S.d[i]) ? " is-bad" : "") + '" x="' + (x + 50) + '" y="' + (y + 52) + '">' + S.d[i] + "</text>";
         } else {
           var ce = bits(S.m[i]), co = bits(S.k[i]);
           if (ce.length) {
             var fs = [0, 32, 32, 32, 30, 26, 23, 21, 19, 17][ce.length];
-            text += '<text class="sd-center" style="font-size:' + fs + 'px" x="' + (x + 50) + '" y="' + (y + 52) + '">' + ce.join("") + "</text>";
+            text += '<text class="sd-center" style="font-size:' + fs + 'px" x="' + (x + 50) + '" y="' + (y + 52) + '">' + ce.map(function (d) { return clash(v, i, d) ? '<tspan class="is-bad">' + d + "</tspan>" : d; }).join("") + "</text>";
           }
           if (co.length) {
             var slots = labelCells[i] ? CORNER_SLOTS.slice(1).concat([CORNER_SLOTS[0]]) : CORNER_SLOTS;
             co.forEach(function (d, k) {
               var sl = slots[k % slots.length];
-              text += '<text class="sd-corner" x="' + (x + sl[0]) + '" y="' + (y + sl[1]) + '">' + d + "</text>";
+              text += '<text class="sd-corner' + (clash(v, i, d) ? " is-bad" : "") + '" x="' + (x + sl[0]) + '" y="' + (y + sl[1]) + '">' + d + "</text>";
             });
           }
         }
       }
-      gColors.innerHTML = colors; gSel.innerHTML = sel; gText.innerHTML = text;
+      gColors.innerHTML = colors; gSame.innerHTML = same; gSel.innerHTML = sel; gText.innerHTML = text;
+      applyDone();
       undoBtn.disabled = solved || hi === 0;
       redoBtn.disabled = solved || hi >= hist.length - 1;
       root.classList.toggle("is-solved", solved);
@@ -162,6 +191,7 @@
         var d = +b.getAttribute("data-n");
         if (em === "color") { b.style.background = COLORS[d - 1]; } else { b.style.background = ""; }
       });
+      applyDone();
     }
 
     function setMsg(kind) {
