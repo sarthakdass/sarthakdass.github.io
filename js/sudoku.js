@@ -69,7 +69,7 @@
 
     // ---------- static board ----------
     var svg = [];
-    svg.push('<rect class="sd-bg" x="-4" y="-4" width="908" height="908"/>');
+    svg.push('<rect class="sd-bg" x="-5" y="-5" width="910" height="910"/>');
     svg.push('<g id="sd-colors"></g><g id="sd-same"></g><g id="sd-sel"></g>');
     var thin = "", thick = "";
     for (var n = 1; n < 9; n++) {
@@ -93,7 +93,7 @@
     svg.push('<path class="sd-thick" d="' + thick + '"/>');
     svg.push('<rect class="sd-frame" x="0" y="0" width="900" height="900"/>');
     svg.push('<g id="sd-text"></g>');
-    svg.push('<rect id="sd-hit" x="-4" y="-4" width="908" height="908" fill="transparent"/>');
+    svg.push('<rect id="sd-hit" x="-5" y="-5" width="910" height="910" fill="transparent"/>');
     board.innerHTML = svg.join("");
     var gColors = document.getElementById("sd-colors");
     var gSel = document.getElementById("sd-sel");
@@ -127,6 +127,26 @@
       });
     }
 
+    // a cell with several colours is cut into equal wedges that meet at its centre
+    function ray(a) {
+      var r = a * Math.PI / 180, dx = Math.cos(r), dy = Math.sin(r), t = 1e9;
+      if (dx > 1e-9) t = Math.min(t, 50 / dx); else if (dx < -1e-9) t = Math.min(t, -50 / dx);
+      if (dy > 1e-9) t = Math.min(t, 50 / dy); else if (dy < -1e-9) t = Math.min(t, -50 / dy);
+      return [50 + dx * t, 50 + dy * t];
+    }
+    function cellColors(mask, x, y) {
+      var list = bits(mask), n = list.length, out = "";
+      if (n === 1) return '<rect x="' + x + '" y="' + y + '" width="100" height="100" fill="' + COLORS[list[0] - 1] + '" fill-opacity="0.78"/>';
+      var A0 = 115, span = 360 / n;
+      list.forEach(function (d, k) {
+        var a = A0 + k * span, b = a + span, pts = [[50, 50], ray(a)], c;
+        for (c = 45 + 90 * Math.ceil((a - 45) / 90); c < b - 1e-6; c += 90) if (c > a + 1e-6) pts.push(ray(c));
+        pts.push(ray(b));
+        out += '<polygon points="' + pts.map(function (p) { return (x + p[0]).toFixed(2) + "," + (y + p[1]).toFixed(2); }).join(" ") + '" fill="' + COLORS[d - 1] + '" fill-opacity="0.78" stroke="' + COLORS[d - 1] + '" stroke-opacity="0.78" stroke-width="0.6"/>';
+      });
+      return out;
+    }
+
     function render() {
       var colors = "", sel = "", text = "", same = "";
       var i, x, y;
@@ -140,28 +160,29 @@
       }
       for (i = 0; i < 81; i++) {
         x = (i % 9) * 100; y = Math.floor(i / 9) * 100;
-        if (S.c[i]) colors += '<rect x="' + x + '" y="' + y + '" width="100" height="100" fill="' + COLORS[S.c[i] - 1] + '" fill-opacity="0.78"/>';
+        if (S.c[i]) colors += cellColors(S.c[i], x, y);
       }
       selected.forEach(function (s) {
         sel += '<rect class="sd-selcell" x="' + ((s % 9) * 100 + 3) + '" y="' + (Math.floor(s / 9) * 100 + 3) + '" width="94" height="94" rx="6"/>';
       });
       for (i = 0; i < 81; i++) {
         x = (i % 9) * 100; y = Math.floor(i / 9) * 100;
+        var oc = S.c[i] ? " on-c" : "";
         if (given[i]) {
-          text += '<text class="sd-given" x="' + (x + 50) + '" y="' + (y + 52) + '">' + given[i] + "</text>";
+          text += '<text class="sd-given' + oc + '" x="' + (x + 50) + '" y="' + (y + 52) + '">' + given[i] + "</text>";
         } else if (S.d[i]) {
-          text += '<text class="sd-digit' + (clash(v, i, S.d[i]) ? " is-bad" : "") + '" x="' + (x + 50) + '" y="' + (y + 52) + '">' + S.d[i] + "</text>";
+          text += '<text class="sd-digit' + oc + (clash(v, i, S.d[i]) ? " is-bad" : "") + '" x="' + (x + 50) + '" y="' + (y + 52) + '">' + S.d[i] + "</text>";
         } else {
           var ce = bits(S.m[i]), co = bits(S.k[i]);
           if (ce.length) {
             var fs = [0, 32, 32, 32, 30, 26, 23, 21, 19, 17][ce.length];
-            text += '<text class="sd-center" style="font-size:' + fs + 'px" x="' + (x + 50) + '" y="' + (y + 52) + '">' + ce.map(function (d) { return clash(v, i, d) ? '<tspan class="is-bad">' + d + "</tspan>" : d; }).join("") + "</text>";
+            text += '<text class="sd-center' + oc + '" style="font-size:' + fs + 'px" x="' + (x + 50) + '" y="' + (y + 52) + '">' + ce.map(function (d) { return clash(v, i, d) ? '<tspan class="is-bad">' + d + "</tspan>" : d; }).join("") + "</text>";
           }
           if (co.length) {
             var slots = labelCells[i] ? CORNER_SLOTS.slice(1).concat([CORNER_SLOTS[0]]) : CORNER_SLOTS;
             co.forEach(function (d, k) {
               var sl = slots[k % slots.length];
-              text += '<text class="sd-corner' + (clash(v, i, d) ? " is-bad" : "") + '" x="' + (x + sl[0]) + '" y="' + (y + sl[1]) + '">' + d + "</text>";
+              text += '<text class="sd-corner' + oc + (clash(v, i, d) ? " is-bad" : "") + '" x="' + (x + sl[0]) + '" y="' + (y + sl[1]) + '">' + d + "</text>";
             });
           }
         }
@@ -215,7 +236,7 @@
     // ---------- persistence ----------
     function save() {
       try {
-        localStorage.setItem(storeKey, JSON.stringify({ s: snap(), t: Math.floor(elapsed), solved: solved, st: started }));
+        localStorage.setItem(storeKey, JSON.stringify({ s: snap(), t: Math.floor(elapsed), solved: solved, st: started, cv: 2 }));
       } catch (e) { /* storage unavailable: the puzzle still works */ }
     }
     function load() {
@@ -223,13 +244,92 @@
         var raw = localStorage.getItem(storeKey);
         if (!raw) return false;
         var o = JSON.parse(raw);
-        restore(o.s); elapsed = o.t || 0; solved = !!o.solved; started = !!o.st || elapsed > 0;
+        var st0 = JSON.parse(o.s);
+        if (!o.cv) st0.c = st0.c.map(function (v) { return v ? (1 << v) : 0; });   // older saves held one colour number per cell
+        restore(JSON.stringify(st0)); elapsed = o.t || 0; solved = !!o.solved; started = !!o.st || elapsed > 0;
         return true;
       } catch (e) { return false; }
     }
 
     // ---------- logic ----------
     function correct(i) { return h53(P.id + ":" + i + ":" + val(i)) === P.check[i]; }
+
+    // ---------- confetti on a fresh solve: a few vermilion and lilac flakes drifting down over the board ----------
+    var confettiRaf = 0, confettiCv = null;
+    function stopConfetti() {
+      if (confettiRaf) cancelAnimationFrame(confettiRaf);
+      confettiRaf = 0;
+      if (confettiCv && confettiCv.parentNode) confettiCv.parentNode.removeChild(confettiCv);
+      confettiCv = null;
+    }
+    function confetti() {
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      stopConfetti();
+      var host = board.parentNode, r = host.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+      var cv = document.createElement("canvas");
+      cv.className = "sd__confetti"; cv.setAttribute("aria-hidden", "true");
+      cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+      host.appendChild(cv); confettiCv = cv;
+      var ctx = cv.getContext("2d"), W = r.width, H = r.height, cols = ["#ff5a36", "#8f9bff"], flakes = [], i;
+      for (i = 0; i < 70; i++) {
+        flakes.push({
+          x: Math.random() * W, y: -10 - Math.random() * H * 0.4,
+          w: 5 + Math.random() * 5, h: 3 + Math.random() * 3,
+          vy: 130 + Math.random() * 110, sway: 10 + Math.random() * 22, ph: Math.random() * 6.28, fr: 1.2 + Math.random() * 1.6,
+          rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 6, c: cols[i % 2]
+        });
+      }
+      var t0 = performance.now(), last = t0, DUR = 4200;
+      function frame(now) {
+        var dt = Math.min(0.05, (now - last) / 1000); last = now;
+        var el = now - t0, fade = el > DUR - 900 ? Math.max(0, (DUR - el) / 900) : 1;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+        flakes.forEach(function (f) {
+          f.y += f.vy * dt; f.rot += f.vr * dt; f.ph += f.fr * dt;
+          var x = f.x + Math.sin(f.ph) * f.sway;
+          ctx.save(); ctx.translate(x, f.y); ctx.rotate(f.rot);
+          ctx.globalAlpha = 0.9 * fade; ctx.fillStyle = f.c; ctx.fillRect(-f.w / 2, -f.h / 2, f.w, f.h);
+          ctx.restore();
+        });
+        if (el < DUR) confettiRaf = requestAnimationFrame(frame); else stopConfetti();
+      }
+      confettiRaf = requestAnimationFrame(frame);
+    }
+
+    // ---------- little easter egg: a big 3 in a corner of the grid fires a short burst of confetti toward the middle ----------
+    function scheduleBurst(cell) {
+      setTimeout(function () { if (S.d[cell] === 3) burst(cell); }, 1000);
+    }
+    function burst(cell) {
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var host = board.parentNode, r = host.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+      var cv = document.createElement("canvas");
+      cv.className = "sd__confetti"; cv.setAttribute("aria-hidden", "true");
+      cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+      host.appendChild(cv);
+      var ctx = cv.getContext("2d"), W = r.width, H = r.height, k = W / 910;
+      var ox = (((cell % 9) * 100 + 50) + 5) * k, oy = ((Math.floor(cell / 9) * 100 + 50) + 5) * k;
+      var ang = Math.atan2(H / 2 - oy, W / 2 - ox), cols = ["#ff5a36", "#8f9bff"], ps = [], i;
+      for (i = 0; i < 44; i++) {
+        var a = ang + (Math.random() - 0.5) * 0.9, sp = (W * 0.5) + Math.random() * W * 0.75;
+        ps.push({ x: ox, y: oy, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, w: 4 + Math.random() * 5, h: 3 + Math.random() * 3,
+          rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 12, c: cols[i % 2] });
+      }
+      var t0 = performance.now(), last = t0, DUR = 1500;
+      function frame(now) {
+        var dt = Math.min(0.05, (now - last) / 1000); last = now;
+        var el = now - t0, fade = el > DUR - 450 ? Math.max(0, (DUR - el) / 450) : 1, drag = Math.pow(0.04, dt);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+        ps.forEach(function (p) {
+          p.vx *= drag; p.vy = p.vy * drag + 120 * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.rot += p.vr * dt;
+          ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+          ctx.globalAlpha = 0.92 * fade; ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        });
+        if (el < DUR) requestAnimationFrame(frame); else if (cv.parentNode) cv.parentNode.removeChild(cv);
+      }
+      requestAnimationFrame(frame);
+    }
 
     function startTimer() { if (!started && !solved) { started = true; lastTick = Date.now(); } }
 
@@ -248,7 +348,7 @@
       }
       if (full) {
         for (var j = 0; j < 81; j++) if (!correct(j)) { ok = false; break; }
-        if (ok) { solved = true; setMsg("win"); if (paused) setPaused(false); } else { setMsg("bad"); }
+        if (ok) { solved = true; setMsg("win"); if (paused) setPaused(false); confetti(); } else { setMsg("bad"); }
       } else {
         setMsg(null);
       }
@@ -267,12 +367,14 @@
       var em = effMode(), t, all;
       if (em === "color") {
         if (!selected.length) return;
-        all = selected.every(function (i) { return S.c[i] === d; });
-        selected.forEach(function (i) { S.c[i] = all ? 0 : d; });
+        var bit = 1 << d;
+        all = selected.every(function (i) { return S.c[i] & bit; });
+        selected.forEach(function (i) { S.c[i] = all ? (S.c[i] & ~bit) : (S.c[i] | bit); });
       } else if (em === "digit") {
         t = targets(false); if (!t.length) return;
         all = t.every(function (i) { return S.d[i] === d; });
         t.forEach(function (i) { S.d[i] = all ? 0 : d; });
+        if (d === 3 && !all) t.forEach(function (i) { if (i === 0 || i === 8 || i === 72 || i === 80) scheduleBurst(i); });
       } else {
         t = targets(true); if (!t.length) return;
         var arr = em === "corner" ? S.k : S.m, bit = 1 << d;
@@ -318,6 +420,7 @@
       }
       disarm();
       if (paused) setPaused(false);
+      stopConfetti();
       S = blank(); hist = [snap()]; hi = 0; selected = []; solved = false; elapsed = 0; started = false; lastTick = Date.now();
       setMsg(null); save(); render(); renderMode(); tick();
     }
@@ -330,8 +433,8 @@
     // ---------- selection ----------
     function cellAt(e) {
       var r = board.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width * 908 - 4;
-      var y = (e.clientY - r.top) / r.height * 908 - 4;
+      var x = (e.clientX - r.left) / r.width * 910 - 5;
+      var y = (e.clientY - r.top) / r.height * 910 - 5;
       var c = Math.floor(x / 100), rr = Math.floor(y / 100);
       if (c < 0 || c > 8 || rr < 0 || rr > 8) return -1;
       return rr * 9 + c;

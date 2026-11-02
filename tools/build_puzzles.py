@@ -19,7 +19,7 @@ sys.path.insert(0, root)
 os.chdir(root)
 from build_pages import page, title_markup  # noqa: E402
 
-CELL, INSET = 100, 9
+CELL, INSET = 100, 5
 
 EXTRA_CARDS = ["puzzle_generator_card.html"]
 
@@ -114,7 +114,7 @@ def cage_path(cells):
 
 def label_pos(cells):
     r, c = min((r, c) for r, c in cells)       # top-most, then left-most cell
-    return (c - 1) * CELL + INSET + 6, (r - 1) * CELL + INSET + 21, (r - 1) * 9 + (c - 1)
+    return (c - 1) * CELL + 16, (r - 1) * CELL + 33, (r - 1) * 9 + (c - 1)
 
 
 def center(rc):
@@ -216,7 +216,7 @@ def puzzle_page(p):
         <div class="sd__play">
           <div class="sd__boardcol">
             <div class="sd__board">
-              <svg id="sd-board" viewBox="-4 -4 908 908" role="img" aria-label="Sudoku board. Select a cell, then type a digit."></svg>
+              <svg id="sd-board" viewBox="-5 -5 910 910" role="img" aria-label="Sudoku board. Select a cell, then type a digit."></svg>
               <div class="sd__paused" id="sd-paused" hidden><strong>Puzzle paused</strong><button class="sd__pill sd__pill--solid" id="sd-resume" type="button">Resume</button></div>
             </div>
           </div>

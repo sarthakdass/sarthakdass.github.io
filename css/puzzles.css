@@ -72,10 +72,10 @@ html[data-theme="dark"] .sd { --sd-user: #aab3ff; --sd-mark: #98a2b5; --sd-bad: 
 }
 .sd-bg { fill: var(--card); }
 .sd-thin { stroke: var(--rule); stroke-width: 2; fill: none; }
-.sd-thick { stroke: var(--text); stroke-width: 6; fill: none; stroke-linecap: square; }
-.sd-frame { fill: none; stroke: var(--text); stroke-width: 7; }
+.sd-thick { stroke: var(--text); stroke-width: 3.5; fill: none; stroke-linecap: square; }
+.sd-frame { fill: none; stroke: var(--text); stroke-width: 10; }
 .sd-cages path { fill: none; stroke: var(--text-mid); stroke-width: 3; stroke-dasharray: 9 7; stroke-linejoin: round; opacity: 0.9; }
-.sd-cagetext text { font: 600 27px var(--font-display); fill: var(--text-mid); }
+.sd-cagetext text { font: 600 25px var(--font-display); fill: var(--text-mid); }
 .sd-lines polyline {
   fill: none; stroke: var(--sd-line); stroke-opacity: 0.5; stroke-width: 15;
   stroke-linecap: round; stroke-linejoin: round;
@@ -87,7 +87,8 @@ html[data-theme="dark"] .sd { --sd-user: #aab3ff; --sd-mark: #98a2b5; --sd-bad: 
 .sd-center { font-family: var(--font-display); font-weight: 600; fill: var(--sd-user); letter-spacing: 0.02em; }
 .sd-corner { font: 600 25px var(--font-display); fill: var(--sd-mark); }
 #sd-hit { cursor: pointer; }
-.sd.is-solved .sd__board { box-shadow: 0 0 0 3px var(--lilac), 0 24px 42px -30px rgba(13, 16, 22, 0.55); }
+.sd__board { transition: box-shadow 0.8s ease; }
+.sd.is-solved .sd__board { box-shadow: 0 0 0 3px var(--lilac), 0 0 16px 3px rgba(143, 155, 255, 0.5), 0 0 42px 8px rgba(143, 155, 255, 0.22), 0 24px 42px -30px rgba(13, 16, 22, 0.55); }
 
 .sd__msg {
   flex: none;
@@ -266,3 +267,11 @@ html[data-theme="dark"] .sd.is-paused .sd__board svg { filter: blur(14px); }
 .sd .sd-digit.is-bad, .sd .sd-corner.is-bad, .sd .sd-center .is-bad { fill: var(--sd-bad); }
 .sd button.sd-key.is-done { background: #aab0bc; color: #e9ecf1; box-shadow: none; }
 html[data-theme="dark"] .sd button.sd-key.is-done { background: #323847; color: #6d7588; }
+
+/* dark mode: pastel colour fills are light, so text sitting on them switches to dark ink */
+html[data-theme="dark"] .sd .on-c.sd-given { fill: #11141b; }
+html[data-theme="dark"] .sd .on-c.sd-digit, html[data-theme="dark"] .sd .on-c.sd-center { fill: #2a38b0; }
+html[data-theme="dark"] .sd .on-c.sd-corner { fill: #232a3b; }
+html[data-theme="dark"] .sd .on-c.is-bad, html[data-theme="dark"] .sd .on-c .is-bad { fill: #c42a08; }
+
+.sd__confetti { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 3; }
