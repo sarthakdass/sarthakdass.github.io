@@ -265,7 +265,7 @@
     function confetti() {
       if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       stopConfetti();
-      var host = board.parentNode, r = host.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+      var host = root.querySelector(".sd__boards") || board.parentNode, r = host.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
       var cv = document.createElement("canvas");
       cv.className = "sd__confetti"; cv.setAttribute("aria-hidden", "true");
       cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);

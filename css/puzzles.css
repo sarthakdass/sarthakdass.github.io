@@ -275,3 +275,63 @@ html[data-theme="dark"] .sd .on-c.sd-corner { fill: #232a3b; }
 html[data-theme="dark"] .sd .on-c.is-bad, html[data-theme="dark"] .sd .on-c .is-bad { fill: #c42a08; }
 
 .sd__confetti { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 3; }
+
+/* ==========================================================================
+   Two-board puzzles (Letter Blocks): the board you fill in on the left, the thermometers to place on the right
+   (display only). Underneath: the pad (narrow, same layout as Entry) with the message and the wide rules card to its right.
+   The timer, pause, reset and fullscreen sit above the boards.
+   ========================================================================== */
+.sd { --sd-thermo: #bcc0c8; }
+html[data-theme="dark"] .sd { --sd-thermo: #596175; }
+.sd-thermos polyline { fill: none; stroke: var(--sd-thermo); stroke-width: 28; stroke-linecap: round; stroke-linejoin: round; }
+.sd-thermos circle { fill: var(--sd-thermo); }
+
+.sd--wide {
+  --gap: clamp(22px, 3vw, 36px);                 /* same gap as the Entry page */
+  --pad: 320px;                                  /* pad column: the width of Entry's right-hand column */
+  /* overall width = Entry's: its board + gap + 320px column, but never wider than the page's content column */
+  --W: min(calc(clamp(340px, calc(100vh - 128px), 600px) + var(--gap) + 320px), calc(min(1040px, 100vw) - 2 * var(--gutter)));
+  --S: calc((var(--W) - var(--gap)) / 2);
+  display: flex;
+  justify-content: center;
+}
+.sd--wide .sd__play { display: flex; flex-direction: column; align-items: stretch; gap: 12px; flex: none; width: calc(2 * var(--S) + var(--gap)); }
+.sd--wide .sd__top { width: 100%; }
+.sd--wide .sd__boards { position: relative; display: grid; grid-template-columns: var(--S) var(--S); gap: var(--gap); }
+
+.sd--wide .sd__lower { display: grid; grid-template-columns: var(--pad) minmax(0, 1fr); gap: 18px; align-items: start; }
+.sd--wide .sd__controls { align-self: start; align-content: start; gap: 6px; }
+.sd--wide .sd__padrow { gap: 8px; }
+.sd--wide .sd__keys, .sd--wide .sd__modes, .sd--wide .sd__actions { gap: 6px; }
+.sd--wide .sd__lowerright { display: flex; flex-direction: column; gap: 6px; min-width: 0; align-self: start; }
+.sd--wide .sd__msg { margin: 0 2px; }
+.sd--wide .sd__rules { flex: none; overflow: visible; }
+.sd--wide button.sd-key, .sd--wide button.sd-tool { min-height: 38px; }
+.sd--wide button.sd-key { border-radius: 13px; }
+
+@media (max-width: 860px) {
+  .sd--wide { --S: min(100%, 560px); display: block; }
+  .sd--wide .sd__play { width: auto; max-width: 560px; margin: 0 auto; }
+  .sd--wide .sd__boards { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .sd--wide .sd__boardcol { width: 100%; }
+  .sd--wide .sd__lower { display: flex; flex-direction: column; gap: 12px; }
+  .sd--wide .sd__lowerright { display: contents; }
+  .sd--wide .sd__msg { order: 0; }
+  .sd--wide .sd__controls { order: 1; }
+  .sd--wide .sd__rules { order: 2; flex: none; }
+  .sd--wide button.sd-key, .sd--wide button.sd-tool { min-height: 46px; }
+}
+
+/* fullscreen */
+.sd--wide.is-fs { --gap: 28px; --pad: 320px; --S: min(calc((100vw - 56px - var(--gap)) / 2), calc(100vh - 380px), 900px); align-items: flex-start; }
+.sd--wide.is-fs .sd__play { gap: 16px; margin: auto; }
+.sd--wide.is-fs .sd__lower { gap: 24px; }
+.sd--wide.is-fs button.sd-key, .sd--wide.is-fs button.sd-tool { min-height: 40px; }
+.sd--wide.is-fs .sd__rules { padding: 14px 18px; }
+.sd--wide.is-fs .sd__rulelist li { font-size: 0.92rem; line-height: 1.4; }
+@media (max-width: 860px) {
+  .sd--wide.is-fs { --S: min(calc(100vw - 40px), 560px); display: flex; }
+  .sd--wide.is-fs .sd__play { width: 100%; }
+  .sd--wide.is-fs button.sd-key, .sd--wide.is-fs button.sd-tool { min-height: 46px; }
+  .sd--wide.is-fs .sd__rulelist li { font-size: 0.9rem; }
+}
