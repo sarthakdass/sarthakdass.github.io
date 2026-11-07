@@ -358,7 +358,7 @@ projects_content = '''      <section class="block" aria-labelledby="coding">
         <div class="entry__body">
           <header class="entry__head">
             <h2 class="entry__title">s-arbitrage &amp; Portfolio Allocation</h2>
-            <span class="entry__meta">Sep 2026</span>
+            <span class="entry__meta">Aug 2026</span>
           </header>
           <p>Built a walk-forward pairs-trading and portfolio-allocation backtester with cointegration testing, Kalman-filtered hedge ratios, and Ornstein-Uhlenbeck half-life estimation. Implemented five portfolio construction methods including convex risk-parity optimization and multi-start SLSQP for non-convex Sharpe optimization. Packaged as an installable Python library with CLI, CI pipeline (GitHub Actions, Python 3.10+) and documented methodology.</p>
           <ul class="tags"><li>NumPy</li><li>pandas</li><li>SciPy</li><li>statsmodels</li></ul>
