@@ -54,6 +54,9 @@ PUZZLES = [
         "cages": [],
         "lines": [],
         "thermos": LB_THERMOS,
+        "thermo_names": ["M", "E (bulb in the middle of the stem)", "N", "E (bulb at the top)", "Z", "E (bulb at the bottom)", "S"],
+        # salted hash of the box (0-8) each thermometer belongs in; revealed under the digits once the puzzle is solved
+        "tcheck": ["xmoairegem","6xeasvz5og","h25ie10zds","1nzlsn9t3bz","1z36vmo234e","4ss8qvzh5s","24pu0fnhf5p"],
         # salted hash of every correct digit (see h53 in js/sudoku.js)
         "check": ["27076ogaha3","1v1kcli66q7","2cixsdeddm3","1gwd1daywoi","122ajqmitzo","12muraaji6g","dnpmmxbtvu","29z1gbxqeq0","gml5avhu9s","1cyt2g54z9f","1uz42x0p59j","2dmbee2wlbr","20h63jexui4","b8g90z1o7n","2ahtktds3ws","25lqy9yvbhu","2af9debr522","e4t3hvdchr","21m9e8vibz","ki2raj131h","2exu61gjo4y","238m8fica9i","188h1j7b6r9","136a5xjzlrn","ckdbcob3iw","1cgrp48e5t2","lh7xwafl1c","vohfebl32l","s3igc3w9zk","10fwo0zbzx7","1nn38wulgvx","1o2j3mdiq59","1w09kdx92ys","ypldlud0eq","74rlsfhv4o","23bd7wmwe96","vla6xgc9sv","5u2kn6s4dv","18otshovs9r","iatxuqzd1r","1lwu2tjnma5","6xp3dtslq","gk0do9obrq","1t5ip6l4xv7","1hufg26m14z","16jwiae90u1","77nn5zi72f","12p4ihmxo89","899j0nb78p","1lw5nxdbr42","1hnyqvs0zu3","loi7tujyzd","du77bdp3i8","lo51hyola3","258dsotorn0","23mdrtchd0h","1ouufw5vafn","14fqw7r11na","26x8fi9mj1t","1027mem0n74","slm8lgm3g6","1qxpeysun3g","xo4493woyk","1rx4zrp1g6q","1xswyk2cjit","greqfnfuht","2dzfud644a1","14ojtdbj82l","29phpw04wip","20gb8yvm0ts","257v5takvo8","280zdr1rc4z","2e5fj48x7gv","19oq4k1awrl","z4lfowmime","1vxv4nrb21q","owehg6xo1y","9f91ty7ogt","6rxnnnpgrb","204x7jpemqu","1jj066elydw"],
     },
@@ -175,15 +178,31 @@ def thermo_group(p, attrs):
     return "".join(out)
 
 
+def ref_thermos(p):
+    """The thermometers of the reference board, one draggable group each."""
+    names = p.get("thermo_names") or [str(k + 1) for k in range(len(p["thermos"]))]
+    out = ['<g class="sd-thermos">']
+    for k, t in enumerate(p["thermos"]):
+        x0, y0 = t["box"][1] * 3 * CELL, t["box"][0] * 3 * CELL
+        out.append(f'<g class="sd-th" data-t="{k}" role="button" aria-label="Thermometer {names[k]}: drag it onto a 3 by 3 box of the left grid">'
+                   f'<rect class="sd-th__hit" x="{x0}" y="{y0}" width="{3 * CELL}" height="{3 * CELL}" fill="transparent"/>')
+        for path in t["paths"]:
+            out.append('<polyline fill="none" points="%s"/>' % " ".join("%d,%d" % thermo_cell(t["box"], rc) for rc in path))
+        bx, by = thermo_cell(t["box"], t["paths"][0][0])
+        out.append(f'<circle cx="{bx}" cy="{by}" r="{BULB_R}"/></g>')
+    out.append("</g>")
+    return "".join(out)
+
+
 def ref_board(p):
     """The right-hand board of a two-board puzzle: an empty grid showing the gray thermometers (display only)."""
     thin = "".join(f"M{n * 100} 0V900M0 {n * 100}H900" for n in range(1, 9) if n % 3)
     thick = "".join(f"M{n * 100} 0V900M0 {n * 100}H900" for n in range(3, 9, 3))
-    label = "The thermometers to place, each used once: M, E, N, E, Z, E and S. Each letter is drawn in its own 3 by 3 box of this grid, with a bulb at the start of every thermometer."
-    return ('<svg class="sd-ref" viewBox="-5 -5 910 910" role="img" aria-label="%s">' % label
+    label = "The seven thermometers to place, each used once: M, E, N, E, Z, E and S. Drag each one onto a 3 by 3 box of the left grid."
+    return ('<svg class="sd-ref" viewBox="-5 -5 910 910" role="group" aria-label="%s">' % label
             + '<rect class="sd-bg" x="-5" y="-5" width="910" height="910"/>'
             + f'<path class="sd-thin" d="{thin}"/>'
-            + thermo_group(p, 'class="sd-thermos"')
+            + ref_thermos(p)
             + f'<path class="sd-thick" d="{thick}"/><rect class="sd-frame" x="0" y="0" width="900" height="900"/></svg>')
 
 
@@ -193,7 +212,11 @@ def player_data(p):
         lx, ly, lc = label_pos(cells)
         cages.append({"sum": total, "path": cage_path(cells), "lx": lx, "ly": ly, "labelCell": lc})
     lines = [{"points": " ".join("%d,%d" % center(rc) for rc in ln)} for ln in p["lines"]]
-    return {"id": p["slug"], "title": p["title"], "givens": p["givens"], "cages": cages, "lines": lines, "check": p["check"]}
+    data = {"id": p["slug"], "title": p["title"], "givens": p["givens"], "cages": cages, "lines": lines, "check": p["check"]}
+    if p.get("thermos"):
+        data["thermos"] = [{"paths": [[list(rc) for rc in path] for path in t["paths"]]} for t in p["thermos"]]
+        data["tcheck"] = p["tcheck"]
+    return data
 
 
 # ----------------------------------------------------------------------------- list page

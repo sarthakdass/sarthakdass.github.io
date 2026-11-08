@@ -49,6 +49,15 @@
     var elapsed = 0, lastTick = null, paused = false, started = false;
     var storeKey = "sd-puzzle-" + P.id;
 
+    // thermometers (puzzles with a "thermos" list): T[k] is the 3x3 box (0-8, row by row) that thermometer k has been
+    // dropped into on the solving grid, or -1. corr[k] is where it really belongs, worked out from hashes only.
+    var NT = P.thermos ? P.thermos.length : 0;
+    var T = [], corr = [], revealAnim = false, tk, tb;
+    for (tk = 0; tk < NT; tk++) {
+      T.push(-1); corr.push(-1);
+      for (tb = 0; tb < 9; tb++) if (h53(P.id + ":t:" + tk + ":" + tb) === P.tcheck[tk]) corr[tk] = tb;
+    }
+
     function blank() { return { d: zeros(), k: zeros(), m: zeros(), c: zeros() }; }
     function zeros() { var a = []; for (var i = 0; i < 81; i++) a.push(0); return a; }
     function snap() { return JSON.stringify(S); }
@@ -77,6 +86,7 @@
       if (n % 3) thin += line; else thick += line;
     }
     svg.push('<path class="sd-thin" d="' + thin + '"/>');
+    if (NT) svg.push('<g id="sd-thermos" class="sd-thermos"></g><g id="sd-drop"></g>');
     svg.push('<g class="sd-cages">');
     P.cages.forEach(function (cg) {
       svg.push('<path d="' + cg.path + '"/>');
@@ -100,6 +110,8 @@
     var gSame = document.getElementById("sd-same");
     var gText = document.getElementById("sd-text");
     var hit = document.getElementById("sd-hit");
+    var gTh = document.getElementById("sd-thermos");
+    var gDrop = document.getElementById("sd-drop");
 
     // ---------- rendering ----------
     function bits(mask) {
@@ -188,6 +200,7 @@
         }
       }
       gColors.innerHTML = colors; gSame.innerHTML = same; gSel.innerHTML = sel; gText.innerHTML = text;
+      renderThermos();
       applyDone();
       undoBtn.disabled = solved || hi === 0;
       redoBtn.disabled = solved || hi >= hist.length - 1;
@@ -236,7 +249,7 @@
     // ---------- persistence ----------
     function save() {
       try {
-        localStorage.setItem(storeKey, JSON.stringify({ s: snap(), t: Math.floor(elapsed), solved: solved, st: started, cv: 2 }));
+        localStorage.setItem(storeKey, JSON.stringify({ s: snap(), t: Math.floor(elapsed), solved: solved, st: started, cv: 2, th: T }));
       } catch (e) { /* storage unavailable: the puzzle still works */ }
     }
     function load() {
@@ -247,6 +260,7 @@
         var st0 = JSON.parse(o.s);
         if (!o.cv) st0.c = st0.c.map(function (v) { return v ? (1 << v) : 0; });   // older saves held one colour number per cell
         restore(JSON.stringify(st0)); elapsed = o.t || 0; solved = !!o.solved; started = !!o.st || elapsed > 0;
+        if (NT && o.th && o.th.length === NT) T = o.th.map(function (b) { return b >= 0 && b < 9 ? +b : -1; });
         return true;
       } catch (e) { return false; }
     }
@@ -348,7 +362,7 @@
       }
       if (full) {
         for (var j = 0; j < 81; j++) if (!correct(j)) { ok = false; break; }
-        if (ok) { solved = true; setMsg("win"); if (paused) setPaused(false); confetti(); } else { setMsg("bad"); }
+        if (ok) { solved = true; setMsg("win"); if (paused) setPaused(false); confetti(); revealAnim = true; setTimeout(function () { revealAnim = false; }, 1500); } else { setMsg("bad"); }
       } else {
         setMsg(null);
       }
@@ -422,6 +436,7 @@
       if (paused) setPaused(false);
       stopConfetti();
       S = blank(); hist = [snap()]; hi = 0; selected = []; solved = false; elapsed = 0; started = false; lastTick = Date.now();
+      T = T.map(function () { return -1; }); cancelThermoDrag();
       setMsg(null); save(); render(); renderMode(); tick();
     }
     function disarm() {
@@ -564,6 +579,121 @@
     window.addEventListener("blur", function () { mods.shift = false; mods.ctrl = false; renderMode(); });
     document.addEventListener("visibilitychange", function () { lastTick = Date.now(); save(); });
     window.addEventListener("pagehide", save);
+
+    // ---------- thermometers: drag one from the reference board onto a 3x3 box of the solving grid ----------
+    function thermoSvg(k) {
+      var paths = P.thermos[k].paths, out = "", st = paths[0][0];
+      paths.forEach(function (path) {
+        out += '<polyline points="' + path.map(function (rc) { return (rc[1] * 100 + 50) + "," + (rc[0] * 100 + 50); }).join(" ") + '"/>';
+      });
+      return out + '<circle cx="' + (st[1] * 100 + 50) + '" cy="' + (st[0] * 100 + 50) + '" r="36"/>';
+    }
+    var refGroups = [].slice.call(root.querySelectorAll(".sd-ref .sd-th"));
+    function renderThermos() {
+      if (!NT) return;
+      var out = "";
+      for (var k = 0; k < NT; k++) {
+        var b = solved ? corr[k] : T[k];            // once solved, the real thermometers sit under the digits
+        if (b < 0) continue;
+        out += '<g class="sd-tg' + (solved && revealAnim && T[k] !== corr[k] ? " is-reveal" : "") + '" transform="translate(' + (b % 3 * 300) + "," + (Math.floor(b / 3) * 300) + ')">' + thermoSvg(k) + "</g>";
+      }
+      gTh.innerHTML = out;
+      refGroups.forEach(function (g) {
+        var k = +g.getAttribute("data-t");
+        g.classList.toggle("is-placed", (solved ? corr[k] : T[k]) >= 0);
+        g.classList.toggle("is-locked", solved);
+      });
+    }
+
+    var drag = null, dragEl = null;
+    function boxAtPoint(cx, cy) {                  // the 3x3 box of the solving grid under a point, or -1
+      var r = board.getBoundingClientRect();
+      var x = (cx - r.left) / r.width * 910 - 5, y = (cy - r.top) / r.height * 910 - 5;
+      if (x < 0 || y < 0 || x >= 900 || y >= 900) return -1;
+      return Math.floor(y / 300) * 3 + Math.floor(x / 300);
+    }
+    function showDrop(b) {
+      gDrop.innerHTML = b < 0 ? "" : '<rect class="sd-drop" x="' + (b % 3 * 300 + 7) + '" y="' + (Math.floor(b / 3) * 300 + 7) + '" width="286" height="286" rx="16"/>';
+    }
+    function dragBox() { return boxAtPoint(drag.x + drag.size / 2, drag.y + drag.size / 2); }
+    function onThermoDown(e) {
+      if (solved || paused || drag || (e.button !== undefined && e.button !== 0)) return;
+      var g = e.currentTarget, hr = g.querySelector(".sd-th__hit").getBoundingClientRect();
+      e.preventDefault();
+      drag = { k: +g.getAttribute("data-t"), g: g, id: e.pointerId, ox: e.clientX - hr.left, oy: e.clientY - hr.top, size: hr.width,
+               sx: e.clientX, sy: e.clientY, x: hr.left, y: hr.top, moved: false };
+      try { g.setPointerCapture(e.pointerId); } catch (err) { /* not needed everywhere */ }
+      document.addEventListener("pointermove", onThermoMove);
+      document.addEventListener("pointerup", onThermoUp);
+      document.addEventListener("pointercancel", onThermoCancel);
+    }
+    function onThermoMove(e) {
+      if (!drag || e.pointerId !== drag.id) return;
+      if (!drag.moved) {
+        if (Math.abs(e.clientX - drag.sx) + Math.abs(e.clientY - drag.sy) < 6) return;
+        drag.moved = true;
+        dragEl = document.createElement("div");
+        dragEl.className = "sd-dragger";
+        dragEl.style.width = dragEl.style.height = drag.size + "px";
+        dragEl.innerHTML = '<svg class="sd-thermos" viewBox="0 0 300 300" aria-hidden="true">' + thermoSvg(drag.k) + "</svg>";
+        root.appendChild(dragEl);
+        root.classList.add("is-dragging");
+        drag.g.classList.add("is-lifted");
+      }
+      drag.x = e.clientX - drag.ox; drag.y = e.clientY - drag.oy;
+      dragEl.style.transform = "translate(" + drag.x + "px," + drag.y + "px)";
+      showDrop(dragBox());
+    }
+    function onThermoUp(e) { if (drag && e.pointerId === drag.id) finishDrag(false); }
+    function onThermoCancel(e) { if (drag && e.pointerId === drag.id) finishDrag(true); }
+    function cancelThermoDrag() { if (drag) finishDrag(true); }
+    function finishDrag(cancel) {
+      var d = drag; drag = null;
+      document.removeEventListener("pointermove", onThermoMove);
+      document.removeEventListener("pointerup", onThermoUp);
+      document.removeEventListener("pointercancel", onThermoCancel);
+      try { d.g.releasePointerCapture(d.id); } catch (err) { /* already released */ }
+      d.g.classList.remove("is-lifted");
+      if (dragEl && dragEl.parentNode) dragEl.parentNode.removeChild(dragEl);
+      dragEl = null; root.classList.remove("is-dragging"); showDrop(-1);
+      if (!cancel) {
+        var b = d.moved ? boxAtPoint(d.x + d.size / 2, d.y + d.size / 2) : -1;
+        if (b >= 0) {
+          for (var j = 0; j < NT; j++) if (T[j] === b) T[j] = -1;     // one thermometer per box: the old one goes back
+          T[d.k] = b; startTimer();
+        } else {
+          T[d.k] = -1;                                                // dropped elsewhere, or simply tapped: back to the reference board
+        }
+      }
+      save(); render();
+    }
+    // the thermometer (if any) whose drawing passes through this cell of the solving grid
+    function thermoAtCell(i) {
+      var r = Math.floor(i / 9), c = i % 9, b = Math.floor(r / 3) * 3 + Math.floor(c / 3), lr = r % 3, lc = c % 3;
+      for (var k = 0; k < NT; k++) {
+        if (T[k] !== b) continue;
+        return P.thermos[k].paths.some(function (path) { return path.some(function (rc) { return rc[0] === lr && rc[1] === lc; }); }) ? k : -1;
+      }
+      return -1;
+    }
+    var lastTap = { t: 0, i: -1 };
+    if (NT) hit.addEventListener("pointerdown", function (e) {
+      if (solved || paused) return;
+      var i = cellAt(e), now = Date.now();
+      if (i < 0) return;
+      if (lastTap.i === i && now - lastTap.t < 450) {
+        lastTap = { t: 0, i: -1 };
+        var k = thermoAtCell(i);
+        if (k >= 0) { T[k] = -1; save(); render(); }
+      } else {
+        lastTap = { t: now, i: i };
+      }
+    });
+    refGroups.forEach(function (g) {
+      g.addEventListener("pointerdown", onThermoDown);
+      g.addEventListener("touchstart", function (e) { if (!solved && !paused) e.preventDefault(); }, { passive: false });
+    });
+    document.addEventListener("keydown", function (e) { if (drag && e.key === "Escape") cancelThermoDrag(); });
 
     // ---------- start ----------
     var restored = load();
