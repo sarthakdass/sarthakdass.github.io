@@ -73,12 +73,12 @@
 }
 
 .notes {
-  margin-top: clamp(40px, 6vw, 72px);
-  padding-top: clamp(28px, 4vw, 44px);
+  margin-top: 12px;
+  padding-top: 12px;
   border-top: 1px solid var(--rule);
 }
 .notes h2 {
-  margin-bottom: 16px;
+  margin-bottom: var(--head-after);
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
   letter-spacing: var(--track);
@@ -108,7 +108,7 @@
 /* ---------- Gerrymandle boards ---------- */
 
 .rules {
-  margin: 0 0 clamp(40px, 6vw, 64px);
+  margin: 0 0 var(--head-before);
   padding: clamp(20px, 3vw, 30px);
   background: var(--card);
   border: 1px solid var(--rule);
@@ -119,7 +119,7 @@
 .rules p:last-child { margin: 0; }
 .rules b { color: var(--text); font-family: var(--font-display); font-weight: 600; }
 
-.secthead { margin: clamp(48px, 7vw, 84px) 0 28px; }
+.secthead { margin: var(--head-before) 0 var(--head-after); }
 .secthead h2 {
   font-size: clamp(1.6rem, 3.2vw, 2.2rem);
   font-weight: 700;
@@ -128,7 +128,7 @@
 .secthead p {margin: 10px 0 0; color: var(--text-soft); }
 
 .puzzle {
-  margin: 0 0 28px;
+  margin: 0 0 var(--head-before);
   padding: clamp(20px, 3vw, 34px);
   background: var(--card);
   border: 1px solid var(--rule);
@@ -308,7 +308,7 @@ pre {
 .clt-ticks.is-disabled button { pointer-events: none; opacity: 0.45; }
 .clt-ticks button:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 4px; }
 
-.clt-chart-head { margin: 36px 0 12px; }
+.clt-chart-head { margin: var(--head-before) 0 var(--head-after); }
 .clt-chart-head h2 { font-size: clamp(1.3rem, 2.6vw, 1.7rem); font-weight: 700; letter-spacing: var(--track); }
 .clt-chart-head p { margin: 6px 0 0; color: var(--text-soft); font-size: 0.95rem; }
 
@@ -359,9 +359,9 @@ pre {
 
 /* ---------- NYC Yellow Taxi Tip Prediction ---------- */
 
-.tx-lead {margin: 0 0 32px; font-size: 1.12rem; line-height: 1.6; color: var(--text); }
-.tx-sec { margin-top: clamp(44px, 6vw, 72px); }
-.tx-sec > h2 { margin-bottom: 14px; font-size: clamp(1.4rem, 2.8vw, 1.9rem); font-weight: 700; letter-spacing: var(--track); }
+.tx-lead {margin: 0 0 var(--head-before); font-size: 1.12rem; line-height: 1.6; color: var(--text); }
+.tx-sec { margin-top: var(--head-before); }
+.tx-sec > h2 { margin-bottom: var(--head-after); font-size: clamp(1.4rem, 2.8vw, 1.9rem); font-weight: 700; letter-spacing: var(--track); }
 .tx-sec > p, .tx-sec > ul, .tx-sec > .formula {}
 .tx-sec p code { padding: 0.08em 0.4em; border-radius: 6px; background: var(--chip); font: 500 0.86em var(--font-mono); }
 .tx-sec .formula { margin: 14px 0; }
@@ -476,7 +476,7 @@ pre {
 .tx-legnum { display: flex; justify-content: space-between; margin-top: 4px; font: 500 0.72rem var(--font-mono); color: var(--text-soft); }
 .tx-legnote { display: inline-flex; align-items: center; gap: 6px; color: var(--text-soft); font-size: 0.76rem; }
 .tx-legnote i { width: 12px; height: 12px; border-radius: 3px; background: #e3e6ec; border: 1px solid var(--rule); }
-.tx-credit {margin-top: 56px; }
+.tx-credit {margin-top: var(--head-before); }
 
 @media (max-width: 860px) {
   .tx-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
