@@ -1,7 +1,7 @@
 /* ==========================================================================
    Sarthak Dassarma — personal site
-   Theme: dark "stage" layer + stacked paper "sheet" layers
-   Fonts: Inter (display/UI), IBM Plex Sans (body), IBM Plex Mono (meta)
+   Theme: plain paper background, flat cards (same as the Writing cards), one font family.
+   Fonts: Lato (--font-main) for everything, IBM Plex Mono for dates and small labels.
    ========================================================================== */
 
 :root {
@@ -27,14 +27,28 @@
   --on-dark: #e9ecf2;
   --on-dark-soft: #a3acbd;
 
-  --font-display: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* One family (Lato) for everything except the monospace labels. */
+  --font-main: 'Lato', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: var(--font-main);
+  --font-body: var(--font-main);
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   --ease: cubic-bezier(0.7, 0, 0.2, 1);
   --gutter: clamp(20px, 5vw, 72px);
   --maxw: 1040px;
+
+  --track: -0.02em;            /* heading letter-spacing */
+  --head-before: 24px;         /* gap above a section heading that follows other content */
+  --head-after: 16px;          /* gap between a section heading and what it introduces */
+
+  /* hover color of cards (outline + glow), shared by the Writing cards and every entry card */
+  --lilac-ink: #5b67d8;
+  --wcard-line: var(--lilac);
+  --wcard-text: var(--lilac);
+  --wcard-glow: rgba(143, 155, 255, 0.55);
 }
+
+html { background: var(--paper); }
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -46,7 +60,7 @@ body {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  background: var(--ink);
+  background: var(--paper);
   color: var(--text);
   font-family: var(--font-body);
   font-size: 1.0625rem;
@@ -59,7 +73,7 @@ h1, h2, h3 {
   font-family: var(--font-display);
   margin: 0;
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: var(--track);
 }
 
 p { margin: 0 0 1em; }
@@ -96,25 +110,10 @@ p { margin: 0 0 1em; }
 :root { --edge: clamp(18px, 3.4vw, 52px); }
 
 .site-header {
-  --fg: var(--on-dark);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  --fg: var(--text);
+  position: relative;
   z-index: 50;
   color: var(--fg);
-  background: transparent;
-  border-bottom: 1px solid transparent;
-  transition: color 0.3s, background-color 0.3s, border-color 0.3s;
-}
-
-/* once the page has scrolled onto the light sheet, the row gets a flat paper bar */
-.site-header.on-light {
-  --fg: var(--text);
-  background: var(--bar);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border-bottom-color: var(--rule);
 }
 
 .topbar {
@@ -122,7 +121,9 @@ p { margin: 0 0 1em; }
   align-items: center;            /* every item is centered on the same line... */
   justify-content: space-between;
   gap: 24px;
-  padding: 16px var(--edge);
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 20px var(--gutter);
 }
 
 .topbar a { text-decoration: none; }
@@ -137,7 +138,7 @@ p { margin: 0 0 1em; }
 .brand__mark {
   display: block;
   flex: none;
-  height: 54px;
+  height: 46px;
   width: auto;
   aspect-ratio: 50 / 75.83;
   color: var(--fg);
@@ -150,7 +151,7 @@ p { margin: 0 0 1em; }
   display: block;
   padding-bottom: 6px;
   font: 700 0.95rem/1.25 var(--font-display);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--track);
   white-space: nowrap;
 }
 
@@ -171,7 +172,7 @@ p { margin: 0 0 1em; }
   padding-bottom: 6px;
   color: var(--fg);
   font: 500 0.95rem/1.25 var(--font-display);
-  letter-spacing: -0.005em;
+  letter-spacing: var(--track);
 }
 
 .nav-link__roll {
@@ -231,163 +232,62 @@ p { margin: 0 0 1em; }
   .nav__links { gap: 14px; }
 }
 
-/* ---------- Stage (dark layer) ---------- */
+/* ---------- Page heading: plain, on the paper ---------- */
 
 .stage {
-  position: relative;
-  overflow: hidden;
-  color: var(--on-dark);
-  padding: clamp(108px, 15vh, 132px) 0 clamp(108px, 14vh, 120px);
-  background:
-    radial-gradient(60% 85% at 90% -15%, rgba(255, 90, 54, 0.32), transparent 62%),
-    radial-gradient(50% 70% at 0% 105%, rgba(143, 155, 255, 0.2), transparent 62%),
-    var(--ink);
-}
-
-.stage::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1.3px);
-  background-size: 24px 24px;
-  -webkit-mask-image: linear-gradient(to bottom, #000 25%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 25%, transparent 100%);
-  pointer-events: none;
-}
-
-.stage > .wrap { position: relative; z-index: 1; }
-
-/* cursor spotlight: a soft glow that follows the pointer across the dark layer */
-.stage::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.45s;
-  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 90, 54, 0.3), transparent 65%);
-}
-.stage.is-lit::after { opacity: 1; }
-
-/* animated random-walk paths (home) */
-.stage__canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.eyebrow {
-  margin: 0 0 22px;
-  font: 500 0.78rem/1 var(--font-mono);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.eyebrow--plain {
-  letter-spacing: 0.04em;
-  text-transform: none;
-  font-size: 0.95rem;
+  color: var(--text);
+  padding: 6px 0 0;
 }
 
 .page-title {
-  font-size: clamp(2.4rem, 5.6vw, 4.2rem);
-  line-height: 1;
-  letter-spacing: -0.045em;
-  font-weight: 800;
-  color: #fff;
+  font-size: clamp(2.2rem, 5vw, 3.3rem);
+  line-height: 1.08;
+  letter-spacing: var(--track);
+  font-weight: 700;
+  color: var(--text);
 }
 
 .stage__lede {
-  margin: 24px 0 0;
-  max-width: 46ch;
-  font-size: 1.12rem;
-  color: var(--on-dark-soft);
+  margin: 14px 0 0;
+  font-size: 1.08rem;
+  color: var(--text-soft);
 }
 
 .display {
-  font-size: clamp(1.9rem, 8.4vw, 4.6rem);
+  font-size: clamp(1.6rem, 7vw, 3.6rem);
   white-space: nowrap;
-  line-height: 0.93;
-  letter-spacing: -0.05em;
-  font-weight: 800;
-  color: #fff;
+  line-height: 1.05;
+  letter-spacing: var(--track);
+  font-weight: 700;
+  color: var(--text);
 }
-
-.display .dot { color: var(--accent); }
 .display.reveal .line { display: inline-block; vertical-align: top; }
 
-.home .stage {
-  padding-top: clamp(100px, 12vh, 120px);
-  padding-bottom: clamp(104px, 14vh, 116px);
-}
+.stage .contact { margin-top: 20px; }
 
-.stage .contact { margin-top: 30px; }
-
-.stage .chip-mono {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.28);
-  color: var(--on-dark);
-}
-
-/* ---------- Stack of paper sheets (light layers) ---------- */
+/* ---------- Page body ---------- */
 
 .stack {
-  position: relative;
-  isolation: isolate;
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
-  margin-top: -56px;
-}
-
-.stack::before,
-.stack::after {
-  content: '';
-  position: absolute;
-  height: 180px;
-  border-radius: 34px 34px 0 0;
-}
-
-.stack::before {
-  z-index: -1;
-  top: -14px;
-  left: 2.2%;
-  right: 2.2%;
-  background: var(--accent);
-}
-
-.stack::after {
-  z-index: -2;
-  top: -28px;
-  left: 4.4%;
-  right: 4.4%;
-  background: var(--lilac);
-  opacity: 0.8;
 }
 
 .sheet {
-  position: relative;
-  z-index: 1;
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: var(--paper);
   color: var(--text);
-  border-radius: 34px 34px 0 0;
-  padding-top: clamp(20px, 3vw, 36px);
+  padding-top: var(--head-after);
 }
 
 .sheet__content {
   flex: 1;
-  padding-bottom: clamp(20px, 2.5vw, 30px);
+  padding-bottom: clamp(28px, 3.5vw, 44px);
 }
 
-.home .sheet { padding-top: clamp(20px, 3vw, 36px); }
+.home .sheet { padding-top: 22px; }
+.post-page .sheet { padding-top: 28px; }   /* a post's meta line needs a little more room before the text */
 
 /* ---------- Links (made noticeable) ---------- */
 
@@ -424,7 +324,7 @@ p { margin: 0 0 1em; }
   background: transparent;
   color: var(--text);
   font: 600 0.9rem/1 var(--font-display);
-  letter-spacing: -0.005em;
+  letter-spacing: var(--track);
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.18s, color 0.18s, border-color 0.18s;
@@ -456,15 +356,13 @@ p { margin: 0 0 1em; }
 /* ---------- Home ---------- */
 
 .statement {
-  max-width: 30em;
   margin: 0;
   font: 500 clamp(1.35rem, 2.7vw, 1.9rem)/1.32 var(--font-display);
-  letter-spacing: -0.022em;
+  letter-spacing: var(--track);
   color: var(--text);
 }
 
 .aside {
-  max-width: 58ch;
   margin: 1.2em 0 0;
   color: var(--text-soft);
 }
@@ -473,30 +371,43 @@ p { margin: 0 0 1em; }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 14px;
-  margin-top: 34px;
+  gap: 8px 16px;
+  margin-top: 20px;
 }
 
-.chip-mono {
+.contact__email {
+  color: var(--text-mid);
+  font: 400 0.95rem/1.4 var(--font-mono);
+}
+
+.icon-links { display: inline-flex; align-items: center; gap: 6px; }
+
+.icon-link {
   display: inline-flex;
   align-items: center;
-  padding: 0.68em 1.1em;
-  border: 1.5px dashed var(--rule);
-  border-radius: 999px;
-  background: var(--card);
-  color: var(--text-mid);
-  font: 400 0.88rem/1 var(--font-mono);
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: var(--text);
+  transition: color 0.18s, background-color 0.18s;
 }
+.icon-link svg { display: block; width: 30px; height: 30px; fill: currentColor; }
+.icon-link:hover { color: var(--accent); background: rgba(127, 135, 155, 0.14); }
 
 /* ---------- Entry cards (projects / math) ----------
    Title + date across the top, then description | thumbnail. */
 
 .entry {
-  margin: 0 0 22px;
+  margin: 0 0 18px;
   background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: 22px;
-  box-shadow: 0 24px 42px -30px rgba(13, 16, 22, 0.5);
+  border: 2px solid var(--rule);
+  border-radius: 18px;
+  transition: border-color 0.22s ease, box-shadow 0.35s var(--ease-out);
+}
+.entry:hover {
+  border-color: var(--wcard-line);
+  box-shadow: 0 14px 34px -18px var(--wcard-glow);
 }
 
 .entry__top {
@@ -517,7 +428,7 @@ p { margin: 0 0 1em; }
   min-width: 0;
   font-size: clamp(1.2rem, 2.3vw, 1.5rem);
   line-height: 1.25;
-  font-weight: 650;
+  font-weight: 700;
 }
 
 .entry__meta {
@@ -542,7 +453,6 @@ p { margin: 0 0 1em; }
 
 .entry p {
   margin: 0.8rem 0 0;
-  max-width: 68ch;
   color: var(--text-mid);
   font-size: 1rem;
 }
@@ -572,37 +482,43 @@ p { margin: 0 0 1em; }
   margin-top: 1.3rem;
 }
 
-/* ---------- Hobbies ---------- */
+/* ---------- Section headings and the Interests page ---------- */
 
-.block + .block { margin-top: clamp(32px, 4.5vw, 52px); }
+/* One rule for every section heading, so the gaps are the same on every page:
+   --head-before above a heading that follows other content, --head-after below it. */
+.block + .block { margin-top: var(--head-before); }
 
-.block__title {
-  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
-  font-weight: 750;
-  letter-spacing: -0.035em;
+.block__title,
+.math-section {
+  margin: 0 0 var(--head-after);
+  line-height: 1.2;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: var(--track);
 }
+.math-section:not(:first-child) { margin-top: var(--head-before); }
 
 .block__lede {
-  margin: 10px 0 28px;
+  margin: 0 0 var(--head-after);
   color: var(--text-soft);
 }
 
 .groups {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 36px clamp(32px, 6vw, 72px);
+  gap: 28px clamp(32px, 6vw, 72px);
 }
 
-/* Academic Hobbies: no cards, just a hairline and a small label above each group */
+/* Academic Interests: no cards, just a hairline and a small label above each group */
 .group {
-  padding: 22px 0 0;
+  padding: 18px 0 0;
   border-top: 1px solid var(--rule);
 }
 
 .group--wide { grid-column: 1 / -1; }
 
 .group h3 {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   font-size: 0.78rem;
   font-weight: 500;
   font-family: var(--font-mono);
@@ -620,24 +536,79 @@ p { margin: 0 0 1em; }
 .group li::marker { color: var(--accent); }
 .group li ul { margin-top: 0.3em; }
 
-.cols { columns: 2; column-gap: 40px; }
-.cols > li { break-inside: avoid; margin: 0 0 0.8em; }   /* no top margin, so both columns start on the same line */
+.group p {
+  margin: 1.1em 0 0;
+  color: var(--text-mid);
+}
 
-.plain {
+.group .cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
+  column-gap: clamp(32px, 6vw, 72px);   /* same as .groups, so these bullets line up with Teaching / Writing below */
+  padding-left: 0;
+}
+.cols > li { margin: 0 0 0.8em 1.15em; }
+
+/* ---------- Click-to-open lists (Other Interests, Inspirations) ----------
+   <details> gives the open/close behavior; the triangle is drawn here: an equilateral triangle that
+   points right when closed and is turned to point down when open. Items without sub-items get a bullet. */
+.tree {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-
-.plain > li {
-  padding: 22px 0;
-  border-top: 1px solid var(--rule);
-  max-width: 76ch;
-  color: var(--text-mid);
+.tree ul {
+  margin: 0.2em 0 0.45em;
+  padding: 0 0 0 1.4em;
+  list-style: none;
 }
+.tree li { margin: 0.3em 0; }
 
-.plain > li:first-child { border-top: none; padding-top: 6px; }
-.plain strong { color: var(--text); font-weight: 600; }
+.tree summary {
+  position: relative;
+  padding-left: 1.3em;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+.tree summary::-webkit-details-marker { display: none; }
+.tree summary::before {
+  content: '';
+  position: absolute;
+  left: 0.15em;
+  top: 0.47em;
+  width: 0.6em;            /* height 0.7em x width 0.6em = equilateral (sides 0.7em) */
+  height: 0.7em;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  transition: transform 0.18s ease;
+}
+.tree details[open] > summary::before { transform: rotate(90deg); }
+.tree summary:focus-visible { outline-offset: 2px; }
+
+.tree li.leaf { position: relative; padding-left: 1.3em; color: var(--text-mid); }
+.tree li.leaf::before {
+  content: '';
+  position: absolute;
+  left: 0.28em;
+  top: 0.66em;
+  width: 0.34em;
+  height: 0.34em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+/* a bullet that has a bullet under it (ProSet's bonus question) */
+.tree li.leaf > ul { padding-left: 0.2em; margin-left: -0.1em; }
+.tree p.tree__note {
+  margin: 0.2em 0 0.4em;
+  padding-left: 1.3em;
+  color: var(--text-soft);
+}
+/* the finite field F_3^4: exponent over subscript */
+.fq { display: inline-flex; align-items: center; gap: 0.05em; }
+.fq__ss { display: inline-flex; flex-direction: column; font-size: 0.68em; line-height: 0.95; }
 
 /* ---------- Now ---------- */
 
@@ -662,7 +633,6 @@ p { margin: 0 0 1em; }
 
 .now dd {
   margin: 0;
-  max-width: 62ch;
   font-size: 1.08rem;
   color: var(--text-mid);
 }
@@ -671,7 +641,6 @@ p { margin: 0 0 1em; }
 .now .tags li { font-size: 0.82rem; }
 
 .bullets {
-  max-width: 68ch;
   margin: 18px 0 0;
   padding: 26px 0 0 1.2em;
   border-top: 1px solid var(--rule);
@@ -694,13 +663,12 @@ p { margin: 0 0 1em; }
 
 @media (max-width: 720px) {
   .groups { grid-template-columns: 1fr; }
-  .cols { columns: 1; }
+  .cols { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
   .entry__index { display: none; }
   .entry__main { grid-template-columns: 1fr; }
   .entry__fig { width: min(100%, 220px); }
   .entry__fig--sq { width: 124px; }
   .now__row { grid-template-columns: 1fr; gap: 8px; }
-  .stack { margin-top: -44px; }
 }
 
 
@@ -725,7 +693,7 @@ p { margin: 0 0 1em; }
 }
 .js .reveal.is-in .line:nth-child(2) > span { transition-delay: 0.12s; }
 
-/* ---------- 2 · Scroll reveal (uses `translate` so it never fights the tilt's `transform`) ---------- */
+/* ---------- 2 · Scroll reveal ---------- */
 .js [data-reveal] {
   opacity: 0;
   translate: 0 34px;
@@ -735,53 +703,15 @@ p { margin: 0 0 1em; }
   opacity: 1;
   translate: none;
 }
-
-/* ---------- 4 · Layered tilt (stacked-paper layers separate on hover) ---------- */
-[data-tilt] {
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.35s var(--ease-out);
+/* entry cards also change border color on hover */
+.js .entry[data-reveal] {
+  transition: opacity 0.7s var(--ease-out), translate 0.7s var(--ease-out),
+              border-color 0.22s ease, box-shadow 0.35s var(--ease-out);
 }
-.js [data-reveal][data-tilt] {
-  transition: transform 0.35s var(--ease-out), opacity 0.7s var(--ease-out), translate 0.7s var(--ease-out);
-}
-[data-tilt]::before,
-[data-tilt]::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-[data-tilt]::before { background: var(--accent); transform: translateZ(-18px) translate(8px, 8px); }
-[data-tilt]::after { background: var(--lilac); transform: translateZ(-36px) translate(16px, 16px); }
-[data-tilt].is-tilting::before { opacity: 1; }
-[data-tilt].is-tilting::after { opacity: 0.85; }
-
-
-.chip-btn {
-  display: none;
-  align-items: center;
-  padding: 0.68em 1.1em;
-  border: 1.5px solid rgba(255, 255, 255, 0.28);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--on-dark);
-  font: 400 0.88rem/1 var(--font-mono);
-  cursor: pointer;
-  transition: background-color 0.18s, border-color 0.18s;
-}
-.chip-btn:hover { background: rgba(255, 255, 255, 0.14); border-color: rgba(255, 255, 255, 0.5); }
-.js .chip-btn { display: inline-flex; }
-.chip-btn--icon { padding: 0.68em 1.05em; }
-
 
 @media (prefers-reduced-motion: reduce) {
   .js .reveal .line > span { transform: none; transition: none; }
   .js [data-reveal] { opacity: 1; translate: none; transition: none; }
-  [data-tilt] { transition: none; }
 }
 
 /* ==========================================================================
@@ -808,83 +738,10 @@ p { margin: 0 0 1em; }
 .v .fg { fill: #22c55e; stroke: none; }
 .v text { font: 500 10px var(--font-mono); fill: currentColor; stroke: none; }
 
-/* ---------- quiet decorations on the dark layer ---------- */
-.stage__art { position: absolute; z-index: 0; pointer-events: none; }
-.stage__art--gasket {
-  right: -110px; top: -70px; width: min(58%, 640px);
-  color: var(--lilac); opacity: 0.4;
-  -webkit-mask-image: linear-gradient(to left, #000 30%, transparent 100%);
-  mask-image: linear-gradient(to left, #000 30%, transparent 100%);
-}
-.stage__art--sierpinski {
-  right: clamp(24px, 6vw, 96px); top: 50%; transform: translateY(-50%);
-  width: min(30%, 280px);
-  color: var(--lilac); opacity: 0.4;
-}
-.stage__art--sierpinski svg { width: 100%; height: auto; display: block; }
-.stage__art--hilbert {
-  right: 0; top: 0; bottom: 0; width: min(46%, 520px);
-  color: var(--on-dark-soft); opacity: 0.2;
-  -webkit-mask-image: linear-gradient(to left, #000 25%, transparent 100%);
-  mask-image: linear-gradient(to left, #000 25%, transparent 100%);
-}
-.stage__art--hilbert.v, .stage__art--hilbert svg { height: 100%; }
-.stage__art--elliptic {
-  right: clamp(24px, 7vw, 110px); top: 8%; bottom: 14%;
-  color: var(--on-dark-soft); opacity: 0.5;
-}
-.stage__art--elliptic.v, .stage__art--elliptic svg { height: 100%; width: auto; }
-.stage__art--fano {
-  /* sits wholly inside the gap between the header row and the marquee, never behind either */
-  right: clamp(24px, 5vw, 80px);
-  top: 96px;
-  height: calc(clamp(118px, 18vh, 170px) + clamp(2.7rem, 7vw, 5.2rem) + clamp(36px, 5vw, 56px) - 112px);
-  color: var(--on-dark-soft);
-  opacity: 0.55;
-}
-.stage__art--fano svg { height: 100%; width: auto; }
-
 /* ---------- Cantor divider and footer mark ---------- */
 .divider { width: min(100%, 440px); margin: clamp(48px, 7vw, 72px) 0 0; color: var(--text-soft); opacity: 0.65; }
 .footer__mark { display: inline-block; width: 22px; margin-right: 10px; vertical-align: -5px; color: var(--text-soft); }
 
-/* ---------- icons on tags and list items ---------- */
-.tag-ic { display: inline-flex; align-items: center; gap: 0.55em; }
-.tag-ic .v { display: inline-block; flex: none; color: var(--text-mid); }
-.tag-ic .v svg { height: 20px; width: auto; }
-
-/* ---------- Visuals gallery ---------- */
-.gal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 28px; }
-.vtile {
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: 22px;
-  box-shadow: 0 24px 42px -30px rgba(13, 16, 22, 0.5);
-}
-.vtile__fig { display: grid; place-items: center; height: 220px; padding: 22px; border-radius: 21px 21px 0 0; }
-.vtile__fig.dark {
-  color: var(--on-dark-soft);
-  background-color: var(--ink);
-  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1.3px);
-  background-size: 24px 24px;
-}
-.vtile__fig.light { color: var(--text-soft); background: var(--paper); }
-.vtile__fig svg { width: auto; max-width: 100%; height: 100%; max-height: 176px; }
-.vtile__fig--wide svg { width: 100%; height: auto; }
-.vtile__body { padding: 16px 20px 20px; }
-.vtile__name { font: 650 1.05rem/1.3 var(--font-display); letter-spacing: -0.015em; }
-.vtile__where { margin: 6px 0 0; color: var(--text-soft); font-size: 0.9rem; }
-.vtile__tag {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 0.3em 0.7em;
-  border-radius: 999px;
-  background: var(--chip);
-  color: var(--text-mid);
-  font: 500 0.68rem/1.2 var(--font-mono);
-}
-@media (max-width: 960px) { .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 620px) { .gal { grid-template-columns: 1fr; } }
 
 /* with six links the header needs to be a little tighter on small screens */
 @media (max-width: 720px) {
@@ -898,32 +755,12 @@ p { margin: 0 0 1em; }
   .brand__mark { height: 36px; }
 }
 
-/* A card that is still fading in is flattened by the browser (opacity < 1 disables 3D), which
-   would paint the tilt's colored sheets over the card. Keep them hidden until it has settled. */
-.js [data-reveal]:not(.settled)::before,
-.js [data-reveal]:not(.settled)::after { opacity: 0 !important; }
-
-/* section headings on the Projects page */
-.block__title--solo { margin-bottom: 26px; }
 
 /* the card thumbnail of Manhattan is tall: keep it inside the card */
 .entry__fig svg[aria-label^="Map of Manhattan"] { width: auto; max-width: 100%; max-height: 210px; margin: 0 auto; }
 
 /* ---------- Brand mark: the hover spin is drawn by js/site.js (a perspective-projected slab) ---------- */
 .brand__shade { opacity: 0; }
-
-/* Math page: category headings above the cards */
-.math-section {
-  margin: 0 0 18px;
-  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
-  font-weight: 750;
-  letter-spacing: -0.035em;
-}
-.math-section:not(:first-child) { margin-top: clamp(36px, 5vw, 56px); }
-
-/* Cards tilt in 3D on hover; keep the figure on its own layer so its thin strokes
-   are not re-rasterised (and fringed) at fractional pixels while the card rotates. */
-.entry[data-tilt] .entry__fig { backface-visibility: hidden; transform: translateZ(0); }
 
 /* ---------- Optional dark mode (opt-in via the sun / moon button in the top row) ---------- */
 html[data-theme="dark"] {
@@ -992,8 +829,4 @@ html[data-theme="dark"] .theme-toggle .ic-moon { display: none; }
 .nav { display: flex; align-items: center; }
 .nav .theme-toggle { margin-bottom: 6px; }
 
-/* home: Cantor-set divider with a note beside it */
-.divider-row { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 10px 32px; margin: clamp(48px, 7vw, 72px) 0 0; }
-.divider-row .divider { margin: 0; flex: none; }
-.divider-note { margin: 0; font-size: 0.92rem; color: var(--text-mid); }
 

@@ -13,10 +13,10 @@
 }
 html[data-theme="dark"] .sd { --sd-user: #aab3ff; --sd-mark: #98a2b5; --sd-bad: #ff7a59; }
 
-.back-link { color: var(--on-dark-soft); }
+.back-link { color: var(--text-soft); }
 
 /* ---------- puzzles list ---------- */
-.puzzles-intro { max-width: 60ch; margin: 0 0 28px; color: var(--text-mid); }
+.puzzles-intro {margin: 0 0 28px; color: var(--text-mid); }
 .entry__links { margin-top: 1.1rem; }
 .entry--card .entry__body { justify-content: center; }
 
@@ -101,7 +101,7 @@ html[data-theme="dark"] .sd { --sd-user: #aab3ff; --sd-mark: #98a2b5; --sd-bad: 
 }
 .sd__msg.is-ok { color: var(--sd-user); }
 .sd__msg.is-bad { color: var(--link); }
-.sd__msg.is-win { color: var(--sd-user); font-size: 1.1rem; letter-spacing: -0.01em; }
+.sd__msg.is-win { color: var(--sd-user); font-size: 1.1rem; letter-spacing: var(--track); }
 .sd__msg:empty::before { content: "\00a0"; }
 
 /* pause */
@@ -121,7 +121,7 @@ html[data-theme="dark"] .sd { --sd-user: #aab3ff; --sd-mark: #98a2b5; --sd-bad: 
   position: absolute; inset: 0; z-index: 2;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
   background: color-mix(in srgb, var(--paper) 55%, transparent);
-  font: 600 1.7rem/1.2 var(--font-display); color: var(--text); letter-spacing: -0.01em;
+  font: 600 1.7rem/1.2 var(--font-display); color: var(--text); letter-spacing: var(--track);
 }
 .sd__paused[hidden] { display: none; }
 .sd.is-paused .sd__board svg { filter: blur(14px); }
@@ -207,7 +207,7 @@ html[data-theme="dark"] .sd { --sd-user: #aab3ff; --sd-mark: #98a2b5; --sd-bad: 
 .sd__rules ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
 .sd__rules .sd__rulelist li { padding-left: 1.2em; position: relative; color: var(--text-mid); font-size: 0.76rem; line-height: 1.38; }
 .sd__rulelist li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-.sd__rulelist li strong { color: var(--text); font-weight: 650; }
+.sd__rulelist li strong { color: var(--text); font-weight: 700; }
 
 @media (max-width: 860px) {
   .sd { --S: min(100%, 560px); }
