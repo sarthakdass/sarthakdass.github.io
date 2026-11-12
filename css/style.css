@@ -381,6 +381,17 @@ p { margin: 0 0 1em; }
   font: 400 0.95rem/1.4 var(--font-mono);
 }
 
+.contact__link {
+  color: var(--text-mid);
+  font: 400 0.95rem/1.4 var(--font-mono);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.contact__link:hover { color: var(--accent); }
+.contact__icons { display: inline-flex; align-items: center; gap: 10px; color: var(--text-mid); }
+.contact__icons a { display: inline-flex; color: inherit; transition: color 0.18s; }
+.contact__icons a:hover { color: var(--accent); }
+.contact__icons svg { display: block; width: 1.4em; height: 1.4em; fill: currentColor; font-size: 0.95rem; }
 .icon-links { display: inline-flex; align-items: center; gap: 6px; }
 
 .icon-link {
@@ -551,6 +562,22 @@ p { margin: 0 0 1em; }
   padding-left: 0;
 }
 .cols > li { margin: 0 0 0.8em 1.15em; }
+
+/* Other Interests | Inspirations side by side; Big Questions full width. Hairline under each heading, like Academic Interests. */
+.duo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--head-before) clamp(32px, 6vw, 72px);
+  align-items: start;
+}
+.block__body { padding-top: 18px; border-top: 1px solid var(--rule); }
+.block__intro { margin: 0 0 0.8em; color: var(--text-mid); }
+.bq { margin: 0; padding-left: 1.15em; }
+.bq li { margin: 0.6em 0; padding-left: 0.2em; }
+.bq li:first-child { margin-top: 0; }
+.bq li:last-child { margin-bottom: 0; }
+.bq li::marker { color: var(--accent); }
+@media (max-width: 760px) { .duo { grid-template-columns: 1fr; } }
 
 /* ---------- Click-to-open lists (Other Interests, Inspirations) ----------
    <details> gives the open/close behavior; the triangle is drawn here: an equilateral triangle that
